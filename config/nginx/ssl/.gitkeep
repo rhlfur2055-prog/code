@@ -1,0 +1,11 @@
+# SSL Certificate Directory
+# Place your SSL certificates here:
+# - fullchain.pem (or cert.pem)
+# - privkey.pem (or key.pem)
+#
+# For Let's Encrypt, use certbot:
+# certbot certonly --webroot -w /var/www/html -d yourdomain.com
+#
+# For self-signed (development only):
+# openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+#   -keyout privkey.pem -out fullchain.pem

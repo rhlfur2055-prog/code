@@ -1,0 +1,2046 @@
+{
+  "01_입문/python-basic": {
+    "id": "01_입문/python-basic",
+    "title": "Python 기본 문법",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Python의 기본 문법과 변수 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 기본 문법",
+        "content": "Python은 들여쓰기로 코드 블록을 구분하며, 세미콜론이 필요 없는 간결한 문법을 가집니다. 변수 선언 시 타입을 명시하지 않아도 자동으로 타입이 결정됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "변수와 출력",
+        "code": "# 변수 선언 (타입 자동 추론)\nname = \"CodeMaster\"  # 문자열\nage = 25             # 정수\nheight = 175.5       # 실수\nis_student = True    # 불리언\n\n# 출력\nprint(f\"이름: {name}, 나이: {age}\")\nprint(f\"키: {height}cm, 학생: {is_student}\")\n\n# 여러 변수 동시 할당\nx, y, z = 1, 2, 3\na = b = c = 0  # 같은 값 할당"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 들여쓰기는 공백 4칸 권장\\n2. 변수명은 소문자+언더스코어(snake_case)\\n3. f-string으로 편리하게 포맷팅"
+      }
+    ]
+  },
+  "01_입문/python-condition": {
+    "id": "01_입문/python-condition",
+    "title": "조건문 (if/elif/else)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "if, elif, else를 사용한 조건 분기를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "조건문 구조",
+        "content": "Python의 조건문은 if, elif, else 키워드를 사용합니다. 콜론(:)으로 블록을 시작하고, 들여쓰기로 범위를 지정합니다. 중괄호 대신 들여쓰기가 문법의 일부입니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "조건문 예제",
+        "code": "score = 85\n\n# 기본 조건문\nif score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelif score >= 70:\n    grade = 'C'\nelse:\n    grade = 'F'\n\nprint(f\"점수: {score}, 학점: {grade}\")\n\n# 조건 표현식 (삼항 연산자)\nresult = \"합격\" if score >= 60 else \"불합격\"\nprint(result)\n\n# 논리 연산자\nage = 20\nhas_id = True\nif age >= 19 and has_id:\n    print(\"입장 가능\")"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. elif는 else if의 줄임말\\n2. and, or, not 논리 연산자 사용\\n3. 삼항 연산자: 값1 if 조건 else 값2"
+      }
+    ]
+  },
+  "01_입문/python-control": {
+    "id": "01_입문/python-control",
+    "title": "제어문 종합",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "break, continue, pass 등 흐름 제어를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "흐름 제어",
+        "content": "break는 반복문을 즉시 종료하고, continue는 현재 반복을 건너뛰고 다음으로 진행합니다. pass는 아무 동작도 하지 않는 빈 문장으로, 구조만 만들어둘 때 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "제어문 예제",
+        "code": "# break - 반복 중단\nfor i in range(10):\n    if i == 5:\n        break\n    print(i, end=' ')  # 0 1 2 3 4\n\nprint()\n\n# continue - 현재 반복 건너뛰기\nfor i in range(5):\n    if i == 2:\n        continue\n    print(i, end=' ')  # 0 1 3 4\n\nprint()\n\n# pass - 빈 블록 처리\ndef not_implemented_yet():\n    pass  # 나중에 구현\n\n# for-else 구조\nfor n in [2, 3, 5, 7]:\n    if n == 4:\n        print(\"4 발견\")\n        break\nelse:\n    print(\"4가 없음\")  # break 없이 완료시 실행"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. break: 가장 가까운 반복문만 종료\\n2. for-else: break 없이 완료시 else 실행\\n3. pass: 빈 함수/클래스 정의시 필수"
+      }
+    ]
+  },
+  "01_입문/python-datatype": {
+    "id": "01_입문/python-datatype",
+    "title": "자료형 (Data Types)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Python의 기본 자료형과 형변환을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 자료형",
+        "content": "Python의 기본 자료형은 int(정수), float(실수), str(문자열), bool(불리언), None(널값)입니다. 동적 타이핑으로 변수에 어떤 타입이든 할당할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "자료형과 형변환",
+        "code": "# 기본 자료형\nnum_int = 10          # int\nnum_float = 3.14      # float\ntext = \"Hello\"        # str\nis_valid = True       # bool\nnothing = None        # NoneType\n\n# 타입 확인\nprint(type(num_int))   # <class 'int'>\nprint(type(text))      # <class 'str'>\n\n# 형변환\nstr_num = \"123\"\nconverted = int(str_num)  # 문자열 → 정수\nprint(converted + 1)       # 124\n\n# 숫자 → 문자열\nage = 25\nmessage = \"나이: \" + str(age)\n\n# 불리언 변환\nprint(bool(0))     # False\nprint(bool(1))     # True\nprint(bool(\"\"))    # False (빈 문자열)\nprint(bool(\"Hi\"))  # True"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. type() 함수로 타입 확인\\n2. 0, 빈 문자열, None은 False로 평가\\n3. isinstance(값, 타입)으로 타입 체크 권장"
+      }
+    ]
+  },
+  "01_입문/python-dict": {
+    "id": "01_입문/python-dict",
+    "title": "딕셔너리 (Dictionary)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "키-값 쌍으로 데이터를 저장하는 딕셔너리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "딕셔너리란?",
+        "content": "딕셔너리는 키(key)와 값(value) 쌍으로 데이터를 저장하는 자료구조입니다. 키는 고유해야 하며, 해시 테이블 기반으로 O(1) 시간에 조회가 가능합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "딕셔너리 사용법",
+        "code": "# 딕셔너리 생성\nperson = {\n    \"name\": \"김철수\",\n    \"age\": 25,\n    \"city\": \"서울\"\n}\n\n# 값 접근\nprint(person[\"name\"])        # 김철수\nprint(person.get(\"age\"))     # 25\nprint(person.get(\"job\", \"없음\"))  # 없음 (기본값)\n\n# 값 추가/수정\nperson[\"job\"] = \"개발자\"\nperson[\"age\"] = 26\n\n# 삭제\ndel person[\"city\"]\nremoved = person.pop(\"job\")  # 삭제하며 값 반환\n\n# 순회\nfor key, value in person.items():\n    print(f\"{key}: {value}\")\n\n# 키, 값 목록\nprint(list(person.keys()))   # ['name', 'age']\nprint(list(person.values())) # ['김철수', 26]"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. get() 사용시 키 없어도 에러 없음\\n2. items()로 키-값 쌍 순회\\n3. in 연산자로 키 존재 확인"
+      }
+    ]
+  },
+  "01_입문/python-function": {
+    "id": "01_입문/python-function",
+    "title": "함수 (Function)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "함수 정의와 호출, 매개변수와 반환값을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "함수 정의",
+        "content": "함수는 def 키워드로 정의하며, 코드의 재사용성과 가독성을 높입니다. 매개변수에 기본값을 지정할 수 있고, 여러 값을 튜플로 반환할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "함수 예제",
+        "code": "# 기본 함수\ndef greet(name):\n    return f\"안녕하세요, {name}님!\"\n\nprint(greet(\"철수\"))\n\n# 기본값 매개변수\ndef power(base, exp=2):\n    return base ** exp\n\nprint(power(3))      # 9 (3^2)\nprint(power(2, 3))   # 8 (2^3)\n\n# 여러 값 반환\ndef get_stats(numbers):\n    return min(numbers), max(numbers), sum(numbers)\n\nmin_val, max_val, total = get_stats([1, 2, 3, 4, 5])\nprint(f\"최소: {min_val}, 최대: {max_val}, 합계: {total}\")\n\n# 가변 인자\ndef add_all(*args):\n    return sum(args)\n\nprint(add_all(1, 2, 3, 4))  # 10"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 기본값 매개변수는 뒤쪽에 배치\\n2. *args: 가변 위치 인자 (튜플)\\n3. **kwargs: 가변 키워드 인자 (딕셔너리)"
+      }
+    ]
+  },
+  "01_입문/python-intro": {
+    "id": "01_입문/python-intro",
+    "title": "Python 소개",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Python 언어의 특징과 활용 분야를 소개합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python이란?",
+        "content": "Python은 1991년 귀도 반 로섬이 개발한 고급 프로그래밍 언어입니다. 간결하고 읽기 쉬운 문법으로 초보자도 쉽게 배울 수 있으며, 웹 개발, 데이터 분석, AI/ML, 자동화 등 다양한 분야에서 사용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "첫 번째 Python 프로그램",
+        "code": "# 첫 번째 프로그램\nprint(\"Hello, Python!\")\n\n# 간단한 계산\na = 10\nb = 3\nprint(f\"{a} + {b} = {a + b}\")\nprint(f\"{a} / {b} = {a / b:.2f}\")\n\n# 리스트 활용\nfruits = [\"사과\", \"바나나\", \"체리\"]\nfor fruit in fruits:\n    print(f\"과일: {fruit}\")\n\n# 함수 정의\ndef say_hello(name):\n    return f\"안녕하세요, {name}님!\"\n\nprint(say_hello(\"CodeMaster\"))"
+      },
+      {
+        "type": "tip",
+        "title": "Python 특징",
+        "content": "1. 인터프리터 언어로 즉시 실행 가능\\n2. 풍부한 라이브러리 생태계\\n3. 크로스 플랫폼 지원\\n4. 동적 타이핑으로 유연한 코딩"
+      }
+    ]
+  },
+  "01_입문/python-list": {
+    "id": "01_입문/python-list",
+    "title": "리스트 (List)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "순서가 있는 변경 가능한 리스트 자료구조를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "리스트란?",
+        "content": "리스트는 순서가 있고 변경 가능한(mutable) 시퀀스 자료형입니다. 다양한 타입의 요소를 함께 저장할 수 있고, 인덱스로 접근하며, 슬라이싱으로 부분 추출이 가능합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "리스트 사용법",
+        "code": "# 리스트 생성\nnumbers = [1, 2, 3, 4, 5]\nmixed = [1, \"hello\", 3.14, True]\n\n# 인덱싱과 슬라이싱\nprint(numbers[0])     # 1 (첫 번째)\nprint(numbers[-1])    # 5 (마지막)\nprint(numbers[1:4])   # [2, 3, 4]\nprint(numbers[::2])   # [1, 3, 5] (2칸씩)\n\n# 요소 추가\nnumbers.append(6)           # 끝에 추가\nnumbers.insert(0, 0)        # 특정 위치에 삽입\nnumbers.extend([7, 8, 9])   # 여러 요소 추가\n\n# 요소 삭제\nnumbers.remove(5)     # 값으로 삭제\npopped = numbers.pop() # 마지막 제거 및 반환\ndel numbers[0]        # 인덱스로 삭제\n\n# 정렬\nnums = [3, 1, 4, 1, 5]\nnums.sort()              # 원본 정렬\nsorted_nums = sorted(nums, reverse=True)  # 새 리스트"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 음수 인덱스: -1은 마지막 요소\\n2. 슬라이싱: [시작:끝:간격]\\n3. sort()는 원본 변경, sorted()는 새 리스트 반환"
+      }
+    ]
+  },
+  "01_입문/python-loop": {
+    "id": "01_입문/python-loop",
+    "title": "반복문 (for/while)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "for와 while 반복문의 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "반복문",
+        "content": "for문은 시퀀스를 순회할 때, while문은 조건이 참인 동안 반복할 때 사용합니다. range() 함수로 숫자 범위를 생성하고, enumerate()로 인덱스와 값을 함께 얻습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "반복문 예제",
+        "code": "# for 반복문\nfor i in range(5):\n    print(i, end=' ')  # 0 1 2 3 4\nprint()\n\n# 리스트 순회\nfruits = [\"사과\", \"바나나\", \"체리\"]\nfor fruit in fruits:\n    print(fruit)\n\n# enumerate로 인덱스 포함\nfor idx, fruit in enumerate(fruits):\n    print(f\"{idx}: {fruit}\")\n\n# while 반복문\ncount = 0\nwhile count < 3:\n    print(f\"count = {count}\")\n    count += 1\n\n# 중첩 반복문\nfor i in range(1, 4):\n    for j in range(1, 4):\n        print(f\"{i}x{j}={i*j}\", end=' ')\n    print()"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. range(시작, 끝, 간격) - 끝은 미포함\\n2. enumerate(리스트, start=0)\\n3. while True: 무한루프, break로 탈출"
+      }
+    ]
+  },
+  "01_입문/python-operator": {
+    "id": "01_입문/python-operator",
+    "title": "연산자 (Operators)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "산술, 비교, 논리 연산자를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 연산자",
+        "content": "Python은 산술(+,-,*,/,//,%,**), 비교(==,!=,<,>,<=,>=), 논리(and,or,not), 멤버십(in, not in), 식별(is, is not) 연산자를 제공합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "연산자 예제",
+        "code": "# 산술 연산자\na, b = 7, 3\nprint(f\"덧셈: {a + b}\")      # 10\nprint(f\"나눗셈: {a / b}\")    # 2.333...\nprint(f\"정수 나눗셈: {a // b}\")  # 2\nprint(f\"나머지: {a % b}\")    # 1\nprint(f\"거듭제곱: {a ** b}\") # 343\n\n# 비교 연산자\nprint(5 == 5)   # True\nprint(5 != 3)   # True\nprint(5 > 3)    # True\n\n# 논리 연산자\nx = True\ny = False\nprint(x and y)  # False\nprint(x or y)   # True\nprint(not x)    # False\n\n# 멤버십 연산자\nfruits = [\"사과\", \"바나나\"]\nprint(\"사과\" in fruits)      # True\nprint(\"체리\" not in fruits)  # True"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. //: 정수 나눗셈 (소수점 버림)\\n2. **: 거듭제곱 (pow() 대체)\\n3. is vs ==: 객체 동일성 vs 값 동등성"
+      }
+    ]
+  },
+  "01_입문/python-set-tuple": {
+    "id": "01_입문/python-set-tuple",
+    "title": "세트와 튜플",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Set(집합)과 Tuple(튜플) 자료구조를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "세트와 튜플",
+        "content": "세트(Set)는 중복을 허용하지 않는 집합 자료형입니다. 튜플(Tuple)은 변경 불가능한(immutable) 시퀀스로, 리스트와 비슷하지만 수정할 수 없습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "세트와 튜플 예제",
+        "code": "# 세트 (Set) - 중복 제거, 순서 없음\nnumbers = {1, 2, 3, 3, 2, 1}\nprint(numbers)  # {1, 2, 3}\n\n# 세트 연산\na = {1, 2, 3}\nb = {3, 4, 5}\nprint(a | b)  # 합집합: {1, 2, 3, 4, 5}\nprint(a & b)  # 교집합: {3}\nprint(a - b)  # 차집합: {1, 2}\n\n# 튜플 (Tuple) - 변경 불가\npoint = (10, 20)\nx, y = point  # 언패킹\nprint(f\"x={x}, y={y}\")\n\n# 튜플 메서드\ndata = (1, 2, 2, 3, 2)\nprint(data.count(2))  # 3 (2의 개수)\nprint(data.index(3))  # 3 (3의 위치)\n\n# 네임드 튜플\nfrom collections import namedtuple\nPerson = namedtuple('Person', ['name', 'age'])\np = Person('철수', 25)\nprint(p.name, p.age)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 세트: 중복 제거, 집합 연산에 유용\\n2. 튜플: 변경 불가, 딕셔너리 키로 사용 가능\\n3. 빈 세트: set() ({}는 빈 딕셔너리)"
+      }
+    ]
+  },
+  "01_입문/python-setup": {
+    "id": "01_입문/python-setup",
+    "title": "Python 설치 및 환경 설정",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Python 설치와 개발 환경 구축 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 설치",
+        "content": "Python은 python.org에서 다운로드하거나 패키지 관리자로 설치합니다. 가상환경을 사용하면 프로젝트별로 독립된 패키지 환경을 유지할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "설치 및 환경 설정",
+        "code": "# Windows - python.org에서 다운로드 후 설치\n# PATH 추가 옵션 체크 필수!\n\n# macOS (Homebrew)\nbrew install python\n\n# Linux (Ubuntu/Debian)\nsudo apt update\nsudo apt install python3 python3-pip\n\n# 버전 확인\npython --version   # Python 3.11.0\npip --version      # pip 23.0\n\n# 가상환경 생성 및 활성화\npython -m venv myenv\n\n# Windows\nmyenv\\Scripts\\activate\n\n# macOS/Linux\nsource myenv/bin/activate\n\n# 패키지 설치\npip install requests\npip install -r requirements.txt"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. Python 3.10+ 권장\\n2. 프로젝트마다 가상환경 사용\\n3. VSCode + Python 확장 추천"
+      }
+    ]
+  },
+  "01_입문/python-string": {
+    "id": "01_입문/python-string",
+    "title": "문자열 (String)",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "문자열 생성, 조작, 포맷팅을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 문자열",
+        "content": "Python의 문자열은 불변(immutable) 시퀀스입니다. 작은따옴표, 큰따옴표, 삼중따옴표로 생성하며, 다양한 메서드로 조작할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문자열 다루기",
+        "code": "# 문자열 생성\ntext1 = 'Hello'\ntext2 = \"World\"\nmulti = '''여러 줄\n문자열입니다'''\n\n# 문자열 연산\nprint(text1 + \" \" + text2)  # Hello World\nprint(text1 * 3)  # HelloHelloHello\n\n# 인덱싱과 슬라이싱\ns = \"Python\"\nprint(s[0])    # P\nprint(s[-1])   # n\nprint(s[0:3])  # Pyt\nprint(s[::-1]) # nohtyP (역순)\n\n# 문자열 메서드\ntext = \"  Hello Python  \"\nprint(text.strip())       # 공백 제거\nprint(text.lower())       # 소문자\nprint(text.upper())       # 대문자\nprint(text.replace(\"Python\", \"World\"))\nprint(\"a,b,c\".split(\",\")) # ['a', 'b', 'c']\nprint(\"-\".join([\"a\",\"b\"])) # a-b\n\n# f-string 포맷팅\nname = \"철수\"\nage = 25\nprint(f\"{name}님은 {age}세입니다.\")"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 문자열은 불변 - 수정시 새 문자열 생성\\n2. f-string이 가장 현대적인 포맷팅\\n3. split()과 join()은 서로 역연산"
+      }
+    ]
+  },
+  "01_입문/quiz-python-basic": {
+    "id": "01_입문/quiz-python-basic",
+    "title": "Python 기초 퀴즈",
+    "category": "python",
+    "subCategory": "01_입문",
+    "language": "Python",
+    "description": "Python 기초 개념을 점검하는 퀴즈입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 기초 퀴즈",
+        "content": "지금까지 배운 Python 기초 문법, 자료형, 제어문을 복습합니다. 각 문제의 출력 결과를 예상해보세요."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "퀴즈 문제",
+        "code": "# Q1: 출력 결과는?\nprint(10 // 3, 10 % 3)  # 정답: 3 1\n\n# Q2: 출력 결과는?\ntext = \"Python\"\nprint(text[1:4])  # 정답: yth\n\n# Q3: 출력 결과는?\nnums = [1, 2, 3]\nnums.append(4)\nprint(len(nums))  # 정답: 4\n\n# Q4: 출력 결과는?\ndata = {\"a\": 1, \"b\": 2}\nprint(data.get(\"c\", 0))  # 정답: 0\n\n# Q5: 출력 결과는?\nfor i in range(3):\n    if i == 1:\n        continue\n    print(i, end=' ')  # 정답: 0 2\n\n# Q6: 출력 결과는?\nx = [1, 2, 3]\ny = x\ny.append(4)\nprint(x)  # 정답: [1, 2, 3, 4] (같은 객체 참조)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 개념 정리",
+        "content": "1. //는 정수 나눗셈, %는 나머지\\n2. 슬라이싱 [시작:끝] - 끝 미포함\\n3. 리스트는 가변 객체 - 복사 주의"
+      }
+    ]
+  },
+  "02_중급/args-kwargs": {
+    "id": "02_중급/args-kwargs",
+    "title": "*args와 **kwargs",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "가변 인자 *args와 **kwargs 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "가변 인자란?",
+        "content": "*args는 여러 개의 위치 인자를 튜플로 받고, **kwargs는 여러 개의 키워드 인자를 딕셔너리로 받습니다. 함수에 유연하게 인자를 전달할 때 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "args와 kwargs 예제",
+        "code": "# *args - 위치 인자를 튜플로\ndef add_all(*args):\n    print(f\"args: {args}\")  # 튜플\n    return sum(args)\n\nprint(add_all(1, 2, 3, 4))  # 10\n\n# **kwargs - 키워드 인자를 딕셔너리로\ndef print_info(**kwargs):\n    for key, value in kwargs.items():\n        print(f\"{key}: {value}\")\n\nprint_info(name=\"철수\", age=25, city=\"서울\")\n\n# 함께 사용\ndef mixed_func(a, b, *args, **kwargs):\n    print(f\"a={a}, b={b}\")\n    print(f\"args: {args}\")\n    print(f\"kwargs: {kwargs}\")\n\nmixed_func(1, 2, 3, 4, x=10, y=20)\n\n# 언패킹으로 전달\nnums = [1, 2, 3]\ninfo = {\"name\": \"철수\", \"age\": 25}\nprint(*nums)         # 1 2 3\nprint_info(**info)   # name: 철수, age: 25"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 순서: 일반 → *args → **kwargs\\n2. *로 리스트 언패킹, **로 딕셔너리 언패킹\\n3. 함수 정의시 이름은 자유 (args, kwargs 관례)"
+      }
+    ]
+  },
+  "02_중급/context-manager": {
+    "id": "02_중급/context-manager",
+    "title": "컨텍스트 매니저",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "with 문과 컨텍스트 매니저 프로토콜을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "컨텍스트 매니저",
+        "content": "컨텍스트 매니저는 리소스의 획득과 해제를 자동화합니다. with 문과 함께 사용되며, __enter__와 __exit__ 메서드를 구현하거나 @contextmanager 데코레이터를 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "컨텍스트 매니저 예제",
+        "code": "# 기본 사용 (파일 자동 닫기)\nwith open('test.txt', 'w') as f:\n    f.write('Hello')\n# 블록 종료 시 자동으로 f.close()\n\n# 클래스로 구현\nclass Timer:\n    def __enter__(self):\n        import time\n        self.start = time.time()\n        return self\n    \n    def __exit__(self, exc_type, exc_val, exc_tb):\n        import time\n        print(f\"실행 시간: {time.time() - self.start:.2f}초\")\n        return False  # 예외 전파\n\nwith Timer():\n    sum(range(1000000))\n\n# @contextmanager로 간단히\nfrom contextlib import contextmanager\n\n@contextmanager\ndef temp_change_dir(path):\n    import os\n    old = os.getcwd()\n    os.chdir(path)\n    try:\n        yield\n    finally:\n        os.chdir(old)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. with는 리소스 누수 방지\\n2. __exit__에서 True 반환시 예외 무시\\n3. contextlib 모듈의 유틸리티 활용"
+      }
+    ]
+  },
+  "02_중급/decorator": {
+    "id": "02_중급/decorator",
+    "title": "데코레이터 (Decorator)",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "함수를 감싸서 기능을 추가하는 데코레이터를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "데코레이터란?",
+        "content": "데코레이터는 함수나 클래스를 수정하지 않고 기능을 추가하는 패턴입니다. @ 문법으로 적용하며, 로깅, 권한 체크, 성능 측정 등에 활용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "데코레이터 예제",
+        "code": "# 기본 데코레이터\ndef timer(func):\n    import time\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        print(f\"{func.__name__}: {time.time()-start:.2f}초\")\n        return result\n    return wrapper\n\n@timer\ndef slow_func():\n    import time\n    time.sleep(1)\n    return \"완료\"\n\nslow_func()\n\n# 인자가 있는 데코레이터\ndef repeat(times):\n    def decorator(func):\n        def wrapper(*args, **kwargs):\n            for _ in range(times):\n                result = func(*args, **kwargs)\n            return result\n        return wrapper\n    return decorator\n\n@repeat(3)\ndef say_hello():\n    print(\"Hello!\")\n\n# functools.wraps로 메타데이터 보존\nfrom functools import wraps\ndef my_decorator(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        return func(*args, **kwargs)\n    return wrapper"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. @decorator는 func = decorator(func)\\n2. @wraps 사용해 __name__, __doc__ 보존\\n3. 여러 데코레이터 적용: 아래→위 순서"
+      }
+    ]
+  },
+  "02_중급/dict-comprehension": {
+    "id": "02_중급/dict-comprehension",
+    "title": "딕셔너리 컴프리헨션",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "딕셔너리를 간결하게 생성하는 컴프리헨션 문법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "딕셔너리 컴프리헨션",
+        "content": "딕셔너리 컴프리헨션은 {key: value for item in iterable} 형태로 딕셔너리를 간결하게 생성합니다. 조건문을 추가하거나 기존 딕셔너리를 변환할 때 유용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "딕셔너리 컴프리헨션 예제",
+        "code": "# 기본 딕셔너리 컴프리헨션\nsquares = {x: x**2 for x in range(1, 6)}\nprint(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}\n\n# 조건 추가\neven_sq = {x: x**2 for x in range(10) if x % 2 == 0}\nprint(even_sq)  # {0: 0, 2: 4, 4: 16, 6: 36, 8: 64}\n\n# 키-값 뒤집기\noriginal = {'a': 1, 'b': 2, 'c': 3}\nreversed_dict = {v: k for k, v in original.items()}\nprint(reversed_dict)  # {1: 'a', 2: 'b', 3: 'c'}\n\n# 리스트에서 딕셔너리 생성\nnames = ['철수', '영희', '민수']\nscores = [85, 92, 78]\ngrade_dict = {n: s for n, s in zip(names, scores)}\nprint(grade_dict)  # {'철수': 85, '영희': 92, '민수': 78}\n\n# 중첩 데이터 변환\ndata = [('a', 1), ('b', 2), ('c', 3)]\nresult = {k: v * 2 for k, v in data}\nprint(result)  # {'a': 2, 'b': 4, 'c': 6}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 구조: {key: value for item in iterable if 조건}\\n2. zip()으로 두 리스트를 딕셔너리로 변환\\n3. 세트 컴프리헨션: {x for x in ...}"
+      }
+    ]
+  },
+  "02_중급/dict-set": {
+    "id": "02_중급/dict-set",
+    "title": "딕셔너리와 세트 심화",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "딕셔너리와 세트의 고급 활용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "딕셔너리/세트 심화",
+        "content": "defaultdict, Counter, OrderedDict 등 collections 모듈의 특수 딕셔너리와 세트의 집합 연산을 활용하면 복잡한 데이터 처리를 간결하게 할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "고급 딕셔너리/세트",
+        "code": "from collections import defaultdict, Counter\n\n# defaultdict - 기본값 자동 생성\nword_count = defaultdict(int)\nfor word in ['a', 'b', 'a', 'c', 'a']:\n    word_count[word] += 1\nprint(dict(word_count))  # {'a': 3, 'b': 1, 'c': 1}\n\n# Counter - 빈도수 계산\ntext = \"abracadabra\"\ncounter = Counter(text)\nprint(counter.most_common(3))  # [('a', 5), ('b', 2), ('r', 2)]\n\n# 딕셔너리 병합 (Python 3.9+)\ndict1 = {'a': 1, 'b': 2}\ndict2 = {'b': 3, 'c': 4}\nmerged = dict1 | dict2  # {'a': 1, 'b': 3, 'c': 4}\n\n# 세트 연산\na = {1, 2, 3, 4}\nb = {3, 4, 5, 6}\nprint(a.symmetric_difference(b))  # {1, 2, 5, 6}\nprint(a.issubset({1,2,3,4,5}))    # True\n\n# frozenset - 불변 세트\nfs = frozenset([1, 2, 3])\n# 딕셔너리 키로 사용 가능"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. defaultdict(list)로 그룹핑 쉽게\\n2. Counter + most_common()으로 빈도 분석\\n3. |, &, -, ^ 연산자로 집합 연산"
+      }
+    ]
+  },
+  "02_중급/generator": {
+    "id": "02_중급/generator",
+    "title": "제너레이터 (Generator)",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "메모리 효율적인 제너레이터 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "제너레이터란?",
+        "content": "제너레이터는 yield 키워드를 사용해 값을 하나씩 생성하는 이터레이터입니다. 전체 시퀀스를 메모리에 올리지 않아 대용량 데이터 처리에 효율적입니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "제너레이터 예제",
+        "code": "# 제너레이터 함수\ndef count_up_to(n):\n    i = 1\n    while i <= n:\n        yield i\n        i += 1\n\nfor num in count_up_to(5):\n    print(num, end=' ')  # 1 2 3 4 5\n\n# 제너레이터 표현식\ngen = (x**2 for x in range(1000000))  # 메모리 거의 안 씀\nprint(next(gen))  # 0\nprint(next(gen))  # 1\n\n# 파일 한 줄씩 읽기 (메모리 효율)\ndef read_lines(filename):\n    with open(filename) as f:\n        for line in f:\n            yield line.strip()\n\n# yield from - 서브 제너레이터 위임\ndef flatten(nested):\n    for item in nested:\n        if isinstance(item, list):\n            yield from flatten(item)\n        else:\n            yield item\n\nprint(list(flatten([1, [2, 3], [[4, 5]]])))\n# [1, 2, 3, 4, 5]"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. yield는 값을 반환하고 상태 유지\\n2. 제너레이터는 1회용 (재사용 불가)\\n3. 대용량 파일 처리에 필수"
+      }
+    ]
+  },
+  "02_중급/iterator": {
+    "id": "02_중급/iterator",
+    "title": "이터레이터 (Iterator)",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "이터레이터 프로토콜과 iterable 객체를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "이터레이터란?",
+        "content": "이터레이터는 __iter__()와 __next__() 메서드를 구현한 객체입니다. for 문은 내부적으로 iter()로 이터레이터를 얻고 next()로 요소를 순회합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "이터레이터 예제",
+        "code": "# iter()와 next() 사용\nnums = [1, 2, 3]\nit = iter(nums)\nprint(next(it))  # 1\nprint(next(it))  # 2\nprint(next(it))  # 3\n# next(it)  # StopIteration 예외\n\n# 커스텀 이터레이터 클래스\nclass Countdown:\n    def __init__(self, start):\n        self.current = start\n    \n    def __iter__(self):\n        return self\n    \n    def __next__(self):\n        if self.current <= 0:\n            raise StopIteration\n        self.current -= 1\n        return self.current + 1\n\nfor num in Countdown(5):\n    print(num, end=' ')  # 5 4 3 2 1\n\n# itertools 활용\nimport itertools\n\n# 무한 반복\nfor i, x in enumerate(itertools.cycle(['A', 'B'])):\n    if i >= 5: break\n    print(x, end='')  # ABABA\n\n# 조합과 순열\nprint(list(itertools.combinations([1,2,3], 2)))  # [(1,2), (1,3), (2,3)]"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. iterable: iter() 가능한 객체 (list, str 등)\\n2. iterator: next()로 순회 가능한 객체\\n3. itertools 모듈로 고급 반복 처리"
+      }
+    ]
+  },
+  "02_중급/lambda": {
+    "id": "02_중급/lambda",
+    "title": "람다 함수 (Lambda)",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "익명 함수인 람다 표현식 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "람다 함수란?",
+        "content": "람다는 lambda 인자: 표현식 형태의 익명 함수입니다. 간단한 연산을 한 줄로 정의하며, sorted(), map(), filter() 등의 key 함수로 자주 사용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "람다 함수 예제",
+        "code": "# 기본 람다\nadd = lambda x, y: x + y\nprint(add(3, 5))  # 8\n\n# 일반 함수와 비교\ndef add_func(x, y):\n    return x + y\n\n# 정렬 key로 활용\nstudents = [\n    {'name': '철수', 'score': 85},\n    {'name': '영희', 'score': 92},\n    {'name': '민수', 'score': 78}\n]\n\n# 점수 기준 정렬\nsorted_students = sorted(students, key=lambda x: x['score'])\nprint([s['name'] for s in sorted_students])  # ['민수', '철수', '영희']\n\n# 역순 정렬\nsorted_desc = sorted(students, key=lambda x: x['score'], reverse=True)\n\n# 튜플 리스트 정렬\npairs = [(1, 'b'), (2, 'a'), (3, 'c')]\nsorted_pairs = sorted(pairs, key=lambda x: x[1])\nprint(sorted_pairs)  # [(2, 'a'), (1, 'b'), (3, 'c')]\n\n# 조건 표현식과 함께\ncheck = lambda x: \"양수\" if x > 0 else \"음수\" if x < 0 else \"영\"\nprint(check(5))  # 양수"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 람다는 단일 표현식만 가능 (문장 불가)\\n2. 복잡한 로직은 일반 함수 권장\\n3. sorted(), max(), min()의 key 인자에 활용"
+      }
+    ]
+  },
+  "02_중급/list-comprehension": {
+    "id": "02_중급/list-comprehension",
+    "title": "리스트 컴프리헨션",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "리스트를 간결하게 생성하는 컴프리헨션 문법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "리스트 컴프리헨션",
+        "content": "리스트 컴프리헨션은 [표현식 for 항목 in 반복가능객체 if 조건] 형태로 리스트를 한 줄로 생성합니다. for 루프보다 간결하고 속도도 빠릅니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "리스트 컴프리헨션 예제",
+        "code": "# 기본 형태\nsquares = [x**2 for x in range(1, 6)]\nprint(squares)  # [1, 4, 9, 16, 25]\n\n# 조건 필터링\nevens = [x for x in range(10) if x % 2 == 0]\nprint(evens)  # [0, 2, 4, 6, 8]\n\n# 조건 표현식 (삼항 연산자)\nresult = [\"짝\" if x % 2 == 0 else \"홀\" for x in range(5)]\nprint(result)  # ['짝', '홀', '짝', '홀', '짝']\n\n# 중첩 루프\nmatrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nflattened = [x for row in matrix for x in row]\nprint(flattened)  # [1, 2, 3, 4, 5, 6, 7, 8, 9]\n\n# 2차원 리스트 생성\nboard = [[0 for _ in range(3)] for _ in range(3)]\nprint(board)  # [[0,0,0], [0,0,0], [0,0,0]]\n\n# 문자열 처리\nwords = ['Hello', 'World', 'Python']\nlower_words = [w.lower() for w in words]\nprint(lower_words)  # ['hello', 'world', 'python']"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 조건 필터: if는 for 뒤에\\n2. 조건 표현식: 표현식 위치에 삼항 연산자\\n3. 가독성 위해 너무 복잡하면 for 루프 사용"
+      }
+    ]
+  },
+  "02_중급/map-filter-reduce": {
+    "id": "02_중급/map-filter-reduce",
+    "title": "map, filter, reduce",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "함수형 프로그래밍 도구 map, filter, reduce를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "함수형 도구",
+        "content": "map()은 모든 요소에 함수를 적용하고, filter()는 조건에 맞는 요소만 필터링합니다. reduce()는 요소들을 누적 연산합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "map, filter, reduce 예제",
+        "code": "# map - 모든 요소에 함수 적용\nnums = [1, 2, 3, 4, 5]\nsquared = list(map(lambda x: x**2, nums))\nprint(squared)  # [1, 4, 9, 16, 25]\n\n# 여러 iterable과 함께\na = [1, 2, 3]\nb = [10, 20, 30]\nresult = list(map(lambda x, y: x + y, a, b))\nprint(result)  # [11, 22, 33]\n\n# filter - 조건에 맞는 요소만 선택\nnums = [1, 2, 3, 4, 5, 6]\nevens = list(filter(lambda x: x % 2 == 0, nums))\nprint(evens)  # [2, 4, 6]\n\n# reduce - 누적 연산\nfrom functools import reduce\nnums = [1, 2, 3, 4, 5]\n\n# 합계\ntotal = reduce(lambda acc, x: acc + x, nums)\nprint(total)  # 15\n\n# 최댓값\nmax_val = reduce(lambda a, b: a if a > b else b, nums)\nprint(max_val)  # 5\n\n# 리스트 컴프리헨션과 비교\n# map + filter 조합\nresult = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, nums)))\n# 동일한 컴프리헨션\nresult2 = [x**2 for x in nums if x % 2 == 0]"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. map/filter 결과는 iterator → list()로 변환\\n2. 컴프리헨션이 더 파이썬스러움\\n3. reduce는 functools에서 import 필요"
+      }
+    ]
+  },
+  "02_중급/quiz-intermediate": {
+    "id": "02_중급/quiz-intermediate",
+    "title": "Python 중급 퀴즈",
+    "category": "python",
+    "subCategory": "02_중급",
+    "language": "Python",
+    "description": "Python 중급 개념을 점검하는 퀴즈입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Python 중급 퀴즈",
+        "content": "컴프리헨션, 람다, 데코레이터, 제너레이터 등 중급 개념을 복습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "퀴즈 문제",
+        "code": "# Q1: 출력 결과는?\nresult = [x**2 for x in range(5) if x % 2 == 1]\nprint(result)  # 정답: [1, 9]\n\n# Q2: 출력 결과는?\nf = lambda x, y=10: x + y\nprint(f(5))  # 정답: 15\n\n# Q3: 출력 결과는?\ndef gen():\n    yield 1\n    yield 2\n    yield 3\n\ng = gen()\nprint(next(g), next(g))  # 정답: 1 2\n\n# Q4: 출력 결과는?\nfrom functools import reduce\nresult = reduce(lambda a, b: a * b, [1, 2, 3, 4])\nprint(result)  # 정답: 24 (1*2*3*4)\n\n# Q5: 데코레이터 실행 순서\ndef d1(f):\n    print(\"d1\")\n    return f\ndef d2(f):\n    print(\"d2\")\n    return f\n\n@d1\n@d2\ndef func(): pass\n# 정답: d2 → d1 (아래에서 위로)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 개념 정리",
+        "content": "1. 컴프리헨션 조건: if는 맨 뒤에\\n2. 제너레이터는 1회용, next()로 소비\\n3. 데코레이터 적용: 아래→위 순서"
+      }
+    ]
+  },
+  "03_객체지향/abc": {
+    "id": "03_객체지향/abc",
+    "title": "추상 클래스 (ABC)",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "abc 모듈을 사용한 추상 클래스 정의를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "추상 클래스란?",
+        "content": "추상 클래스는 직접 인스턴스화할 수 없고, 서브클래스에서 반드시 구현해야 하는 메서드를 정의합니다. abc 모듈의 ABC와 @abstractmethod를 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "추상 클래스 예제",
+        "code": "from abc import ABC, abstractmethod\n\n# 추상 클래스 정의\nclass Animal(ABC):\n    def __init__(self, name):\n        self.name = name\n    \n    @abstractmethod\n    def speak(self):\n        pass  # 서브클래스에서 구현 필수\n    \n    @abstractmethod\n    def move(self):\n        pass\n    \n    def info(self):  # 일반 메서드\n        return f\"이름: {self.name}\"\n\n# 구현 클래스\nclass Dog(Animal):\n    def speak(self):\n        return \"멍멍!\"\n    \n    def move(self):\n        return \"네 발로 달린다\"\n\nclass Bird(Animal):\n    def speak(self):\n        return \"짹짹!\"\n    \n    def move(self):\n        return \"날아다닌다\"\n\n# 사용\ndog = Dog(\"바둑이\")\nprint(dog.speak())  # 멍멍!\nprint(dog.info())   # 이름: 바둑이\n\n# Animal()  # TypeError: 추상 클래스 인스턴스화 불가"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. ABC 상속 + @abstractmethod 데코레이터\\n2. 추상 메서드 미구현시 인스턴스화 불가\\n3. 인터페이스 정의에 활용"
+      }
+    ]
+  },
+  "03_객체지향/class-basic": {
+    "id": "03_객체지향/class-basic",
+    "title": "클래스 기초",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "Python 클래스 정의와 인스턴스 생성을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "클래스란?",
+        "content": "클래스는 객체의 설계도입니다. 속성(데이터)과 메서드(동작)를 정의하고, 인스턴스를 생성하여 사용합니다. __init__은 생성자로 인스턴스 초기화에 사용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "클래스 기본 예제",
+        "code": "# 클래스 정의\nclass Person:\n    # 클래스 변수 (모든 인스턴스 공유)\n    species = \"Homo sapiens\"\n    \n    # 생성자\n    def __init__(self, name, age):\n        # 인스턴스 변수\n        self.name = name\n        self.age = age\n    \n    # 인스턴스 메서드\n    def greet(self):\n        return f\"안녕하세요, {self.name}입니다.\"\n    \n    def have_birthday(self):\n        self.age += 1\n        return f\"{self.name}님, {self.age}세가 되셨습니다!\"\n\n# 인스턴스 생성\nperson1 = Person(\"철수\", 25)\nperson2 = Person(\"영희\", 23)\n\n# 메서드 호출\nprint(person1.greet())  # 안녕하세요, 철수입니다.\nprint(person1.have_birthday())  # 철수님, 26세가 되셨습니다!\n\n# 클래스 변수 접근\nprint(Person.species)  # Homo sapiens\nprint(person1.species)  # Homo sapiens"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. self는 인스턴스 자신을 참조\\n2. __init__은 생성자 (자동 호출)\\n3. 클래스 변수 vs 인스턴스 변수 구분"
+      }
+    ]
+  },
+  "03_객체지향/class-inheritance": {
+    "id": "03_객체지향/class-inheritance",
+    "title": "클래스 상속",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "클래스 상속과 메서드 오버라이딩을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "상속이란?",
+        "content": "상속은 기존 클래스의 속성과 메서드를 새 클래스가 물려받는 것입니다. 코드 재사용과 계층 구조 표현에 유용하며, super()로 부모 클래스에 접근합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "상속 예제",
+        "code": "# 부모 클래스\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n    \n    def speak(self):\n        return \"소리를 냅니다\"\n\n# 자식 클래스\nclass Dog(Animal):\n    def __init__(self, name, breed):\n        super().__init__(name)  # 부모 생성자 호출\n        self.breed = breed\n    \n    def speak(self):  # 메서드 오버라이딩\n        return \"멍멍!\"\n    \n    def fetch(self):  # 새 메서드 추가\n        return f\"{self.name}가 공을 물어옵니다\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"야옹!\"\n\n# 사용\ndog = Dog(\"바둑이\", \"진돗개\")\ncat = Cat(\"나비\")\n\nprint(dog.speak())   # 멍멍!\nprint(cat.speak())   # 야옹!\nprint(dog.fetch())   # 바둑이가 공을 물어옵니다\n\n# 상속 관계 확인\nprint(isinstance(dog, Animal))  # True\nprint(issubclass(Dog, Animal))  # True"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. class 자식(부모): 형태로 상속\\n2. super()로 부모 메서드 호출\\n3. isinstance(), issubclass()로 관계 확인"
+      }
+    ]
+  },
+  "03_객체지향/dataclass": {
+    "id": "03_객체지향/dataclass",
+    "title": "데이터클래스 (dataclass)",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "@dataclass 데코레이터로 간결한 데이터 클래스를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "dataclass란?",
+        "content": "@dataclass는 __init__, __repr__, __eq__ 등을 자동 생성합니다. 데이터를 담는 클래스를 간결하게 정의할 수 있고, 기본값, 비교, 정렬 등의 기능을 쉽게 추가합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "dataclass 예제",
+        "code": "from dataclasses import dataclass, field\nfrom typing import List\n\n# 기본 dataclass\n@dataclass\nclass Point:\n    x: float\n    y: float\n\np1 = Point(1.0, 2.0)\np2 = Point(1.0, 2.0)\nprint(p1)          # Point(x=1.0, y=2.0)\nprint(p1 == p2)    # True (자동 __eq__)\n\n# 기본값과 옵션\n@dataclass(order=True)  # 비교 연산자 자동 생성\nclass Person:\n    name: str\n    age: int = 0  # 기본값\n    hobbies: List[str] = field(default_factory=list)  # 가변 기본값\n    \n    def greet(self):\n        return f\"안녕, 나는 {self.name}\"\n\np1 = Person(\"철수\", 25)\np2 = Person(\"영희\", 23)\nprint(p1 > p2)  # True (이름순 비교)\n\n# frozen - 불변 객체\n@dataclass(frozen=True)\nclass Config:\n    host: str\n    port: int\n\nconfig = Config(\"localhost\", 8080)\n# config.port = 9000  # FrozenInstanceError"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 타입 힌트 필수 (실제 검사는 안 함)\\n2. 가변 기본값은 field(default_factory=...) 사용\\n3. frozen=True로 불변 객체 생성"
+      }
+    ]
+  },
+  "03_객체지향/inheritance-python": {
+    "id": "03_객체지향/inheritance-python",
+    "title": "다중 상속과 MRO",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "다중 상속과 메서드 해석 순서(MRO)를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "다중 상속",
+        "content": "Python은 여러 클래스를 동시에 상속할 수 있습니다. MRO(Method Resolution Order)는 C3 선형화 알고리즘으로 메서드 검색 순서를 결정합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "다중 상속 예제",
+        "code": "# 다중 상속\nclass A:\n    def method(self):\n        return \"A\"\n\nclass B(A):\n    def method(self):\n        return \"B\"\n\nclass C(A):\n    def method(self):\n        return \"C\"\n\nclass D(B, C):  # 다중 상속\n    pass\n\nd = D()\nprint(d.method())  # B (MRO 순서)\nprint(D.__mro__)   # D → B → C → A → object\n\n# Mixin 패턴\nclass JsonMixin:\n    def to_json(self):\n        import json\n        return json.dumps(self.__dict__)\n\nclass LogMixin:\n    def log(self, message):\n        print(f\"[{self.__class__.__name__}] {message}\")\n\nclass User(JsonMixin, LogMixin):\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nuser = User(\"철수\", 25)\nprint(user.to_json())  # {\"name\": \"철수\", \"age\": 25}\nuser.log(\"생성됨\")     # [User] 생성됨"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. __mro__ 또는 mro()로 순서 확인\\n2. Mixin: 기능 추가용 작은 클래스\\n3. 다이아몬드 문제는 MRO로 해결"
+      }
+    ]
+  },
+  "03_객체지향/magic-method": {
+    "id": "03_객체지향/magic-method",
+    "title": "매직 메서드",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "__init__, __str__ 등 특수 메서드를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "매직 메서드란?",
+        "content": "매직 메서드(던더 메서드)는 __로 시작하고 끝나는 특수 메서드입니다. 연산자 오버로딩, 객체 표현, 컨테이너 동작 등을 커스터마이징합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "매직 메서드 예제",
+        "code": "class Vector:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n    \n    # 문자열 표현\n    def __repr__(self):\n        return f\"Vector({self.x}, {self.y})\"\n    \n    def __str__(self):\n        return f\"({self.x}, {self.y})\"\n    \n    # 연산자 오버로딩\n    def __add__(self, other):\n        return Vector(self.x + other.x, self.y + other.y)\n    \n    def __eq__(self, other):\n        return self.x == other.x and self.y == other.y\n    \n    def __len__(self):\n        return int((self.x**2 + self.y**2)**0.5)\n    \n    # 인덱싱\n    def __getitem__(self, index):\n        return (self.x, self.y)[index]\n\nv1 = Vector(3, 4)\nv2 = Vector(1, 2)\n\nprint(v1)           # (3, 4)\nprint(repr(v1))     # Vector(3, 4)\nprint(v1 + v2)      # (4, 6)\nprint(len(v1))      # 5\nprint(v1[0])        # 3"
+      },
+      {
+        "type": "tip",
+        "title": "주요 매직 메서드",
+        "content": "1. __init__, __del__: 생성/소멸자\\n2. __str__, __repr__: 문자열 표현\\n3. __add__, __sub__, __mul__: 연산자\\n4. __len__, __getitem__: 컨테이너"
+      }
+    ]
+  },
+  "03_객체지향/property": {
+    "id": "03_객체지향/property",
+    "title": "프로퍼티 (property)",
+    "category": "python",
+    "subCategory": "03_객체지향",
+    "language": "Python",
+    "description": "@property를 사용한 getter/setter를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "프로퍼티란?",
+        "content": "@property 데코레이터는 메서드를 속성처럼 접근할 수 있게 합니다. getter, setter, deleter를 정의하여 속성 접근을 제어하고 유효성 검사를 수행합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "프로퍼티 예제",
+        "code": "class Person:\n    def __init__(self, name, age):\n        self._name = name  # private 관례\n        self._age = age\n    \n    # getter\n    @property\n    def age(self):\n        return self._age\n    \n    # setter\n    @age.setter\n    def age(self, value):\n        if value < 0:\n            raise ValueError(\"나이는 음수일 수 없습니다\")\n        self._age = value\n    \n    # deleter\n    @age.deleter\n    def age(self):\n        print(\"나이 정보 삭제\")\n        del self._age\n    \n    # 읽기 전용 프로퍼티\n    @property\n    def info(self):\n        return f\"{self._name}, {self._age}세\"\n\nperson = Person(\"철수\", 25)\n\n# getter 호출 (메서드처럼 () 없이)\nprint(person.age)     # 25\n\n# setter 호출\nperson.age = 26       # OK\n# person.age = -1     # ValueError\n\n# 읽기 전용\nprint(person.info)    # 철수, 26세\n# person.info = \"x\"   # AttributeError"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. _변수명: private 관례 (접근 가능)\\n2. __변수명: 네임 맹글링 (실제로 숨김)\\n3. setter 없으면 읽기 전용"
+      }
+    ]
+  },
+  "04_타입/mypy": {
+    "id": "04_타입/mypy",
+    "title": "Mypy 정적 타입 검사",
+    "category": "python",
+    "subCategory": "04_타입",
+    "language": "Python",
+    "description": "mypy를 사용한 정적 타입 검사를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mypy란?",
+        "content": "mypy는 Python의 정적 타입 검사 도구입니다. 타입 힌트를 기반으로 코드 실행 전에 타입 오류를 발견하여 버그를 예방합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Mypy 사용 예제",
+        "code": "# mypy 설치: pip install mypy\n\n# example.py\ndef greet(name: str) -> str:\n    return f\"Hello, {name}\"\n\n# 타입 오류 발생 코드\nresult = greet(123)  # mypy: Argument 1 has incompatible type \"int\"\n\ndef add(a: int, b: int) -> int:\n    return a + b\n\n# 리스트 타입\nfrom typing import List\n\ndef sum_numbers(numbers: List[int]) -> int:\n    return sum(numbers)\n\n# mypy 실행\n# $ mypy example.py\n# example.py:6: error: Argument 1 to \"greet\" has incompatible type \"int\"\n\n# mypy.ini 설정 예시\n\"\"\"\n[mypy]\npython_version = 3.10\nwarn_return_any = True\ndisallow_untyped_defs = True\nignore_missing_imports = True\n\"\"\"\n\n# 타입 무시 (필요시)\nx: int = \"hello\"  # type: ignore"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. mypy --strict: 엄격 모드\\n2. # type: ignore로 특정 줄 무시\\n3. CI/CD에 통합하여 자동 검사"
+      }
+    ]
+  },
+  "04_타입/type-hint": {
+    "id": "04_타입/type-hint",
+    "title": "타입 힌트 기초",
+    "category": "python",
+    "subCategory": "04_타입",
+    "language": "Python",
+    "description": "Python 타입 힌트의 기본 문법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "타입 힌트란?",
+        "content": "타입 힌트는 Python 3.5+에서 도입된 문법으로, 변수와 함수의 타입을 명시합니다. 런타임에 강제되지 않지만, IDE 자동완성과 정적 분석 도구에 활용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "타입 힌트 기본",
+        "code": "# 변수 타입 힌트\nname: str = \"철수\"\nage: int = 25\nheight: float = 175.5\nis_student: bool = True\n\n# 함수 타입 힌트\ndef greet(name: str) -> str:\n    return f\"안녕하세요, {name}님!\"\n\ndef add(a: int, b: int) -> int:\n    return a + b\n\n# 반환값 없음\ndef print_hello() -> None:\n    print(\"Hello\")\n\n# 리스트, 딕셔너리 (Python 3.9+)\ndef process_items(items: list[str]) -> dict[str, int]:\n    return {item: len(item) for item in items}\n\n# Python 3.8 이하\nfrom typing import List, Dict\ndef process_items_old(items: List[str]) -> Dict[str, int]:\n    return {item: len(item) for item in items}\n\n# 클래스 메서드\nclass Person:\n    def __init__(self, name: str, age: int) -> None:\n        self.name = name\n        self.age = age\n    \n    def greet(self) -> str:\n        return f\"안녕, {self.name}\""
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 타입 힌트는 힌트일 뿐, 강제 아님\\n2. Python 3.9+: list[str], dict[str, int]\\n3. Python 3.8-: from typing import List, Dict"
+      }
+    ]
+  },
+  "04_타입/typing-module": {
+    "id": "04_타입/typing-module",
+    "title": "typing 모듈 활용",
+    "category": "python",
+    "subCategory": "04_타입",
+    "language": "Python",
+    "description": "typing 모듈의 고급 타입들을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "typing 모듈",
+        "content": "typing 모듈은 Union, Optional, Callable, TypeVar 등 복잡한 타입을 표현합니다. 제네릭 타입과 타입 별칭으로 유연한 타입 정의가 가능합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "typing 모듈 예제",
+        "code": "from typing import (\n    Union, Optional, Callable, TypeVar,\n    Any, Literal, Final, TypedDict\n)\n\n# Union - 여러 타입 중 하나\ndef process(value: Union[str, int]) -> str:\n    return str(value)\n\n# Python 3.10+: | 연산자\ndef process_new(value: str | int) -> str:\n    return str(value)\n\n# Optional - None 허용 (Union[X, None])\ndef find(name: str) -> Optional[int]:\n    return None  # 또는 정수\n\n# Callable - 함수 타입\ndef apply(func: Callable[[int, int], int], a: int, b: int) -> int:\n    return func(a, b)\n\n# TypeVar - 제네릭\nT = TypeVar('T')\ndef first(items: list[T]) -> T:\n    return items[0]\n\n# Literal - 특정 값만 허용\ndef set_mode(mode: Literal[\"read\", \"write\"]) -> None:\n    pass\n\n# TypedDict - 딕셔너리 구조 정의\nclass Person(TypedDict):\n    name: str\n    age: int\n\nperson: Person = {\"name\": \"철수\", \"age\": 25}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. Optional[X] = Union[X, None]\\n2. Callable[[인자타입], 반환타입]\\n3. TypedDict로 딕셔너리 구조 정의"
+      }
+    ]
+  },
+  "05_비동기/aiohttp": {
+    "id": "05_비동기/aiohttp",
+    "title": "aiohttp 비동기 HTTP",
+    "category": "python",
+    "subCategory": "05_비동기",
+    "language": "Python",
+    "description": "aiohttp를 사용한 비동기 HTTP 요청을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "aiohttp란?",
+        "content": "aiohttp는 비동기 HTTP 클라이언트/서버 라이브러리입니다. asyncio 기반으로 동시에 여러 HTTP 요청을 효율적으로 처리합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "aiohttp 예제",
+        "code": "import aiohttp\nimport asyncio\n\n# 단일 요청\nasync def fetch(url):\n    async with aiohttp.ClientSession() as session:\n        async with session.get(url) as response:\n            return await response.text()\n\n# 여러 요청 동시 처리\nasync def fetch_all(urls):\n    async with aiohttp.ClientSession() as session:\n        tasks = []\n        for url in urls:\n            task = asyncio.create_task(fetch_one(session, url))\n            tasks.append(task)\n        return await asyncio.gather(*tasks)\n\nasync def fetch_one(session, url):\n    async with session.get(url) as response:\n        return await response.json()\n\n# POST 요청\nasync def post_data(url, data):\n    async with aiohttp.ClientSession() as session:\n        async with session.post(url, json=data) as response:\n            return await response.json()\n\n# 실행\nasync def main():\n    urls = [\n        'https://api.example.com/1',\n        'https://api.example.com/2',\n    ]\n    results = await fetch_all(urls)\n    print(results)\n\nasyncio.run(main())"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. ClientSession은 재사용 권장\\n2. gather()로 동시 요청 처리\\n3. 타임아웃: timeout=aiohttp.ClientTimeout(total=10)"
+      }
+    ]
+  },
+  "05_비동기/async-intro": {
+    "id": "05_비동기/async-intro",
+    "title": "비동기 프로그래밍 소개",
+    "category": "python",
+    "subCategory": "05_비동기",
+    "language": "Python",
+    "description": "Python 비동기 프로그래밍의 개념을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "비동기 프로그래밍이란?",
+        "content": "비동기 프로그래밍은 I/O 작업(네트워크, 파일) 대기 시간 동안 다른 작업을 수행합니다. async/await 문법으로 동기 코드처럼 직관적으로 작성할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "async/await 기본",
+        "code": "import asyncio\n\n# 코루틴 정의\nasync def say_hello(name, delay):\n    await asyncio.sleep(delay)  # 비동기 대기\n    print(f\"Hello, {name}!\")\n    return f\"Done: {name}\"\n\n# 순차 실행 (총 3초)\nasync def sequential():\n    await say_hello(\"A\", 1)\n    await say_hello(\"B\", 1)\n    await say_hello(\"C\", 1)\n\n# 동시 실행 (총 1초)\nasync def concurrent():\n    await asyncio.gather(\n        say_hello(\"A\", 1),\n        say_hello(\"B\", 1),\n        say_hello(\"C\", 1)\n    )\n\n# 실행\nasync def main():\n    print(\"순차 실행:\")\n    await sequential()\n    \n    print(\"\\n동시 실행:\")\n    await concurrent()\n\n# 메인 실행\nasyncio.run(main())\n\n# 동기 vs 비동기 비교\n# 동기: 요청1 완료 → 요청2 시작 → 요청2 완료\n# 비동기: 요청1 시작 → 요청2 시작 → 둘 다 완료"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. async def: 코루틴 함수 정의\\n2. await: 코루틴 실행 대기\\n3. asyncio.run(): 이벤트 루프 실행"
+      }
+    ]
+  },
+  "05_비동기/asyncio": {
+    "id": "05_비동기/asyncio",
+    "title": "asyncio 모듈",
+    "category": "python",
+    "subCategory": "05_비동기",
+    "language": "Python",
+    "description": "asyncio 모듈의 핵심 기능을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "asyncio 모듈",
+        "content": "asyncio는 Python의 비동기 프로그래밍 표준 라이브러리입니다. 이벤트 루프, 태스크, Future 등을 제공하여 동시성 프로그래밍을 지원합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "asyncio 활용",
+        "code": "import asyncio\n\n# Task 생성 및 관리\nasync def worker(name, delay):\n    print(f\"{name} 시작\")\n    await asyncio.sleep(delay)\n    print(f\"{name} 완료\")\n    return f\"{name} 결과\"\n\nasync def main():\n    # 태스크 생성\n    task1 = asyncio.create_task(worker(\"작업1\", 2))\n    task2 = asyncio.create_task(worker(\"작업2\", 1))\n    \n    # 모든 태스크 완료 대기\n    results = await asyncio.gather(task1, task2)\n    print(f\"결과: {results}\")\n\n# 타임아웃 처리\nasync def with_timeout():\n    try:\n        result = await asyncio.wait_for(\n            worker(\"느린작업\", 10),\n            timeout=3.0\n        )\n    except asyncio.TimeoutError:\n        print(\"타임아웃 발생!\")\n\n# 태스크 취소\nasync def cancellation():\n    task = asyncio.create_task(worker(\"취소될작업\", 10))\n    await asyncio.sleep(1)\n    task.cancel()\n    try:\n        await task\n    except asyncio.CancelledError:\n        print(\"태스크가 취소됨\")\n\nasyncio.run(main())"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. create_task(): 태스크 생성\\n2. gather(): 여러 코루틴 동시 실행\\n3. wait_for(): 타임아웃 설정"
+      }
+    ]
+  },
+  "05_비동기/concurrent": {
+    "id": "05_비동기/concurrent",
+    "title": "concurrent.futures",
+    "category": "python",
+    "subCategory": "05_비동기",
+    "language": "Python",
+    "description": "ThreadPoolExecutor와 ProcessPoolExecutor를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "concurrent.futures",
+        "content": "concurrent.futures는 스레드/프로세스 풀을 쉽게 사용하는 고수준 인터페이스입니다. I/O 바운드는 ThreadPool, CPU 바운드는 ProcessPool을 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "concurrent.futures 예제",
+        "code": "from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor\nimport time\n\ndef download(url):\n    time.sleep(1)  # 네트워크 요청 시뮬레이션\n    return f\"Downloaded: {url}\"\n\ndef cpu_task(n):\n    return sum(i * i for i in range(n))\n\n# ThreadPoolExecutor (I/O 바운드)\ndef thread_example():\n    urls = [f\"url_{i}\" for i in range(5)]\n    \n    with ThreadPoolExecutor(max_workers=5) as executor:\n        # map 사용\n        results = list(executor.map(download, urls))\n        print(results)\n        \n        # submit 사용 (개별 제어)\n        futures = [executor.submit(download, url) for url in urls]\n        for future in futures:\n            print(future.result())\n\n# ProcessPoolExecutor (CPU 바운드)\ndef process_example():\n    numbers = [10**6, 10**7, 10**6]\n    \n    with ProcessPoolExecutor() as executor:\n        results = list(executor.map(cpu_task, numbers))\n        print(results)\n\n# as_completed - 완료 순서대로 처리\nfrom concurrent.futures import as_completed\n\ndef as_completed_example():\n    with ThreadPoolExecutor() as executor:\n        futures = {executor.submit(download, f\"url_{i}\"): i for i in range(5)}\n        for future in as_completed(futures):\n            idx = futures[future]\n            print(f\"{idx}: {future.result()}\")"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. ThreadPool: I/O 대기 작업 (네트워크, 파일)\\n2. ProcessPool: CPU 연산 작업\\n3. GIL 때문에 CPU 작업은 ProcessPool 필수"
+      }
+    ]
+  },
+  "05_비동기/practice-async": {
+    "id": "05_비동기/practice-async",
+    "title": "비동기 실습",
+    "category": "python",
+    "subCategory": "05_비동기",
+    "language": "Python",
+    "description": "비동기 프로그래밍 실전 예제를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "비동기 실습",
+        "content": "웹 크롤링, API 호출, 파일 처리 등 실전에서 비동기 프로그래밍을 적용하는 패턴을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "실전 비동기 패턴",
+        "code": "import asyncio\nimport aiohttp\nfrom typing import List\n\n# 세마포어로 동시 요청 제한\nasync def limited_fetch(urls: List[str], limit: int = 5):\n    semaphore = asyncio.Semaphore(limit)\n    \n    async def fetch_with_limit(session, url):\n        async with semaphore:\n            async with session.get(url) as response:\n                return await response.text()\n    \n    async with aiohttp.ClientSession() as session:\n        tasks = [fetch_with_limit(session, url) for url in urls]\n        return await asyncio.gather(*tasks)\n\n# 재시도 패턴\nasync def fetch_with_retry(url, retries=3):\n    for attempt in range(retries):\n        try:\n            async with aiohttp.ClientSession() as session:\n                async with session.get(url) as response:\n                    return await response.json()\n        except Exception as e:\n            if attempt == retries - 1:\n                raise\n            await asyncio.sleep(2 ** attempt)  # 지수 백오프\n\n# 프로듀서-컨슈머 패턴\nasync def producer(queue: asyncio.Queue):\n    for i in range(10):\n        await queue.put(i)\n        await asyncio.sleep(0.1)\n    await queue.put(None)  # 종료 신호\n\nasync def consumer(queue: asyncio.Queue, name: str):\n    while True:\n        item = await queue.get()\n        if item is None:\n            await queue.put(None)  # 다른 컨슈머에게 전파\n            break\n        print(f\"{name}: 처리 {item}\")\n        queue.task_done()"
+      },
+      {
+        "type": "tip",
+        "title": "실전 팁",
+        "content": "1. 세마포어로 동시 연결 수 제한\\n2. 지수 백오프로 재시도\\n3. Queue로 작업 분배"
+      }
+    ]
+  },
+  "06_테스트/mock": {
+    "id": "06_테스트/mock",
+    "title": "Mock 객체",
+    "category": "python",
+    "subCategory": "06_테스트",
+    "language": "Python",
+    "description": "unittest.mock을 사용한 모킹 테스트를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mock이란?",
+        "content": "Mock은 실제 객체를 대체하는 가짜 객체입니다. 외부 의존성(API, DB)을 격리하여 단위 테스트의 독립성을 보장합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Mock 사용 예제",
+        "code": "from unittest.mock import Mock, patch, MagicMock\nimport pytest\n\n# 기본 Mock 객체\nmock = Mock()\nmock.method.return_value = 42\nassert mock.method() == 42\nmock.method.assert_called_once()\n\n# patch 데코레이터\nclass UserService:\n    def get_user(self, user_id):\n        import requests\n        response = requests.get(f'/api/users/{user_id}')\n        return response.json()\n\n@patch('requests.get')\ndef test_get_user(mock_get):\n    mock_get.return_value.json.return_value = {'id': 1, 'name': '철수'}\n    \n    service = UserService()\n    result = service.get_user(1)\n    \n    assert result['name'] == '철수'\n    mock_get.assert_called_once_with('/api/users/1')\n\n# MagicMock - 매직 메서드 자동 지원\nmagic = MagicMock()\nmagic.__len__.return_value = 5\nassert len(magic) == 5\n\n# side_effect로 예외 발생\nmock = Mock()\nmock.method.side_effect = ValueError(\"에러!\")\nwith pytest.raises(ValueError):\n    mock.method()"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. @patch: 특정 모듈/클래스 대체\\n2. return_value: 반환값 지정\\n3. side_effect: 예외 또는 연속 반환값"
+      }
+    ]
+  },
+  "06_테스트/practice-test": {
+    "id": "06_테스트/practice-test",
+    "title": "테스트 실습",
+    "category": "python",
+    "subCategory": "06_테스트",
+    "language": "Python",
+    "description": "실전 테스트 작성 패턴을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "테스트 실습",
+        "content": "실제 프로젝트에서 사용하는 테스트 패턴, 구조화, 커버리지 측정 방법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "실전 테스트 패턴",
+        "code": "# tests/test_calculator.py\nimport pytest\nfrom calculator import Calculator\n\nclass TestCalculator:\n    \"\"\"Calculator 테스트 클래스\"\"\"\n    \n    @pytest.fixture\n    def calc(self):\n        return Calculator()\n    \n    # Given-When-Then 패턴\n    def test_add_positive_numbers(self, calc):\n        # Given\n        a, b = 2, 3\n        \n        # When\n        result = calc.add(a, b)\n        \n        # Then\n        assert result == 5\n    \n    # 경계값 테스트\n    @pytest.mark.parametrize(\"a,b,expected\", [\n        (0, 0, 0),\n        (-1, 1, 0),\n        (999999, 1, 1000000),\n    ])\n    def test_add_edge_cases(self, calc, a, b, expected):\n        assert calc.add(a, b) == expected\n    \n    # 예외 테스트\n    def test_divide_by_zero(self, calc):\n        with pytest.raises(ZeroDivisionError):\n            calc.divide(10, 0)\n\n# 커버리지 실행\n# pytest --cov=src --cov-report=html\n\n# conftest.py - 공유 픽스처\n@pytest.fixture(scope=\"session\")\ndef db_connection():\n    conn = create_connection()\n    yield conn\n    conn.close()"
+      },
+      {
+        "type": "tip",
+        "title": "테스트 팁",
+        "content": "1. AAA 패턴: Arrange-Act-Assert\\n2. 커버리지 80% 이상 목표\\n3. conftest.py로 픽스처 공유"
+      }
+    ]
+  },
+  "06_테스트/pytest-fixture": {
+    "id": "06_테스트/pytest-fixture",
+    "title": "pytest Fixture",
+    "category": "python",
+    "subCategory": "06_테스트",
+    "language": "Python",
+    "description": "pytest fixture를 사용한 테스트 설정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Fixture란?",
+        "content": "Fixture는 테스트 전에 필요한 설정(데이터, 객체)을 준비하고, 테스트 후 정리하는 함수입니다. 의존성 주입 방식으로 테스트 함수에 전달됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Fixture 사용 예제",
+        "code": "import pytest\n\n# 기본 fixture\n@pytest.fixture\ndef sample_data():\n    return {\"name\": \"철수\", \"age\": 25}\n\ndef test_with_fixture(sample_data):\n    assert sample_data[\"name\"] == \"철수\"\n\n# setup/teardown (yield 사용)\n@pytest.fixture\ndef database():\n    db = Database.connect()\n    yield db  # 테스트에 전달\n    db.close()  # teardown\n\n# 스코프 설정\n@pytest.fixture(scope=\"module\")  # module, session, function\ndef expensive_resource():\n    return create_expensive_resource()\n\n# 파라미터화된 fixture\n@pytest.fixture(params=[\"mysql\", \"postgresql\", \"sqlite\"])\ndef db_type(request):\n    return request.param\n\ndef test_database(db_type):\n    # 3번 실행됨 (각 DB 타입별)\n    assert db_type in [\"mysql\", \"postgresql\", \"sqlite\"]\n\n# fixture 조합\n@pytest.fixture\ndef user(database):\n    return database.create_user(\"test_user\")\n\n@pytest.fixture\ndef authenticated_user(user):\n    user.login()\n    return user"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. yield: setup/teardown 분리\\n2. scope: function < class < module < session\\n3. conftest.py: 프로젝트 전체 공유"
+      }
+    ]
+  },
+  "06_테스트/pytest-intro": {
+    "id": "06_테스트/pytest-intro",
+    "title": "pytest 시작하기",
+    "category": "python",
+    "subCategory": "06_테스트",
+    "language": "Python",
+    "description": "pytest 프레임워크의 기본 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "pytest란?",
+        "content": "pytest는 Python의 가장 인기 있는 테스트 프레임워크입니다. 간단한 assert 문으로 테스트를 작성하고, 풍부한 플러그인 생태계를 제공합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "pytest 기본 사용법",
+        "code": "# 설치: pip install pytest\n\n# test_example.py\ndef test_addition():\n    assert 1 + 1 == 2\n\ndef test_string():\n    assert \"hello\".upper() == \"HELLO\"\n\n# 예외 테스트\nimport pytest\n\ndef test_zero_division():\n    with pytest.raises(ZeroDivisionError):\n        1 / 0\n\n# 파라미터화 테스트\n@pytest.mark.parametrize(\"input,expected\", [\n    (1, 1),\n    (2, 4),\n    (3, 9),\n])\ndef test_square(input, expected):\n    assert input ** 2 == expected\n\n# 마커 (조건부 실행)\n@pytest.mark.skip(reason=\"아직 미구현\")\ndef test_not_implemented():\n    pass\n\n@pytest.mark.skipif(True, reason=\"조건부 스킵\")\ndef test_conditional():\n    pass\n\n# 실행\n# pytest                    # 모든 테스트\n# pytest test_example.py    # 특정 파일\n# pytest -v                 # 상세 출력\n# pytest -k \"square\"        # 이름 필터"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 파일명: test_*.py 또는 *_test.py\\n2. 함수명: test_ 접두사\\n3. assert 문 하나로 간단히 검증"
+      }
+    ]
+  },
+  "07_파일/csv-excel": {
+    "id": "07_파일/csv-excel",
+    "title": "CSV와 Excel 파일",
+    "category": "python",
+    "subCategory": "07_파일",
+    "language": "Python",
+    "description": "CSV와 Excel 파일 읽기/쓰기를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "CSV/Excel 처리",
+        "content": "csv 모듈로 CSV 파일을, openpyxl이나 pandas로 Excel 파일을 처리합니다. 데이터 분석과 보고서 생성에 필수적인 기능입니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "CSV/Excel 예제",
+        "code": "import csv\n\n# CSV 읽기\nwith open('data.csv', 'r', encoding='utf-8') as f:\n    reader = csv.DictReader(f)\n    for row in reader:\n        print(row['name'], row['age'])\n\n# CSV 쓰기\ndata = [\n    {'name': '철수', 'age': 25},\n    {'name': '영희', 'age': 23}\n]\nwith open('output.csv', 'w', newline='', encoding='utf-8') as f:\n    writer = csv.DictWriter(f, fieldnames=['name', 'age'])\n    writer.writeheader()\n    writer.writerows(data)\n\n# pandas로 CSV\nimport pandas as pd\ndf = pd.read_csv('data.csv')\ndf.to_csv('output.csv', index=False)\n\n# Excel 읽기/쓰기 (openpyxl)\nfrom openpyxl import Workbook, load_workbook\n\n# 읽기\nwb = load_workbook('data.xlsx')\nws = wb.active\nfor row in ws.iter_rows(values_only=True):\n    print(row)\n\n# 쓰기\nwb = Workbook()\nws = wb.active\nws.append(['이름', '나이'])\nws.append(['철수', 25])\nwb.save('output.xlsx')\n\n# pandas로 Excel\ndf = pd.read_excel('data.xlsx')\ndf.to_excel('output.xlsx', index=False)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. CSV: newline='' 옵션 필수 (Windows)\\n2. pandas가 가장 편리\\n3. Excel: openpyxl 또는 xlsxwriter"
+      }
+    ]
+  },
+  "07_파일/file-io": {
+    "id": "07_파일/file-io",
+    "title": "파일 입출력",
+    "category": "python",
+    "subCategory": "07_파일",
+    "language": "Python",
+    "description": "Python 파일 읽기/쓰기 기본을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "파일 입출력",
+        "content": "open() 함수로 파일을 열고 읽기/쓰기를 수행합니다. with 문을 사용하면 파일이 자동으로 닫히며, 다양한 모드와 인코딩을 지원합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "파일 입출력 예제",
+        "code": "# 파일 읽기\nwith open('file.txt', 'r', encoding='utf-8') as f:\n    content = f.read()         # 전체 읽기\n    # lines = f.readlines()    # 리스트로\n    # line = f.readline()      # 한 줄씩\n\n# 한 줄씩 읽기 (메모리 효율)\nwith open('file.txt', 'r', encoding='utf-8') as f:\n    for line in f:\n        print(line.strip())\n\n# 파일 쓰기\nwith open('output.txt', 'w', encoding='utf-8') as f:\n    f.write('Hello, World!\\n')\n    f.writelines(['Line 1\\n', 'Line 2\\n'])\n\n# 파일 추가\nwith open('output.txt', 'a', encoding='utf-8') as f:\n    f.write('추가된 내용\\n')\n\n# 바이너리 파일\nwith open('image.png', 'rb') as f:\n    data = f.read()\n\nwith open('copy.png', 'wb') as f:\n    f.write(data)\n\n# 파일 모드 정리\n# 'r'  - 읽기 (기본)\n# 'w'  - 쓰기 (덮어쓰기)\n# 'a'  - 추가\n# 'x'  - 새 파일 생성 (있으면 에러)\n# 'b'  - 바이너리 모드\n# '+'  - 읽기+쓰기"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. with 문으로 자동 close() 보장\\n2. encoding='utf-8' 명시 권장\\n3. 대용량 파일은 for line in f: 사용"
+      }
+    ]
+  },
+  "07_파일/json-handling": {
+    "id": "07_파일/json-handling",
+    "title": "JSON 처리",
+    "category": "python",
+    "subCategory": "07_파일",
+    "language": "Python",
+    "description": "json 모듈을 사용한 JSON 데이터 처리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "JSON 처리",
+        "content": "json 모듈은 Python 객체와 JSON 문자열 간 변환을 제공합니다. API 응답, 설정 파일 등에서 널리 사용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "JSON 처리 예제",
+        "code": "import json\n\n# Python → JSON 문자열\ndata = {'name': '철수', 'age': 25, 'skills': ['Python', 'JS']}\njson_str = json.dumps(data, ensure_ascii=False, indent=2)\nprint(json_str)\n\n# JSON 문자열 → Python\njson_text = '{\"name\": \"영희\", \"age\": 23}'\nparsed = json.loads(json_text)\nprint(parsed['name'])  # 영희\n\n# 파일에서 읽기\nwith open('config.json', 'r', encoding='utf-8') as f:\n    config = json.load(f)\n\n# 파일에 쓰기\nwith open('output.json', 'w', encoding='utf-8') as f:\n    json.dump(data, f, ensure_ascii=False, indent=2)\n\n# 커스텀 객체 직렬화\nfrom datetime import datetime\n\nclass CustomEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat()\n        return super().default(obj)\n\ndata = {'created': datetime.now()}\njson.dumps(data, cls=CustomEncoder)\n\n# 딕셔너리 기본값\nimport json\nconfig = json.loads('{}')\nname = config.get('name', 'default')"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. dumps/loads: 문자열 변환\\n2. dump/load: 파일 변환\\n3. ensure_ascii=False: 한글 유지"
+      }
+    ]
+  },
+  "07_파일/json-yaml": {
+    "id": "07_파일/json-yaml",
+    "title": "YAML 처리",
+    "category": "python",
+    "subCategory": "07_파일",
+    "language": "Python",
+    "description": "PyYAML을 사용한 YAML 파일 처리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "YAML 처리",
+        "content": "YAML은 JSON보다 읽기 쉬운 데이터 직렬화 형식입니다. 설정 파일에 많이 사용되며, PyYAML 라이브러리로 처리합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "YAML 처리 예제",
+        "code": "# pip install pyyaml\nimport yaml\n\n# YAML 문자열 파싱\nyaml_text = \"\"\"\nserver:\n  host: localhost\n  port: 8080\ndatabase:\n  name: mydb\n  users:\n    - admin\n    - guest\n\"\"\"\nconfig = yaml.safe_load(yaml_text)\nprint(config['server']['host'])  # localhost\n\n# 파일에서 읽기\nwith open('config.yaml', 'r', encoding='utf-8') as f:\n    config = yaml.safe_load(f)\n\n# Python → YAML\ndata = {\n    'name': '철수',\n    'skills': ['Python', 'Docker', 'K8s']\n}\nyaml_str = yaml.dump(data, allow_unicode=True, default_flow_style=False)\nprint(yaml_str)\n\n# 파일에 쓰기\nwith open('output.yaml', 'w', encoding='utf-8') as f:\n    yaml.dump(data, f, allow_unicode=True)\n\n# 여러 문서 처리\nmulti_yaml = \"\"\"\n---\nname: doc1\n---\nname: doc2\n\"\"\"\nfor doc in yaml.safe_load_all(multi_yaml):\n    print(doc)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. safe_load() 사용 (보안)\\n2. allow_unicode=True: 한글 유지\\n3. ---로 여러 문서 구분"
+      }
+    ]
+  },
+  "07_파일/pathlib": {
+    "id": "07_파일/pathlib",
+    "title": "pathlib 모듈",
+    "category": "python",
+    "subCategory": "07_파일",
+    "language": "Python",
+    "description": "pathlib을 사용한 경로 처리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "pathlib이란?",
+        "content": "pathlib은 객체 지향적인 경로 처리 모듈입니다. os.path보다 직관적이고, 경로 조합, 파일 검색, 메타데이터 조회 등을 쉽게 수행합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "pathlib 사용 예제",
+        "code": "from pathlib import Path\n\n# 경로 생성\np = Path('folder/file.txt')\np = Path.cwd()  # 현재 디렉토리\np = Path.home()  # 홈 디렉토리\n\n# 경로 조합 (/ 연산자)\nbase = Path('/home/user')\nfull = base / 'documents' / 'file.txt'\nprint(full)  # /home/user/documents/file.txt\n\n# 경로 정보\np = Path('/home/user/docs/file.txt')\nprint(p.name)       # file.txt\nprint(p.stem)       # file\nprint(p.suffix)     # .txt\nprint(p.parent)     # /home/user/docs\nprint(p.parts)      # ('/', 'home', 'user', 'docs', 'file.txt')\n\n# 파일/디렉토리 확인\nprint(p.exists())    # 존재 여부\nprint(p.is_file())   # 파일인지\nprint(p.is_dir())    # 디렉토리인지\n\n# 파일 검색 (glob)\nfor py_file in Path('.').glob('**/*.py'):\n    print(py_file)\n\n# 파일 읽기/쓰기\np = Path('test.txt')\np.write_text('Hello', encoding='utf-8')\ntext = p.read_text(encoding='utf-8')\n\n# 디렉토리 생성\nPath('new/nested/dir').mkdir(parents=True, exist_ok=True)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. / 연산자로 경로 조합\\n2. glob('**/*.py'): 재귀 검색\\n3. os.path 대신 pathlib 권장"
+      }
+    ]
+  },
+  "08_웹/django-intro": {
+    "id": "08_웹/django-intro",
+    "title": "Django 시작하기",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "Django 웹 프레임워크의 기본을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Django란?",
+        "content": "Django는 Python의 풀스택 웹 프레임워크입니다. ORM, 관리자 패널, 인증 시스템 등 배터리 포함 철학으로 빠른 개발을 지원합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Django 기본 구조",
+        "code": "# 설치 및 프로젝트 생성\n# pip install django\n# django-admin startproject myproject\n# cd myproject && python manage.py startapp myapp\n\n# myapp/models.py - 모델 정의\nfrom django.db import models\n\nclass Post(models.Model):\n    title = models.CharField(max_length=200)\n    content = models.TextField()\n    created_at = models.DateTimeField(auto_now_add=True)\n    \n    def __str__(self):\n        return self.title\n\n# myapp/views.py - 뷰 정의\nfrom django.shortcuts import render, get_object_or_404\nfrom .models import Post\n\ndef post_list(request):\n    posts = Post.objects.all()\n    return render(request, 'posts/list.html', {'posts': posts})\n\ndef post_detail(request, pk):\n    post = get_object_or_404(Post, pk=pk)\n    return render(request, 'posts/detail.html', {'post': post})\n\n# myapp/urls.py\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('', views.post_list, name='post_list'),\n    path('<int:pk>/', views.post_detail, name='post_detail'),\n]"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. MTV 패턴: Model-Template-View\\n2. python manage.py migrate: DB 마이그레이션\\n3. python manage.py createsuperuser: 관리자 생성"
+      }
+    ]
+  },
+  "08_웹/fastapi-auth": {
+    "id": "08_웹/fastapi-auth",
+    "title": "FastAPI 인증",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "FastAPI에서 JWT 인증을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "FastAPI 인증",
+        "content": "FastAPI는 OAuth2, JWT 등 다양한 인증 방식을 지원합니다. python-jose로 JWT를 생성하고 검증하며, Depends로 의존성 주입합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "JWT 인증 예제",
+        "code": "from fastapi import FastAPI, Depends, HTTPException, status\nfrom fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm\nfrom jose import JWTError, jwt\nfrom datetime import datetime, timedelta\nfrom pydantic import BaseModel\n\napp = FastAPI()\noauth2_scheme = OAuth2PasswordBearer(tokenUrl=\"token\")\n\nSECRET_KEY = \"your-secret-key\"\nALGORITHM = \"HS256\"\n\nclass Token(BaseModel):\n    access_token: str\n    token_type: str\n\ndef create_access_token(data: dict, expires_delta: timedelta = None):\n    to_encode = data.copy()\n    expire = datetime.utcnow() + (expires_delta or timedelta(hours=1))\n    to_encode.update({\"exp\": expire})\n    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)\n\nasync def get_current_user(token: str = Depends(oauth2_scheme)):\n    try:\n        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])\n        username = payload.get(\"sub\")\n        if username is None:\n            raise HTTPException(status_code=401)\n        return username\n    except JWTError:\n        raise HTTPException(status_code=401)\n\n@app.post(\"/token\", response_model=Token)\nasync def login(form: OAuth2PasswordRequestForm = Depends()):\n    # 사용자 검증 로직\n    token = create_access_token({\"sub\": form.username})\n    return {\"access_token\": token, \"token_type\": \"bearer\"}\n\n@app.get(\"/protected\")\nasync def protected(user: str = Depends(get_current_user)):\n    return {\"message\": f\"Hello, {user}\"}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. OAuth2PasswordBearer: 토큰 추출\\n2. Depends(): 의존성 주입\\n3. SECRET_KEY는 환경변수로 관리"
+      }
+    ]
+  },
+  "08_웹/fastapi-crud": {
+    "id": "08_웹/fastapi-crud",
+    "title": "FastAPI CRUD API",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "FastAPI로 RESTful CRUD API를 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "CRUD API",
+        "content": "CRUD는 Create, Read, Update, Delete의 약자입니다. FastAPI에서 HTTP 메서드(POST, GET, PUT, DELETE)로 RESTful API를 구현합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "CRUD API 예제",
+        "code": "from fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel\nfrom typing import List, Optional\n\napp = FastAPI()\n\nclass Item(BaseModel):\n    id: Optional[int] = None\n    name: str\n    price: float\n    description: Optional[str] = None\n\n# 임시 데이터베이스\ndb: List[Item] = []\nnext_id = 1\n\n# Create\n@app.post(\"/items/\", response_model=Item)\ndef create_item(item: Item):\n    global next_id\n    item.id = next_id\n    next_id += 1\n    db.append(item)\n    return item\n\n# Read All\n@app.get(\"/items/\", response_model=List[Item])\ndef read_items(skip: int = 0, limit: int = 10):\n    return db[skip : skip + limit]\n\n# Read One\n@app.get(\"/items/{item_id}\", response_model=Item)\ndef read_item(item_id: int):\n    for item in db:\n        if item.id == item_id:\n            return item\n    raise HTTPException(status_code=404, detail=\"Item not found\")\n\n# Update\n@app.put(\"/items/{item_id}\", response_model=Item)\ndef update_item(item_id: int, updated: Item):\n    for i, item in enumerate(db):\n        if item.id == item_id:\n            updated.id = item_id\n            db[i] = updated\n            return updated\n    raise HTTPException(status_code=404)\n\n# Delete\n@app.delete(\"/items/{item_id}\")\ndef delete_item(item_id: int):\n    for i, item in enumerate(db):\n        if item.id == item_id:\n            db.pop(i)\n            return {\"message\": \"Deleted\"}\n    raise HTTPException(status_code=404)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. POST: 생성, GET: 조회, PUT: 수정, DELETE: 삭제\\n2. response_model로 응답 스키마 정의\\n3. HTTPException으로 에러 응답"
+      }
+    ]
+  },
+  "08_웹/fastapi-intro": {
+    "id": "08_웹/fastapi-intro",
+    "title": "FastAPI 시작하기",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "FastAPI 프레임워크의 기본을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "FastAPI란?",
+        "content": "FastAPI는 현대적인 고성능 Python 웹 프레임워크입니다. 타입 힌트 기반 자동 문서화, 비동기 지원, Pydantic 통합으로 빠른 API 개발이 가능합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "FastAPI 기본 예제",
+        "code": "# pip install fastapi uvicorn\nfrom fastapi import FastAPI, Query, Path\nfrom typing import Optional\n\napp = FastAPI(title=\"My API\", version=\"1.0.0\")\n\n# 기본 엔드포인트\n@app.get(\"/\")\ndef read_root():\n    return {\"message\": \"Hello, FastAPI!\"}\n\n# 경로 매개변수\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int):\n    return {\"item_id\": item_id}\n\n# 쿼리 매개변수\n@app.get(\"/search/\")\ndef search(\n    q: str,\n    skip: int = 0,\n    limit: int = Query(default=10, le=100)\n):\n    return {\"q\": q, \"skip\": skip, \"limit\": limit}\n\n# 비동기 엔드포인트\n@app.get(\"/async/\")\nasync def async_endpoint():\n    return {\"message\": \"Async response\"}\n\n# 실행: uvicorn main:app --reload\n# 문서: http://localhost:8000/docs (Swagger UI)\n# 문서: http://localhost:8000/redoc (ReDoc)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 자동 API 문서: /docs, /redoc\\n2. 타입 힌트 → 자동 검증\\n3. uvicorn: ASGI 서버"
+      }
+    ]
+  },
+  "08_웹/fastapi-pydantic": {
+    "id": "08_웹/fastapi-pydantic",
+    "title": "Pydantic - SQLMap 공격을 무력화하는 첫 번째 방어선",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "2014년 N포털 3,500만 명 개인정보 유출 사건으로 배우는 서버 사이드 검증",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 [Case Study] 프랜차이즈 매장 SQL Injection 사건",
+        "content": "**Junior**: \"프론트엔드에서 JavaScript로 검증했으니까 안전하죠?\"\n\n**Senior**: \"2017년 유명 프랜차이즈 매장의 포인트 시스템이 털렸어. 해커가 **SQLMap**이라는 도구로 1시간 만에 회원 50만 명 개인정보를 빼냈지.\"\n\n**Junior**: \"어떻게요? 프론트에서 막았을 텐데...\"\n\n**Senior**: \"F12 누르면 끝이야. **Burp Suite**로 HTTP 패킷을 가로채서 JavaScript 검증 우회하고, 직접 서버로 공격 패킷을 보내면 돼.\"\n\n```\n해커의 공격 도구:\n\n[1] Burp Suite (프록시)\n    - 브라우저↔서버 사이 모든 패킷 가로채기\n    - JavaScript 검증 무력화\n    - 패킷 변조 후 재전송\n\n[2] SQLMap (자동 공격)\n    - 자동 SQL Injection 공격\n    - DB 종류 자동 탐지\n    - 테이블 덤프, 쉘 획득\n\n공격 예시:\n정상: {\"username\": \"john\"}\n공격: {\"username\": \"' OR '1'='1' --\"}\n결과: 모든 사용자 데이터 유출\n```"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "💀 프론트엔드만 믿으면 생기는 일",
+        "code": "from fastapi import FastAPI\nimport sqlite3\n\napp = FastAPI()\n\n# ❌ 위험한 코드 - Pydantic 없이 직접 딕셔너리 사용\n@app.post(\"/login\")\nasync def dangerous_login(data: dict):\n    username = data.get(\"username\")  # 검증 없음!\n    password = data.get(\"password\")\n    \n    # SQL 직접 조합 - SQL Injection 취약점\n    query = f\"SELECT * FROM users WHERE username='{username}'\"\n    cursor.execute(query)\n    \n    return {\"user\": cursor.fetchone()}\n\n# 🔴 해커가 보내는 패킷 (Burp Suite로 변조)\n# POST /login HTTP/1.1\n# Content-Type: application/json\n#\n# {\n#     \"username\": \"' OR '1'='1' UNION SELECT password FROM users--\",\n#     \"password\": \"아무거나\"\n# }\n#\n# 결과: 모든 사용자의 비밀번호 유출!"
+      },
+      {
+        "type": "concept",
+        "title": "🛡️ Pydantic으로 방어하기",
+        "content": "**Pydantic의 방어 메커니즘:**\n\n1. **타입 강제** - 문자열에 SQL 구문 들어가도 타입 체크에서 걸림\n2. **패턴 검증** - regex로 허용된 문자만 통과\n3. **길이 제한** - 공격 페이로드 차단\n4. **자동 이스케이프** - 특수문자 무력화\n\n**핵심 원칙:**\n- 클라이언트(HTML/JS) 검증 = UX 목적 (보안 아님)\n- 서버(Pydantic) 검증 = 보안 목적 (필수)\n- DB(파라미터 바인딩) = 최후의 방어선"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "✅ Pydantic으로 SQLMap 무력화",
+        "code": "from fastapi import FastAPI, HTTPException\nfrom pydantic import BaseModel, Field, field_validator, EmailStr\nfrom typing import Optional\nimport re\n\napp = FastAPI()\n\n# ✅ 안전한 입력 모델 - 해커가 뚫기 어려움\nclass LoginRequest(BaseModel):\n    username: str = Field(\n        ...,\n        min_length=4,\n        max_length=20,\n        pattern=r\"^[a-zA-Z0-9_]+$\",  # 영문, 숫자, 언더스코어만!\n        description=\"사용자명 (영문, 숫자, 언더스코어만)\"\n    )\n    password: str = Field(\n        ...,\n        min_length=8,\n        max_length=100\n    )\n    \n    # 추가 검증: SQL Injection 패턴 탐지\n    @field_validator('username')\n    @classmethod\n    def check_dangerous_patterns(cls, v: str) -> str:\n        dangerous = [\"'\", '\"', '--', ';', 'UNION', 'SELECT', 'DROP', 'OR ']\n        for pattern in dangerous:\n            if pattern.upper() in v.upper():\n                raise ValueError('허용되지 않는 문자가 포함되어 있습니다')\n        return v\n\n\n@app.post(\"/login\")\nasync def secure_login(request: LoginRequest):\n    # Pydantic 검증을 통과해야 여기 도달\n    # SQL Injection 시도: {\"username\": \"' OR '1'='1'\"}\n    # → 패턴 불일치로 422 에러 반환, 서버 도달 불가!\n    \n    # 추가로 파라미터 바인딩 사용\n    user = await db.execute(\n        \"SELECT * FROM users WHERE username = ?\",  # ? 사용\n        (request.username,)  # 파라미터로 전달\n    )\n    \n    return {\"message\": \"로그인 성공\"}\n\n\n# 검증 실패 시 상세 에러 반환\n@app.exception_handler(RequestValidationError)\nasync def validation_exception_handler(request, exc):\n    # 공격 시도 로깅 (보안팀 알림 연동 가능)\n    logger.warning(f\"⚠️ 의심스러운 요청: {exc.errors()}\")\n    \n    return JSONResponse(\n        status_code=422,\n        content={\"detail\": \"입력값 검증 실패\", \"errors\": exc.errors()}\n    )"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "🔒 Pydantic V2 보안 패턴 모음",
+        "code": "from pydantic import BaseModel, Field, field_validator, model_validator\nfrom pydantic import EmailStr, HttpUrl, SecretStr\nfrom typing import Annotated\nimport re\n\n# 재사용 가능한 안전 타입 정의\nSafeString = Annotated[\n    str,\n    Field(min_length=1, max_length=100, pattern=r\"^[\\w\\s가-힣]+$\")\n]\n\nSafeUsername = Annotated[\n    str,\n    Field(min_length=4, max_length=20, pattern=r\"^[a-zA-Z0-9_]+$\")\n]\n\n\nclass SecureUserCreate(BaseModel):\n    \"\"\"보안 강화된 회원가입 요청 모델\"\"\"\n    \n    username: SafeUsername\n    email: EmailStr  # 이메일 형식 자동 검증\n    password: SecretStr = Field(min_length=8)  # 로그에 노출 안됨\n    name: SafeString\n    \n    # 비밀번호 복잡도 검증\n    @field_validator('password')\n    @classmethod\n    def validate_password_strength(cls, v: SecretStr) -> SecretStr:\n        password = v.get_secret_value()\n        \n        if not re.search(r'[A-Z]', password):\n            raise ValueError('대문자가 1개 이상 필요합니다')\n        if not re.search(r'[a-z]', password):\n            raise ValueError('소문자가 1개 이상 필요합니다')\n        if not re.search(r'\\d', password):\n            raise ValueError('숫자가 1개 이상 필요합니다')\n        if not re.search(r'[!@#$%^&*]', password):\n            raise ValueError('특수문자가 1개 이상 필요합니다')\n        \n        return v\n    \n    # 모델 레벨 검증 (여러 필드 조합)\n    @model_validator(mode='after')\n    def check_username_not_in_password(self):\n        if self.username.lower() in self.password.get_secret_value().lower():\n            raise ValueError('비밀번호에 사용자명을 포함할 수 없습니다')\n        return self\n\n\nclass TransferRequest(BaseModel):\n    \"\"\"보안 강화된 송금 요청 - 비즈니스 로직 검증\"\"\"\n    \n    from_account: str = Field(pattern=r\"^[0-9]{3}-[0-9]{6}-[0-9]{2}$\")\n    to_account: str = Field(pattern=r\"^[0-9]{3}-[0-9]{6}-[0-9]{2}$\")\n    amount: int = Field(gt=0, le=10_000_000)  # 1원~1천만원\n    \n    @model_validator(mode='after')\n    def check_different_accounts(self):\n        if self.from_account == self.to_account:\n            raise ValueError('동일 계좌로는 이체할 수 없습니다')\n        return self"
+      },
+      {
+        "type": "concept",
+        "title": "📊 체크리스트: FastAPI 보안 검증",
+        "content": "**배포 전 보안 점검:**\n\n- [ ] 모든 엔드포인트에 Pydantic 모델 적용\n- [ ] dict 직접 사용 금지 (무조건 BaseModel 상속)\n- [ ] SQL 쿼리는 파라미터 바인딩만 사용\n- [ ] 비밀번호는 SecretStr로 로그 노출 방지\n- [ ] 사용자 입력 로깅 시 민감정보 마스킹\n- [ ] 커스텀 validator로 비즈니스 규칙 검증\n\n**채용 담당자에게:**\n\"저는 화려한 기능보다 **입력값을 의심하는 습관**이 시스템을 지키는 첫걸음임을 압니다. Pydantic으로 타입을 강제하고, SQLAlchemy로 파라미터 바인딩을 하는 것이 SQLMap 앞에서 회사의 DB를 지키는 방법입니다.\""
+      }
+    ]
+  },
+  "08_웹/flask-intro": {
+    "id": "08_웹/flask-intro",
+    "title": "Flask 시작하기",
+    "category": "python",
+    "subCategory": "08_웹",
+    "language": "Python",
+    "description": "Flask 마이크로 프레임워크의 기본을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Flask란?",
+        "content": "Flask는 Python의 마이크로 웹 프레임워크입니다. 최소한의 코어와 확장 가능한 구조로, 작은 프로젝트부터 대규모 앱까지 유연하게 대응합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Flask 기본 예제",
+        "code": "# pip install flask\nfrom flask import Flask, request, jsonify, render_template\n\napp = Flask(__name__)\n\n# 기본 라우트\n@app.route('/')\ndef home():\n    return 'Hello, Flask!'\n\n# 동적 라우트\n@app.route('/user/<username>')\ndef show_user(username):\n    return f'User: {username}'\n\n# HTTP 메서드\n@app.route('/api/items', methods=['GET', 'POST'])\ndef items():\n    if request.method == 'POST':\n        data = request.json\n        return jsonify({\"created\": data}), 201\n    return jsonify({\"items\": []})\n\n# 쿼리 파라미터\n@app.route('/search')\ndef search():\n    query = request.args.get('q', '')\n    return jsonify({\"query\": query})\n\n# 템플릿 렌더링\n@app.route('/hello/<name>')\ndef hello(name):\n    return render_template('hello.html', name=name)\n\n# 에러 핸들러\n@app.errorhandler(404)\ndef not_found(error):\n    return jsonify({\"error\": \"Not found\"}), 404\n\nif __name__ == '__main__':\n    app.run(debug=True)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. @app.route(): URL 라우팅\\n2. request: 요청 데이터 접근\\n3. Jinja2 템플릿 엔진 내장"
+      }
+    ]
+  },
+  "09_가상환경/pip": {
+    "id": "09_가상환경/pip",
+    "title": "pip 패키지 관리",
+    "category": "python",
+    "subCategory": "09_가상환경",
+    "language": "Python",
+    "description": "pip를 사용한 패키지 설치와 관리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "pip란?",
+        "content": "pip는 Python 패키지 관리자입니다. PyPI(Python Package Index)에서 패키지를 설치하고, 의존성을 관리합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "pip 사용법",
+        "code": "# 패키지 설치\npip install requests\npip install requests==2.28.0  # 특정 버전\npip install 'requests>=2.20,<3.0'  # 버전 범위\n\n# 패키지 업그레이드\npip install --upgrade requests\npip install -U pip  # pip 자체 업그레이드\n\n# 패키지 제거\npip uninstall requests\n\n# 설치된 패키지 목록\npip list\npip list --outdated  # 업데이트 가능한 패키지\n\n# 패키지 정보\npip show requests\n\n# requirements.txt 관리\npip freeze > requirements.txt  # 현재 패키지 저장\npip install -r requirements.txt  # 일괄 설치\n\n# 개발용 패키지 분리\n# requirements.txt - 프로덕션\n# requirements-dev.txt - 개발 (pytest 등)\npip install -r requirements.txt -r requirements-dev.txt\n\n# 캐시 정리\npip cache purge"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 가상환경에서 pip 사용 권장\\n2. pip freeze로 의존성 고정\\n3. -r로 여러 requirements 파일 조합"
+      }
+    ]
+  },
+  "09_가상환경/poetry": {
+    "id": "09_가상환경/poetry",
+    "title": "Poetry 프로젝트 관리",
+    "category": "python",
+    "subCategory": "09_가상환경",
+    "language": "Python",
+    "description": "Poetry를 사용한 의존성 및 프로젝트 관리를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Poetry란?",
+        "content": "Poetry는 Python의 현대적인 의존성 관리 및 패키징 도구입니다. pyproject.toml로 프로젝트를 관리하고, 가상환경을 자동 생성합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Poetry 사용법",
+        "code": "# 설치\ncurl -sSL https://install.python-poetry.org | python3 -\n\n# 새 프로젝트 생성\npoetry new myproject\n\n# 기존 프로젝트에 Poetry 추가\npoetry init\n\n# 패키지 추가\npoetry add requests\npoetry add pytest --group dev  # 개발 의존성\npoetry add 'django>=4.0,<5.0'  # 버전 범위\n\n# 패키지 제거\npoetry remove requests\n\n# 의존성 설치 (poetry.lock 기준)\npoetry install\n\n# 가상환경 활성화\npoetry shell\n\n# 가상환경 내에서 실행\npoetry run python main.py\npoetry run pytest\n\n# 패키지 빌드 및 배포\npoetry build\npoetry publish\n\n# pyproject.toml 예시\n# [tool.poetry]\n# name = \"myproject\"\n# version = \"0.1.0\"\n# [tool.poetry.dependencies]\n# python = \"^3.10\"\n# requests = \"^2.28.0\""
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. poetry.lock: 정확한 버전 고정\\n2. poetry shell: 가상환경 진입\\n3. pyproject.toml: 모든 설정 통합"
+      }
+    ]
+  },
+  "09_가상환경/venv": {
+    "id": "09_가상환경/venv",
+    "title": "venv 가상환경",
+    "category": "python",
+    "subCategory": "09_가상환경",
+    "language": "Python",
+    "description": "Python 내장 venv 모듈로 가상환경을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "가상환경이란?",
+        "content": "가상환경은 프로젝트별로 독립된 Python 환경을 제공합니다. 패키지 충돌을 방지하고, 프로젝트마다 다른 버전의 패키지를 사용할 수 있습니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "venv 사용법",
+        "code": "# 가상환경 생성\npython -m venv venv\npython -m venv .venv  # 숨김 폴더로\n\n# 활성화 (Windows)\nvenv\\Scripts\\activate\n\n# 활성화 (macOS/Linux)\nsource venv/bin/activate\n\n# 활성화 확인\nwhich python  # 가상환경 경로 표시\npip list      # 빈 목록 (새 환경)\n\n# 패키지 설치 (가상환경 내)\npip install requests\npip install -r requirements.txt\n\n# 비활성화\ndeactivate\n\n# .gitignore에 추가\n# venv/\n# .venv/\n\n# VS Code 설정\n# Python 인터프리터 선택: venv/Scripts/python.exe\n\n# 가상환경 삭제 (폴더 삭제)\n# Windows: rmdir /s /q venv\n# Linux: rm -rf venv"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 프로젝트마다 가상환경 생성\\n2. .venv 또는 venv 이름 사용\\n3. .gitignore에 추가 필수"
+      }
+    ]
+  },
+  "09_크롤링/beautifulsoup": {
+    "id": "09_크롤링/beautifulsoup",
+    "title": "BeautifulSoup HTML 파싱",
+    "category": "python",
+    "subCategory": "09_크롤링",
+    "language": "Python",
+    "description": "BeautifulSoup으로 HTML을 파싱하는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "BeautifulSoup이란?",
+        "content": "BeautifulSoup은 HTML/XML 파싱 라이브러리입니다. 태그, 클래스, ID 등으로 요소를 쉽게 찾고, 데이터를 추출합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "BeautifulSoup 예제",
+        "code": "# pip install beautifulsoup4 lxml\nfrom bs4 import BeautifulSoup\nimport requests\n\n# HTML 파싱\nhtml = '<html><body><h1 class=\"title\">제목</h1><p>내용</p></body></html>'\nsoup = BeautifulSoup(html, 'lxml')\n\n# 요소 찾기\nprint(soup.h1.text)  # 제목\nprint(soup.find('h1').text)  # 제목\nprint(soup.find('h1', class_='title').text)  # 제목\n\n# 여러 요소 찾기\nfor p in soup.find_all('p'):\n    print(p.text)\n\n# CSS 선택자\nresult = soup.select('h1.title')  # 클래스\nresult = soup.select('#main')     # ID\nresult = soup.select('div > p')   # 자식\n\n# 실제 웹페이지 크롤링\nurl = 'https://example.com'\nresponse = requests.get(url)\nsoup = BeautifulSoup(response.text, 'lxml')\n\n# 모든 링크 추출\nfor link in soup.find_all('a'):\n    href = link.get('href')\n    text = link.text\n    print(f'{text}: {href}')\n\n# 속성 접근\nimg = soup.find('img')\nprint(img['src'])  # 이미지 URL\nprint(img.get('alt', 'No alt'))  # 기본값"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. lxml 파서가 가장 빠름\\n2. select(): CSS 선택자 사용\\n3. .text로 텍스트, ['attr']로 속성"
+      }
+    ]
+  },
+  "09_크롤링/requests": {
+    "id": "09_크롤링/requests",
+    "title": "Requests HTTP 요청",
+    "category": "python",
+    "subCategory": "09_크롤링",
+    "language": "Python",
+    "description": "requests 라이브러리로 HTTP 요청을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Requests란?",
+        "content": "requests는 Python의 가장 인기 있는 HTTP 라이브러리입니다. 간단한 API로 GET, POST 등 HTTP 요청을 보내고 응답을 처리합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Requests 예제",
+        "code": "import requests\n\n# GET 요청\nresponse = requests.get('https://api.example.com/data')\nprint(response.status_code)  # 200\nprint(response.text)         # 응답 텍스트\nprint(response.json())       # JSON 파싱\n\n# 쿼리 파라미터\nparams = {'q': 'python', 'page': 1}\nresponse = requests.get('https://api.example.com/search', params=params)\n\n# POST 요청\ndata = {'username': 'user', 'password': 'pass'}\nresponse = requests.post('https://api.example.com/login', json=data)\n\n# 헤더 설정\nheaders = {\n    'User-Agent': 'Mozilla/5.0',\n    'Authorization': 'Bearer token123'\n}\nresponse = requests.get(url, headers=headers)\n\n# 세션 유지 (쿠키 자동 관리)\nwith requests.Session() as session:\n    session.post('/login', data={'user': 'test'})\n    response = session.get('/dashboard')  # 로그인 유지\n\n# 타임아웃\ntry:\n    response = requests.get(url, timeout=5)\nexcept requests.Timeout:\n    print('요청 시간 초과')\n\n# 파일 다운로드\nresponse = requests.get('https://example.com/image.png')\nwith open('image.png', 'wb') as f:\n    f.write(response.content)"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. .json(): JSON 자동 파싱\\n2. Session: 쿠키/인증 유지\\n3. timeout 설정 필수 (무한 대기 방지)"
+      }
+    ]
+  },
+  "09_크롤링/selenium": {
+    "id": "09_크롤링/selenium",
+    "title": "Selenium 웹 자동화",
+    "category": "python",
+    "subCategory": "09_크롤링",
+    "language": "Python",
+    "description": "Selenium으로 동적 웹페이지를 크롤링합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Selenium이란?",
+        "content": "Selenium은 웹 브라우저를 자동화하는 도구입니다. JavaScript로 렌더링되는 동적 페이지 크롤링, 폼 입력, 클릭 등 브라우저 조작이 가능합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "Selenium 예제",
+        "code": "# pip install selenium webdriver-manager\nfrom selenium import webdriver\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.common.keys import Keys\nfrom selenium.webdriver.support.ui import WebDriverWait\nfrom selenium.webdriver.support import expected_conditions as EC\nfrom webdriver_manager.chrome import ChromeDriverManager\n\n# 드라이버 설정\noptions = webdriver.ChromeOptions()\noptions.add_argument('--headless')  # 헤드리스 모드\ndriver = webdriver.Chrome(options=options)\n\ntry:\n    # 페이지 열기\n    driver.get('https://www.google.com')\n    \n    # 요소 찾기\n    search_box = driver.find_element(By.NAME, 'q')\n    \n    # 입력 및 제출\n    search_box.send_keys('Python')\n    search_box.send_keys(Keys.RETURN)\n    \n    # 대기 (요소가 나타날 때까지)\n    wait = WebDriverWait(driver, 10)\n    results = wait.until(\n        EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'h3'))\n    )\n    \n    for result in results[:5]:\n        print(result.text)\n    \n    # 스크린샷\n    driver.save_screenshot('screenshot.png')\n    \nfinally:\n    driver.quit()"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. headless: 화면 없이 실행\\n2. WebDriverWait: 요소 대기\\n3. webdriver-manager: 드라이버 자동 관리"
+      }
+    ]
+  },
+  "10_numpy/numpy-array": {
+    "id": "10_numpy/numpy-array",
+    "title": "NumPy 배열",
+    "category": "python",
+    "subCategory": "10_numpy",
+    "language": "Python",
+    "description": "NumPy 배열 생성과 인덱싱을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "NumPy 배열",
+        "content": "ndarray는 NumPy의 핵심 자료구조입니다. 동일한 타입의 요소를 담고, 다차원 배열을 효율적으로 처리합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "배열 생성과 조작",
+        "code": "import numpy as np\n\n# 배열 생성\narr = np.array([1, 2, 3, 4, 5])\narr2d = np.array([[1, 2, 3], [4, 5, 6]])\n\n# 특수 배열\nzeros = np.zeros((3, 4))       # 0으로 채움\nones = np.ones((2, 3))         # 1로 채움\neye = np.eye(3)                # 단위 행렬\nrandom = np.random.rand(3, 3)  # 랜덤\n\n# 범위 배열\narr = np.arange(0, 10, 2)      # [0, 2, 4, 6, 8]\narr = np.linspace(0, 1, 5)     # [0, 0.25, 0.5, 0.75, 1]\n\n# 인덱싱\narr = np.array([1, 2, 3, 4, 5])\nprint(arr[0])      # 1\nprint(arr[-1])     # 5\nprint(arr[1:4])    # [2, 3, 4]\n\n# 2D 인덱싱\narr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nprint(arr2d[0, 1])     # 2 (0행 1열)\nprint(arr2d[:, 0])     # [1, 4, 7] (전체 행의 0열)\nprint(arr2d[0:2, 1:])  # [[2, 3], [5, 6]]\n\n# 배열 정보\nprint(arr2d.shape)   # (3, 3)\nprint(arr2d.dtype)   # int64\nprint(arr2d.ndim)    # 2"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. shape: 배열 형태\\n2. dtype: 데이터 타입\\n3. 슬라이싱은 뷰(view) 반환 (복사 아님)"
+      }
+    ]
+  },
+  "10_numpy/numpy-intro": {
+    "id": "10_numpy/numpy-intro",
+    "title": "NumPy 소개",
+    "category": "python",
+    "subCategory": "10_numpy",
+    "language": "Python",
+    "description": "NumPy 라이브러리의 개요와 설치를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "NumPy란?",
+        "content": "NumPy(Numerical Python)는 과학 계산을 위한 핵심 라이브러리입니다. 고성능 다차원 배열과 수학 함수를 제공하며, pandas, scikit-learn 등의 기반입니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "NumPy 시작하기",
+        "code": "# pip install numpy\nimport numpy as np\n\n# Python 리스트 vs NumPy\npython_list = [1, 2, 3, 4, 5]\nnumpy_array = np.array([1, 2, 3, 4, 5])\n\n# 속도 비교 (NumPy가 훨씬 빠름)\nimport time\n\nsize = 1000000\npy_list = list(range(size))\nnp_arr = np.arange(size)\n\n# Python 리스트\nstart = time.time()\nresult = [x * 2 for x in py_list]\nprint(f\"Python: {time.time() - start:.4f}s\")\n\n# NumPy 배열\nstart = time.time()\nresult = np_arr * 2\nprint(f\"NumPy: {time.time() - start:.4f}s\")\n\n# NumPy 장점\n# 1. 벡터화 연산 (반복문 불필요)\narr = np.array([1, 2, 3])\nprint(arr + 10)      # [11, 12, 13]\nprint(arr * 2)       # [2, 4, 6]\nprint(arr ** 2)      # [1, 4, 9]\n\n# 2. 브로드캐스팅\na = np.array([[1], [2], [3]])\nb = np.array([10, 20, 30])\nprint(a + b)  # 자동 확장"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. C로 구현되어 매우 빠름\\n2. 벡터화: 반복문 없이 연산\\n3. 브로드캐스팅: 크기 자동 맞춤"
+      }
+    ]
+  },
+  "10_numpy/numpy-operation": {
+    "id": "10_numpy/numpy-operation",
+    "title": "NumPy 연산",
+    "category": "python",
+    "subCategory": "10_numpy",
+    "language": "Python",
+    "description": "NumPy 배열의 수학 연산을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "배열 연산",
+        "content": "NumPy는 요소별 연산, 집계 함수, 행렬 연산 등 다양한 수학적 연산을 제공합니다. 모든 연산은 벡터화되어 빠르게 수행됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "NumPy 연산 예제",
+        "code": "import numpy as np\n\n# 요소별 연산\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\n\nprint(a + b)    # [5, 7, 9]\nprint(a * b)    # [4, 10, 18]\nprint(a / b)    # [0.25, 0.4, 0.5]\nprint(np.sqrt(a))  # [1, 1.41, 1.73]\n\n# 집계 함수\narr = np.array([1, 2, 3, 4, 5])\nprint(np.sum(arr))    # 15\nprint(np.mean(arr))   # 3.0\nprint(np.std(arr))    # 1.41\nprint(np.min(arr))    # 1\nprint(np.max(arr))    # 5\n\n# 축 기준 연산\narr2d = np.array([[1, 2, 3], [4, 5, 6]])\nprint(np.sum(arr2d, axis=0))  # [5, 7, 9] (열별)\nprint(np.sum(arr2d, axis=1))  # [6, 15] (행별)\n\n# 행렬 연산\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\n\nprint(A @ B)          # 행렬 곱\nprint(np.dot(A, B))   # 행렬 곱\nprint(A.T)            # 전치\nprint(np.linalg.inv(A))  # 역행렬\nprint(np.linalg.det(A))  # 행렬식"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. axis=0: 열 방향, axis=1: 행 방향\\n2. @: 행렬 곱 연산자 (Python 3.5+)\\n3. np.linalg: 선형대수 함수들"
+      }
+    ]
+  },
+  "10_numpy/numpy-practice": {
+    "id": "10_numpy/numpy-practice",
+    "title": "NumPy 실습",
+    "category": "python",
+    "subCategory": "10_numpy",
+    "language": "Python",
+    "description": "NumPy를 활용한 실전 예제를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "NumPy 실습",
+        "content": "데이터 분석, 이미지 처리, 통계 계산 등 실전에서 NumPy를 활용하는 패턴을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "실전 NumPy 활용",
+        "code": "import numpy as np\n\n# 1. 조건부 필터링\narr = np.array([1, 2, 3, 4, 5, 6])\nprint(arr[arr > 3])      # [4, 5, 6]\nprint(arr[arr % 2 == 0]) # [2, 4, 6]\n\n# 2. 배열 변형\narr = np.arange(12)\nprint(arr.reshape(3, 4))  # 3x4 행렬\nprint(arr.reshape(-1, 3)) # 자동 계산\n\n# 3. 배열 합치기/분리\na = np.array([1, 2, 3])\nb = np.array([4, 5, 6])\nprint(np.concatenate([a, b]))  # [1,2,3,4,5,6]\nprint(np.vstack([a, b]))  # 세로\nprint(np.hstack([a, b]))  # 가로\n\n# 4. 정규화\ndata = np.array([10, 20, 30, 40, 50])\nnormalized = (data - data.mean()) / data.std()\nprint(normalized)\n\n# 5. 누락값 처리\narr = np.array([1, 2, np.nan, 4, 5])\nprint(np.isnan(arr))         # [F, F, T, F, F]\nprint(np.nanmean(arr))       # NaN 무시 평균\narr[np.isnan(arr)] = 0       # NaN을 0으로\n\n# 6. 랜덤 샘플링\nnp.random.seed(42)\nprint(np.random.choice([1,2,3,4,5], size=3, replace=False))\nprint(np.random.shuffle(arr))  # 섞기"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 불리언 인덱싱으로 필터링\\n2. reshape(-1): 자동 크기 계산\\n3. np.nan*: NaN 무시 함수들"
+      }
+    ]
+  },
+  "10_데이터/pandas-groupby": {
+    "id": "10_데이터/pandas-groupby",
+    "title": "Pandas Groupby",
+    "category": "python",
+    "subCategory": "10_데이터",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "10_데이터/pandas-merge": {
+    "id": "10_데이터/pandas-merge",
+    "title": "Pandas Merge",
+    "category": "python",
+    "subCategory": "10_데이터",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "10_데이터/pandas-selection": {
+    "id": "10_데이터/pandas-selection",
+    "title": "Pandas Selection",
+    "category": "python",
+    "subCategory": "10_데이터",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "10_면접/interview-python": {
+    "id": "10_면접/interview-python",
+    "title": "Interview Python",
+    "category": "python",
+    "subCategory": "10_면접",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_pandas/pandas-analysis": {
+    "id": "11_pandas/pandas-analysis",
+    "title": "Pandas Analysis",
+    "category": "python",
+    "subCategory": "11_pandas",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_pandas/pandas-dataframe": {
+    "id": "11_pandas/pandas-dataframe",
+    "title": "Pandas Dataframe",
+    "category": "python",
+    "subCategory": "11_pandas",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_pandas/pandas-intro": {
+    "id": "11_pandas/pandas-intro",
+    "title": "Pandas Intro",
+    "category": "python",
+    "subCategory": "11_pandas",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_pandas/pandas-practice": {
+    "id": "11_pandas/pandas-practice",
+    "title": "Pandas Practice",
+    "category": "python",
+    "subCategory": "11_pandas",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_시각화/seaborn": {
+    "id": "11_시각화/seaborn",
+    "title": "Seaborn",
+    "category": "python",
+    "subCategory": "11_시각화",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_matplotlib/matplotlib-advanced": {
+    "id": "12_matplotlib/matplotlib-advanced",
+    "title": "Matplotlib Advanced",
+    "category": "python",
+    "subCategory": "12_matplotlib",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_matplotlib/matplotlib-intro": {
+    "id": "12_matplotlib/matplotlib-intro",
+    "title": "Matplotlib Intro",
+    "category": "python",
+    "subCategory": "12_matplotlib",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_기타/datetime": {
+    "id": "12_기타/datetime",
+    "title": "Datetime",
+    "category": "python",
+    "subCategory": "12_기타",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_기타/encoding": {
+    "id": "12_기타/encoding",
+    "title": "Encoding",
+    "category": "python",
+    "subCategory": "12_기타",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Encoding",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_기타/logging": {
+    "id": "12_기타/logging",
+    "title": "Logging",
+    "category": "python",
+    "subCategory": "12_기타",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_기타/regex": {
+    "id": "12_기타/regex",
+    "title": "Regex",
+    "category": "python",
+    "subCategory": "12_기타",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "13_webscraping/webscraping-intro": {
+    "id": "13_webscraping/webscraping-intro",
+    "title": "Webscraping Intro",
+    "category": "python",
+    "subCategory": "13_webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "13_프로젝트/project-crawler": {
+    "id": "13_프로젝트/project-crawler",
+    "title": "Project Crawler",
+    "category": "python",
+    "subCategory": "13_프로젝트",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "14_nlp/nlp-intro": {
+    "id": "14_nlp/nlp-intro",
+    "title": "Nlp Intro",
+    "category": "python",
+    "subCategory": "14_nlp",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "14_면접/interview-python-advanced": {
+    "id": "14_면접/interview-python-advanced",
+    "title": "Interview Python Advanced",
+    "category": "python",
+    "subCategory": "14_면접",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "14_면접/interview-python-basic": {
+    "id": "14_면접/interview-python-basic",
+    "title": "Interview Python Basic",
+    "category": "python",
+    "subCategory": "14_면접",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "14_면접/interview-python-data": {
+    "id": "14_면접/interview-python-data",
+    "title": "Interview Python Data",
+    "category": "python",
+    "subCategory": "14_면접",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "15_timeseries/timeseries-intro": {
+    "id": "15_timeseries/timeseries-intro",
+    "title": "Timeseries Intro",
+    "category": "python",
+    "subCategory": "15_timeseries",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "16_encoding/encoding-intro": {
+    "id": "16_encoding/encoding-intro",
+    "title": "Encoding Intro",
+    "category": "python",
+    "subCategory": "16_encoding",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Encoding Intro",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "프로젝트/project-api": {
+    "id": "프로젝트/project-api",
+    "title": "Project Api",
+    "category": "python",
+    "subCategory": "프로젝트",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "프로젝트/project-cli": {
+    "id": "프로젝트/project-cli",
+    "title": "Project Cli",
+    "category": "python",
+    "subCategory": "프로젝트",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  }
+}

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>점수 계산기 - 코드마스터</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1B1B1F 0%, #2D2D35 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { text-align: center; color: #00C471; margin-bottom: 30px; font-size: 2rem; }
+        
+        .card {
+            background: #25252B;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .card h2 { color: #00C471; margin-bottom: 16px; font-size: 1.2rem; }
+        
+        .input-group { margin-bottom: 16px; }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #1B1B1F;
+            border: 2px solid #3F3F46;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #00C471;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #00C471;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn:hover { background: #00a85e; }
+        .btn:active { transform: scale(0.98); }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #1B1B1F;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+        .result.show { display: block; animation: fadeIn 0.3s ease; }
+        
+        .result .emoji { font-size: 3rem; margin-bottom: 10px; }
+        .result .grade { font-size: 2.5rem; font-weight: bold; color: #00C471; }
+        .result .score { font-size: 1.2rem; color: #9CA3AF; margin: 10px 0; }
+        .result .description { color: #fff; font-size: 1.1rem; }
+        .result .status {
+            margin-top: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .result .status.pass { background: #00C471; }
+        .result .status.fail { background: #EF4444; }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            flex: 1;
+            padding: 12px;
+            background: #1B1B1F;
+            border: 2px solid #3F3F46;
+            border-radius: 8px;
+            color: #9CA3AF;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            border-color: #00C471;
+            color: #00C471;
+            background: rgba(0, 196, 113, 0.1);
+        }
+        
+        .subject-list { margin-bottom: 16px; }
+        .subject-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .subject-item input { flex: 1; }
+        .subject-item .remove-btn {
+            padding: 12px 16px;
+            background: #EF4444;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .add-btn {
+            padding: 10px;
+            background: transparent;
+            border: 2px dashed #3F3F46;
+            border-radius: 8px;
+            color: #9CA3AF;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+        .add-btn:hover { border-color: #00C471; color: #00C471; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .grade-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grade-table th, .grade-table td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #3F3F46;
+        }
+        .grade-table th { color: #00C471; }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            color: #00C471;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← 학습 홈으로</a>
+        <h1>🎯 점수 계산기</h1>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('single')">단일 점수</div>
+            <div class="tab" onclick="showTab('average')">평균 계산</div>
+            <div class="tab" onclick="showTab('weighted')">가중치 계산</div>
+        </div>
+        
+        <div id="single-tab" class="card">
+            <h2>📝 단일 점수 등급 계산</h2>
+            <div class="input-group">
+                <label>점수 입력 (0-100)</label>
+                <input type="number" id="single-score" min="0" max="100" placeholder="85">
+            </div>
+            <button class="btn" onclick="calculateSingle()">등급 계산하기</button>
+            <div id="single-result" class="result"></div>
+        </div>
+        
+        <div id="average-tab" class="card" style="display:none;">
+            <h2>📊 평균 점수 계산</h2>
+            <div id="score-list" class="subject-list">
+                <div class="subject-item">
+                    <input type="number" class="score-input" min="0" max="100" placeholder="점수 1">
+                    <button class="remove-btn" onclick="removeScore(this)">✕</button>
+                </div>
+                <div class="subject-item">
+                    <input type="number" class="score-input" min="0" max="100" placeholder="점수 2">
+                    <button class="remove-btn" onclick="removeScore(this)">✕</button>
+                </div>
+            </div>
+            <button class="add-btn" onclick="addScore()">+ 점수 추가</button>
+            <button class="btn" onclick="calculateAverage()">평균 계산하기</button>
+            <div id="average-result" class="result"></div>
+        </div>
+        
+        <div id="weighted-tab" class="card" style="display:none;">
+            <h2>⚖️ 가중치 적용 계산</h2>
+            <div id="weighted-list" class="subject-list">
+                <div class="subject-item">
+                    <input type="text" class="subject-name" placeholder="중간고사" style="flex:1.5;">
+                    <input type="number" class="subject-score" min="0" max="100" placeholder="점수">
+                    <input type="number" class="subject-weight" min="0" max="100" placeholder="%">
+                </div>
+                <div class="subject-item">
+                    <input type="text" class="subject-name" placeholder="기말고사" style="flex:1.5;">
+                    <input type="number" class="subject-score" min="0" max="100" placeholder="점수">
+                    <input type="number" class="subject-weight" min="0" max="100" placeholder="%">
+                </div>
+            </div>
+            <button class="add-btn" onclick="addWeightedScore()">+ 과목 추가</button>
+            <button class="btn" onclick="calculateWeighted()">가중 평균 계산하기</button>
+            <div id="weighted-result" class="result"></div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 등급 기준표</h2>
+            <table class="grade-table">
+                <tr><th>점수</th><th>등급</th><th>설명</th><th>학점</th></tr>
+                <tr><td>95-100</td><td>A+</td><td>최우수</td><td>4.5</td></tr>
+                <tr><td>90-94</td><td>A</td><td>우수</td><td>4.0</td></tr>
+                <tr><td>85-89</td><td>B+</td><td>우량</td><td>3.5</td></tr>
+                <tr><td>80-84</td><td>B</td><td>양호</td><td>3.0</td></tr>
+                <tr><td>75-79</td><td>C+</td><td>보통+</td><td>2.5</td></tr>
+                <tr><td>70-74</td><td>C</td><td>보통</td><td>2.0</td></tr>
+                <tr><td>65-69</td><td>D+</td><td>미흡+</td><td>1.5</td></tr>
+                <tr><td>60-64</td><td>D</td><td>미흡</td><td>1.0</td></tr>
+                <tr><td>0-59</td><td>F</td><td>불합격</td><td>0.0</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function getGrade(score) {
+            const gradeTable = [
+                { min: 95, grade: 'A+', desc: '최우수', emoji: '🏆', gpa: 4.5 },
+                { min: 90, grade: 'A', desc: '우수', emoji: '🥇', gpa: 4.0 },
+                { min: 85, grade: 'B+', desc: '우량', emoji: '🥈', gpa: 3.5 },
+                { min: 80, grade: 'B', desc: '양호', emoji: '🥉', gpa: 3.0 },
+                { min: 75, grade: 'C+', desc: '보통+', emoji: '📗', gpa: 2.5 },
+                { min: 70, grade: 'C', desc: '보통', emoji: '📘', gpa: 2.0 },
+                { min: 65, grade: 'D+', desc: '미흡+', emoji: '📙', gpa: 1.5 },
+                { min: 60, grade: 'D', desc: '미흡', emoji: '📕', gpa: 1.0 },
+                { min: 0, grade: 'F', desc: '불합격', emoji: '❌', gpa: 0.0 },
+            ];
+            
+            for (const g of gradeTable) {
+                if (score >= g.min) return g;
+            }
+            return gradeTable[gradeTable.length - 1];
+        }
+        
+        function showResult(elementId, score, gradeInfo) {
+            const result = document.getElementById(elementId);
+            const passed = gradeInfo.grade !== 'F';
+            
+            result.innerHTML = `
+                <div class="emoji">${gradeInfo.emoji}</div>
+                <div class="grade">${gradeInfo.grade}</div>
+                <div class="score">${score.toFixed(1)}점</div>
+                <div class="description">${gradeInfo.desc} (학점: ${gradeInfo.gpa})</div>
+                <div class="status ${passed ? 'pass' : 'fail'}">
+                    ${passed ? '✅ 합격' : '❌ 불합격'}
+                </div>
+            `;
+            result.classList.add('show');
+        }
+        
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            document.querySelector('.card:last-child').style.display = 'block';
+        }
+        
+        function calculateSingle() {
+            const score = parseFloat(document.getElementById('single-score').value);
+            if (isNaN(score) || score < 0 || score > 100) {
+                alert('0-100 사이의 점수를 입력하세요.');
+                return;
+            }
+            showResult('single-result', score, getGrade(score));
+        }
+        
+        function addScore() {
+            const list = document.getElementById('score-list');
+            const item = document.createElement('div');
+            item.className = 'subject-item';
+            item.innerHTML = `
+                <input type="number" class="score-input" min="0" max="100" placeholder="점수">
+                <button class="remove-btn" onclick="removeScore(this)">✕</button>
+            `;
+            list.appendChild(item);
+        }
+        
+        function removeScore(btn) {
+            btn.parentElement.remove();
+        }
+        
+        function calculateAverage() {
+            const inputs = document.querySelectorAll('#score-list .score-input');
+            const scores = [];
+            
+            inputs.forEach(input => {
+                const val = parseFloat(input.value);
+                if (!isNaN(val) && val >= 0 && val <= 100) {
+                    scores.push(val);
+                }
+            });
+            
+            if (scores.length === 0) {
+                alert('최소 1개의 점수를 입력하세요.');
+                return;
+            }
+            
+            const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+            showResult('average-result', avg, getGrade(avg));
+        }
+        
+        function addWeightedScore() {
+            const list = document.getElementById('weighted-list');
+            const item = document.createElement('div');
+            item.className = 'subject-item';
+            item.innerHTML = `
+                <input type="text" class="subject-name" placeholder="과목명" style="flex:1.5;">
+                <input type="number" class="subject-score" min="0" max="100" placeholder="점수">
+                <input type="number" class="subject-weight" min="0" max="100" placeholder="%">
+            `;
+            list.appendChild(item);
+        }
+        
+        function calculateWeighted() {
+            const items = document.querySelectorAll('#weighted-list .subject-item');
+            let weightedSum = 0;
+            let totalWeight = 0;
+            
+            items.forEach(item => {
+                const score = parseFloat(item.querySelector('.subject-score').value);
+                const weight = parseFloat(item.querySelector('.subject-weight').value) / 100;
+                
+                if (!isNaN(score) && !isNaN(weight)) {
+                    weightedSum += score * weight;
+                    totalWeight += weight;
+                }
+            });
+            
+            if (totalWeight === 0) {
+                alert('점수와 가중치를 입력하세요.');
+                return;
+            }
+            
+            if (Math.abs(totalWeight - 1) > 0.01) {
+                alert(`가중치 합이 100%가 아닙니다. (현재: ${(totalWeight * 100).toFixed(0)}%)`);
+                return;
+            }
+            
+            showResult('weighted-result', weightedSum, getGrade(weightedSum));
+        }
+        
+        document.getElementById('single-score').addEventListener('keypress', e => {
+            if (e.key === 'Enter') calculateSingle();
+        });
+    </script>
+</body>
+</html>

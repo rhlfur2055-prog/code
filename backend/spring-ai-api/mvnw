@@ -1,0 +1,4 @@
+#!/bin/sh
+# Maven Wrapper script
+# Download from: https://maven.apache.org/wrapper/
+exec mvn "$@"

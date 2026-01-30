@@ -1,0 +1,989 @@
+{
+  "01_기초/dns": {
+    "id": "01_기초/dns",
+    "title": "Dns",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dns",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/ip-address": {
+    "id": "01_기초/ip-address",
+    "title": "Ip Address",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Ip Address",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/network-intro": {
+    "id": "01_기초/network-intro",
+    "title": "Network Intro",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Network Intro",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/osi-7-layer": {
+    "id": "01_기초/osi-7-layer",
+    "title": "Osi 7 Layer",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Osi 7 Layer",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/port": {
+    "id": "01_기초/port",
+    "title": "Port",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Port",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/tcp-ip": {
+    "id": "01_기초/tcp-ip",
+    "title": "Tcp Ip",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Ip",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/4way-handshake": {
+    "id": "02_TCP_UDP/4way-handshake",
+    "title": "4Way Handshake",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "4Way Handshake",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-concept": {
+    "id": "02_TCP_UDP/tcp-concept",
+    "title": "Tcp Concept",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Concept",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-congestion-control": {
+    "id": "02_TCP_UDP/tcp-congestion-control",
+    "title": "Tcp Congestion Control",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Congestion Control",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-flow-control": {
+    "id": "02_TCP_UDP/tcp-flow-control",
+    "title": "Tcp Flow Control",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Flow Control",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-handshake": {
+    "id": "02_TCP_UDP/tcp-handshake",
+    "title": "Tcp Handshake",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Handshake",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-teardown": {
+    "id": "02_TCP_UDP/tcp-teardown",
+    "title": "Tcp Teardown",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Teardown",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-vs-udp": {
+    "id": "02_TCP_UDP/tcp-vs-udp",
+    "title": "Tcp Vs Udp",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tcp Vs Udp",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "02_TCP_UDP/udp-concept": {
+    "id": "02_TCP_UDP/udp-concept",
+    "title": "Udp Concept",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Udp Concept",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "03_HTTP/http-header": {
+    "id": "03_HTTP/http-header",
+    "title": "Http Header",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Http Header",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/http-intro": {
+    "id": "03_HTTP/http-intro",
+    "title": "Http Intro",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Http Intro",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/http-method": {
+    "id": "03_HTTP/http-method",
+    "title": "Http Method",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Http Method",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/http-status-code": {
+    "id": "03_HTTP/http-status-code",
+    "title": "Http Status Code",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Http Status Code",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/http-version": {
+    "id": "03_HTTP/http-version",
+    "title": "Http Version",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Http Version",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/https": {
+    "id": "03_HTTP/https",
+    "title": "Https",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Https",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "03_HTTP/tls-handshake": {
+    "id": "03_HTTP/tls-handshake",
+    "title": "Tls Handshake",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tls Handshake",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "04_REST/rest-concept": {
+    "id": "04_REST/rest-concept",
+    "title": "Rest Concept",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rest Concept",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "04_REST/rest-design": {
+    "id": "04_REST/rest-design",
+    "title": "Rest Design",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rest Design",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "04_REST/rest-vs-graphql": {
+    "id": "04_REST/rest-vs-graphql",
+    "title": "Rest Vs Graphql",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rest Vs Graphql",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "04_REST/restful-api": {
+    "id": "04_REST/restful-api",
+    "title": "Restful Api",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Restful Api",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "05_인증/auth-compare": {
+    "id": "05_인증/auth-compare",
+    "title": "Auth Compare",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Auth Compare",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/cookie-vs-session": {
+    "id": "05_인증/cookie-vs-session",
+    "title": "Cookie Vs Session",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cookie Vs Session",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/cookie": {
+    "id": "05_인증/cookie",
+    "title": "Cookie",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cookie",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/jwt-structure": {
+    "id": "05_인증/jwt-structure",
+    "title": "Jwt Structure",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Jwt Structure",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/jwt": {
+    "id": "05_인증/jwt",
+    "title": "Jwt",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Jwt",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/oauth": {
+    "id": "05_인증/oauth",
+    "title": "Oauth",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Oauth",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "05_인증/session": {
+    "id": "05_인증/session",
+    "title": "Session",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Session",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "06_CORS/cors-concept": {
+    "id": "06_CORS/cors-concept",
+    "title": "Cors Concept",
+    "category": "network",
+    "subCategory": "06_CORS",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cors Concept",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "06_CORS/cors-preflight": {
+    "id": "06_CORS/cors-preflight",
+    "title": "Cors Preflight",
+    "category": "network",
+    "subCategory": "06_CORS",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cors Preflight",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "06_보안/cors-solution": {
+    "id": "06_보안/cors-solution",
+    "title": "Cors Solution",
+    "category": "network",
+    "subCategory": "06_보안",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cors Solution",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "06_보안/same-origin-policy": {
+    "id": "06_보안/same-origin-policy",
+    "title": "Same Origin Policy",
+    "category": "network",
+    "subCategory": "06_보안",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Same Origin Policy",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "07_실시간/long-polling": {
+    "id": "07_실시간/long-polling",
+    "title": "Long Polling",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Long Polling",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "07_실시간/realtime-compare": {
+    "id": "07_실시간/realtime-compare",
+    "title": "Realtime Compare",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Realtime Compare",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "07_실시간/sse": {
+    "id": "07_실시간/sse",
+    "title": "Sse",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sse",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "07_실시간/websocket": {
+    "id": "07_실시간/websocket",
+    "title": "Websocket",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "JavaScript",
+    "description": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Websocket",
+        "content": "HTTP 메서드(GET, POST)와 상태 코드, 헤더 구조를 이해합니다."
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "code": "fetch('https://api.example.com/data', {\r\n  method: 'GET',\r\n  headers: { 'Content-Type': 'application/json' }\r\n})\r\n.then(res => res.json())\r\n.then(data => console.log(data));"
+      }
+    ]
+  },
+  "08_고급/browser-rendering": {
+    "id": "08_고급/browser-rendering",
+    "title": "Browser Rendering",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Browser Rendering",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "08_고급/load-balancing": {
+    "id": "08_고급/load-balancing",
+    "title": "Load Balancing",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Load Balancing",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "08_고급/proxy": {
+    "id": "08_고급/proxy",
+    "title": "Proxy",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Proxy",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "08_기타/cdn": {
+    "id": "08_기타/cdn",
+    "title": "Cdn",
+    "category": "network",
+    "subCategory": "08_기타",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cdn",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "08_기타/load-balancer": {
+    "id": "08_기타/load-balancer",
+    "title": "Load Balancer",
+    "category": "network",
+    "subCategory": "08_기타",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Load Balancer",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "09_면접/interview-network": {
+    "id": "09_면접/interview-network",
+    "title": "Interview Network",
+    "category": "network",
+    "subCategory": "09_면접",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Interview Network",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "네트워크",
+    "category": "network",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "네트워크",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "01_클린코드/boundary": {
+    "id": "01_클린코드/boundary",
+    "title": "Boundary",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/cleancode-intro": {
+    "id": "01_클린코드/cleancode-intro",
+    "title": "Cleancode Intro",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/code-smell": {
+    "id": "01_클린코드/code-smell",
+    "title": "Code Smell",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/comment": {
+    "id": "01_클린코드/comment",
+    "title": "Comment",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/dry-kiss": {
+    "id": "01_클린코드/dry-kiss",
+    "title": "Dry Kiss",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/error-handling": {
+    "id": "01_클린코드/error-handling",
+    "title": "Error Handling",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/formatting": {
+    "id": "01_클린코드/formatting",
+    "title": "Formatting",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/function-parameter": {
+    "id": "01_클린코드/function-parameter",
+    "title": "Function Parameter",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/function": {
+    "id": "01_클린코드/function",
+    "title": "Function",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/naming-convention": {
+    "id": "01_클린코드/naming-convention",
+    "title": "Naming Convention",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_클린코드/naming": {
+    "id": "01_클린코드/naming",
+    "title": "Naming",
+    "category": "cleancode",
+    "subCategory": "01_클린코드",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/dip": {
+    "id": "02_SOLID/dip",
+    "title": "Dip",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/isp": {
+    "id": "02_SOLID/isp",
+    "title": "Isp",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/lsp": {
+    "id": "02_SOLID/lsp",
+    "title": "Lsp",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/ocp": {
+    "id": "02_SOLID/ocp",
+    "title": "Ocp",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/solid-example": {
+    "id": "02_SOLID/solid-example",
+    "title": "Solid Example",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/solid-intro": {
+    "id": "02_SOLID/solid-intro",
+    "title": "Solid Intro",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_SOLID/srp": {
+    "id": "02_SOLID/srp",
+    "title": "Srp",
+    "category": "cleancode",
+    "subCategory": "02_SOLID",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/encapsulate-collection": {
+    "id": "03_리팩토링/encapsulate-collection",
+    "title": "Encapsulate Collection",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/extract-method": {
+    "id": "03_리팩토링/extract-method",
+    "title": "Extract Method",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/extract-variable": {
+    "id": "03_리팩토링/extract-variable",
+    "title": "Extract Variable",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/practice-refactoring": {
+    "id": "03_리팩토링/practice-refactoring",
+    "title": "Practice Refactoring",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/refactoring-intro": {
+    "id": "03_리팩토링/refactoring-intro",
+    "title": "Refactoring Intro",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/refactoring-when": {
+    "id": "03_리팩토링/refactoring-when",
+    "title": "Refactoring When",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/rename": {
+    "id": "03_리팩토링/rename",
+    "title": "Rename",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_리팩토링/replace-conditional": {
+    "id": "03_리팩토링/replace-conditional",
+    "title": "Replace Conditional",
+    "category": "cleancode",
+    "subCategory": "03_리팩토링",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_면접/interview-cleancode": {
+    "id": "04_면접/interview-cleancode",
+    "title": "Interview Cleancode",
+    "category": "cleancode",
+    "subCategory": "04_면접",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_테스트/tdd": {
+    "id": "04_테스트/tdd",
+    "title": "Tdd",
+    "category": "cleancode",
+    "subCategory": "04_테스트",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_테스트/test-code": {
+    "id": "04_테스트/test-code",
+    "title": "Test Code",
+    "category": "cleancode",
+    "subCategory": "04_테스트",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_테스트/test-pattern": {
+    "id": "04_테스트/test-pattern",
+    "title": "Test Pattern",
+    "category": "cleancode",
+    "subCategory": "04_테스트",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_설계/class-design": {
+    "id": "05_설계/class-design",
+    "title": "Class Design",
+    "category": "cleancode",
+    "subCategory": "05_설계",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_설계/composition-over-inheritance": {
+    "id": "05_설계/composition-over-inheritance",
+    "title": "Composition Over Inheritance",
+    "category": "cleancode",
+    "subCategory": "05_설계",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Composition Over Inheritance",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "클린코드 & SOLID",
+    "category": "cleancode",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "클린코드 & SOLID",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+# FastAPI
+fastapi==0.109.2
+uvicorn==0.27.1
+python-multipart==0.0.9
+
+# AI Models
+ultralytics==8.1.19
+openai-whisper==20231117
+transformers==4.38.1
+rembg==2.0.51
+easyocr==1.7.1  # K-MaaS 번호판 OCR
+
+# Image Processing
+Pillow==10.3.0
+opencv-python-headless==4.9.0.80
+
+# PyTorch (CPU version - GPU는 별도 설치)
+# Updating to 2.2.0 for security fixes
+torch==2.2.0
+torchvision==0.17.0
+
+# Utilities
+numpy>=1.24.0
+pydantic>=2.0.0
+
+# HTTP Client (for OpenAI API)
+httpx==0.27.0

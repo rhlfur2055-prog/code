@@ -1,0 +1,2060 @@
+{
+  "01_기초/algorithm-intro": {
+    "id": "01_기초/algorithm-intro",
+    "title": "Algorithm Intro",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Algorithm Intro",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "01_기초/quiz-complexity": {
+    "id": "01_기초/quiz-complexity",
+    "title": "Quiz Complexity",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Quiz Complexity",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "01_기초/recursion-advanced": {
+    "id": "01_기초/recursion-advanced",
+    "title": "Recursion Advanced",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Recursion Advanced",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "01_기초/recursion-basic": {
+    "id": "01_기초/recursion-basic",
+    "title": "Recursion Basic",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Recursion Basic",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "01_기초/space-complexity": {
+    "id": "01_기초/space-complexity",
+    "title": "Space Complexity",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Space Complexity",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "01_기초/time-complexity": {
+    "id": "01_기초/time-complexity",
+    "title": "Time Complexity",
+    "category": "algorithm",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Time Complexity",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/array-basic": {
+    "id": "02_배열/array-basic",
+    "title": "Array Basic",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Array Basic",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/kadane": {
+    "id": "02_배열/kadane",
+    "title": "Kadane",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Kadane",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/practice-array": {
+    "id": "02_배열/practice-array",
+    "title": "Practice Array",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Array",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/prefix-sum": {
+    "id": "02_배열/prefix-sum",
+    "title": "Prefix Sum",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Prefix Sum",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/sliding-window": {
+    "id": "02_배열/sliding-window",
+    "title": "Sliding Window",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sliding Window",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "02_배열/two-pointer": {
+    "id": "02_배열/two-pointer",
+    "title": "Two Pointer",
+    "category": "algorithm",
+    "subCategory": "02_배열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Two Pointer",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "03_문자열/kmp": {
+    "id": "03_문자열/kmp",
+    "title": "Kmp",
+    "category": "algorithm",
+    "subCategory": "03_문자열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Kmp",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "03_문자열/string-basic": {
+    "id": "03_문자열/string-basic",
+    "title": "String Basic",
+    "category": "algorithm",
+    "subCategory": "03_문자열",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "String Basic",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "03_연결리스트/linkedlist-concept": {
+    "id": "03_연결리스트/linkedlist-concept",
+    "title": "Linkedlist Concept",
+    "category": "algorithm",
+    "subCategory": "03_연결리스트",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Linkedlist Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "03_연결리스트/linkedlist-cycle": {
+    "id": "03_연결리스트/linkedlist-cycle",
+    "title": "Linkedlist Cycle",
+    "category": "algorithm",
+    "subCategory": "03_연결리스트",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Linkedlist Cycle",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "03_연결리스트/linkedlist-operation": {
+    "id": "03_연결리스트/linkedlist-operation",
+    "title": "Linkedlist Operation",
+    "category": "algorithm",
+    "subCategory": "03_연결리스트",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Linkedlist Operation",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/deque": {
+    "id": "04_스택큐/deque",
+    "title": "Deque",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Deque",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/monotonic-stack": {
+    "id": "04_스택큐/monotonic-stack",
+    "title": "Monotonic Stack",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Monotonic Stack",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/practice-stack-queue": {
+    "id": "04_스택큐/practice-stack-queue",
+    "title": "Practice Stack Queue",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Stack Queue",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/priority-queue": {
+    "id": "04_스택큐/priority-queue",
+    "title": "Priority Queue",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Priority Queue",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/queue-concept": {
+    "id": "04_스택큐/queue-concept",
+    "title": "Queue Concept",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Queue Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/stack-concept": {
+    "id": "04_스택큐/stack-concept",
+    "title": "Stack Concept",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Stack Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "04_스택큐/stack-problem": {
+    "id": "04_스택큐/stack-problem",
+    "title": "Stack Problem",
+    "category": "algorithm",
+    "subCategory": "04_스택큐",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Stack Problem",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_해시/hash-basic": {
+    "id": "05_해시/hash-basic",
+    "title": "Hash Basic",
+    "category": "algorithm",
+    "subCategory": "05_해시",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hash Basic",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_해시/hash-collision": {
+    "id": "05_해시/hash-collision",
+    "title": "Hash Collision",
+    "category": "algorithm",
+    "subCategory": "05_해시",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hash Collision",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_해시/hash-concept": {
+    "id": "05_해시/hash-concept",
+    "title": "Hash Concept",
+    "category": "algorithm",
+    "subCategory": "05_해시",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hash Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_해시/hash-problem": {
+    "id": "05_해시/hash-problem",
+    "title": "Hash Problem",
+    "category": "algorithm",
+    "subCategory": "05_해시",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hash Problem",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_해시/hashset-hashmap": {
+    "id": "05_해시/hashset-hashmap",
+    "title": "Hashset Hashmap",
+    "category": "algorithm",
+    "subCategory": "05_해시",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Hashset Hashmap",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_힙/heap-concept": {
+    "id": "05_힙/heap-concept",
+    "title": "Heap Concept",
+    "category": "algorithm",
+    "subCategory": "05_힙",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Heap Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_힙/heap-operation": {
+    "id": "05_힙/heap-operation",
+    "title": "Heap Operation",
+    "category": "algorithm",
+    "subCategory": "05_힙",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Heap Operation",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "05_힙/top-k": {
+    "id": "05_힙/top-k",
+    "title": "Top K",
+    "category": "algorithm",
+    "subCategory": "05_힙",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Top K",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_정렬/merge-sort": {
+    "id": "06_정렬/merge-sort",
+    "title": "Merge Sort",
+    "category": "algorithm",
+    "subCategory": "06_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Merge Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_정렬/practice-sort": {
+    "id": "06_정렬/practice-sort",
+    "title": "Practice Sort",
+    "category": "algorithm",
+    "subCategory": "06_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_정렬/quick-sort": {
+    "id": "06_정렬/quick-sort",
+    "title": "Quick Sort",
+    "category": "algorithm",
+    "subCategory": "06_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Quick Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_정렬/sort-compare": {
+    "id": "06_정렬/sort-compare",
+    "title": "Sort Compare",
+    "category": "algorithm",
+    "subCategory": "06_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sort Compare",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_정렬/sort-intro": {
+    "id": "06_정렬/sort-intro",
+    "title": "Sort Intro",
+    "category": "algorithm",
+    "subCategory": "06_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sort Intro",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_트리/balanced-tree": {
+    "id": "06_트리/balanced-tree",
+    "title": "Balanced Tree",
+    "category": "algorithm",
+    "subCategory": "06_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Balanced Tree",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_트리/tree-concept": {
+    "id": "06_트리/tree-concept",
+    "title": "Tree Concept",
+    "category": "algorithm",
+    "subCategory": "06_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tree Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "06_트리/tree-traversal": {
+    "id": "06_트리/tree-traversal",
+    "title": "Tree Traversal",
+    "category": "algorithm",
+    "subCategory": "06_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tree Traversal",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/bubble-sort": {
+    "id": "07_정렬/bubble-sort",
+    "title": "Bubble Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Bubble Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/counting-sort": {
+    "id": "07_정렬/counting-sort",
+    "title": "Counting Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Counting Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/heap-sort": {
+    "id": "07_정렬/heap-sort",
+    "title": "Heap Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Heap Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/insertion-sort": {
+    "id": "07_정렬/insertion-sort",
+    "title": "Insertion Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Insertion Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/radix-sort": {
+    "id": "07_정렬/radix-sort",
+    "title": "Radix Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Radix Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_정렬/selection-sort": {
+    "id": "07_정렬/selection-sort",
+    "title": "Selection Sort",
+    "category": "algorithm",
+    "subCategory": "07_정렬",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Selection Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_탐색/binary-search": {
+    "id": "07_탐색/binary-search",
+    "title": "Binary Search",
+    "category": "algorithm",
+    "subCategory": "07_탐색",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Binary Search",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_탐색/parametric-search": {
+    "id": "07_탐색/parametric-search",
+    "title": "Parametric Search",
+    "category": "algorithm",
+    "subCategory": "07_탐색",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Parametric Search",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "07_탐색/practice-search": {
+    "id": "07_탐색/practice-search",
+    "title": "Practice Search",
+    "category": "algorithm",
+    "subCategory": "07_탐색",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Search",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "08_탐색/binary-search-variant": {
+    "id": "08_탐색/binary-search-variant",
+    "title": "Binary Search Variant",
+    "category": "algorithm",
+    "subCategory": "08_탐색",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Binary Search Variant",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "08_탐색/linear-search": {
+    "id": "08_탐색/linear-search",
+    "title": "Linear Search",
+    "category": "algorithm",
+    "subCategory": "08_탐색",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Linear Search",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "08_트리/binary-tree": {
+    "id": "08_트리/binary-tree",
+    "title": "Binary Tree",
+    "category": "algorithm",
+    "subCategory": "08_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Binary Tree",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "08_트리/bst": {
+    "id": "08_트리/bst",
+    "title": "Bst",
+    "category": "algorithm",
+    "subCategory": "08_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Bst",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "08_트리/tree-basic": {
+    "id": "08_트리/tree-basic",
+    "title": "Tree Basic",
+    "category": "algorithm",
+    "subCategory": "08_트리",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Tree Basic",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/bfs": {
+    "id": "09_그래프/bfs",
+    "title": "Bfs",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Bfs",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/connected-component": {
+    "id": "09_그래프/connected-component",
+    "title": "Connected Component",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Connected Component",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/cycle-detection": {
+    "id": "09_그래프/cycle-detection",
+    "title": "Cycle Detection",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cycle Detection",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/dfs-bfs-compare": {
+    "id": "09_그래프/dfs-bfs-compare",
+    "title": "Dfs Bfs Compare",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dfs Bfs Compare",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/dfs": {
+    "id": "09_그래프/dfs",
+    "title": "Dfs",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dfs",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/graph-concept": {
+    "id": "09_그래프/graph-concept",
+    "title": "Graph Concept",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Graph Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/graph-representation": {
+    "id": "09_그래프/graph-representation",
+    "title": "Graph Representation",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Graph Representation",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/practice-graph": {
+    "id": "09_그래프/practice-graph",
+    "title": "Practice Graph",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Graph",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "09_그래프/topological-sort": {
+    "id": "09_그래프/topological-sort",
+    "title": "Topological Sort",
+    "category": "algorithm",
+    "subCategory": "09_그래프",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Topological Sort",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "10_최단경로/bellman-ford": {
+    "id": "10_최단경로/bellman-ford",
+    "title": "Bellman Ford",
+    "category": "algorithm",
+    "subCategory": "10_최단경로",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Bellman Ford",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "10_최단경로/dijkstra": {
+    "id": "10_최단경로/dijkstra",
+    "title": "Dijkstra",
+    "category": "algorithm",
+    "subCategory": "10_최단경로",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dijkstra",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "10_최단경로/floyd-warshall": {
+    "id": "10_최단경로/floyd-warshall",
+    "title": "Floyd Warshall",
+    "category": "algorithm",
+    "subCategory": "10_최단경로",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Floyd Warshall",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "10_최단경로/practice-shortest": {
+    "id": "10_최단경로/practice-shortest",
+    "title": "Practice Shortest",
+    "category": "algorithm",
+    "subCategory": "10_최단경로",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Shortest",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "10_최단경로/shortest-path-compare": {
+    "id": "10_최단경로/shortest-path-compare",
+    "title": "Shortest Path Compare",
+    "category": "algorithm",
+    "subCategory": "10_최단경로",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Shortest Path Compare",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-bitmask": {
+    "id": "11_DP/dp-bitmask",
+    "title": "Dp Bitmask",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Bitmask",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-coin": {
+    "id": "11_DP/dp-coin",
+    "title": "Dp Coin",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Coin",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-concept": {
+    "id": "11_DP/dp-concept",
+    "title": "Dp Concept",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-fibonacci": {
+    "id": "11_DP/dp-fibonacci",
+    "title": "Dp Fibonacci",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Fibonacci",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-knapsack": {
+    "id": "11_DP/dp-knapsack",
+    "title": "Dp Knapsack",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Knapsack",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-lcs": {
+    "id": "11_DP/dp-lcs",
+    "title": "Dp Lcs",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Lcs",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-lis": {
+    "id": "11_DP/dp-lis",
+    "title": "Dp Lis",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Lis",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/dp-matrix-chain": {
+    "id": "11_DP/dp-matrix-chain",
+    "title": "Dp Matrix Chain",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dp Matrix Chain",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "11_DP/practice-dp": {
+    "id": "11_DP/practice-dp",
+    "title": "Practice Dp",
+    "category": "algorithm",
+    "subCategory": "11_DP",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Dp",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_그리디/activity-selection": {
+    "id": "12_그리디/activity-selection",
+    "title": "Activity Selection",
+    "category": "algorithm",
+    "subCategory": "12_그리디",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Activity Selection",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_그리디/greedy-concept": {
+    "id": "12_그리디/greedy-concept",
+    "title": "Greedy Concept",
+    "category": "algorithm",
+    "subCategory": "12_그리디",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Greedy Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_그리디/greedy-interval": {
+    "id": "12_그리디/greedy-interval",
+    "title": "Greedy Interval",
+    "category": "algorithm",
+    "subCategory": "12_그리디",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Greedy Interval",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_그리디/greedy-vs-dp": {
+    "id": "12_그리디/greedy-vs-dp",
+    "title": "Greedy Vs Dp",
+    "category": "algorithm",
+    "subCategory": "12_그리디",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Greedy Vs Dp",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "12_그리디/practice-greedy": {
+    "id": "12_그리디/practice-greedy",
+    "title": "Practice Greedy",
+    "category": "algorithm",
+    "subCategory": "12_그리디",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Greedy",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/backtracking-concept": {
+    "id": "13_백트래킹/backtracking-concept",
+    "title": "Backtracking Concept",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Backtracking Concept",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/backtracking-nqueen": {
+    "id": "13_백트래킹/backtracking-nqueen",
+    "title": "Backtracking Nqueen",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Backtracking Nqueen",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/backtracking-permutation": {
+    "id": "13_백트래킹/backtracking-permutation",
+    "title": "Backtracking Permutation",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Backtracking Permutation",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/combination": {
+    "id": "13_백트래킹/combination",
+    "title": "Combination",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Combination",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/n-queen": {
+    "id": "13_백트래킹/n-queen",
+    "title": "N Queen",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "N Queen",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/permutation": {
+    "id": "13_백트래킹/permutation",
+    "title": "Permutation",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Permutation",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "13_백트래킹/practice-backtracking": {
+    "id": "13_백트래킹/practice-backtracking",
+    "title": "Practice Backtracking",
+    "category": "algorithm",
+    "subCategory": "13_백트래킹",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Backtracking",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "14_고급/mst-prim": {
+    "id": "14_고급/mst-prim",
+    "title": "Mst Prim",
+    "category": "algorithm",
+    "subCategory": "14_고급",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mst Prim",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "14_고급/segment-tree": {
+    "id": "14_고급/segment-tree",
+    "title": "Segment Tree",
+    "category": "algorithm",
+    "subCategory": "14_고급",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Segment Tree",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "14_고급/trie": {
+    "id": "14_고급/trie",
+    "title": "Trie",
+    "category": "algorithm",
+    "subCategory": "14_고급",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Trie",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "14_기타/mst-kruskal": {
+    "id": "14_기타/mst-kruskal",
+    "title": "Mst Kruskal",
+    "category": "algorithm",
+    "subCategory": "14_기타",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mst Kruskal",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "14_기타/union-find": {
+    "id": "14_기타/union-find",
+    "title": "Union Find",
+    "category": "algorithm",
+    "subCategory": "14_기타",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Union Find",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "15_실전/coding-test-tip": {
+    "id": "15_실전/coding-test-tip",
+    "title": "Coding Test Tip",
+    "category": "algorithm",
+    "subCategory": "15_실전",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Coding Test Tip",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "15_실전/interview-algorithm": {
+    "id": "15_실전/interview-algorithm",
+    "title": "Interview Algorithm",
+    "category": "algorithm",
+    "subCategory": "15_실전",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Interview Algorithm",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "15_실전/problem-pattern": {
+    "id": "15_실전/problem-pattern",
+    "title": "Problem Pattern",
+    "category": "algorithm",
+    "subCategory": "15_실전",
+    "language": "Python",
+    "description": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Problem Pattern",
+        "content": "정렬, 탐색 등 필수 알고리즘의 시간 복잡도와 구현을 익힙니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "def binary_search(arr, target):\r\n    low, high = 0, len(arr) - 1\r\n    while low <= high:\r\n        mid = (low + high) // 2\r\n        if arr[mid] == target: return mid\r\n        elif arr[mid] < target: low = mid + 1\r\n        else: high = mid - 1\r\n    return -1"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "알고리즘 & 자료구조",
+    "category": "algorithm",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "알고리즘 & 자료구조",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

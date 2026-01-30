@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 한글 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono&display=swap');
+
+:root {
+  --primary: #00C471;
+  --primary-dark: #00A85D;
+  --bg-dark: #1B1B1F;
+  --card-dark: #25252B;
+  --border-dark: #3F3F46;
+  --text-primary: #E4E4E7;
+  --text-secondary: #A1A1AA;
+}
+
+body {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* 선택 영역 */
+::selection { background-color: var(--primary); color: white; }
+
+@layer components {
+  /* 카드 */
+  .card {
+    @apply bg-dark-card rounded-xl border border-dark-border p-6 transition-all;
+  }
+  .card-hover {
+    @apply hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1;
+  }
+
+  /* 버튼 */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark;
+  }
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary hover:text-white;
+  }
+
+  /* 난이도 뱃지 */
+  .level {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium;
+  }
+  .level-beginner { @apply bg-green-500/20 text-green-400; }
+  .level-basic { @apply bg-blue-500/20 text-blue-400; }
+  .level-intermediate { @apply bg-yellow-500/20 text-yellow-400; }
+  .level-advanced { @apply bg-red-500/20 text-red-400; }
+
+  /* 태그 */
+  .tag {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs;
+  }
+  .tag-required { @apply bg-red-500/10 text-red-400 border border-red-500/30; }
+  .tag-interview { @apply bg-purple-500/10 text-purple-400 border border-purple-500/30; }
+  .tag-practical { @apply bg-cyan-500/10 text-cyan-400 border border-cyan-500/30; }
+  .tag-coding { @apply bg-yellow-500/10 text-yellow-400 border border-yellow-500/30; }
+
+  /* 코드 블록 */
+  .code-block {
+    @apply bg-[#1E1E1E] rounded-lg overflow-hidden border border-dark-border;
+  }
+  .code-header {
+    @apply flex justify-between items-center px-4 py-2 bg-[#2D2D2D] text-sm text-gray-400;
+  }
+  .code-content {
+    @apply p-4 overflow-x-auto font-mono text-sm;
+  }
+
+  /* 알림 박스 */
+  .alert {
+    @apply flex gap-3 p-4 rounded-lg border;
+  }
+  .alert-info { @apply bg-blue-500/10 border-blue-500/30 text-blue-300; }
+  .alert-warning { @apply bg-yellow-500/10 border-yellow-500/30 text-yellow-300; }
+  .alert-success { @apply bg-green-500/10 border-green-500/30 text-green-300; }
+  .alert-danger { @apply bg-red-500/10 border-red-500/30 text-red-300; }
+
+  /* 면접 박스 */
+  .interview-box {
+    @apply bg-purple-500/10 border border-purple-500/30 rounded-lg p-4;
+  }
+  .interview-q { @apply font-bold text-purple-300 mb-2; }
+  .interview-a { @apply text-gray-300 pl-4 border-l-2 border-purple-500; }
+
+  /* 진행률 바 */
+  .progress-bar {
+    @apply h-2 bg-dark-border rounded-full overflow-hidden;
+  }
+  .progress-fill {
+    @apply h-full bg-primary rounded-full transition-all duration-500;
+  }
+}

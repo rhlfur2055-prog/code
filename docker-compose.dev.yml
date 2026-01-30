@@ -1,0 +1,209 @@
+version: '3.8'
+
+# ================================
+# Development Environment
+# Docker Compose Configuration
+# ================================
+# Usage: docker-compose -f docker-compose.dev.yml up -d
+# Features:
+# - Hot reloading enabled
+# - All ports exposed for debugging
+# - Volume mounts for live code updates
+# - Development-friendly logging
+
+services:
+  # ================================
+  # Frontend - Next.js
+  # ================================
+  frontend:
+    build:
+      context: ./src
+      dockerfile: Dockerfile.dev
+      args:
+        - NODE_ENV=development
+    container_name: msa-frontend-dev
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    volumes:
+      # Live code reload
+      - ./src:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_AI_API_URL=${NEXT_PUBLIC_AI_API_URL}
+      - WATCHPACK_POLLING=true
+    command: npm run dev
+    networks:
+      - msa-network
+    depends_on:
+      - spring-api
+      - python-ai
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ================================
+  # Backend - Spring Boot API
+  # ================================
+  spring-api:
+    build:
+      context: ./backend/spring-ai-api
+      dockerfile: Dockerfile.dev
+    container_name: msa-spring-api-dev
+    ports:
+      - "${SPRING_PORT:-8080}:8080"
+      # Debug port for remote debugging
+      - "${DEBUG_SPRING_PORT:-5005}:5005"
+    volumes:
+      # Live code reload (for Maven)
+      - ./backend/spring-ai-api/src:/app/src
+      - ./backend/spring-ai-api/target:/app/target
+      - ~/.m2:/root/.m2  # Maven cache
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILE:-dev}
+      - SPRING_DATASOURCE_URL=jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
+      - SPRING_JPA_SHOW_SQL=${SPRING_JPA_SHOW_SQL:-true}
+      - LOGGING_LEVEL_ROOT=${LOGGING_LEVEL_ROOT:-INFO}
+      - JWT_SECRET=${JWT_SECRET}
+      # Enable remote debugging
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    networks:
+      - msa-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ================================
+  # Backend - Python AI Server (FastAPI)
+  # ================================
+  python-ai:
+    build:
+      context: ./backend/python-ai-server
+      dockerfile: Dockerfile.dev
+    container_name: msa-python-ai-dev
+    ports:
+      - "${PYTHON_AI_PORT:-8000}:8000"
+      # Debug port for Python debugging
+      - "${DEBUG_PYTHON_PORT:-5678}:5678"
+    volumes:
+      # Live code reload
+      - ./backend/python-ai-server:/app
+      - ./backend/python-ai-server/models:/app/models
+      # Prevent overwriting installed packages
+      - /app/__pycache__
+    environment:
+      - FASTAPI_ENV=${FASTAPI_ENV:-development}
+      - YOLO_MODEL_PATH=${YOLO_MODEL_PATH}
+      - WHISPER_MODEL_PATH=${WHISPER_MODEL_PATH}
+      - OCR_MODEL_PATH=${OCR_MODEL_PATH}
+      - MAX_IMAGE_SIZE=${MAX_IMAGE_SIZE}
+      - MAX_AUDIO_LENGTH=${MAX_AUDIO_LENGTH}
+      - ENABLE_GPU=${ENABLE_GPU:-false}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - msa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ================================
+  # Database - MySQL
+  # ================================
+  mysql:
+    image: mysql:8.0
+    container_name: msa-mysql-dev
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      # Persistent data
+      - mysql-data-dev:/var/lib/mysql
+      # Custom configuration
+      - ./backend/spring-ai-api/src/main/resources/db/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - TZ=${TZ:-Asia/Seoul}
+    command: 
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+    networks:
+      - msa-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ================================
+  # Optional: phpMyAdmin (Database Management)
+  # ================================
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: msa-phpmyadmin-dev
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - msa-network
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    profiles:
+      - debug  # Only starts with: docker-compose --profile debug up
+
+# ================================
+# Networks
+# ================================
+networks:
+  msa-network:
+    driver: bridge
+    name: msa-dev-network
+
+# ================================
+# Volumes
+# ================================
+volumes:
+  mysql-data-dev:
+    driver: local
+    name: msa-mysql-data-dev
+
+# ================================
+# DEVELOPMENT NOTES
+# ================================
+# 1. Start all services: docker-compose -f docker-compose.dev.yml up -d
+# 2. View logs: docker-compose -f docker-compose.dev.yml logs -f
+# 3. Stop all services: docker-compose -f docker-compose.dev.yml down
+# 4. Rebuild services: docker-compose -f docker-compose.dev.yml up -d --build
+# 5. Access phpMyAdmin: http://localhost:8081 (with --profile debug)
+# 6. Remote debugging:
+#    - Spring Boot: localhost:5005
+#    - Python: localhost:5678

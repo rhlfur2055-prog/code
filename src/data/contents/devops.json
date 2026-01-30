@@ -1,0 +1,839 @@
+{
+  "01_Docker/docker-intro": {
+    "id": "01_Docker/docker-intro",
+    "title": "Docker 소개",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Docker",
+    "description": "Docker의 개념과 컨테이너 가상화를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Docker란?",
+        "content": "컨테이너 기반 가상화 플랫폼\n\n**핵심 개념**:\n- 이미지(Image): 읽기 전용 템플릿\n- 컨테이너(Container): 실행 중인 이미지 인스턴스\n- Docker Hub: 이미지 저장소\n\n**장점**: 환경 일관성, 빠른 배포, 리소스 효율성"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Docker 시작하기",
+        "code": "# 이미지 다운로드\ndocker pull nginx\n\n# 컨테이너 실행\ndocker run -d -p 8080:80 --name web nginx\n\n# 컨테이너 확인\ndocker ps\n\n# 컨테이너 중지/삭제\ndocker stop web\ndocker rm web"
+      }
+    ]
+  },
+  "01_Docker/docker-vs-vm": {
+    "id": "01_Docker/docker-vs-vm",
+    "title": "Docker vs VM",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Text",
+    "description": "Docker와 가상머신의 차이점을 비교합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "컨테이너 vs VM",
+        "content": "**가상머신(VM)**:\n- 하이퍼바이저 위에 게스트 OS 설치\n- 무겁고 느린 부팅\n- 완전한 격리\n\n**컨테이너**:\n- 호스트 OS 커널 공유\n- 가볍고 빠른 시작\n- 프로세스 수준 격리\n\n**선택 기준**: 완전 격리 필요 → VM / 빠른 배포 필요 → 컨테이너"
+      },
+      {
+        "type": "tip",
+        "title": "리소스 비교",
+        "content": "VM: 수 GB 메모리, 수 분 부팅\n컨테이너: 수 MB 메모리, 수 초 부팅\n\n같은 하드웨어에 컨테이너가 10배 이상 더 많이 실행 가능"
+      }
+    ]
+  },
+  "01_Docker/docker-architecture": {
+    "id": "01_Docker/docker-architecture",
+    "title": "Docker 아키텍처",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Text",
+    "description": "Docker의 내부 구조와 동작 원리를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Docker 구조",
+        "content": "**Docker Daemon (dockerd)**: 컨테이너 관리 백그라운드 프로세스\n**Docker Client**: CLI 명령어 도구\n**Docker Registry**: 이미지 저장소 (Docker Hub)\n\n**동작 흐름**:\n1. Client → Daemon에 명령 전달\n2. Daemon → Registry에서 이미지 Pull\n3. Daemon → 이미지로 컨테이너 생성/실행"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Docker 정보 확인",
+        "code": "# Docker 버전\ndocker version\n\n# Docker 시스템 정보\ndocker info\n\n# Docker 디스크 사용량\ndocker system df"
+      }
+    ]
+  },
+  "01_Docker/docker-install": {
+    "id": "01_Docker/docker-install",
+    "title": "Docker 설치",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Bash",
+    "description": "각 운영체제별 Docker 설치 방법을 안내합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Docker 설치 방법",
+        "content": "**Windows/Mac**: Docker Desktop 설치\n**Linux**: 패키지 매니저로 설치\n\n**권장 사양**:\n- 64비트 운영체제\n- 가상화 지원 CPU\n- 최소 4GB RAM"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Linux(Ubuntu) 설치",
+        "code": "# 패키지 업데이트\nsudo apt-get update\n\n# 필수 패키지 설치\nsudo apt-get install ca-certificates curl gnupg\n\n# Docker GPG 키 추가\nsudo install -m 0755 -d /etc/apt/keyrings\ncurl -fsSL https://download.docker.com/linux/ubuntu/gpg | \\\n  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg\n\n# Docker 저장소 추가\necho \"deb [arch=$(dpkg --print-architecture) \\\n  signed-by=/etc/apt/keyrings/docker.gpg] \\\n  https://download.docker.com/linux/ubuntu \\\n  $(. /etc/os-release && echo $VERSION_CODENAME) stable\" | \\\n  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null\n\n# Docker 설치\nsudo apt-get update\nsudo apt-get install docker-ce docker-ce-cli containerd.io\n\n# 사용자 그룹 추가 (sudo 없이 사용)\nsudo usermod -aG docker $USER"
+      }
+    ]
+  },
+  "01_Docker/docker-command": {
+    "id": "01_Docker/docker-command",
+    "title": "Docker 기본 명령어",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Bash",
+    "description": "Docker 컨테이너와 이미지 관리 필수 명령어를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "명령어 구조",
+        "content": "docker [대상] [명령] [옵션]\n\n**대상**: container, image, volume, network\n**명령**: run, start, stop, rm, ls 등"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "필수 명령어",
+        "code": "# === 이미지 관리 ===\ndocker images                    # 이미지 목록\ndocker pull nginx:latest         # 이미지 다운로드\ndocker rmi nginx                 # 이미지 삭제\ndocker build -t myapp:1.0 .      # 이미지 빌드\n\n# === 컨테이너 생명주기 ===\ndocker run -d -p 8080:80 nginx   # 생성+실행\ndocker ps                        # 실행 중 컨테이너\ndocker ps -a                     # 모든 컨테이너\ndocker stop <id>                 # 중지\ndocker start <id>                # 시작\ndocker rm <id>                   # 삭제\n\n# === 컨테이너 접속 ===\ndocker exec -it <id> bash        # 내부 접속\ndocker logs <id>                 # 로그 확인\ndocker logs -f <id>              # 실시간 로그"
+      },
+      {
+        "type": "tip",
+        "title": "자주 쓰는 옵션",
+        "content": "-d: 백그라운드 실행\n-p 호스트:컨테이너: 포트 매핑\n--name: 이름 지정\n-v: 볼륨 마운트\n-e: 환경변수\n--rm: 종료 시 자동 삭제"
+      }
+    ]
+  },
+  "01_Docker/docker-image": {
+    "id": "01_Docker/docker-image",
+    "title": "Docker 이미지",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Bash",
+    "description": "Docker 이미지의 구조와 관리 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Docker 이미지",
+        "content": "읽기 전용 레이어들의 집합\n\n**구조**: 베이스 이미지 + 변경 레이어\n**태그**: 이미지:태그 (nginx:1.24)\n**레지스트리**: Docker Hub, ECR, GCR 등"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "이미지 관리",
+        "code": "# 이미지 검색\ndocker search nginx\n\n# 이미지 다운로드\ndocker pull nginx:1.24-alpine\n\n# 이미지 태그 변경\ndocker tag nginx:latest myrepo/nginx:v1\n\n# 이미지 푸시\ndocker login\ndocker push myrepo/nginx:v1\n\n# 이미지 히스토리 (레이어 확인)\ndocker history nginx\n\n# 이미지 상세 정보\ndocker inspect nginx\n\n# 이미지 저장/로드\ndocker save nginx > nginx.tar\ndocker load < nginx.tar"
+      }
+    ]
+  },
+  "01_Docker/dockerfile": {
+    "id": "01_Docker/dockerfile",
+    "title": "Dockerfile 작성",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Docker",
+    "description": "Dockerfile을 작성하여 커스텀 이미지를 빌드합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dockerfile 명령어",
+        "content": "**FROM**: 베이스 이미지\n**WORKDIR**: 작업 디렉토리\n**COPY/ADD**: 파일 복사\n**RUN**: 빌드 시 명령 실행\n**ENV**: 환경변수 설정\n**EXPOSE**: 포트 노출\n**CMD/ENTRYPOINT**: 실행 명령"
+      },
+      {
+        "type": "code",
+        "language": "dockerfile",
+        "title": "Dockerfile 예시",
+        "code": "# Node.js 애플리케이션\nFROM node:18-alpine\n\nWORKDIR /app\n\n# 의존성 먼저 복사 (캐싱 활용)\nCOPY package*.json ./\nRUN npm ci --only=production\n\n# 소스 복사\nCOPY . .\n\nEXPOSE 3000\n\nCMD [\"node\", \"server.js\"]\n\n# 빌드: docker build -t myapp:1.0 .\n# 실행: docker run -p 3000:3000 myapp:1.0"
+      }
+    ]
+  },
+  "01_Docker/dockerfile-best-practice": {
+    "id": "01_Docker/dockerfile-best-practice",
+    "title": "Dockerfile 베스트 프랙티스",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Docker",
+    "description": "효율적인 Dockerfile 작성 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "최적화 원칙",
+        "content": "1. **경량 베이스 이미지**: alpine 사용\n2. **레이어 캐싱**: 변경 적은 것 먼저\n3. **멀티스테이지 빌드**: 빌드/실행 분리\n4. **.dockerignore**: 불필요한 파일 제외\n5. **최소 패키지**: 필요한 것만 설치"
+      },
+      {
+        "type": "code",
+        "language": "dockerfile",
+        "title": "멀티스테이지 빌드",
+        "code": "# === 빌드 스테이지 ===\nFROM node:18 AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# === 실행 스테이지 ===\nFROM node:18-alpine\nWORKDIR /app\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/node_modules ./node_modules\n\nEXPOSE 3000\nCMD [\"node\", \"dist/server.js\"]\n\n# 최종 이미지에는 빌드 도구 없음 = 작은 이미지"
+      }
+    ]
+  },
+  "01_Docker/docker-volume": {
+    "id": "01_Docker/docker-volume",
+    "title": "Docker Volume",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Bash",
+    "description": "컨테이너 데이터 영속성을 위한 볼륨을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "볼륨 타입",
+        "content": "**Volume**: Docker가 관리하는 영역\n**Bind Mount**: 호스트 경로 직접 마운트\n**tmpfs**: 메모리에 임시 저장\n\n컨테이너 삭제해도 볼륨 데이터는 유지됨"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "볼륨 사용",
+        "code": "# 볼륨 생성\ndocker volume create mydata\n\n# 볼륨 목록\ndocker volume ls\n\n# 볼륨 사용하여 컨테이너 실행\ndocker run -d \\\n  -v mydata:/var/lib/mysql \\\n  -e MYSQL_ROOT_PASSWORD=secret \\\n  mysql:8\n\n# Bind Mount (호스트 경로)\ndocker run -d \\\n  -v $(pwd)/html:/usr/share/nginx/html \\\n  nginx\n\n# 볼륨 삭제\ndocker volume rm mydata\ndocker volume prune  # 미사용 볼륨 정리"
+      }
+    ]
+  },
+  "01_Docker/docker-network": {
+    "id": "01_Docker/docker-network",
+    "title": "Docker Network",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Bash",
+    "description": "컨테이너 간 네트워크 통신을 설정합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "네트워크 드라이버",
+        "content": "**bridge**: 기본 네트워크, 같은 호스트 내 통신\n**host**: 호스트 네트워크 직접 사용\n**none**: 네트워크 비활성화\n**overlay**: 다중 호스트 간 통신 (Swarm)"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "네트워크 설정",
+        "code": "# 네트워크 생성\ndocker network create mynet\n\n# 네트워크 목록\ndocker network ls\n\n# 컨테이너를 네트워크에 연결\ndocker run -d --name db --network mynet mysql:8\ndocker run -d --name app --network mynet myapp\n\n# app 컨테이너에서 db 컨테이너에 접근\n# (같은 네트워크면 컨테이너 이름으로 접근 가능)\n# mysql -h db -u root -p\n\n# 네트워크 상세 정보\ndocker network inspect mynet\n\n# 네트워크 삭제\ndocker network rm mynet"
+      }
+    ]
+  },
+  "01_Docker/docker-compose": {
+    "id": "01_Docker/docker-compose",
+    "title": "Docker Compose",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "YAML",
+    "description": "여러 컨테이너를 함께 정의하고 실행합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Docker Compose",
+        "content": "여러 컨테이너를 YAML로 정의하고 한 번에 관리\n\n**구성 요소**:\n- services: 컨테이너 정의\n- volumes: 볼륨 정의\n- networks: 네트워크 정의"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "docker-compose.yml",
+        "code": "version: \"3.8\"\n\nservices:\n  app:\n    build: .\n    ports:\n      - \"8080:8080\"\n    environment:\n      - DB_HOST=db\n    depends_on:\n      - db\n    networks:\n      - backend\n\n  db:\n    image: mysql:8\n    environment:\n      MYSQL_ROOT_PASSWORD: secret\n      MYSQL_DATABASE: myapp\n    volumes:\n      - db-data:/var/lib/mysql\n    networks:\n      - backend\n\nvolumes:\n  db-data:\n\nnetworks:\n  backend:"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Compose 명령어",
+        "code": "# 시작 (빌드 포함)\ndocker-compose up -d --build\n\n# 로그 확인\ndocker-compose logs -f\n\n# 중지\ndocker-compose down\n\n# 볼륨까지 삭제\ndocker-compose down -v"
+      }
+    ]
+  },
+  "01_Docker/docker-compose-example": {
+    "id": "01_Docker/docker-compose-example",
+    "title": "Docker Compose 실전 예제",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "YAML",
+    "description": "실제 프로젝트에서 사용하는 Docker Compose 예제입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "풀스택 애플리케이션",
+        "content": "Frontend + Backend + Database + Redis 구성\n\n각 서비스는 독립적인 컨테이너로 실행되며\n네트워크를 통해 서로 통신합니다."
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "풀스택 Compose 예제",
+        "code": "version: \"3.8\"\n\nservices:\n  frontend:\n    build: ./frontend\n    ports:\n      - \"3000:3000\"\n    depends_on:\n      - backend\n\n  backend:\n    build: ./backend\n    ports:\n      - \"8080:8080\"\n    environment:\n      - DB_HOST=postgres\n      - REDIS_HOST=redis\n    depends_on:\n      - postgres\n      - redis\n\n  postgres:\n    image: postgres:15-alpine\n    environment:\n      POSTGRES_DB: myapp\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: pass\n    volumes:\n      - postgres-data:/var/lib/postgresql/data\n\n  redis:\n    image: redis:7-alpine\n    volumes:\n      - redis-data:/data\n\nvolumes:\n  postgres-data:\n  redis-data:"
+      }
+    ]
+  },
+  "01_Docker/practice-docker": {
+    "id": "01_Docker/practice-docker",
+    "title": "Docker 실습",
+    "category": "devops",
+    "subCategory": "01_Docker",
+    "language": "Docker",
+    "description": "Docker 실습 문제를 풀어봅니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "실습 과제",
+        "content": "1. Nginx로 정적 웹사이트 서빙\n2. Node.js 앱 컨테이너화\n3. MySQL + 앱 Compose 구성\n4. 멀티스테이지 빌드로 이미지 최적화"
+      },
+      {
+        "type": "code",
+        "language": "dockerfile",
+        "title": "실습 1: Nginx 웹서버",
+        "code": "# Dockerfile\nFROM nginx:alpine\nCOPY ./html /usr/share/nginx/html\nEXPOSE 80\n\n# 빌드 및 실행\n# docker build -t my-website .\n# docker run -d -p 80:80 my-website\n\n# 또는 볼륨 마운트로 개발\n# docker run -d -p 80:80 \\\n#   -v $(pwd)/html:/usr/share/nginx/html \\\n#   nginx:alpine"
+      }
+    ]
+  },
+  "02_CICD/cicd-intro": {
+    "id": "02_CICD/cicd-intro",
+    "title": "CI/CD - 45분 만에 4,600억 원을 날린 배포 사고",
+    "category": "devops",
+    "subCategory": "02_CICD",
+    "language": "YAML",
+    "description": "나이트 캐피탈(Knight Capital) 파산 사건으로 배우는 CI/CD의 중요성. 왜 자동화된 배포 파이프라인이 생명줄인지 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 실제 사고: 45분 만에 4,600억 원 증발 (2012년 나이트 캐피탈)",
+        "content": "**[The Legend Case - 월스트리트 역사상 최악의 배포 사고]**\n\n2012년 8월 1일, 미국 주식 시장이 열리자마자 이상한 일이 벌어졌습니다.\n\n**사고 경과:**\n```\n09:30 - 뉴욕 증권거래소 개장\n09:31 - Knight Capital 서버에서 비정상 주문 폭주\n09:32 - 분당 수천 건의 잘못된 매매 주문 발생\n10:15 - 45분 후, 거래 중지\n\n결과: 4억 4천만 달러 손실 (약 4,600억 원)\n      회사 시가총액의 75% 증발\n      3일 후 경쟁사에 인수됨 (사실상 파산)\n```\n\n---\n\n**무슨 일이 있었나?**\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    💀 사고의 핵심 원인                        │\n├─────────────────────────────────────────────────────────────┤\n│                                                             │\n│   1. 개발자가 새 코드를 8대 서버에 배포해야 했음              │\n│   2. 7대에만 배포하고 1대를 깜빡함 (수동 배포)                │\n│   3. 그 1대에는 8년 전 테스트 코드가 남아있었음              │\n│   4. 테스트 코드: \"무한 매수 주문\" 로직                      │\n│   5. 9시 30분, 시장 개장과 동시에 테스트 코드 발동           │\n│   6. 분당 수천 건의 잘못된 주문 → 45분간 손실 누적           │\n│                                                             │\n│   📌 핵심: 수동 배포 + 테스트 코드 미제거 + 롤백 체계 없음    │\n│                                                             │\n└─────────────────────────────────────────────────────────────┘\n```\n\n**만약 CI/CD가 있었다면?**\n\n| 문제 | CI/CD 해결책 |\n|------|-------------|\n| 수동 배포 누락 | 자동 배포로 모든 서버에 일괄 적용 |\n| 테스트 코드 잔존 | 빌드 시 테스트/프로덕션 분리 |\n| 롤백 불가 | Blue-Green 배포로 즉시 롤백 |\n| 모니터링 부재 | 배포 후 자동 헬스체크 |"
+      },
+      {
+        "type": "concept",
+        "title": "🐣 Junior vs 🐯 Senior: 배포 대화",
+        "content": "**🐣 Junior의 배포:**\n```bash\n# SSH로 서버 8대에 하나씩 접속\nssh server1 && ./deploy.sh\nssh server2 && ./deploy.sh\n...\nssh server8 && ./deploy.sh  # ← 깜빡하고 안 함\n\n\"팀장님, 배포 완료했습니다!\"\n```\n\n---\n\n**🐯 Senior의 대응:**\n\n\"잠깐. 서버 8대를 어떻게 확인했어?\"\n\n\"어... 제가 직접 하나씩...\"\n\n\"그거 사람이 하면 안 돼. **나이트 캐피탈** 알아? 개발자가 서버 하나 빠뜨려서 회사가 망했어. 4,600억 원 날리고.\"\n\n\"네?! 서버 하나 때문에요?\"\n\n\"응. 그래서 우리는 **CI/CD 파이프라인**을 쓰는 거야:\n1. **자동 빌드**: 코드 푸시하면 자동으로 빌드\n2. **자동 테스트**: 테스트 통과해야만 다음 단계\n3. **자동 배포**: 모든 서버에 동시에 배포\n4. **자동 롤백**: 문제 생기면 즉시 이전 버전으로\n\n사람은 실수해. 기계는 안 해.\""
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "🛡️ 생존 키트: GitHub Actions CI/CD 파이프라인",
+        "code": "# .github/workflows/production-deploy.yml\n# 나이트 캐피탈 사고를 막는 파이프라인\n\nname: Production Deploy (Safe)\n\non:\n  push:\n    branches: [main]\n\njobs:\n  # ═══════════════════════════════════════════════════════════\n  # 1단계: 빌드 + 테스트 (여기서 실패하면 배포 안 됨)\n  # ═══════════════════════════════════════════════════════════\n  build-and-test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Build\n        run: npm ci && npm run build\n      \n      - name: Unit Tests\n        run: npm test\n      \n      - name: Integration Tests\n        run: npm run test:integration\n      \n      # 테스트 코드가 프로덕션에 포함되지 않도록 검증\n      - name: Verify No Test Code in Build\n        run: |\n          if grep -r \"describe(\" ./dist || grep -r \"it(\" ./dist; then\n            echo \"❌ 테스트 코드가 빌드에 포함됨!\"\n            exit 1\n          fi\n          echo \"✅ 빌드 검증 통과\"\n\n  # ═══════════════════════════════════════════════════════════\n  # 2단계: 스테이징 배포 + 검증\n  # ═══════════════════════════════════════════════════════════\n  deploy-staging:\n    needs: build-and-test\n    runs-on: ubuntu-latest\n    steps:\n      - name: Deploy to Staging\n        run: ./deploy.sh staging\n      \n      - name: Health Check (Staging)\n        run: |\n          for i in {1..10}; do\n            if curl -f https://staging.example.com/health; then\n              echo \"✅ 스테이징 헬스체크 통과\"\n              exit 0\n            fi\n            sleep 5\n          done\n          echo \"❌ 스테이징 헬스체크 실패\"\n          exit 1\n\n  # ═══════════════════════════════════════════════════════════\n  # 3단계: 프로덕션 Blue-Green 배포\n  # ═══════════════════════════════════════════════════════════\n  deploy-production:\n    needs: deploy-staging\n    runs-on: ubuntu-latest\n    environment: production  # 수동 승인 필요\n    steps:\n      - name: Blue-Green Deploy\n        run: |\n          # 1. Green 환경에 새 버전 배포\n          ./deploy.sh green\n          \n          # 2. Green 헬스체크\n          ./health-check.sh green\n          \n          # 3. 트래픽 전환 (Blue → Green)\n          ./switch-traffic.sh green\n          \n          # 4. 이전 Blue는 롤백용으로 유지\n          echo \"롤백 필요시: ./switch-traffic.sh blue\"\n      \n      - name: Notify Slack\n        if: always()\n        run: |\n          curl -X POST $SLACK_WEBHOOK -d '{\n            \"text\": \"🚀 프로덕션 배포 완료: ${{ github.sha }}\"\n          }'"
+      },
+      {
+        "type": "concept",
+        "title": "📋 배포 사고 방지 체크리스트",
+        "content": "**절대 하지 말아야 할 것:**\n\n```\n❌ 수동으로 서버에 SSH 접속해서 배포\n❌ 테스트 코드와 프로덕션 코드 혼재\n❌ 롤백 계획 없이 배포\n❌ 금요일 오후에 배포 (불금 배포 금지!)\n❌ 모니터링 없이 배포 후 퇴근\n```\n\n---\n\n**반드시 해야 할 것:**\n\n```\n✅ CI/CD 파이프라인으로 자동화\n✅ 테스트 통과해야만 배포 가능\n✅ Blue-Green 또는 Canary 배포\n✅ 자동 헬스체크 + 자동 롤백\n✅ 배포 후 모니터링 대시보드 확인\n✅ 슬랙/이메일 알림 설정\n```\n\n---\n\n**배포 전략 비교:**\n\n| 전략 | 장점 | 단점 |\n|------|------|------|\n| Rolling | 점진적 배포 | 롤백 느림 |\n| Blue-Green | 즉시 롤백 가능 | 인프라 2배 필요 |\n| Canary | 리스크 최소화 | 설정 복잡 |"
+      },
+      {
+        "type": "tip",
+        "title": "💼 면접 대비: CI/CD 관련 질문",
+        "content": "**Q: \"CI/CD가 왜 중요한가요?\"**\n\n✅ 모범 답안:\n\"2012년 나이트 캐피탈 사건을 예로 들겠습니다. 개발자가 수동 배포 중 서버 하나를 빠뜨렸고, 그 서버에 남아있던 테스트 코드가 실행되어 45분 만에 4,600억 원을 날리고 회사가 망했습니다. CI/CD는 이런 인적 오류를 방지합니다. 자동화된 파이프라인이 모든 서버에 일관되게 배포하고, 문제 발생 시 즉시 롤백할 수 있습니다.\"\n\n---\n\n**Q: \"Blue-Green 배포와 Rolling 배포의 차이는?\"**\n\n✅ 모범 답안:\n\"Blue-Green은 동일한 환경 2개를 운영하여 트래픽을 한 번에 전환합니다. 롤백이 즉시 가능하지만 인프라 비용이 2배입니다. Rolling은 서버를 하나씩 순차적으로 업데이트하여 비용은 절감되지만, 문제 발생 시 롤백이 느립니다. 금융 같은 크리티컬한 시스템에서는 Blue-Green을 권장합니다.\"\n\n---\n\n**Q: \"배포 중 장애가 발생하면 어떻게 대응하나요?\"**\n\n✅ 모범 답안:\n\"첫째, 즉시 이전 버전으로 롤백합니다. Blue-Green 배포라면 트래픽만 전환하면 되고, Rolling이라면 중단 후 롤백 스크립트를 실행합니다. 둘째, 장애 원인을 파악하고 슬랙에 공유합니다. 셋째, 해당 커밋을 revert하고 수정 후 다시 배포합니다. 가장 중요한 건 '일단 복구'입니다.\""
+      }
+    ]
+  },
+  "02_CICD/github-actions": {
+    "id": "02_CICD/github-actions",
+    "title": "GitHub Actions",
+    "category": "devops",
+    "subCategory": "02_CICD",
+    "language": "YAML",
+    "description": "GitHub Actions로 CI/CD 파이프라인을 구축합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "GitHub Actions 구조",
+        "content": "**Workflow**: 자동화 프로세스 정의 (.github/workflows/)\n**Job**: 워크플로우 내 작업 단위\n**Step**: Job 내 실행 단계\n**Action**: 재사용 가능한 작업 단위"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "CI 워크플로우 예시",
+        "code": "# .github/workflows/ci.yml\nname: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    \n    steps:\n    - uses: actions/checkout@v4\n    \n    - name: Setup Node.js\n      uses: actions/setup-node@v4\n      with:\n        node-version: '20'\n        cache: 'npm'\n    \n    - name: Install dependencies\n      run: npm ci\n    \n    - name: Run tests\n      run: npm test\n    \n    - name: Build\n      run: npm run build"
+      }
+    ]
+  },
+  "02_CICD/jenkins": {
+    "id": "02_CICD/jenkins",
+    "title": "Jenkins",
+    "category": "devops",
+    "subCategory": "02_CICD",
+    "language": "Groovy",
+    "description": "Jenkins로 CI/CD 파이프라인을 구축합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Jenkins란?",
+        "content": "오픈소스 자동화 서버\n\n**특징**:\n- 플러그인 기반 확장성\n- Declarative/Scripted Pipeline\n- Master-Agent 분산 빌드\n- Blue Ocean UI"
+      },
+      {
+        "type": "code",
+        "language": "groovy",
+        "title": "Jenkinsfile 예시",
+        "code": "pipeline {\n    agent any\n    \n    stages {\n        stage('Build') {\n            steps {\n                sh 'npm ci'\n                sh 'npm run build'\n            }\n        }\n        \n        stage('Test') {\n            steps {\n                sh 'npm test'\n            }\n        }\n        \n        stage('Docker Build') {\n            steps {\n                sh 'docker build -t myapp:${BUILD_NUMBER} .'\n            }\n        }\n        \n        stage('Deploy') {\n            when {\n                branch 'main'\n            }\n            steps {\n                sh 'docker-compose up -d'\n            }\n        }\n    }\n    \n    post {\n        failure {\n            echo 'Build failed!'\n        }\n    }\n}"
+      }
+    ]
+  },
+  "02_CICD/practice-cicd": {
+    "id": "02_CICD/practice-cicd",
+    "title": "CI/CD 실습",
+    "category": "devops",
+    "subCategory": "02_CICD",
+    "language": "YAML",
+    "description": "CI/CD 파이프라인을 직접 구축해봅니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "실습 과제",
+        "content": "1. GitHub Actions로 테스트 자동화\n2. Docker 이미지 빌드 및 푸시\n3. AWS/GCP에 자동 배포\n4. 슬랙 알림 연동"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Docker 빌드 및 푸시",
+        "code": "name: Docker Build and Push\n\non:\n  push:\n    branches: [main]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v4\n    \n    - name: Login to DockerHub\n      uses: docker/login-action@v3\n      with:\n        username: ${{ secrets.DOCKER_USERNAME }}\n        password: ${{ secrets.DOCKER_TOKEN }}\n    \n    - name: Build and Push\n      uses: docker/build-push-action@v5\n      with:\n        push: true\n        tags: myrepo/myapp:${{ github.sha }}"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-intro": {
+    "id": "02_Kubernetes/k8s-intro",
+    "title": "Kubernetes 소개",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "Kubernetes의 개념과 구성 요소를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Kubernetes란?",
+        "content": "컨테이너 오케스트레이션 플랫폼\n\n**핵심 기능**:\n- 자동 배포 및 롤백\n- 서비스 디스커버리\n- 로드 밸런싱\n- 자동 스케일링\n- 자가 치유 (Self-healing)"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "kubectl 기본 명령어",
+        "code": "# 클러스터 정보\nkubectl cluster-info\n\n# 리소스 조회\nkubectl get pods\nkubectl get services\nkubectl get deployments\n\n# 리소스 생성\nkubectl apply -f manifest.yaml\n\n# 리소스 삭제\nkubectl delete -f manifest.yaml\n\n# 로그 확인\nkubectl logs <pod-name>\n\n# Pod 접속\nkubectl exec -it <pod-name> -- /bin/sh"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-architecture": {
+    "id": "02_Kubernetes/k8s-architecture",
+    "title": "Kubernetes 아키텍처",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "Text",
+    "description": "Kubernetes 클러스터의 구조를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "K8s 구조",
+        "content": "**Control Plane (Master)**:\n- API Server: 모든 요청 처리\n- etcd: 클러스터 상태 저장\n- Scheduler: Pod 배치 결정\n- Controller Manager: 상태 관리\n\n**Worker Node**:\n- kubelet: Pod 실행 관리\n- kube-proxy: 네트워크 프록시\n- Container Runtime: 컨테이너 실행"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 개념",
+        "content": "선언적 구성: 원하는 상태를 정의하면\nK8s가 현재 상태를 원하는 상태로 맞춤"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-pod": {
+    "id": "02_Kubernetes/k8s-pod",
+    "title": "Kubernetes Pod",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "K8s의 최소 배포 단위인 Pod를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Pod란?",
+        "content": "하나 이상의 컨테이너 그룹\n\n**특징**:\n- 같은 Pod 내 컨테이너는 네트워크/스토리지 공유\n- 일시적(ephemeral) - 언제든 재생성될 수 있음\n- 보통 하나의 메인 컨테이너 + 사이드카"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Pod 정의",
+        "code": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: my-app\n  labels:\n    app: my-app\nspec:\n  containers:\n  - name: app\n    image: my-app:1.0\n    ports:\n    - containerPort: 8080\n    resources:\n      requests:\n        memory: \"128Mi\"\n        cpu: \"250m\"\n      limits:\n        memory: \"256Mi\"\n        cpu: \"500m\"\n    livenessProbe:\n      httpGet:\n        path: /health\n        port: 8080\n      initialDelaySeconds: 15\n      periodSeconds: 10"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-deployment": {
+    "id": "02_Kubernetes/k8s-deployment",
+    "title": "Kubernetes Deployment",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "Deployment로 애플리케이션을 배포하고 관리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Deployment",
+        "content": "Pod의 선언적 업데이트 관리\n\n**기능**:\n- 복제본(Replica) 관리\n- 롤링 업데이트\n- 롤백\n- 스케일링"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Deployment 정의",
+        "code": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: my-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: my-app\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxSurge: 1\n      maxUnavailable: 0\n  template:\n    metadata:\n      labels:\n        app: my-app\n    spec:\n      containers:\n      - name: app\n        image: my-app:1.0\n        ports:\n        - containerPort: 8080"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Deployment 관리",
+        "code": "# 스케일링\nkubectl scale deployment my-app --replicas=5\n\n# 이미지 업데이트\nkubectl set image deployment/my-app app=my-app:2.0\n\n# 롤아웃 상태 확인\nkubectl rollout status deployment/my-app\n\n# 롤백\nkubectl rollout undo deployment/my-app"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-service": {
+    "id": "02_Kubernetes/k8s-service",
+    "title": "Kubernetes Service",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "Service로 Pod를 외부에 노출합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Service 타입",
+        "content": "**ClusterIP**: 클러스터 내부에서만 접근\n**NodePort**: 노드 포트로 외부 접근\n**LoadBalancer**: 클라우드 로드밸런서 사용\n**ExternalName**: 외부 DNS 매핑"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Service 정의",
+        "code": "# ClusterIP (기본)\napiVersion: v1\nkind: Service\nmetadata:\n  name: my-app-service\nspec:\n  selector:\n    app: my-app\n  ports:\n  - port: 80\n    targetPort: 8080\n---\n# LoadBalancer\napiVersion: v1\nkind: Service\nmetadata:\n  name: my-app-lb\nspec:\n  type: LoadBalancer\n  selector:\n    app: my-app\n  ports:\n  - port: 80\n    targetPort: 8080"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-ingress": {
+    "id": "02_Kubernetes/k8s-ingress",
+    "title": "Kubernetes Ingress",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "Ingress로 HTTP 라우팅을 설정합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Ingress란?",
+        "content": "클러스터 외부에서 내부 서비스로 HTTP 라우팅\n\n**기능**:\n- URL 기반 라우팅\n- SSL/TLS 종료\n- 가상 호스트\n- 로드 밸런싱"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Ingress 정의",
+        "code": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: my-ingress\n  annotations:\n    nginx.ingress.kubernetes.io/rewrite-target: /\nspec:\n  ingressClassName: nginx\n  rules:\n  - host: myapp.example.com\n    http:\n      paths:\n      - path: /api\n        pathType: Prefix\n        backend:\n          service:\n            name: api-service\n            port:\n              number: 80\n      - path: /\n        pathType: Prefix\n        backend:\n          service:\n            name: frontend-service\n            port:\n              number: 80"
+      }
+    ]
+  },
+  "02_Kubernetes/k8s-configmap-secret": {
+    "id": "02_Kubernetes/k8s-configmap-secret",
+    "title": "ConfigMap과 Secret",
+    "category": "devops",
+    "subCategory": "02_Kubernetes",
+    "language": "YAML",
+    "description": "설정과 민감 정보를 관리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "ConfigMap vs Secret",
+        "content": "**ConfigMap**: 일반 설정 데이터\n**Secret**: 민감한 정보 (암호화 저장)\n\n둘 다 환경변수나 볼륨으로 Pod에 주입"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "ConfigMap & Secret",
+        "code": "# ConfigMap\napiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  DATABASE_HOST: \"mysql\"\n  LOG_LEVEL: \"info\"\n---\n# Secret\napiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  DB_PASSWORD: cGFzc3dvcmQxMjM=  # base64 인코딩\n---\n# Pod에서 사용\nspec:\n  containers:\n  - name: app\n    envFrom:\n    - configMapRef:\n        name: app-config\n    - secretRef:\n        name: app-secret"
+      }
+    ]
+  },
+  "03_클라우드/aws-intro": {
+    "id": "03_클라우드/aws-intro",
+    "title": "AWS 소개",
+    "category": "devops",
+    "subCategory": "03_클라우드",
+    "language": "AWS",
+    "description": "AWS 클라우드 서비스를 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "AWS 핵심 서비스",
+        "content": "**컴퓨팅**: EC2, Lambda, ECS, EKS\n**스토리지**: S3, EBS, EFS\n**데이터베이스**: RDS, DynamoDB, ElastiCache\n**네트워킹**: VPC, Route53, CloudFront\n**보안**: IAM, KMS"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "AWS CLI 기본",
+        "code": "# 설정\naws configure\n\n# S3\naws s3 ls\naws s3 cp file.txt s3://bucket/\n\n# EC2\naws ec2 describe-instances"
+      }
+    ]
+  },
+  "03_클라우드/ec2": {
+    "id": "03_클라우드/ec2",
+    "title": "AWS EC2",
+    "category": "devops",
+    "subCategory": "03_클라우드",
+    "language": "AWS",
+    "description": "EC2 가상 서버를 생성하고 관리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "EC2 개념",
+        "content": "**인스턴스 타입**: t2.micro, m5.large 등\n**AMI**: 운영체제 이미지\n**EBS**: 블록 스토리지\n**Security Group**: 방화벽\n**Key Pair**: SSH 접속용 키"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "EC2 관리",
+        "code": "# 인스턴스 시작\naws ec2 run-instances \\\n  --image-id ami-12345 \\\n  --instance-type t2.micro \\\n  --key-name mykey\n\n# SSH 접속\nssh -i mykey.pem ec2-user@<public-ip>\n\n# 인스턴스 중지/시작\naws ec2 stop-instances --instance-ids i-12345\naws ec2 start-instances --instance-ids i-12345"
+      }
+    ]
+  },
+  "03_클라우드/s3": {
+    "id": "03_클라우드/s3",
+    "title": "AWS S3",
+    "category": "devops",
+    "subCategory": "03_클라우드",
+    "language": "AWS",
+    "description": "S3 객체 스토리지를 활용합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "S3 개념",
+        "content": "객체 스토리지 서비스\n\n**용도**: 정적 파일, 백업, 로그\n**버킷**: 객체 컨테이너\n**객체**: 파일 + 메타데이터\n**클래스**: Standard, IA, Glacier"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "S3 명령어",
+        "code": "# 버킷 생성\naws s3 mb s3://my-bucket\n\n# 파일 업로드\naws s3 cp file.txt s3://my-bucket/\naws s3 sync ./folder s3://my-bucket/folder\n\n# 파일 다운로드\naws s3 cp s3://my-bucket/file.txt .\n\n# 목록 조회\naws s3 ls s3://my-bucket/\n\n# 삭제\naws s3 rm s3://my-bucket/file.txt"
+      }
+    ]
+  },
+  "03_클라우드/rds": {
+    "id": "03_클라우드/rds",
+    "title": "AWS RDS",
+    "category": "devops",
+    "subCategory": "03_클라우드",
+    "language": "AWS",
+    "description": "관리형 데이터베이스 RDS를 사용합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "RDS 특징",
+        "content": "**지원 엔진**: MySQL, PostgreSQL, MariaDB, Oracle, SQL Server\n**관리 기능**: 자동 백업, 패치, 스케일링\n**고가용성**: Multi-AZ 배포\n**Read Replica**: 읽기 성능 향상"
+      },
+      {
+        "type": "tip",
+        "title": "RDS 설정 팁",
+        "content": "1. 프로덕션은 Multi-AZ 필수\n2. 보안 그룹으로 접근 제한\n3. 파라미터 그룹으로 설정 관리\n4. 자동 백업 보존 기간 설정"
+      }
+    ]
+  },
+  "04_면접/interview-devops": {
+    "id": "04_면접/interview-devops",
+    "title": "DevOps 면접 대비",
+    "category": "devops",
+    "subCategory": "04_면접",
+    "language": "Text",
+    "description": "DevOps 관련 면접 질문을 정리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "자주 나오는 질문",
+        "content": "**Docker**:\nQ: 컨테이너와 VM의 차이?\nQ: Dockerfile 최적화 방법?\n\n**K8s**:\nQ: Pod, Deployment, Service 차이?\nQ: 롤링 업데이트 과정?\n\n**CI/CD**:\nQ: CI/CD의 장점?\nQ: 블루-그린 vs 카나리 배포?"
+      },
+      {
+        "type": "tip",
+        "title": "면접 준비 팁",
+        "content": "1. 실제 프로젝트 경험 정리\n2. 트러블슈팅 사례 준비\n3. 아키텍처 설계 연습\n4. 각 도구의 장단점 비교"
+      }
+    ]
+  },
+  "05_배포전략/deployment-strategy": {
+    "id": "05_배포전략/deployment-strategy",
+    "title": "배포 전략",
+    "category": "devops",
+    "subCategory": "05_배포전략",
+    "language": "Text",
+    "description": "다양한 배포 전략을 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "배포 전략 종류",
+        "content": "**롤링(Rolling)**: 점진적 교체\n**블루-그린(Blue-Green)**: 두 환경 전환\n**카나리(Canary)**: 일부 트래픽으로 테스트\n**A/B 테스트**: 사용자 그룹별 다른 버전"
+      },
+      {
+        "type": "tip",
+        "title": "전략 선택 기준",
+        "content": "롤링: 리소스 효율적, 단계적 배포\n블루-그린: 빠른 롤백, 리소스 2배\n카나리: 리스크 최소화, 복잡한 설정"
+      }
+    ]
+  },
+  "05_배포전략/zero-downtime": {
+    "id": "05_배포전략/zero-downtime",
+    "title": "무중단 배포",
+    "category": "devops",
+    "subCategory": "05_배포전략",
+    "language": "Text",
+    "description": "서비스 중단 없이 배포하는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "무중단 배포 핵심",
+        "content": "**필수 요소**:\n1. 로드 밸런서로 트래픽 분산\n2. Health Check로 상태 확인\n3. Graceful Shutdown\n4. 데이터베이스 마이그레이션 전략"
+      },
+      {
+        "type": "tip",
+        "title": "구현 체크리스트",
+        "content": "1. SIGTERM 시그널 처리\n2. 진행 중인 요청 완료 대기\n3. 연결 드레이닝\n4. 헬스체크 엔드포인트 구현"
+      }
+    ]
+  },
+  "06_모니터링/monitoring-intro": {
+    "id": "06_모니터링/monitoring-intro",
+    "title": "모니터링 소개",
+    "category": "devops",
+    "subCategory": "06_모니터링",
+    "language": "Text",
+    "description": "시스템 모니터링의 중요성과 방법을 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "모니터링 영역",
+        "content": "**인프라 모니터링**: CPU, 메모리, 디스크, 네트워크\n**APM**: 애플리케이션 성능\n**로그 모니터링**: 에러, 이벤트 추적\n**알림**: 이상 징후 감지 시 알림"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 지표",
+        "content": "**4 Golden Signals**:\n- Latency: 응답 시간\n- Traffic: 요청량\n- Errors: 에러율\n- Saturation: 리소스 포화도"
+      }
+    ]
+  },
+  "06_모니터링/prometheus-grafana": {
+    "id": "06_모니터링/prometheus-grafana",
+    "title": "Prometheus & Grafana",
+    "category": "devops",
+    "subCategory": "06_모니터링",
+    "language": "YAML",
+    "description": "Prometheus와 Grafana로 모니터링 시스템을 구축합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Prometheus + Grafana",
+        "content": "**Prometheus**: 메트릭 수집 및 저장\n- Pull 방식으로 타겟에서 메트릭 수집\n- PromQL로 쿼리\n\n**Grafana**: 시각화 대시보드\n- 다양한 데이터소스 지원\n- 알림 설정 가능"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "Prometheus 설정",
+        "code": "# prometheus.yml\nglobal:\n  scrape_interval: 15s\n\nscrape_configs:\n  - job_name: 'app'\n    static_configs:\n      - targets: ['app:8080']\n  \n  - job_name: 'node'\n    static_configs:\n      - targets: ['node-exporter:9100']"
+      }
+    ]
+  },
+  "06_모니터링/logging": {
+    "id": "06_모니터링/logging",
+    "title": "로그 관리",
+    "category": "devops",
+    "subCategory": "06_모니터링",
+    "language": "Text",
+    "description": "효과적인 로그 수집과 분석 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "로깅 스택",
+        "content": "**ELK Stack**:\n- Elasticsearch: 로그 저장/검색\n- Logstash: 로그 수집/변환\n- Kibana: 시각화\n\n**대안**: Loki + Promtail + Grafana"
+      },
+      {
+        "type": "tip",
+        "title": "로깅 모범 사례",
+        "content": "1. 구조화된 로그 (JSON)\n2. 적절한 로그 레벨\n3. 요청 ID로 추적\n4. 민감 정보 마스킹"
+      }
+    ]
+  },
+  "06_모니터링/apm": {
+    "id": "06_모니터링/apm",
+    "title": "APM (Application Performance Monitoring)",
+    "category": "devops",
+    "subCategory": "06_모니터링",
+    "language": "Text",
+    "description": "애플리케이션 성능 모니터링을 구축합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "APM 핵심 기능",
+        "content": "**분산 추적**: 요청 흐름 추적\n**에러 추적**: 예외 수집 및 분석\n**성능 프로파일링**: 병목 지점 발견\n**의존성 맵**: 서비스 간 관계 시각화"
+      },
+      {
+        "type": "tip",
+        "title": "APM 도구",
+        "content": "오픈소스: Jaeger, Zipkin\n상용: Datadog, New Relic, Sentry"
+      }
+    ]
+  },
+  "07_인프라/nginx": {
+    "id": "07_인프라/nginx",
+    "title": "Nginx",
+    "category": "devops",
+    "subCategory": "07_인프라",
+    "language": "Nginx",
+    "description": "Nginx 웹서버와 리버스 프록시를 설정합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Nginx 용도",
+        "content": "**웹서버**: 정적 파일 서빙\n**리버스 프록시**: 백엔드 서버 앞단\n**로드 밸런서**: 트래픽 분산\n**SSL 종료**: HTTPS 처리"
+      },
+      {
+        "type": "code",
+        "language": "nginx",
+        "title": "Nginx 설정",
+        "code": "# 리버스 프록시 설정\nupstream backend {\n    server app1:8080;\n    server app2:8080;\n}\n\nserver {\n    listen 80;\n    server_name example.com;\n    \n    location / {\n        proxy_pass http://backend;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n    \n    location /static {\n        alias /var/www/static;\n        expires 30d;\n    }\n}"
+      }
+    ]
+  },
+  "07_인프라/iac": {
+    "id": "07_인프라/iac",
+    "title": "Infrastructure as Code",
+    "category": "devops",
+    "subCategory": "07_인프라",
+    "language": "HCL",
+    "description": "코드로 인프라를 관리하는 IaC를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "IaC 도구",
+        "content": "**Terraform**: 멀티 클라우드 IaC\n**AWS CloudFormation**: AWS 전용\n**Pulumi**: 프로그래밍 언어 사용\n**Ansible**: 설정 관리"
+      },
+      {
+        "type": "code",
+        "language": "hcl",
+        "title": "Terraform 예시",
+        "code": "# EC2 인스턴스 생성\nresource \"aws_instance\" \"web\" {\n  ami           = \"ami-12345678\"\n  instance_type = \"t2.micro\"\n  \n  tags = {\n    Name = \"web-server\"\n  }\n}\n\n# terraform init\n# terraform plan\n# terraform apply"
+      }
+    ]
+  }
+}

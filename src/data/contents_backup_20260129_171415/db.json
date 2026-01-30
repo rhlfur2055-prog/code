@@ -1,0 +1,1304 @@
+{
+  "01_기초/db-intro": {
+    "id": "01_기초/db-intro",
+    "title": "Db Intro",
+    "category": "db",
+    "subCategory": "01_기초",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Db Intro",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "01_기초/rdbms-concept": {
+    "id": "01_기초/rdbms-concept",
+    "title": "Rdbms Concept",
+    "category": "db",
+    "subCategory": "01_기초",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rdbms Concept",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "01_기초/rdbms": {
+    "id": "01_기초/rdbms",
+    "title": "Rdbms",
+    "category": "db",
+    "subCategory": "01_기초",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rdbms",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/aggregate-function": {
+    "id": "02_SQL/aggregate-function",
+    "title": "Aggregate Function",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Aggregate Function",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/case-when": {
+    "id": "02_SQL/case-when",
+    "title": "Case When",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Case When",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/date-function": {
+    "id": "02_SQL/date-function",
+    "title": "Date Function",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Date Function",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/ddl": {
+    "id": "02_SQL/ddl",
+    "title": "Ddl",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Ddl",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/dml-insert": {
+    "id": "02_SQL/dml-insert",
+    "title": "Dml Insert",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dml Insert",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/dml-select": {
+    "id": "02_SQL/dml-select",
+    "title": "Dml Select",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Dml Select",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/group-by": {
+    "id": "02_SQL/group-by",
+    "title": "Group By",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Group By",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/insert-update-delete": {
+    "id": "02_SQL/insert-update-delete",
+    "title": "Insert Update Delete",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Insert Update Delete",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/sql-intro": {
+    "id": "02_SQL/sql-intro",
+    "title": "SQL 기초",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "SQL의 기본 문법과 SELECT 문을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "SQL이란?",
+        "content": "SQL(Structured Query Language)은 관계형 데이터베이스를 조작하기 위한 표준 언어입니다. 데이터 조회(SELECT), 삽입(INSERT), 수정(UPDATE), 삭제(DELETE)를 수행합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "기본 SELECT 문",
+        "code": "-- 전체 조회\nSELECT * FROM users;\n\n-- 특정 컬럼만 조회\nSELECT name, email FROM users;\n\n-- 조건 조회\nSELECT * FROM users WHERE age >= 20;\n\n-- 정렬\nSELECT * FROM users ORDER BY created_at DESC;\n\n-- 개수 제한\nSELECT * FROM users LIMIT 10;\n\n-- 중복 제거\nSELECT DISTINCT department FROM employees;\n\n-- 별칭 사용\nSELECT name AS 이름, age AS 나이 FROM users;"
+      },
+      {
+        "type": "tip",
+        "title": "실행 순서 암기",
+        "content": "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT\\n\\n면접에서 자주 물어보는 순서입니다!"
+      }
+    ]
+  },
+  "02_SQL/string-function": {
+    "id": "02_SQL/string-function",
+    "title": "String Function",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "String Function",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/subquery": {
+    "id": "02_SQL/subquery",
+    "title": "Subquery",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Subquery",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "02_SQL/where-clause": {
+    "id": "02_SQL/where-clause",
+    "title": "Where Clause",
+    "category": "db",
+    "subCategory": "02_SQL",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Where Clause",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/cross-join": {
+    "id": "03_JOIN/cross-join",
+    "title": "Cross Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cross Join",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "03_JOIN/full-outer-join": {
+    "id": "03_JOIN/full-outer-join",
+    "title": "Full Outer Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Full Outer Join",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/inner-join": {
+    "id": "03_JOIN/inner-join",
+    "title": "INNER JOIN",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "두 테이블에서 일치하는 행만 조회하는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "INNER JOIN이란?",
+        "content": "두 테이블에서 조인 조건을 만족하는 행만 반환합니다. 교집합과 비슷하며, 가장 많이 사용되는 조인 방식입니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "INNER JOIN 예제",
+        "code": "-- 기본 INNER JOIN\nSELECT u.name, o.order_date, o.amount\nFROM users u\nINNER JOIN orders o ON u.id = o.user_id;\n\n-- 여러 테이블 조인\nSELECT\n    u.name,\n    o.order_date,\n    p.product_name,\n    oi.quantity\nFROM users u\nINNER JOIN orders o ON u.id = o.user_id\nINNER JOIN order_items oi ON o.id = oi.order_id\nINNER JOIN products p ON oi.product_id = p.id;\n\n-- 조건 추가\nSELECT u.name, COUNT(o.id) AS order_count\nFROM users u\nINNER JOIN orders o ON u.id = o.user_id\nWHERE o.order_date >= '2024-01-01'\nGROUP BY u.id\nHAVING order_count >= 5;"
+      },
+      {
+        "type": "tip",
+        "title": "JOIN 비교",
+        "content": "INNER: 양쪽 모두 있는 것만\\nLEFT: 왼쪽 전부 + 매칭되는 오른쪽\\nRIGHT: 오른쪽 전부 + 매칭되는 왼쪽\\nFULL OUTER: 양쪽 전부 (MySQL은 UNION 사용)"
+      }
+    ]
+  },
+  "03_JOIN/join-compare": {
+    "id": "03_JOIN/join-compare",
+    "title": "Join Compare",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Join Compare",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/join-concept": {
+    "id": "03_JOIN/join-concept",
+    "title": "Join Concept",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Join Concept",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/join-intro": {
+    "id": "03_JOIN/join-intro",
+    "title": "Join Intro",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Join Intro",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/left-join": {
+    "id": "03_JOIN/left-join",
+    "title": "Left Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Left Join",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/practice-join": {
+    "id": "03_JOIN/practice-join",
+    "title": "Practice Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Practice Join",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/right-join": {
+    "id": "03_JOIN/right-join",
+    "title": "Right Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Right Join",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "03_JOIN/self-join": {
+    "id": "03_JOIN/self-join",
+    "title": "Self Join",
+    "category": "db",
+    "subCategory": "03_JOIN",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Self Join",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "04_인덱스/index-anti-pattern": {
+    "id": "04_인덱스/index-anti-pattern",
+    "title": "Index Anti Pattern",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Index Anti Pattern",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "04_인덱스/index-bad-case": {
+    "id": "04_인덱스/index-bad-case",
+    "title": "Index Bad Case",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Index Bad Case",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "04_인덱스/index-concept": {
+    "id": "04_인덱스/index-concept",
+    "title": "인덱스 - 로그인 3초 걸려서 100만 명 이탈한 드로우 사태",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "한정판 드로우 서버 다운 사건으로 배우는 DB 인덱스의 중요성. 왜 EXPLAIN을 봐야 하는지, 인덱스 하나가 서비스를 살리는지 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 실제 사고: 100만 명 동시 접속에 DB 3초 응답 (한정판 드로우)",
+        "content": "**[The Legend Case - 서버 다운으로 매출 0원]**\n\n2023년, 유명 스니커즈 브랜드의 한정판 드로우 이벤트.\n오전 10시, 100만 명이 동시에 접속했습니다.\n\n**사고 경과:**\n```\n09:59 - 100만 명 대기\n10:00 - 드로우 시작, 로그인 요청 폭주\n10:01 - 로그인 응답 시간 0.1초 → 3초로 급증\n10:02 - DB 커넥션 풀 고갈\n10:03 - 504 Gateway Timeout 발생\n10:05 - 서버 전체 다운\n\n결과: 드로우 취소, 환불 사태, SNS 폭발\n      예상 매출 50억 원 → 0원\n      브랜드 이미지 타격\n```\n\n---\n\n**무슨 일이 있었나?**\n\n```sql\n-- 문제의 쿼리 (매 로그인마다 실행)\nSELECT * FROM users \nWHERE email = 'user@example.com' \nAND password_hash = 'xxx';\n\n-- users 테이블: 500만 행\n-- email 컬럼에 인덱스 없음!\n```\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    💀 사고의 핵심 원인                        │\n├─────────────────────────────────────────────────────────────┤\n│                                                             │\n│   인덱스 없는 쿼리 = Full Table Scan                         │\n│                                                             │\n│   [검색 방식 비교]                                           │\n│                                                             │\n│   ❌ 인덱스 없음 (Full Scan)                                 │\n│      500만 행 전체를 한 줄씩 확인                            │\n│      O(N) = 500만 번 비교                                    │\n│      응답 시간: 3초+                                         │\n│                                                             │\n│   ✅ 인덱스 있음 (Index Scan)                                │\n│      B-Tree 구조로 즉시 찾기                                  │\n│      O(log N) = 약 23번 비교                                 │\n│      응답 시간: 0.001초                                      │\n│                                                             │\n│   📌 인덱스 하나가 성능을 3,000배 차이 나게 함               │\n│                                                             │\n└─────────────────────────────────────────────────────────────┘\n```"
+      },
+      {
+        "type": "concept",
+        "title": "🐣 Junior vs 🐯 Senior: 쿼리 대화",
+        "content": "**🐣 Junior의 개발:**\n```sql\n-- \"테이블 만들었고, 쿼리 잘 돌아갑니다!\"\nCREATE TABLE users (\n    id BIGINT PRIMARY KEY,\n    email VARCHAR(255),\n    password_hash VARCHAR(255),\n    name VARCHAR(100)\n);\n\n-- 테스트: 100건 데이터로 확인\nSELECT * FROM users WHERE email = 'test@test.com';\n-- 결과: 0.01초 (빠르네!)\n```\n\n---\n\n**🐯 Senior의 대응:**\n\n\"잠깐. EXPLAIN 돌려봤어?\"\n\n\"EXPLAIN이요? 결과 잘 나오는데...\"\n\n```sql\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';\n\n-- 결과:\n-- type: ALL          ← 🚨 Full Table Scan!\n-- rows: 5000000      ← 500만 행 전체 스캔\n-- possible_keys: NULL ← 사용 가능한 인덱스 없음\n```\n\n\"봐. **type: ALL**이야. 이게 Full Scan이야. 지금은 100건이라 빠른데, 프로덕션은 500만 건이야. 100만 명이 동시에 이 쿼리 치면?\"\n\n\"어... 서버 터지겠네요?\"\n\n\"맞아. 나이키 드로우 때 그래서 서버 터졌어. **인덱스** 안 걸어서.\"\n\n```sql\n-- 해결책: 인덱스 추가\nCREATE INDEX idx_users_email ON users(email);\n\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';\n-- type: ref         ← ✅ Index Scan!\n-- rows: 1           ← 1행만 확인\n-- key: idx_users_email ← 인덱스 사용\n```"
+      },
+      {
+        "type": "code",
+        "language": "sql",
+        "title": "🛡️ 생존 키트: 인덱스 설계 가이드",
+        "code": "-- ═══════════════════════════════════════════════════════════\n-- 1️⃣ 필수 인덱스: 로그인/인증 관련\n-- ═══════════════════════════════════════════════════════════\n\n-- 이메일 로그인 (가장 빈번한 쿼리)\nCREATE UNIQUE INDEX idx_users_email ON users(email);\n\n-- 소셜 로그인\nCREATE INDEX idx_users_provider_id ON users(provider, provider_id);\n\n-- 세션/토큰 조회\nCREATE INDEX idx_sessions_token ON sessions(token);\n\n-- ═══════════════════════════════════════════════════════════\n-- 2️⃣ 복합 인덱스: 순서가 중요!\n-- ═══════════════════════════════════════════════════════════\n\n-- 주문 내역 조회: 사용자별 최신 순\n-- WHERE user_id = ? ORDER BY created_at DESC\nCREATE INDEX idx_orders_user_date \nON orders(user_id, created_at DESC);\n\n-- ❌ 잘못된 순서 (인덱스 안 탐)\n-- CREATE INDEX idx_orders_date_user ON orders(created_at, user_id);\n-- WHERE user_id = ? 에서 인덱스 사용 불가!\n\n-- ═══════════════════════════════════════════════════════════\n-- 3️⃣ 커버링 인덱스: 테이블 접근 없이 인덱스만으로 해결\n-- ═══════════════════════════════════════════════════════════\n\n-- 상품 목록 조회 (id, name, price만 필요)\nCREATE INDEX idx_products_covering \nON products(category_id, name, price);\n\n-- SELECT name, price FROM products WHERE category_id = 1;\n-- → 인덱스만 읽음, 테이블 접근 X = 초고속\n\n-- ═══════════════════════════════════════════════════════════\n-- 4️⃣ EXPLAIN 분석 체크리스트\n-- ═══════════════════════════════════════════════════════════\n\nEXPLAIN ANALYZE \nSELECT * FROM orders \nWHERE user_id = 123 \nAND status = 'COMPLETED'\nORDER BY created_at DESC\nLIMIT 10;\n\n-- 확인할 것:\n-- type: ALL (❌ 위험) → ref, range, index (✅ 안전)\n-- rows: 높으면 위험 (수만 건 이상 스캔 시 경고)\n-- key: NULL (❌) → 인덱스명 (✅)\n-- Extra: Using filesort (❌) → Using index (✅)"
+      },
+      {
+        "type": "concept",
+        "title": "📋 인덱스 설계 체크리스트",
+        "content": "**반드시 인덱스 걸어야 하는 컬럼:**\n\n```\n✅ WHERE 절에 자주 등장하는 컬럼\n✅ JOIN 조건에 사용되는 컬럼 (FK)\n✅ ORDER BY에 사용되는 컬럼\n✅ UNIQUE 제약이 필요한 컬럼\n✅ 카디널리티가 높은 컬럼 (email, user_id 등)\n```\n\n---\n\n**인덱스 걸면 안 되는 경우:**\n\n```\n❌ INSERT/UPDATE가 초당 수천 건인 테이블 (인덱스 업데이트 부하)\n❌ 데이터가 1,000건 미만인 작은 테이블\n❌ 카디널리티가 낮은 컬럼 (성별, 상태값 등)\n❌ TEXT/BLOB 등 대용량 컬럼\n```\n\n---\n\n**인덱스 안 타는 경우 (주의!):**\n\n```sql\n-- ❌ 함수 사용\nWHERE YEAR(created_at) = 2024  -- 함수 쓰면 인덱스 안 탐\nWHERE created_at >= '2024-01-01'  -- ✅ 이렇게 바꿔야 함\n\n-- ❌ LIKE 앞에 %\nWHERE name LIKE '%신발'  -- Full Scan\nWHERE name LIKE '나이키%'  -- ✅ 뒤에 %는 OK\n\n-- ❌ OR 조건 (각각 인덱스 필요)\nWHERE status = 'A' OR status = 'B'  -- 인덱스 잘 안 탐\nWHERE status IN ('A', 'B')  -- ✅ IN으로 바꾸기\n\n-- ❌ NULL 비교\nWHERE email IS NULL  -- 인덱스 안 탈 수 있음\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💼 면접 대비: 인덱스 관련 질문",
+        "content": "**Q: \"인덱스를 왜 써야 하나요?\"**\n\n✅ 모범 답안:\n\"인덱스는 검색 성능을 O(N)에서 O(log N)으로 개선합니다. 실제로 한정판 드로우 이벤트에서 인덱스 없이 500만 행을 Full Scan 하다가 로그인 응답이 3초로 늘어나 서버가 다운된 사례가 있습니다. 인덱스 하나를 추가하면 같은 쿼리가 0.001초로 줄어듭니다.\"\n\n---\n\n**Q: \"복합 인덱스에서 컬럼 순서가 왜 중요한가요?\"**\n\n✅ 모범 답안:\n\"복합 인덱스는 왼쪽 컬럼부터 순차적으로 사용됩니다. (user_id, created_at) 인덱스가 있을 때, WHERE user_id = 1은 인덱스를 타지만, WHERE created_at > '2024-01-01'은 인덱스를 타지 않습니다. 가장 자주 필터링하는 컬럼을 앞에 두고, 카디널리티가 높은 컬럼을 앞에 배치합니다.\"\n\n---\n\n**Q: \"인덱스가 많으면 좋은 건가요?\"**\n\n✅ 모범 답안:\n\"아닙니다. 인덱스는 읽기 성능을 높이지만, 쓰기 성능을 낮춥니다. INSERT/UPDATE 시마다 인덱스도 함께 업데이트해야 하기 때문입니다. 또한 인덱스는 디스크 공간을 차지합니다. 실제 쿼리 패턴을 분석해서 꼭 필요한 인덱스만 생성하고, 사용되지 않는 인덱스는 삭제해야 합니다.\""
+      }
+    ]
+  },
+  "04_인덱스/index-design": {
+    "id": "04_인덱스/index-design",
+    "title": "Index Design",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Index Design",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "04_인덱스/index-structure": {
+    "id": "04_인덱스/index-structure",
+    "title": "Index Structure",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Index Structure",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "04_인덱스/index-types": {
+    "id": "04_인덱스/index-types",
+    "title": "Index Types",
+    "category": "db",
+    "subCategory": "04_인덱스",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Index Types",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "05_트랜잭션/acid": {
+    "id": "05_트랜잭션/acid",
+    "title": "Acid",
+    "category": "db",
+    "subCategory": "05_트랜잭션",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Acid",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "05_트랜잭션/isolation-level": {
+    "id": "05_트랜잭션/isolation-level",
+    "title": "Isolation Level",
+    "category": "db",
+    "subCategory": "05_트랜잭션",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Isolation Level",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "05_트랜잭션/lock": {
+    "id": "05_트랜잭션/lock",
+    "title": "DB Lock - 코인 거래소가 하루에 100억 잃은 이유",
+    "category": "db",
+    "subCategory": "05_트랜잭션",
+    "language": "SQL",
+    "description": "가상화폐 거래소 출금 버그와 이커머스 재고 마이너스 사태로 배우는 동시성 제어",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 [Case Study] 코인 거래소 출금 버그 사건",
+        "content": "**Junior**: \"SELECT 한 다음 UPDATE 하면 되는 거 아닌가요?\"\n\n**Senior**: \"2021년 국내 가상화폐 거래소에서 출금 버그가 터졌어. 해커가 **동시에 100개의 출금 요청**을 보냈는데, 잔고 1BTC로 100BTC를 출금했지.\"\n\n**Junior**: \"어떻게요? 잔고 체크 로직이 있었을 텐데...\"\n\n**Senior**: \"**Race Condition(경쟁 상태)** 때문이야. 100개 요청이 동시에 '잔고 1BTC'를 읽고, 각각 '1BTC 출금 가능'이라고 판단한 거지.\"\n\n```\nRace Condition 공격 시나리오:\n\n시간순   요청1        요청2        ... 요청100    실제잔고\n─────────────────────────────────────────────────────\nt0      SELECT       SELECT       ... SELECT     1 BTC\n        (1 BTC)      (1 BTC)          (1 BTC)\n\nt1      CHECK OK     CHECK OK     ... CHECK OK   1 BTC\n        (1>=1)       (1>=1)           (1>=1)\n\nt2      UPDATE       UPDATE       ... UPDATE     -99 BTC\n        (-1)         (-1)             (-1)\n\n결과: 1 BTC 잔고로 100 BTC 출금 성공!\n\n피해 규모:\n- 가상화폐 거래소: 수십억~수백억 원\n- 이커머스 한정판 재고: -999개 판매\n- 게임사 아이템 복제: 서버 경제 붕괴\n```"
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "💀 Race Condition 취약 코드",
+        "code": "-- ❌ 위험한 코드: 읽기와 쓰기가 분리됨\n-- 동시에 100개 요청이 오면 모두 잔고 1 BTC를 읽음\n\n-- 1. 잔고 확인 (모든 요청이 동시에 1 BTC를 읽음)\nSELECT balance FROM wallets WHERE user_id = 'victim';\n-- 결과: 1.0 BTC\n\n-- 2. 애플리케이션에서 체크 (모두 통과!)\n-- if (balance >= withdraw_amount) { ... }\n\n-- 3. 출금 처리 (100개가 동시에 실행)\nUPDATE wallets \nSET balance = balance - 1.0 \nWHERE user_id = 'victim';\n\n-- 결과: balance = -99 BTC 😱\n\n\n-- ❌ 또 다른 위험한 패턴: 이커머스 재고 관리\n-- 한정판 스니커즈 1개 남음\nSELECT stock FROM products WHERE id = 'limited_sneakers';\n-- 결과: 1개\n\n-- 100명이 동시에 \"1개 남았네? 구매 가능!\"\n-- 전부 결제 성공 → 재고 -99개"
+      },
+      {
+        "type": "concept",
+        "title": "🛡️ The Defense - DB Lock으로 방어하기",
+        "content": "**Lock의 종류:**\n\n| 종류 | 설명 | 용도 |\n|------|------|------|\n| Shared Lock (S) | 읽기 락, 여러 트랜잭션 공유 | SELECT |\n| Exclusive Lock (X) | 쓰기 락, 단독 점유 | UPDATE, DELETE |\n| Row Lock | 행 단위 잠금 | 높은 동시성 |\n| Table Lock | 테이블 전체 잠금 | 낮은 동시성, 높은 안전성 |\n\n**방어 전략:**\n1. **비관적 락(Pessimistic)** - SELECT ... FOR UPDATE\n2. **낙관적 락(Optimistic)** - 버전 컬럼으로 충돌 감지\n3. **원자적 연산** - UPDATE에 조건 포함"
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "✅ 비관적 락 (Pessimistic Lock) - 금융 시스템용",
+        "code": "-- ✅ 방법 1: SELECT ... FOR UPDATE (비관적 락)\n-- 행을 잠그고 트랜잭션 끝날 때까지 다른 트랜잭션 대기\n\nSTART TRANSACTION;\n\n-- 행을 잠금 (다른 트랜잭션은 여기서 대기)\nSELECT balance FROM wallets \nWHERE user_id = 'victim' \nFOR UPDATE;  -- 🔒 잠금!\n\n-- 이제 안전하게 체크 및 업데이트\nUPDATE wallets \nSET balance = balance - 1.0 \nWHERE user_id = 'victim' \nAND balance >= 1.0;  -- 추가 안전장치\n\nCOMMIT;  -- 🔓 잠금 해제\n\n\n-- ✅ NOWAIT 옵션: 대기 없이 즉시 실패\nSELECT * FROM wallets \nWHERE user_id = 'victim' \nFOR UPDATE NOWAIT;\n-- 이미 잠겨있으면 에러 반환 (재시도 필요)\n\n\n-- ✅ SKIP LOCKED: 잠긴 행 건너뛰기 (큐 처리에 유용)\nSELECT * FROM job_queue \nWHERE status = 'pending' \nFOR UPDATE SKIP LOCKED \nLIMIT 1;"
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "✅ 낙관적 락 (Optimistic Lock) - 이커머스용",
+        "code": "-- ✅ 방법 2: 버전 기반 낙관적 락\n-- 충돌이 드문 경우 더 좋은 성능\n\n-- 테이블에 version 컬럼 추가\nALTER TABLE products ADD COLUMN version INT DEFAULT 0;\n\n-- 1. 현재 상태 조회 (버전 함께)\nSELECT stock, version \nFROM products \nWHERE id = 'limited_sneakers';\n-- 결과: stock=1, version=5\n\n-- 2. 업데이트 시 버전 체크 (원자적 연산)\nUPDATE products \nSET stock = stock - 1, \n    version = version + 1\nWHERE id = 'limited_sneakers' \nAND version = 5;  -- 읽었던 버전과 같을 때만!\n\n-- 3. 영향받은 행 체크\n-- affected_rows = 0 이면 다른 요청이 먼저 처리됨 → 재시도\n\n\n-- ✅ 방법 3: 원자적 UPDATE (가장 간단)\n-- 조건을 UPDATE 문에 포함\n\n-- 재고 차감 (재고가 있을 때만)\nUPDATE products \nSET stock = stock - 1 \nWHERE id = 'limited_sneakers' \nAND stock >= 1;  -- 재고가 1개 이상일 때만 실행\n\n-- affected_rows 체크로 성공/실패 판단\n-- 0이면 재고 부족, 1이면 성공"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "🔐 JPA/Spring에서의 락 처리",
+        "code": "// ✅ JPA 비관적 락\n@Repository\npublic interface WalletRepository extends JpaRepository<Wallet, Long> {\n    \n    // 비관적 락 - 금융 시스템용\n    @Lock(LockModeType.PESSIMISTIC_WRITE)\n    @Query(\"SELECT w FROM Wallet w WHERE w.userId = :userId\")\n    Optional<Wallet> findByUserIdWithLock(@Param(\"userId\") String userId);\n}\n\n// ✅ JPA 낙관적 락\n@Entity\npublic class Product {\n    @Id\n    private Long id;\n    \n    private int stock;\n    \n    @Version  // 낙관적 락용 버전 컬럼\n    private Long version;\n}\n\n// ✅ 서비스 레이어에서 동시성 처리\n@Service\n@Transactional\npublic class WithdrawService {\n    \n    public void withdraw(String userId, BigDecimal amount) {\n        // 비관적 락으로 조회\n        Wallet wallet = walletRepository.findByUserIdWithLock(userId)\n            .orElseThrow(() -> new NotFoundException(\"지갑 없음\"));\n        \n        // 잔고 체크 (이미 락 걸려있어서 안전)\n        if (wallet.getBalance().compareTo(amount) < 0) {\n            throw new InsufficientBalanceException(\"잔고 부족\");\n        }\n        \n        // 출금 처리\n        wallet.subtract(amount);\n        // 트랜잭션 종료 시 락 해제\n    }\n    \n    // 낙관적 락 사용 시 재시도 로직\n    @Retryable(value = OptimisticLockException.class, maxAttempts = 3)\n    public void purchaseWithRetry(Long productId) {\n        Product product = productRepository.findById(productId).orElseThrow();\n        product.decreaseStock();  // @Version 체크\n        // OptimisticLockException 발생 시 자동 재시도\n    }\n}"
+      },
+      {
+        "type": "concept",
+        "title": "📊 Lock 선택 가이드",
+        "content": "**언제 어떤 락을 쓸까?**\n\n| 상황 | 권장 방식 | 이유 |\n|------|----------|------|\n| 금융/결제 | 비관적 락 | 절대 실패하면 안 됨 |\n| 한정판 재고 | 비관적 락 + FOR UPDATE NOWAIT | 빠른 실패, 재시도 |\n| 일반 재고 | 낙관적 락 | 충돌 적음, 성능 우선 |\n| 게시글 조회수 | 원자적 UPDATE | 단순, 빠름 |\n| 포인트 적립 | 비관적 락 | 돈과 관련 |\n\n**데드락 방지:**\n- 락 획득 순서 일관되게\n- 타임아웃 설정\n- 트랜잭션 짧게 유지\n\n**체크리스트:**\n- [ ] SELECT 후 UPDATE 패턴 제거\n- [ ] FOR UPDATE 또는 @Version 적용\n- [ ] 재시도 로직 구현\n- [ ] 데드락 모니터링 설정"
+      }
+    ]
+  },
+  "05_트랜잭션/mvcc": {
+    "id": "05_트랜잭션/mvcc",
+    "title": "Mvcc",
+    "category": "db",
+    "subCategory": "05_트랜잭션",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mvcc",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "05_트랜잭션/transaction-concept": {
+    "id": "05_트랜잭션/transaction-concept",
+    "title": "트랜잭션 개념",
+    "category": "db",
+    "subCategory": "05_트랜잭션",
+    "language": "SQL",
+    "description": "ACID 속성과 트랜잭션 관리 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "트랜잭션이란?",
+        "content": "트랜잭션은 하나의 논리적 작업 단위로 처리되어야 하는 연산의 집합입니다. 모두 성공하거나 모두 실패해야 합니다 (All or Nothing). ACID 속성을 보장합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "title": "트랜잭션 사용 예제",
+        "code": "-- 트랜잭션 시작\nSTART TRANSACTION;\n\n-- 계좌 이체 예시\nUPDATE accounts SET balance = balance - 10000\nWHERE account_id = 'A';\n\nUPDATE accounts SET balance = balance + 10000\nWHERE account_id = 'B';\n\n-- 성공 시 커밋\nCOMMIT;\n\n-- 실패 시 롤백\nROLLBACK;\n\n-- 자동 커밋 끄기\nSET autocommit = 0;\n\n-- 저장점 설정 (부분 롤백)\nSAVEPOINT sp1;\n-- 작업...\nROLLBACK TO sp1;  -- sp1 이후만 취소"
+      },
+      {
+        "type": "tip",
+        "title": "ACID 속성",
+        "content": "A(Atomicity): 원자성 - 전부 성공 or 전부 실패\\nC(Consistency): 일관성 - 제약조건 항상 만족\\nI(Isolation): 격리성 - 트랜잭션 간 간섭 X\\nD(Durability): 지속성 - 커밋 후 영구 저장"
+      }
+    ]
+  },
+  "06_설계/denormalization": {
+    "id": "06_설계/denormalization",
+    "title": "Denormalization",
+    "category": "db",
+    "subCategory": "06_설계",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Denormalization",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "06_설계/erd-concept": {
+    "id": "06_설계/erd-concept",
+    "title": "Erd Concept",
+    "category": "db",
+    "subCategory": "06_설계",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Erd Concept",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "06_설계/normalization": {
+    "id": "06_설계/normalization",
+    "title": "Normalization",
+    "category": "db",
+    "subCategory": "06_설계",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Normalization",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "06_설계/pk-fk": {
+    "id": "06_설계/pk-fk",
+    "title": "Pk Fk",
+    "category": "db",
+    "subCategory": "06_설계",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Pk Fk",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "06_설계/relationship": {
+    "id": "06_설계/relationship",
+    "title": "Relationship",
+    "category": "db",
+    "subCategory": "06_설계",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Relationship",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "07_최적화/explain": {
+    "id": "07_최적화/explain",
+    "title": "Explain",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Explain",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "07_최적화/partitioning": {
+    "id": "07_최적화/partitioning",
+    "title": "Partitioning",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Partitioning",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "07_최적화/query-optimization": {
+    "id": "07_최적화/query-optimization",
+    "title": "Query Optimization",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Query Optimization",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "07_최적화/query-tuning": {
+    "id": "07_최적화/query-tuning",
+    "title": "Query Tuning",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Query Tuning",
+        "content": "인덱스 작동 원리와 실행 계획(Explain)을 통한 최적화를 다룹니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "CREATE INDEX idx_user_email ON users(email);\r\n-- 실행 계획 확인\r\nEXPLAIN SELECT * FROM users WHERE email = 'test@test.com';"
+      }
+    ]
+  },
+  "07_최적화/sharding": {
+    "id": "07_최적화/sharding",
+    "title": "Sharding",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sharding",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "07_최적화/slow-query": {
+    "id": "07_최적화/slow-query",
+    "title": "Slow Query",
+    "category": "db",
+    "subCategory": "07_최적화",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Slow Query",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "08_NoSQL/mongodb": {
+    "id": "08_NoSQL/mongodb",
+    "title": "Mongodb",
+    "category": "db",
+    "subCategory": "08_NoSQL",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Mongodb",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "08_NoSQL/nosql-concept": {
+    "id": "08_NoSQL/nosql-concept",
+    "title": "Nosql Concept",
+    "category": "db",
+    "subCategory": "08_NoSQL",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Nosql Concept",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "08_NoSQL/redis-data-type": {
+    "id": "08_NoSQL/redis-data-type",
+    "title": "Redis Data Type",
+    "category": "db",
+    "subCategory": "08_NoSQL",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Redis Data Type",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "08_NoSQL/redis": {
+    "id": "08_NoSQL/redis",
+    "title": "Redis",
+    "category": "db",
+    "subCategory": "08_NoSQL",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Redis",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "08_NoSQL/sql-vs-nosql": {
+    "id": "08_NoSQL/sql-vs-nosql",
+    "title": "Sql Vs Nosql",
+    "category": "db",
+    "subCategory": "08_NoSQL",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Sql Vs Nosql",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "09_실무/backup-restore": {
+    "id": "09_실무/backup-restore",
+    "title": "Backup Restore",
+    "category": "db",
+    "subCategory": "09_실무",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Backup Restore",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "09_실무/caching-strategy": {
+    "id": "09_실무/caching-strategy",
+    "title": "Caching Strategy",
+    "category": "db",
+    "subCategory": "09_실무",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Caching Strategy",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "09_실무/connection-pool": {
+    "id": "09_실무/connection-pool",
+    "title": "Connection Pool",
+    "category": "db",
+    "subCategory": "09_실무",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Connection Pool",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "09_실무/n-plus-1": {
+    "id": "09_실무/n-plus-1",
+    "title": "N Plus 1",
+    "category": "db",
+    "subCategory": "09_실무",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "N Plus 1",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "09_실무/replication": {
+    "id": "09_실무/replication",
+    "title": "Replication",
+    "category": "db",
+    "subCategory": "09_실무",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Replication",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "10_면접/interview-db": {
+    "id": "10_면접/interview-db",
+    "title": "Interview Db",
+    "category": "db",
+    "subCategory": "10_면접",
+    "language": "SQL",
+    "description": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Interview Db",
+        "content": "CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다."
+      },
+      {
+        "type": "code",
+        "language": "SQL",
+        "code": "SELECT u.name, o.order_date\r\nFROM users u\r\nJOIN orders o ON u.id = o.user_id\r\nWHERE u.active = 1;"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "Database",
+    "category": "db",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Database",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

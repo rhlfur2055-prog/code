@@ -1,0 +1,474 @@
+{
+  "01_basics": {
+    "id": "01_basics",
+    "title": "01 Basics",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/conditionals": {
+    "id": "01_기초/conditionals",
+    "title": "Conditionals",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/data-types": {
+    "id": "01_기초/data-types",
+    "title": "Data Types",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/js-connect": {
+    "id": "01_기초/js-connect",
+    "title": "Js Connect",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/js-intro": {
+    "id": "01_기초/js-intro",
+    "title": "Js Intro",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/loops": {
+    "id": "01_기초/loops",
+    "title": "Loops",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/operators": {
+    "id": "01_기초/operators",
+    "title": "Operators",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/variables": {
+    "id": "01_기초/variables",
+    "title": "Variables",
+    "category": "javascript",
+    "subCategory": "01_기초",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_functions": {
+    "id": "02_functions",
+    "title": "02 Functions",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_함수/arrow-function": {
+    "id": "02_함수/arrow-function",
+    "title": "Arrow Function",
+    "category": "javascript",
+    "subCategory": "02_함수",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_함수/callback": {
+    "id": "02_함수/callback",
+    "title": "Callback",
+    "category": "javascript",
+    "subCategory": "02_함수",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_함수/function-basic": {
+    "id": "02_함수/function-basic",
+    "title": "Function Basic",
+    "category": "javascript",
+    "subCategory": "02_함수",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_함수/hoisting": {
+    "id": "02_함수/hoisting",
+    "title": "Hoisting",
+    "category": "javascript",
+    "subCategory": "02_함수",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_함수/scope-closure": {
+    "id": "02_함수/scope-closure",
+    "title": "Scope Closure",
+    "category": "javascript",
+    "subCategory": "02_함수",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Scope Closure",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "03_dom": {
+    "id": "03_dom",
+    "title": "03 Dom",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_객체배열/array-methods": {
+    "id": "03_객체배열/array-methods",
+    "title": "Array Methods",
+    "category": "javascript",
+    "subCategory": "03_객체배열",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_객체배열/destructuring": {
+    "id": "03_객체배열/destructuring",
+    "title": "Destructuring",
+    "category": "javascript",
+    "subCategory": "03_객체배열",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_객체배열/object-basic": {
+    "id": "03_객체배열/object-basic",
+    "title": "Object Basic",
+    "category": "javascript",
+    "subCategory": "03_객체배열",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_객체배열/spread-rest": {
+    "id": "03_객체배열/spread-rest",
+    "title": "Spread Rest",
+    "category": "javascript",
+    "subCategory": "03_객체배열",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_async": {
+    "id": "04_async",
+    "title": "04 Async",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/dom-create": {
+    "id": "04_DOM/dom-create",
+    "title": "Dom Create",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/dom-intro": {
+    "id": "04_DOM/dom-intro",
+    "title": "Dom Intro",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/dom-manipulation": {
+    "id": "04_DOM/dom-manipulation",
+    "title": "Dom Manipulation",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/dom-selection": {
+    "id": "04_DOM/dom-selection",
+    "title": "Dom Selection",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/event-propagation": {
+    "id": "04_DOM/event-propagation",
+    "title": "Event Propagation",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/events": {
+    "id": "04_DOM/events",
+    "title": "Events",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_DOM/form-validation": {
+    "id": "04_DOM/form-validation",
+    "title": "Form Validation",
+    "category": "javascript",
+    "subCategory": "04_DOM",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_es6": {
+    "id": "05_es6",
+    "title": "05 Es6",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/async-await": {
+    "id": "05_비동기/async-await",
+    "title": "Async Await",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/error-handling": {
+    "id": "05_비동기/error-handling",
+    "title": "Error Handling",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/event-loop": {
+    "id": "05_비동기/event-loop",
+    "title": "Event Loop",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/fetch-api": {
+    "id": "05_비동기/fetch-api",
+    "title": "Fetch Api",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/promise": {
+    "id": "05_비동기/promise",
+    "title": "Promise",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_비동기/sync-async-js": {
+    "id": "05_비동기/sync-async-js",
+    "title": "Sync Async Js",
+    "category": "javascript",
+    "subCategory": "05_비동기",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_ES6/class-js": {
+    "id": "06_ES6/class-js",
+    "title": "Class Js",
+    "category": "javascript",
+    "subCategory": "06_ES6",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_ES6/modules": {
+    "id": "06_ES6/modules",
+    "title": "Modules",
+    "category": "javascript",
+    "subCategory": "06_ES6",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_ES6/nullish-coalescing": {
+    "id": "06_ES6/nullish-coalescing",
+    "title": "Nullish Coalescing",
+    "category": "javascript",
+    "subCategory": "06_ES6",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_ES6/optional-chaining": {
+    "id": "06_ES6/optional-chaining",
+    "title": "Optional Chaining",
+    "category": "javascript",
+    "subCategory": "06_ES6",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_ES6/template-literal": {
+    "id": "06_ES6/template-literal",
+    "title": "Template Literal",
+    "category": "javascript",
+    "subCategory": "06_ES6",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "07_고급/execution-context": {
+    "id": "07_고급/execution-context",
+    "title": "Execution Context",
+    "category": "javascript",
+    "subCategory": "07_고급",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "07_고급/prototype": {
+    "id": "07_고급/prototype",
+    "title": "Prototype",
+    "category": "javascript",
+    "subCategory": "07_고급",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "07_고급/this-keyword": {
+    "id": "07_고급/this-keyword",
+    "title": "This Keyword",
+    "category": "javascript",
+    "subCategory": "07_고급",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "08_웹저장소/local-storage": {
+    "id": "08_웹저장소/local-storage",
+    "title": "Local Storage",
+    "category": "javascript",
+    "subCategory": "08_웹저장소",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "09_면접/interview-js": {
+    "id": "09_면접/interview-js",
+    "title": "Interview Js",
+    "category": "javascript",
+    "subCategory": "09_면접",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "index": {
+    "id": "index",
+    "title": "⚡ Day 34-36: JavaScript",
+    "category": "javascript",
+    "subCategory": null,
+    "language": "Day 34",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "⚡ Day 34-36: JavaScript",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Day 34",
+        "code": ""
+      }
+    ]
+  }
+}

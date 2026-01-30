@@ -1,0 +1,145 @@
+# =====================================================
+# K-MaaS 개발 환경 Docker Compose
+# 사용법: docker-compose up -d
+# 중지: docker-compose down
+# 로그: docker-compose logs -f [서비스명]
+# =====================================================
+
+version: '3.8'
+
+services:
+  # ==================== Frontend ====================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXT_PUBLIC_AI_API_URL=http://localhost:8080/api/ai
+    depends_on:
+      - spring-api
+    networks:
+      - kmaas-network
+    restart: unless-stopped
+
+  # ==================== Spring Boot API ====================
+  spring-api:
+    build:
+      context: ./backend/spring-ai-api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      # 프로필
+      - SPRING_PROFILES_ACTIVE=docker
+      # AI 서버 연결
+      - AI_PYTHON_SERVER_URL=http://python-ai:8000
+      - AI_TIMEOUT_CONNECT=5000
+      - AI_TIMEOUT_READ=30000
+      # 데이터베이스
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/kmaas?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      - SPRING_DATASOURCE_USERNAME=kmaas
+      - SPRING_DATASOURCE_PASSWORD=kmaas1234
+      # Redis
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      mysql:
+        condition: service_healthy
+      python-ai:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - kmaas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+
+  # ==================== FastAPI AI Server ====================
+  python-ai:
+    build:
+      context: ./backend/python-ai-server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_CACHE_DIR=/app/models
+    volumes:
+      - ai-models:/root/.cache  # YOLO, Whisper 모델 캐시
+    networks:
+      - kmaas-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s  # 모델 로딩 시간 고려
+    restart: unless-stopped
+    # GPU 사용 시 아래 주석 해제
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # ==================== MySQL Database ====================
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root1234
+      - MYSQL_DATABASE=kmaas
+      - MYSQL_USER=kmaas
+      - MYSQL_PASSWORD=kmaas1234
+      - TZ=Asia/Seoul
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - kmaas-network
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ==================== Redis (세션/캐시) ====================
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - kmaas-network
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+
+# ==================== Networks ====================
+networks:
+  kmaas-network:
+    driver: bridge
+
+# ==================== Volumes ====================
+volumes:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local
+  ai-models:
+    driver: local

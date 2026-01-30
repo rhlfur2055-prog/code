@@ -1,0 +1,694 @@
+{
+  "01_Git기초/git-intro": {
+    "id": "01_Git기초/git-intro",
+    "title": "Git 소개",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "Git의 개념과 버전 관리 시스템의 필요성을 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Git이란?",
+        "content": "Git은 분산 버전 관리 시스템(DVCS)입니다. 코드의 변경 이력을 추적하고, 여러 개발자가 동시에 작업할 수 있게 해줍니다. Linus Torvalds가 Linux 커널 개발을 위해 2005년에 만들었습니다.\n\n**왜 Git을 사용하나요?**\n1. 변경 이력 추적: 언제, 누가, 무엇을 변경했는지 기록\n2. 협업: 여러 명이 동시에 작업 가능\n3. 브랜치: 독립적인 작업 공간 생성\n4. 되돌리기: 언제든 이전 상태로 복구 가능"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Git 시작하기",
+        "code": "# Git 버전 확인\ngit --version\n\n# 사용자 정보 설정 (최초 1회)\ngit config --global user.name \"홍길동\"\ngit config --global user.email \"hong@example.com\"\n\n# 설정 확인\ngit config --list\n\n# 새 저장소 생성\nmkdir my-project\ncd my-project\ngit init\n\n# 기존 저장소 복제\ngit clone https://github.com/user/repo.git"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 개념",
+        "content": "• Working Directory: 실제 파일이 있는 작업 공간\n• Staging Area: 커밋할 파일을 준비하는 공간 (git add)\n• Repository: 커밋된 스냅샷이 저장되는 공간 (.git 폴더)\n• Remote: 원격 저장소 (GitHub, GitLab 등)"
+      }
+    ]
+  },
+  "01_Git기초/git-basic-command": {
+    "id": "01_Git기초/git-basic-command",
+    "title": "Git 기본 명령어",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "Git의 핵심 명령어를 익혀 기본적인 버전 관리를 수행합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Git 워크플로우",
+        "content": "Git의 기본 워크플로우는 다음과 같습니다:\n1. 파일 수정 (Working Directory)\n2. 변경 사항 스테이징 (git add)\n3. 커밋으로 저장 (git commit)\n4. 원격 저장소에 푸시 (git push)"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "필수 Git 명령어",
+        "code": "# === 기본 워크플로우 ===\ngit status              # 현재 상태 확인\ngit add file.txt        # 특정 파일 스테이징\ngit add .               # 모든 변경 파일 스테이징\ngit commit -m \"메시지\"   # 커밋 생성\n\n# === 이력 확인 ===\ngit log                 # 커밋 이력 보기\ngit log --oneline       # 한 줄로 보기\ngit log --graph         # 그래프로 보기\ngit show abc123         # 특정 커밋 상세 보기\n\n# === 원격 저장소 ===\ngit remote -v           # 원격 저장소 목록\ngit push origin main    # 원격에 푸시\ngit pull origin main    # 원격에서 가져오기\ngit fetch origin        # 원격 정보만 가져오기\n\n# === 변경 취소 ===\ngit checkout -- file.txt   # 파일 변경 취소\ngit reset HEAD file.txt    # 스테이징 취소"
+      },
+      {
+        "type": "tip",
+        "title": "자주 쓰는 옵션",
+        "content": "• git add -p: 변경 사항을 하나씩 확인하며 스테이징\n• git commit -am \"메시지\": add + commit 동시에\n• git log -p: 변경 내용까지 함께 보기\n• git diff: 변경 사항 비교"
+      }
+    ]
+  },
+  "01_Git기초/git-status-log": {
+    "id": "01_Git기초/git-status-log",
+    "title": "Git Status & Log",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "git status와 git log로 저장소 상태와 이력을 확인합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "상태 확인의 중요성",
+        "content": "git status는 현재 작업 디렉토리의 상태를 보여줍니다:\n• Untracked: Git이 추적하지 않는 새 파일\n• Modified: 수정되었지만 스테이징되지 않은 파일\n• Staged: 커밋 대기 중인 파일\n\ngit log는 커밋 이력을 보여줍니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "상태 및 이력 확인",
+        "code": "# === git status ===\ngit status              # 전체 상태\ngit status -s           # 짧게 보기 (M: 수정, A: 추가, ??: 미추적)\n\n# === git log 다양한 옵션 ===\ngit log --oneline                    # 한 줄씩\ngit log --oneline -5                 # 최근 5개만\ngit log --graph --oneline --all      # 모든 브랜치 그래프\ngit log --author=\"홍길동\"             # 특정 작성자\ngit log --since=\"2024-01-01\"         # 특정 날짜 이후\ngit log --grep=\"버그\"                 # 메시지 검색\ngit log -- path/to/file              # 특정 파일 이력\n\n# === git diff ===\ngit diff                # 스테이징 전 변경사항\ngit diff --staged       # 스테이징된 변경사항\ngit diff HEAD~1         # 직전 커밋과 비교\ngit diff branch1 branch2  # 브랜치 간 비교"
+      },
+      {
+        "type": "tip",
+        "title": "유용한 팁",
+        "content": "• git log --pretty=format:\"%h %s\" : 커스텀 포맷\n• git shortlog: 작성자별 커밋 요약\n• git blame file.txt: 각 라인의 마지막 수정자 확인"
+      }
+    ]
+  },
+  "01_Git기초/git-structure": {
+    "id": "01_Git기초/git-structure",
+    "title": "Git 구조 이해",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "Git의 내부 구조와 3가지 영역을 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Git의 3가지 영역",
+        "content": "Git은 3가지 영역으로 파일을 관리합니다:\n\n1. **Working Directory (작업 디렉토리)**\n   - 실제 파일이 있는 곳\n   - 파일을 수정하는 공간\n\n2. **Staging Area (Index)**\n   - 커밋할 파일을 준비하는 중간 영역\n   - git add로 파일 추가\n\n3. **Repository (.git)**\n   - 커밋된 스냅샷 저장소\n   - 모든 버전 이력 보관"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": ".git 폴더 구조",
+        "code": ".git/\n├── HEAD          # 현재 브랜치 포인터\n├── config        # 저장소 설정\n├── objects/      # 모든 Git 객체 (blob, tree, commit)\n├── refs/         # 브랜치, 태그 참조\n│   ├── heads/    # 로컬 브랜치\n│   └── remotes/  # 원격 브랜치\n├── hooks/        # Git 훅 스크립트\n└── index         # 스테이징 영역 정보\n\n# HEAD 내용 확인\ncat .git/HEAD\n# ref: refs/heads/main\n\n# 현재 브랜치의 최신 커밋 확인\ncat .git/refs/heads/main"
+      },
+      {
+        "type": "tip",
+        "title": "Git 객체 유형",
+        "content": "• Blob: 파일 내용 저장\n• Tree: 디렉토리 구조 저장\n• Commit: 스냅샷 + 메타데이터 (작성자, 메시지, 부모 커밋)\n• Tag: 특정 커밋에 이름 부여"
+      }
+    ]
+  },
+  "01_Git기초/git-diff": {
+    "id": "01_Git기초/git-diff",
+    "title": "Git Diff",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "git diff로 파일 변경 사항을 비교합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "변경 사항 비교",
+        "content": "git diff는 파일의 변경 내용을 비교합니다:\n• 추가된 라인: + (초록색)\n• 삭제된 라인: - (빨간색)\n\n비교 대상에 따라 다양한 옵션을 사용합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "diff 명령어 활용",
+        "code": "# === 기본 비교 ===\ngit diff                    # Working Directory vs Staging\ngit diff --staged           # Staging vs 최신 커밋\ngit diff HEAD               # Working Directory vs 최신 커밋\n\n# === 커밋 간 비교 ===\ngit diff abc123 def456      # 두 커밋 비교\ngit diff HEAD~3 HEAD        # 3개 전 커밋과 비교\ngit diff HEAD^ HEAD         # 직전 커밋과 비교\n\n# === 브랜치 비교 ===\ngit diff main feature       # 브랜치 간 비교\ngit diff main...feature     # 공통 조상 기준 비교\n\n# === 특정 파일만 ===\ngit diff -- path/to/file.js\ngit diff main feature -- src/\n\n# === 통계만 보기 ===\ngit diff --stat             # 변경 파일 목록과 통계\ngit diff --name-only        # 변경된 파일명만"
+      },
+      {
+        "type": "tip",
+        "title": "diff 읽는 법",
+        "content": "@@ -1,5 +1,6 @@\n• -1,5: 원본 파일 1번째 줄부터 5줄\n• +1,6: 변경 후 1번째 줄부터 6줄\n• 공백: 변경 없는 컨텍스트 라인"
+      }
+    ]
+  },
+  "01_Git기초/git-install": {
+    "id": "01_Git기초/git-install",
+    "title": "Git 설치",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Bash",
+    "description": "운영체제별 Git 설치 방법을 알아봅니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Git 설치하기",
+        "content": "Git은 모든 주요 운영체제에서 사용할 수 있습니다. 공식 사이트(git-scm.com)에서 다운로드하거나 패키지 관리자를 통해 설치합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "OS별 설치 명령어",
+        "code": "# === Windows ===\n# 1. git-scm.com에서 다운로드\n# 2. Git Bash 포함 설치\n# 또는 winget 사용:\nwinget install Git.Git\n\n# === macOS ===\n# Homebrew 사용\nbrew install git\n# 또는 Xcode Command Line Tools\nxcode-select --install\n\n# === Ubuntu/Debian ===\nsudo apt update\nsudo apt install git\n\n# === Fedora ===\nsudo dnf install git\n\n# === 설치 확인 ===\ngit --version\n# git version 2.43.0"
+      },
+      {
+        "type": "tip",
+        "title": "설치 후 설정",
+        "content": "필수 설정:\ngit config --global user.name \"이름\"\ngit config --global user.email \"이메일\"\n\n추천 설정:\ngit config --global init.defaultBranch main\ngit config --global core.autocrlf true  # Windows"
+      }
+    ]
+  },
+  "01_Git기초/gitignore": {
+    "id": "01_Git기초/gitignore",
+    "title": ".gitignore와 환경변수 - 실수 한 번에 회사가 망한다",
+    "category": "collaboration",
+    "subCategory": "01_Git기초",
+    "language": "Text",
+    "description": "실제 암호화폐 거래소 해킹 사례로 배우는 .gitignore와 환경변수 관리. API 키 하나 노출로 수백억 원이 사라진 사건들.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚨 실제 사고: API 키 노출로 2,200억 원 증발 (2022년 암호화폐 거래소)",
+        "content": "**[The Incident - 실제로 일어난 일]**\n\n2022년, 한 암호화폐 거래소의 신입 개발자가 실수를 저질렀습니다:\n\n```bash\n# 개발자가 무심코 실행한 명령어\ngit add .\ngit commit -m \"fix: API 연동 수정\"\ngit push origin main\n```\n\n**문제: `.env` 파일이 함께 커밋됨**\n\n```env\n# .env 파일 내용 (GitHub에 그대로 노출)\nAWS_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE\nAWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\nDB_PASSWORD=production_db_password_2022!\nAPI_SECRET=exchange_hot_wallet_private_key_xxxxx\n```\n\n**해커의 공격 (15분 이내):**\n\n1. GitHub 실시간 모니터링 봇이 \"AWS_ACCESS_KEY\" 패턴 감지\n2. API 키로 AWS 콘솔 접속\n3. S3 버킷에서 고객 데이터 탈취\n4. 핫월렛 프라이빗 키로 암호화폐 전액 출금\n\n---\n\n**[The Disaster - 피해 규모]**\n\n| 항목 | 피해 ||\n|------|------|\n| 암호화폐 탈취 | 약 2,200억 원 |\n| 고객 정보 유출 | 150만 명 |\n| 규제 벌금 | 50억 원 |\n| 거래소 결과 | **파산** |\n\n**핵심 교훈:**\n> \"Git에 올라간 것은 영원히 인터넷에 남는다\"\n> (GitHub에서 파일을 삭제해도 히스토리에 남음)"
+      },
+      {
+        "type": "concept",
+        "title": "🔍 왜 이런 일이 반복되는가? - 초보자의 실수 패턴",
+        "content": "**실수 패턴 1: \"잠깐 테스트용이니까...\"**\n\n```python\n# config.py - 개발자: \"나중에 지워야지\"\nDB_PASSWORD = \"admin123\"  # TODO: 환경변수로 변경\nAPI_KEY = \"sk-xxxxx\"      # 나중에 바꿀거야...\n```\n\n결과: 잊어버리고 그대로 커밋 → 6개월 후 해킹\n\n---\n\n**실수 패턴 2: \".env.example 복사 후 그대로 커밋\"**\n\n```bash\n# 처음 프로젝트 설정할 때\ncp .env.example .env\nvim .env  # 실제 비밀번호 입력\n\n# 며칠 후 (gitignore 설정 안 됨)\ngit add .\ngit commit -m \"initial setup\"\n# .env 파일도 함께 커밋됨!\n```\n\n---\n\n**실수 패턴 3: \"이미 커밋된 .env 삭제하면 되는 거 아냐?\"**\n\n```bash\n# 개발자의 \"해결\" 시도\nrm .env\necho \".env\" >> .gitignore\ngit add . && git commit -m \"remove .env\"\ngit push\n\n# 개발자: \"해결됐다!\"\n```\n\n**현실:**\n```bash\n# 해커가 하는 일\ngit log --all --full-history -- .env\ngit show abc123:.env  # 과거 커밋에서 .env 내용 확인\n\n# .env 내용 그대로 보임!\n```\n\n---\n\n**GitHub에는 비밀 수집 봇이 24시간 돌고 있다:**\n\n```python\n# 해커들이 사용하는 봇 (예시)\nimport requests\n\nPATTERNS = [\n    r'AKIA[0-9A-Z]{16}',      # AWS Access Key\n    r'sk-[a-zA-Z0-9]{48}',    # OpenAI API Key\n    r'ghp_[a-zA-Z0-9]{36}',   # GitHub Personal Token\n    r'-----BEGIN RSA PRIVATE KEY-----',\n]\n\n# GitHub Events API를 실시간 모니터링\n# 매초 수천 개의 새 커밋을 스캔\n```\n\n**통계:**\n- 평균 15분 이내에 노출된 키가 악용됨\n- 매일 수천 개의 시크릿이 GitHub에 노출됨"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "🛡️ 생존 키트: 사고 예방 체크리스트",
+        "code": "# ═══════════════════════════════════════════════════════════════\n# 📁 .gitignore - 프로젝트 생성 직후 가장 먼저 설정!\n# ═══════════════════════════════════════════════════════════════\n\n# 🚨 최우선 차단: 환경 변수 / 비밀 정보\n.env\n.env.*\n*.env\n.env.local\n.env.development.local\n.env.test.local\n.env.production.local\n\n# 🔐 인증 관련\n*.pem\n*.key\n*.p12\n*.pfx\ncredentials.json\nservice-account.json\n**/secrets/\n\n# 🗄️ 데이터베이스\n*.db\n*.sqlite\n*.sqlite3\ndump.sql\n\n# ☁️ 클라우드 설정\n.aws/\n.gcp/\nterraform.tfstate\n*.tfvars\n\n# 💳 결제/API\nstripe.json\npaypal.json\napi-keys.json"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "🔧 사전 예방: Git Hooks로 자동 차단",
+        "code": "#!/bin/bash\n# .git/hooks/pre-commit (또는 husky 사용)\n# 커밋 전 시크릿 자동 검사\n\n# ═══════════════════════════════════════════════════════════════\n# 위험한 패턴 자동 감지\n# ═══════════════════════════════════════════════════════════════\n\nDANGEROUS_PATTERNS=(\n    'AKIA[0-9A-Z]{16}'           # AWS Access Key\n    'sk-[a-zA-Z0-9]{48}'         # OpenAI API Key  \n    'ghp_[a-zA-Z0-9]{36}'        # GitHub Token\n    'password\\s*=\\s*[\"'\\'][^\"'\\']+'  # 하드코딩된 비밀번호\n    'api.key.*=.*[a-zA-Z0-9]{20,}'   # API 키 패턴\n)\n\nfor pattern in \"${DANGEROUS_PATTERNS[@]}\"; do\n    if git diff --cached | grep -qE \"$pattern\"; then\n        echo \"🚨 위험! 시크릿 노출 감지: $pattern\"\n        echo \"커밋이 차단되었습니다.\"\n        echo \"환경변수(.env)로 이동하세요.\"\n        exit 1\n    fi\ndone\n\necho \"✅ 시크릿 검사 통과\"\nexit 0"
+      },
+      {
+        "type": "code",
+        "language": "java",
+        "title": "☕ Spring Boot 환경변수 올바른 사용법",
+        "code": "// ═══════════════════════════════════════════════════════════════\n// ❌ 위험: 소스코드에 하드코딩\n// ═══════════════════════════════════════════════════════════════\n\n@Configuration\npublic class BadConfig {\n    // 🚨 절대 금지! 코드에 직접 입력\n    private String apiKey = \"sk-1234567890abcdef\";  \n    private String dbPassword = \"production_password!\";\n}\n\n// ═══════════════════════════════════════════════════════════════\n// ✅ 안전: 환경변수에서 주입\n// ═══════════════════════════════════════════════════════════════\n\n@Configuration\npublic class SecureConfig {\n    \n    @Value(\"${api.secret.key}\")  // application.yml에서 주입\n    private String apiKey;\n    \n    @Value(\"${spring.datasource.password}\")\n    private String dbPassword;\n}\n\n// application.yml (이것도 .gitignore에 추가하거나 환경변수 참조)\n// ---\n// api:\n//   secret:\n//     key: ${API_SECRET_KEY}  # 시스템 환경변수 참조\n// spring:\n//   datasource:\n//     password: ${DB_PASSWORD}\n\n// ═══════════════════════════════════════════════════════════════\n// 🏆 프로덕션 베스트 프랙티스: Spring Cloud Config 또는 Vault\n// ═══════════════════════════════════════════════════════════════\n\n@Configuration\n@EnableConfigurationProperties(SecretsProperties.class)\npublic class VaultConfig {\n    \n    @Autowired\n    private SecretsProperties secrets;  // Vault에서 안전하게 주입\n    \n    @Bean\n    public DataSource dataSource() {\n        return DataSourceBuilder.create()\n            .password(secrets.getDbPassword())  // Vault에서 가져온 값\n            .build();\n    }\n}"
+      },
+      {
+        "type": "concept",
+        "title": "🚑 사고 발생 시 긴급 대응 (이미 커밋했다면)",
+        "content": "**상황: \"앗... .env 파일이 GitHub에 올라갔다!\"**\n\n---\n\n**🚨 Step 1: 즉시 키 폐기 (가장 중요!)**\n\n```bash\n# Git에서 파일 삭제하는 것보다 키 폐기가 먼저!\n# 해커는 이미 봤을 수 있음\n\n# AWS: 콘솔에서 Access Key 삭제/비활성화\n# GitHub: Settings > Developer Settings > Tokens 폐기\n# OpenAI: API Keys에서 해당 키 삭제\n# DB: 비밀번호 즉시 변경\n```\n\n---\n\n**🔧 Step 2: Git 히스토리에서 완전 삭제**\n\n```bash\n# BFG Repo-Cleaner 사용 (git filter-branch보다 빠름)\njava -jar bfg.jar --delete-files .env my-repo.git\n\n# 또는 git-filter-repo\npip install git-filter-repo\ngit filter-repo --path .env --invert-paths\n\n# 강제 푸시 (팀원들에게 먼저 알릴 것!)\ngit push --force --all\n```\n\n---\n\n**📋 Step 3: 침해 범위 확인**\n\n```\n[ ] AWS CloudTrail 로그에서 의심스러운 활동 확인\n[ ] GitHub Audit Log에서 비정상 접근 확인  \n[ ] DB 쿼리 로그에서 이상 활동 확인\n[ ] 결제 시스템에 비인가 트랜잭션 확인\n```\n\n---\n\n**✅ Step 4: 재발 방지**\n\n```bash\n# 1. .gitignore 재설정\necho \".env\" >> .gitignore\necho \"*.pem\" >> .gitignore\n\n# 2. pre-commit hook 설치\nnpx husky-init && npm install\nnpx husky add .husky/pre-commit \"npx detect-secrets-hook\"\n\n# 3. GitHub Secret Scanning 활성화\n# Settings > Security > Code security and analysis\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💼 면접 대비: 시크릿 관리 관련 질문",
+        "content": "**Q: \".env 파일이 실수로 커밋됐을 때 어떻게 대응하시겠습니까?\"**\n\n✅ 모범 답안:\n\"가장 먼저 해야 할 일은 **노출된 키를 즉시 폐기**하는 것입니다. Git에서 파일을 삭제해도 히스토리에 남아있고, 해커는 이미 봤을 수 있기 때문입니다. 그 다음 BFG나 git-filter-repo로 히스토리에서 완전 삭제하고, CloudTrail 같은 로그에서 침해 여부를 확인합니다. 재발 방지를 위해 pre-commit hook과 GitHub Secret Scanning을 설정합니다.\"\n\n---\n\n**Q: \"프로덕션 환경에서 시크릿은 어떻게 관리하나요?\"**\n\n✅ 모범 답안:\n\"프로덕션에서는 코드에 시크릿을 하드코딩하지 않고, HashiCorp Vault나 AWS Secrets Manager 같은 전용 도구를 사용합니다. 애플리케이션이 시작할 때 Vault에서 시크릿을 가져오고, 주기적으로 자동 교체(rotation)합니다. 로컬 개발에서는 .env 파일을 사용하되 반드시 .gitignore에 등록합니다.\"\n\n---\n\n**Q: \"팀에서 시크릿 관리 정책을 어떻게 수립하시겠습니까?\"**\n\n✅ 모범 답안:\n\"첫째, 모든 프로젝트에 .gitignore 템플릿을 강제 적용합니다. 둘째, pre-commit hook으로 시크릿 패턴을 자동 검사합니다. 셋째, 분기별로 시크릿 로테이션 정책을 실행합니다. 넷째, 신입 온보딩 시 시크릿 관리 교육을 필수로 진행합니다. 사고 사례를 공유하면 경각심이 높아집니다.\""
+      }
+    ]
+  },
+  "02_브랜치/branch-concept": {
+    "id": "02_브랜치/branch-concept",
+    "title": "브랜치 개념",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "Git 브랜치의 개념과 필요성을 이해합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "브랜치란?",
+        "content": "브랜치는 독립적인 작업 공간입니다. 메인 코드에 영향을 주지 않고 새 기능을 개발하거나 버그를 수정할 수 있습니다.\n\n**브랜치의 장점:**\n1. 병렬 개발: 여러 기능을 동시에 개발\n2. 안전한 실험: 메인 코드 보호\n3. 코드 리뷰: PR을 통한 검토 가능\n4. 롤백 용이: 문제 시 쉽게 되돌리기"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "브랜치 기본 명령어",
+        "code": "# === 브랜치 조회 ===\ngit branch              # 로컬 브랜치 목록\ngit branch -r           # 원격 브랜치 목록\ngit branch -a           # 모든 브랜치 목록\ngit branch -v           # 브랜치별 최신 커밋\n\n# === 브랜치 생성 ===\ngit branch feature      # 브랜치 생성\ngit checkout -b feature # 생성 + 이동\ngit switch -c feature   # 생성 + 이동 (Git 2.23+)\n\n# === 브랜치 이동 ===\ngit checkout feature    # 브랜치로 이동\ngit switch feature      # 브랜치로 이동 (권장)\n\n# === 브랜치 삭제 ===\ngit branch -d feature   # 병합된 브랜치 삭제\ngit branch -D feature   # 강제 삭제"
+      },
+      {
+        "type": "tip",
+        "title": "브랜치 이름 규칙",
+        "content": "• feature/기능명: 새 기능 개발\n• bugfix/버그명: 버그 수정\n• hotfix/이슈명: 긴급 수정\n• release/버전: 릴리스 준비\n예: feature/user-login, bugfix/login-error"
+      }
+    ]
+  },
+  "02_브랜치/branch-create": {
+    "id": "02_브랜치/branch-create",
+    "title": "브랜치 생성",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "브랜치를 생성하고 관리하는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "브랜치 생성 시나리오",
+        "content": "브랜치는 다양한 상황에서 생성합니다:\n1. 새 기능 개발 시작\n2. 버그 수정 작업\n3. 실험적인 변경 테스트\n4. 릴리스 준비"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "브랜치 생성 및 관리",
+        "code": "# === 다양한 브랜치 생성 방법 ===\n# 1. 현재 위치에서 생성\ngit branch feature-login\ngit switch feature-login\n\n# 2. 생성과 동시에 이동\ngit switch -c feature-signup\n\n# 3. 특정 커밋에서 생성\ngit branch hotfix-bug abc123\n\n# 4. 원격 브랜치 기반으로 생성\ngit switch -c local-branch origin/remote-branch\n\n# === 브랜치 이름 변경 ===\ngit branch -m old-name new-name\ngit branch -m new-name  # 현재 브랜치 이름 변경\n\n# === 원격 브랜치 푸시 ===\ngit push -u origin feature-login\n# -u 옵션: upstream 설정 (이후 git push만 하면 됨)"
+      },
+      {
+        "type": "tip",
+        "title": "작업 흐름 예시",
+        "content": "1. git switch -c feature/login  # 브랜치 생성\n2. # 코드 작업...\n3. git add . && git commit -m \"Add login\"\n4. git push -u origin feature/login\n5. # GitHub에서 PR 생성\n6. # 리뷰 후 merge\n7. git switch main && git pull"
+      }
+    ]
+  },
+  "02_브랜치/merge": {
+    "id": "02_브랜치/merge",
+    "title": "브랜치 병합 (Merge)",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "브랜치를 병합하여 변경 사항을 통합합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Merge란?",
+        "content": "Merge는 두 브랜치의 변경 사항을 하나로 합치는 것입니다.\n\n**Merge 유형:**\n1. Fast-forward: 브랜치가 직선상에 있을 때 (포인터만 이동)\n2. 3-way merge: 분기된 브랜치를 합칠 때 (병합 커밋 생성)"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Merge 실행",
+        "code": "# === 기본 Merge ===\n# 1. 대상 브랜치로 이동\ngit switch main\n\n# 2. 병합\ngit merge feature-login\n\n# === Merge 옵션 ===\n# Fast-forward 없이 항상 병합 커밋 생성\ngit merge --no-ff feature-login\n\n# Squash: 여러 커밋을 하나로 합쳐서 병합\ngit merge --squash feature-login\ngit commit -m \"Add login feature\"\n\n# === Merge 취소 ===\n# 충돌 중 병합 취소\ngit merge --abort\n\n# 병합 후 되돌리기\ngit reset --hard HEAD~1"
+      },
+      {
+        "type": "tip",
+        "title": "--no-ff vs Fast-forward",
+        "content": "• Fast-forward: 이력이 단순, 브랜치 흔적 없음\n• --no-ff: 병합 커밋 생성, 브랜치 이력 보존\n\n팀에서는 --no-ff를 권장: 기능 단위로 이력 확인 가능"
+      }
+    ]
+  },
+  "02_브랜치/conflict": {
+    "id": "02_브랜치/conflict",
+    "title": "충돌 해결",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "Git 병합 충돌을 이해하고 해결하는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "충돌이란?",
+        "content": "충돌은 두 브랜치에서 같은 파일의 같은 부분을 다르게 수정했을 때 발생합니다. Git이 자동으로 병합할 수 없어 수동 해결이 필요합니다.\n\n**충돌 발생 시나리오:**\n1. 같은 라인 수정\n2. 한 쪽에서 삭제, 다른 쪽에서 수정\n3. 파일 이름 변경 충돌"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "충돌 해결 과정",
+        "code": "# 병합 시도\ngit merge feature-branch\n# CONFLICT (content): Merge conflict in file.txt\n\n# 충돌 파일 확인\ngit status\n# both modified: file.txt\n\n# 충돌 마커 예시 (file.txt):\n<<<<<<< HEAD\n현재 브랜치의 내용\n=======\n병합하려는 브랜치의 내용\n>>>>>>> feature-branch\n\n# 수동으로 충돌 해결 후:\n# 1. 충돌 마커 제거\n# 2. 원하는 내용으로 수정\n# 3. 스테이징 및 커밋\ngit add file.txt\ngit commit -m \"Resolve merge conflict\"\n\n# 충돌 중 병합 취소\ngit merge --abort"
+      },
+      {
+        "type": "tip",
+        "title": "충돌 예방 팁",
+        "content": "1. 자주 pull/merge하여 최신 상태 유지\n2. 작은 단위로 자주 커밋\n3. 같은 파일 동시 수정 피하기\n4. 브랜치 작업 시간 짧게 유지\n\nVS Code에서 충돌 해결: Accept Current/Incoming/Both 버튼 활용"
+      }
+    ]
+  },
+  "02_브랜치/rebase": {
+    "id": "02_브랜치/rebase",
+    "title": "Rebase",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "git rebase로 커밋 이력을 깔끔하게 정리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Rebase란?",
+        "content": "Rebase는 브랜치의 베이스(시작점)를 다른 커밋으로 옮기는 것입니다. 커밋 이력을 직선으로 만들어 깔끔하게 유지할 수 있습니다.\n\n**Merge vs Rebase:**\n• Merge: 병합 커밋 생성, 이력 보존\n• Rebase: 커밋 재작성, 깔끔한 직선 이력"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Rebase 사용법",
+        "code": "# === 기본 Rebase ===\n# feature 브랜치를 main 최신 상태 위로 이동\ngit switch feature\ngit rebase main\n\n# 충돌 발생 시\n# 1. 충돌 해결\n# 2. git add .\n# 3. git rebase --continue\n# 취소: git rebase --abort\n\n# === Interactive Rebase ===\n# 최근 3개 커밋 정리\ngit rebase -i HEAD~3\n\n# 에디터에서 옵션:\n# pick: 커밋 유지\n# reword: 메시지 수정\n# squash: 이전 커밋과 합치기\n# fixup: 합치고 메시지 버리기\n# drop: 커밋 삭제\n\n# === Rebase 후 푸시 ===\n# 이미 푸시한 브랜치는 force push 필요\ngit push --force-with-lease origin feature"
+      },
+      {
+        "type": "tip",
+        "title": "Rebase 주의사항",
+        "content": "⚠️ 황금률: 이미 공유된(push된) 커밋은 rebase 하지 않기!\n\n다른 사람과 공유한 브랜치를 rebase하면 이력이 꼬입니다.\n\n안전한 사용:\n• 로컬에서만 작업한 브랜치\n• 혼자 작업하는 브랜치\n• PR 전 정리 목적"
+      }
+    ]
+  },
+  "02_브랜치/merge-vs-rebase": {
+    "id": "02_브랜치/merge-vs-rebase",
+    "title": "Merge vs Rebase",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "Merge와 Rebase의 차이점과 사용 시나리오를 비교합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "언제 무엇을 사용할까?",
+        "content": "**Merge 사용:**\n• 공유된 브랜치 통합 시\n• 기능 브랜치 이력 보존 필요 시\n• 팀 협업에서 안전한 선택\n\n**Rebase 사용:**\n• 로컬 브랜치 정리 시\n• 깔끔한 직선 이력 원할 때\n• PR 전 커밋 정리 시"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "비교 예시",
+        "code": "# === Merge 결과 ===\n# 병합 커밋 포함, 분기점 보존\n*   Merge branch 'feature'\n|\\  \n| * feature commit 2\n| * feature commit 1\n* | main commit\n|/  \n* base commit\n\n# === Rebase 결과 ===\n# 직선 이력, 병합 커밋 없음\n* feature commit 2\n* feature commit 1\n* main commit\n* base commit\n\n# === 실전 워크플로우 ===\n# 1. 기능 개발 중 main 업데이트 반영\ngit switch feature\ngit rebase main\n\n# 2. 완료 후 main에 병합\ngit switch main\ngit merge --no-ff feature"
+      },
+      {
+        "type": "tip",
+        "title": "팀 컨벤션",
+        "content": "대부분의 팀은 다음 규칙을 따릅니다:\n\n1. main/develop → feature: rebase로 최신화\n2. feature → main: merge (--no-ff)\n3. PR 전: interactive rebase로 커밋 정리\n4. 공유된 브랜치: merge만 사용"
+      }
+    ]
+  },
+  "02_브랜치/merge-type": {
+    "id": "02_브랜치/merge-type",
+    "title": "Merge 유형",
+    "category": "collaboration",
+    "subCategory": "02_브랜치",
+    "language": "Bash",
+    "description": "다양한 Merge 유형과 특징을 알아봅니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "3가지 Merge 유형",
+        "content": "1. **Fast-forward Merge**\n   - 분기 없이 직선 이력일 때\n   - 포인터만 앞으로 이동\n   - 병합 커밋 없음\n\n2. **3-way Merge**\n   - 분기된 브랜치 병합 시\n   - 공통 조상 + 두 브랜치 비교\n   - 병합 커밋 생성\n\n3. **Squash Merge**\n   - 여러 커밋을 하나로 압축\n   - 깔끔한 main 이력 유지"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Merge 유형별 명령어",
+        "code": "# === Fast-forward (기본) ===\ngit merge feature\n# main이 feature로 이동 (직선일 때)\n\n# === No Fast-forward ===\ngit merge --no-ff feature\n# 항상 병합 커밋 생성\n\n# === Squash Merge ===\ngit merge --squash feature\ngit commit -m \"Add feature (squashed)\"\n# feature의 모든 커밋을 하나로 합침\n\n# === GitHub/GitLab PR 옵션 ===\n# Create a merge commit: --no-ff와 유사\n# Squash and merge: --squash와 유사\n# Rebase and merge: rebase 후 fast-forward"
+      },
+      {
+        "type": "tip",
+        "title": "선택 가이드",
+        "content": "• Fast-forward: 단순한 작업, 이력 최소화\n• No-ff: 기능 단위 이력 보존 (팀 권장)\n• Squash: main 이력 깔끔하게 (PR에서 자주 사용)"
+      }
+    ]
+  },
+  "03_되돌리기/git-reset": {
+    "id": "03_되돌리기/git-reset",
+    "title": "Git Reset",
+    "category": "collaboration",
+    "subCategory": "03_되돌리기",
+    "language": "Bash",
+    "description": "git reset으로 커밋을 되돌리는 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Reset의 3가지 모드",
+        "content": "git reset은 HEAD를 특정 커밋으로 이동시킵니다:\n\n1. **--soft**: 커밋만 취소, 변경사항은 staged 상태로 유지\n2. **--mixed (기본)**: 커밋 취소, 변경사항은 unstaged 상태로 유지\n3. **--hard**: 커밋 취소, 변경사항도 모두 삭제"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Reset 사용법",
+        "code": "# === 직전 커밋 취소 ===\ngit reset --soft HEAD~1   # 변경사항 staged 유지\ngit reset --mixed HEAD~1  # 변경사항 unstaged 유지\ngit reset --hard HEAD~1   # 변경사항 삭제\n\n# === 특정 커밋으로 이동 ===\ngit reset --hard abc123\n\n# === 스테이징 취소 ===\ngit reset HEAD file.txt   # 특정 파일\ngit reset HEAD            # 모든 파일\n\n# === 실수로 reset --hard 후 복구 ===\ngit reflog               # 이력 확인\ngit reset --hard HEAD@{2}  # 특정 상태로 복구\n\n# === Reset 후 원격 반영 ===\n# ⚠️ 이미 push한 커밋은 주의!\ngit push --force-with-lease origin branch"
+      },
+      {
+        "type": "tip",
+        "title": "Reset vs Revert",
+        "content": "• Reset: 커밋 이력 자체를 삭제 (로컬 작업용)\n• Revert: 취소하는 새 커밋 생성 (공유된 브랜치용)\n\n⚠️ 이미 push한 커밋은 revert 사용 권장!"
+      }
+    ]
+  },
+  "03_되돌리기/git-revert": {
+    "id": "03_되돌리기/git-revert",
+    "title": "Git Revert",
+    "category": "collaboration",
+    "subCategory": "03_되돌리기",
+    "language": "Bash",
+    "description": "git revert로 안전하게 커밋을 되돌립니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Revert란?",
+        "content": "Revert는 특정 커밋의 변경사항을 취소하는 새로운 커밋을 생성합니다. 이력을 보존하면서 안전하게 되돌릴 수 있어 공유된 브랜치에서 사용하기 적합합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Revert 사용법",
+        "code": "# === 특정 커밋 되돌리기 ===\ngit revert abc123\n# 에디터에서 커밋 메시지 작성 후 저장\n\n# === 메시지 없이 바로 커밋 ===\ngit revert abc123 --no-edit\n\n# === 커밋 생성 없이 변경만 ===\ngit revert abc123 --no-commit\n# 직접 확인 후 커밋 가능\n\n# === 여러 커밋 되돌리기 ===\ngit revert abc123 def456  # 여러 커밋\ngit revert HEAD~3..HEAD   # 범위로 지정\n\n# === Merge 커밋 되돌리기 ===\n# -m 옵션으로 유지할 부모 지정 (보통 1)\ngit revert -m 1 merge-commit-hash\n\n# === Revert 중 충돌 ===\n# 충돌 해결 후\ngit revert --continue\n# 취소\ngit revert --abort"
+      },
+      {
+        "type": "tip",
+        "title": "Revert 사용 시나리오",
+        "content": "1. 배포 후 문제 발생: 해당 커밋 revert\n2. 잘못된 merge 취소: merge 커밋 revert\n3. 특정 기능 일시 제거: 해당 커밋들 revert\n\nRevert의 revert도 가능! (원래 변경 다시 적용)"
+      }
+    ]
+  },
+  "03_되돌리기/git-stash": {
+    "id": "03_되돌리기/git-stash",
+    "title": "Git Stash",
+    "category": "collaboration",
+    "subCategory": "03_되돌리기",
+    "language": "Bash",
+    "description": "git stash로 작업 중인 변경사항을 임시 저장합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Stash란?",
+        "content": "Stash는 작업 중인 변경사항을 임시로 저장해두는 기능입니다. 다른 브랜치로 전환하거나 급한 작업을 처리할 때 유용합니다.\n\n**사용 시나리오:**\n• 작업 중 다른 브랜치로 긴급 전환\n• 실험적 변경 임시 보관\n• 다른 브랜치에 변경사항 적용"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Stash 명령어",
+        "code": "# === 기본 사용 ===\ngit stash                # 변경사항 저장\ngit stash push -m \"메모\"  # 메시지와 함께 저장\n\n# === Stash 목록 ===\ngit stash list\n# stash@{0}: On main: 메모\n# stash@{1}: WIP on feature: abc123 commit message\n\n# === Stash 적용 ===\ngit stash pop            # 적용 후 stash에서 삭제\ngit stash apply          # 적용만 (stash 유지)\ngit stash apply stash@{1}  # 특정 stash 적용\n\n# === Stash 삭제 ===\ngit stash drop stash@{0}  # 특정 stash 삭제\ngit stash clear          # 모든 stash 삭제\n\n# === 고급 옵션 ===\ngit stash -u             # untracked 파일 포함\ngit stash --keep-index   # staged 변경 제외\ngit stash show stash@{0} # stash 내용 확인\ngit stash show -p        # 상세 diff 보기"
+      },
+      {
+        "type": "tip",
+        "title": "Stash 활용 팁",
+        "content": "• stash는 stack 구조 (LIFO)\n• 다른 브랜치에서도 stash 적용 가능\n• 충돌 발생 시 수동 해결 필요\n• git stash branch 브랜치명: 새 브랜치에 stash 적용"
+      }
+    ]
+  },
+  "03_되돌리기/git-cherry-pick": {
+    "id": "03_되돌리기/git-cherry-pick",
+    "title": "Git Cherry-pick",
+    "category": "collaboration",
+    "subCategory": "03_되돌리기",
+    "language": "Bash",
+    "description": "특정 커밋만 선택적으로 가져오는 cherry-pick을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Cherry-pick이란?",
+        "content": "Cherry-pick은 다른 브랜치의 특정 커밋만 선택하여 현재 브랜치에 적용하는 기능입니다.\n\n**사용 시나리오:**\n• 핫픽스를 여러 브랜치에 적용\n• 특정 기능만 다른 브랜치에 가져오기\n• 잘못된 브랜치에서 작업한 커밋 이동"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Cherry-pick 사용법",
+        "code": "# === 기본 사용 ===\ngit cherry-pick abc123    # 특정 커밋 적용\n\n# === 여러 커밋 ===\ngit cherry-pick abc123 def456  # 여러 커밋\ngit cherry-pick abc123..def456 # 범위 (abc123 제외)\ngit cherry-pick abc123^..def456 # 범위 (abc123 포함)\n\n# === 옵션 ===\ngit cherry-pick -n abc123  # 커밋 없이 적용만\ngit cherry-pick -e abc123  # 메시지 수정\ngit cherry-pick -x abc123  # 원본 커밋 정보 추가\n\n# === 충돌 시 ===\n# 충돌 해결 후\ngit cherry-pick --continue\n# 취소\ngit cherry-pick --abort\n# 건너뛰기\ngit cherry-pick --skip"
+      },
+      {
+        "type": "tip",
+        "title": "주의사항",
+        "content": "• Cherry-pick은 새 커밋을 생성 (해시가 다름)\n• 같은 변경을 두 브랜치에 적용하면 이후 충돌 가능\n• merge로 해결 가능한 경우 merge 권장\n• 자주 사용한다면 브랜치 전략 재검토 필요"
+      }
+    ]
+  },
+  "03_되돌리기/reset-vs-revert": {
+    "id": "03_되돌리기/reset-vs-revert",
+    "title": "Reset vs Revert",
+    "category": "collaboration",
+    "subCategory": "03_되돌리기",
+    "language": "Bash",
+    "description": "Reset과 Revert의 차이점과 사용 시나리오를 비교합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "핵심 차이점",
+        "content": "**Git Reset:**\n• 커밋 이력 자체를 삭제/이동\n• 로컬에서만 사용 (push 전)\n• 위험하지만 깔끔한 이력\n\n**Git Revert:**\n• 취소 커밋을 새로 생성\n• 이력 보존 (안전)\n• 공유된 브랜치에서 사용"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "사용 시나리오 비교",
+        "code": "# === 시나리오 1: 방금 한 커밋 취소 (push 전) ===\ngit reset --soft HEAD~1    # Reset 사용 OK\n\n# === 시나리오 2: 이미 push한 커밋 취소 ===\ngit revert abc123          # Revert 사용!\n# reset 후 force push는 위험!\n\n# === 시나리오 3: 로컬 커밋 여러 개 정리 ===\ngit reset --soft HEAD~3\ngit commit -m \"Clean commit\"\n\n# === 시나리오 4: 특정 기능 제거 (운영 배포됨) ===\ngit revert feature-commit  # 안전하게 제거\n\n# === 이력 비교 ===\n# Reset 후:\n# A - B - C (C에서 B로 reset)\n# A - B\n\n# Revert 후:\n# A - B - C (C를 revert)\n# A - B - C - C' (C 취소 커밋)"
+      },
+      {
+        "type": "tip",
+        "title": "선택 가이드",
+        "content": "1. 아직 push 안 했다? → Reset\n2. 이미 push 했다? → Revert\n3. 팀과 공유 중? → Revert\n4. 혼자 작업 중? → 둘 다 OK\n5. 확실하지 않다? → Revert (안전)"
+      }
+    ]
+  },
+  "04_협업/pr": {
+    "id": "04_협업/pr",
+    "title": "Pull Request (PR)",
+    "category": "collaboration",
+    "subCategory": "04_협업",
+    "language": "Bash",
+    "description": "Pull Request를 통한 코드 리뷰와 협업 프로세스를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "PR이란?",
+        "content": "Pull Request(PR)는 브랜치의 변경사항을 다른 브랜치에 병합해달라고 요청하는 것입니다. 코드 리뷰를 통해 품질을 높이고 지식을 공유합니다.\n\n**PR의 장점:**\n1. 코드 리뷰를 통한 품질 향상\n2. 지식 공유 및 학습\n3. 변경 이력 문서화\n4. CI/CD 자동화 연계"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "PR 워크플로우",
+        "code": "# === 1. 기능 브랜치 생성 ===\ngit switch -c feature/login\n\n# === 2. 작업 및 커밋 ===\n# 코드 작업...\ngit add .\ngit commit -m \"feat: Add login functionality\"\n\n# === 3. 원격에 푸시 ===\ngit push -u origin feature/login\n\n# === 4. GitHub에서 PR 생성 ===\n# - 제목, 설명 작성\n# - 리뷰어 지정\n# - 라벨 추가\n\n# === 5. 리뷰 반영 ===\n# 리뷰 코멘트에 따라 수정\ngit add .\ngit commit -m \"fix: Address review feedback\"\ngit push\n\n# === 6. Merge 후 정리 ===\ngit switch main\ngit pull\ngit branch -d feature/login  # 로컬 브랜치 삭제"
+      },
+      {
+        "type": "tip",
+        "title": "좋은 PR 작성법",
+        "content": "1. 작은 단위로 PR 생성 (300줄 이내 권장)\n2. 명확한 제목과 설명\n3. 스크린샷/동영상 첨부 (UI 변경 시)\n4. 관련 이슈 링크\n5. 셀프 리뷰 먼저 진행"
+      }
+    ]
+  },
+  "04_협업/commit-convention": {
+    "id": "04_협업/commit-convention",
+    "title": "커밋 컨벤션",
+    "category": "collaboration",
+    "subCategory": "04_협업",
+    "language": "Text",
+    "description": "일관된 커밋 메시지 작성을 위한 컨벤션을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "커밋 메시지 컨벤션",
+        "content": "Conventional Commits 형식을 따르면 커밋 이력을 쉽게 파악하고 자동화 도구를 활용할 수 있습니다.\n\n**형식:**\n<type>(<scope>): <subject>\n\n<body>\n\n<footer>"
+      },
+      {
+        "type": "code",
+        "language": "text",
+        "title": "커밋 타입 및 예시",
+        "code": "# === 커밋 타입 ===\nfeat:     새로운 기능 추가\nfix:      버그 수정\ndocs:     문서 수정\nstyle:    코드 포맷팅 (세미콜론 등)\nrefactor: 코드 리팩토링\ntest:     테스트 추가/수정\nchore:    빌드, 설정 파일 수정\nperf:     성능 개선\n\n# === 예시 ===\nfeat(auth): Add login functionality\n\nfix(api): Fix null pointer exception in user service\n\nRefactoring을 적용하여 코드 품질을 개선합니다.\nCRE: JIR-123\n\ndocs: Update README with installation guide\n\nchore: Update dependencies to latest versions\n\n# === Breaking Change 표시 ===\nfeat!: Change API response format\n\nBREAKING CHANGE: API 응답 형식이 변경되었습니다."
+      },
+      {
+        "type": "tip",
+        "title": "커밋 메시지 팁",
+        "content": "1. 제목은 50자 이내, 명령형으로\n2. 제목 끝에 마침표 X\n3. 본문은 72자마다 줄바꿈\n4. Why(왜)와 What(무엇)을 설명\n5. 이슈 번호 연결: Fixes #123"
+      }
+    ]
+  },
+  "04_협업/code-review": {
+    "id": "04_협업/code-review",
+    "title": "코드 리뷰",
+    "category": "collaboration",
+    "subCategory": "04_협업",
+    "language": "Text",
+    "description": "효과적인 코드 리뷰 방법과 베스트 프랙티스를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "코드 리뷰의 목적",
+        "content": "**왜 코드 리뷰를 하나요?**\n1. 버그 조기 발견\n2. 코드 품질 향상\n3. 지식 공유\n4. 일관된 코딩 스타일\n5. 팀 역량 향상\n\n**리뷰어의 자세:**\n• 코드를 비판, 사람을 비판하지 않음\n• 구체적이고 건설적인 피드백\n• 좋은 점도 언급"
+      },
+      {
+        "type": "code",
+        "language": "text",
+        "title": "코드 리뷰 체크리스트",
+        "code": "# === 기능 ===\n[ ] 요구사항을 충족하는가?\n[ ] 엣지 케이스 처리가 되어있는가?\n[ ] 에러 처리가 적절한가?\n\n# === 코드 품질 ===\n[ ] 변수/함수명이 명확한가?\n[ ] 중복 코드가 없는가?\n[ ] 함수가 하나의 역할만 하는가?\n[ ] 주석이 필요한 곳에 있는가?\n\n# === 보안 ===\n[ ] SQL Injection 위험은 없는가?\n[ ] XSS 위험은 없는가?\n[ ] 민감 정보가 노출되지 않는가?\n\n# === 성능 ===\n[ ] N+1 쿼리 문제는 없는가?\n[ ] 불필요한 API 호출은 없는가?\n\n# === 테스트 ===\n[ ] 테스트 코드가 있는가?\n[ ] 테스트가 의미있는가?"
+      },
+      {
+        "type": "tip",
+        "title": "리뷰 코멘트 예시",
+        "content": "❌ \"이건 잘못됐어요\"\n✅ \"이 부분은 null 체크가 필요해 보입니다. user가 없을 경우 예외가 발생할 수 있어요.\"\n\n❌ \"왜 이렇게 했어요?\"\n✅ \"이 접근 방식을 선택한 이유가 궁금합니다. XXX 방식도 고려해보셨나요?\"\n\n✅ \"깔끔하게 잘 정리하셨네요! 👍\""
+      }
+    ]
+  },
+  "03_전략/git-flow": {
+    "id": "03_전략/git-flow",
+    "title": "Git Flow",
+    "category": "collaboration",
+    "subCategory": "03_전략",
+    "language": "Bash",
+    "description": "Git Flow 브랜치 전략을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Git Flow란?",
+        "content": "Git Flow는 Vincent Driessen이 제안한 브랜치 관리 전략입니다.\n\n**5가지 브랜치:**\n1. **main**: 릴리스된 코드\n2. **develop**: 개발 중인 코드\n3. **feature/***: 기능 개발\n4. **release/***: 릴리스 준비\n5. **hotfix/***: 긴급 버그 수정"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "Git Flow 워크플로우",
+        "code": "# === 기능 개발 ===\ngit switch develop\ngit switch -c feature/login\n# 개발 작업...\ngit switch develop\ngit merge --no-ff feature/login\ngit branch -d feature/login\n\n# === 릴리스 준비 ===\ngit switch develop\ngit switch -c release/1.0.0\n# 버그 수정, 버전 업데이트...\ngit switch main\ngit merge --no-ff release/1.0.0\ngit tag -a v1.0.0 -m \"Version 1.0.0\"\ngit switch develop\ngit merge --no-ff release/1.0.0\ngit branch -d release/1.0.0\n\n# === 핫픽스 ===\ngit switch main\ngit switch -c hotfix/critical-bug\n# 긴급 수정...\ngit switch main\ngit merge --no-ff hotfix/critical-bug\ngit tag -a v1.0.1\ngit switch develop\ngit merge --no-ff hotfix/critical-bug"
+      },
+      {
+        "type": "tip",
+        "title": "Git Flow 특징",
+        "content": "장점:\n• 체계적인 릴리스 관리\n• 역할이 명확한 브랜치\n\n단점:\n• 복잡한 구조\n• 빠른 배포에 부적합\n\n적합한 환경: 정기 릴리스, 버전 관리 필요한 프로젝트"
+      }
+    ]
+  },
+  "03_전략/github-flow": {
+    "id": "03_전략/github-flow",
+    "title": "GitHub Flow",
+    "category": "collaboration",
+    "subCategory": "03_전략",
+    "language": "Bash",
+    "description": "GitHub Flow 브랜치 전략을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "GitHub Flow란?",
+        "content": "GitHub Flow는 GitHub에서 제안한 단순한 브랜치 전략입니다.\n\n**규칙:**\n1. main 브랜치는 항상 배포 가능\n2. 기능 개발은 main에서 브랜치 생성\n3. 정기적으로 push\n4. PR로 리뷰 후 merge\n5. merge 즉시 배포"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "GitHub Flow 워크플로우",
+        "code": "# === 1. 브랜치 생성 (main에서) ===\ngit switch main\ngit pull\ngit switch -c feature/add-login\n\n# === 2. 개발 및 푸시 ===\n# 코드 작업...\ngit add .\ngit commit -m \"feat: Add login form\"\ngit push -u origin feature/add-login\n\n# === 3. PR 생성 ===\n# GitHub에서 PR 생성\n# - 리뷰 요청\n# - CI 통과 확인\n\n# === 4. 리뷰 후 Merge ===\n# GitHub에서 Merge 버튼\n\n# === 5. 배포 ===\n# main에 merge되면 자동 배포 (CD)\n\n# === 6. 로컬 정리 ===\ngit switch main\ngit pull\ngit branch -d feature/add-login"
+      },
+      {
+        "type": "tip",
+        "title": "GitHub Flow 특징",
+        "content": "장점:\n• 단순하고 이해하기 쉬움\n• 지속적 배포에 적합\n• 빠른 피드백 사이클\n\n단점:\n• 릴리스 버전 관리 어려움\n• 여러 버전 운영 시 부적합\n\n적합한 환경: SaaS, 웹 서비스, CI/CD 환경"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "협업 & Git",
+    "category": "collaboration",
+    "subCategory": null,
+    "language": "Text",
+    "description": "Git과 협업 도구를 활용한 효과적인 팀 개발을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "협업 & Git 학습 로드맵",
+        "content": "1. Git 기초: 버전 관리의 기본 개념\n2. 브랜치: 병렬 개발과 병합\n3. 되돌리기: Reset, Revert, Stash\n4. 협업: PR, 코드 리뷰\n5. 전략: Git Flow, GitHub Flow"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "기본 Git 워크플로우",
+        "code": "git clone repo-url      # 저장소 복제\ngit switch -c feature   # 브랜치 생성\n# 코드 작업...\ngit add .\ngit commit -m \"message\"\ngit push origin feature # PR 생성"
+      }
+    ]
+  }
+}

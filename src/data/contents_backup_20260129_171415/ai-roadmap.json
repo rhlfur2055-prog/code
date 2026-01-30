@@ -1,0 +1,415 @@
+{
+  "01_python-basics/01_variables": {
+    "id": "01_python-basics/01_variables",
+    "title": "01 Variables",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_python-basics/02_control_flow": {
+    "id": "01_python-basics/02_control_flow",
+    "title": "02 Control Flow",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_python-basics/03_functions": {
+    "id": "01_python-basics/03_functions",
+    "title": "03 Functions",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_python-basics/04_classes": {
+    "id": "01_python-basics/04_classes",
+    "title": "04 Classes",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_python-basics/05_modules": {
+    "id": "01_python-basics/05_modules",
+    "title": "05 Modules",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_python-basics/intro": {
+    "id": "01_python-basics/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "01_python-basics",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/01_numpy_basics": {
+    "id": "02_python-data/01_numpy_basics",
+    "title": "01 Numpy Basics",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/02_numpy_operations": {
+    "id": "02_python-data/02_numpy_operations",
+    "title": "02 Numpy Operations",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/03_pandas_dataframe": {
+    "id": "02_python-data/03_pandas_dataframe",
+    "title": "03 Pandas Dataframe",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/04_pandas_analysis": {
+    "id": "02_python-data/04_pandas_analysis",
+    "title": "04 Pandas Analysis",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/05_matplotlib": {
+    "id": "02_python-data/05_matplotlib",
+    "title": "05 Matplotlib",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_python-data/numpy": {
+    "id": "02_python-data/numpy",
+    "title": "Numpy",
+    "category": "ai-roadmap",
+    "subCategory": "02_python-data",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/01_image_read": {
+    "id": "03_python-opencv/01_image_read",
+    "title": "01 Image Read",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/02_image_transform": {
+    "id": "03_python-opencv/02_image_transform",
+    "title": "02 Image Transform",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/03_color_space": {
+    "id": "03_python-opencv/03_color_space",
+    "title": "03 Color Space",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/04_drawing": {
+    "id": "03_python-opencv/04_drawing",
+    "title": "04 Drawing",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/05_video": {
+    "id": "03_python-opencv/05_video",
+    "title": "05 Video",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_python-opencv/intro": {
+    "id": "03_python-opencv/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "03_python-opencv",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/01_requests_basics": {
+    "id": "04_python-webscraping/01_requests_basics",
+    "title": "01 Requests Basics",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/02_beautifulsoup": {
+    "id": "04_python-webscraping/02_beautifulsoup",
+    "title": "02 Beautifulsoup",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/03_selenium": {
+    "id": "04_python-webscraping/03_selenium",
+    "title": "03 Selenium",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/04_scrapy": {
+    "id": "04_python-webscraping/04_scrapy",
+    "title": "04 Scrapy",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/05_ai_data_collect": {
+    "id": "04_python-webscraping/05_ai_data_collect",
+    "title": "05 Ai Data Collect",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_python-webscraping/intro": {
+    "id": "04_python-webscraping/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "04_python-webscraping",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/01_pytorch_tensor": {
+    "id": "05_python-ai-libs/01_pytorch_tensor",
+    "title": "01 Pytorch Tensor",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/02_pytorch_model": {
+    "id": "05_python-ai-libs/02_pytorch_model",
+    "title": "02 Pytorch Model",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/03_transformers": {
+    "id": "05_python-ai-libs/03_transformers",
+    "title": "03 Transformers",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/04_ultralytics": {
+    "id": "05_python-ai-libs/04_ultralytics",
+    "title": "04 Ultralytics",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/05_diffusers": {
+    "id": "05_python-ai-libs/05_diffusers",
+    "title": "05 Diffusers",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_python-ai-libs/pytorch": {
+    "id": "05_python-ai-libs/pytorch",
+    "title": "Pytorch",
+    "category": "ai-roadmap",
+    "subCategory": "05_python-ai-libs",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_java-basics/intro": {
+    "id": "06_java-basics/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "06_java-basics",
+    "language": "Java",
+    "description": "Java 클래스와 메인 메서드 구조입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "07_spring-boot-basics/intro": {
+    "id": "07_spring-boot-basics/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "07_spring-boot-basics",
+    "language": "Java",
+    "description": "스프링 빈과 DI 원리입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Intro",
+        "content": "스프링 빈과 DI 원리입니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Service\r\npublic class MyService {}"
+      }
+    ]
+  },
+  "08_spring-ai-api/intro": {
+    "id": "08_spring-ai-api/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "08_spring-ai-api",
+    "language": "Java",
+    "description": "스프링 빈과 DI 원리입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Intro",
+        "content": "스프링 빈과 DI 원리입니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "code": "@Service\r\npublic class MyService {}"
+      }
+    ]
+  },
+  "09_rest-api-json/intro": {
+    "id": "09_rest-api-json/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "09_rest-api-json",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "10_async-programming/intro": {
+    "id": "10_async-programming/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "10_async-programming",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "11_database-ai/intro": {
+    "id": "11_database-ai/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "11_database-ai",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "12_fullstack-ai/intro": {
+    "id": "12_fullstack-ai/intro",
+    "title": "Intro",
+    "category": "ai-roadmap",
+    "subCategory": "12_fullstack-ai",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "index": {
+    "id": "index",
+    "title": "🚀 AI 활용 종합 학습 로드맵",
+    "category": "ai-roadmap",
+    "subCategory": null,
+    "language": "Text",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🚀 AI 활용 종합 학습 로드맵",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Text",
+        "code": ""
+      }
+    ]
+  }
+}

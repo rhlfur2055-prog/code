@@ -1,0 +1,384 @@
+{
+  "01_html_basics": {
+    "id": "01_html_basics",
+    "title": "01 Html Basics",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/form-tag": {
+    "id": "01_HTML기초/form-tag",
+    "title": "Form Tag",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/html-attribute": {
+    "id": "01_HTML기초/html-attribute",
+    "title": "Html Attribute",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/html-intro": {
+    "id": "01_HTML기초/html-intro",
+    "title": "Html Intro",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/html-structure": {
+    "id": "01_HTML기초/html-structure",
+    "title": "Html Structure",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/input-types": {
+    "id": "01_HTML기초/input-types",
+    "title": "Input Types",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/link-image": {
+    "id": "01_HTML기초/link-image",
+    "title": "Link Image",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/list-tags": {
+    "id": "01_HTML기초/list-tags",
+    "title": "List Tags",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/semantic-html": {
+    "id": "01_HTML기초/semantic-html",
+    "title": "Semantic Html",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/table-tag": {
+    "id": "01_HTML기초/table-tag",
+    "title": "Table Tag",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_HTML기초/text-tags": {
+    "id": "01_HTML기초/text-tags",
+    "title": "Text Tags",
+    "category": "html-css",
+    "subCategory": "01_HTML기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_css_basics": {
+    "id": "02_css_basics",
+    "title": "02 Css Basics",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/box-model": {
+    "id": "02_CSS기초/box-model",
+    "title": "Box Model",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/box-sizing": {
+    "id": "02_CSS기초/box-sizing",
+    "title": "Box Sizing",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/color-background": {
+    "id": "02_CSS기초/color-background",
+    "title": "Color Background",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/css-connect": {
+    "id": "02_CSS기초/css-connect",
+    "title": "Css Connect",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/css-intro": {
+    "id": "02_CSS기초/css-intro",
+    "title": "Css Intro",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/css-selector": {
+    "id": "02_CSS기초/css-selector",
+    "title": "Css Selector",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/css-specificity": {
+    "id": "02_CSS기초/css-specificity",
+    "title": "Css Specificity",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/display-property": {
+    "id": "02_CSS기초/display-property",
+    "title": "Display Property",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/font-text": {
+    "id": "02_CSS기초/font-text",
+    "title": "Font Text",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_CSS기초/position": {
+    "id": "02_CSS기초/position",
+    "title": "Position",
+    "category": "html-css",
+    "subCategory": "02_CSS기초",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Position",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "03_flexbox": {
+    "id": "03_flexbox",
+    "title": "03 Flexbox",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_레이아웃/flex-items": {
+    "id": "03_레이아웃/flex-items",
+    "title": "Flex Items",
+    "category": "html-css",
+    "subCategory": "03_레이아웃",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_레이아웃/flex-vs-grid": {
+    "id": "03_레이아웃/flex-vs-grid",
+    "title": "Flex Vs Grid",
+    "category": "html-css",
+    "subCategory": "03_레이아웃",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_레이아웃/flexbox": {
+    "id": "03_레이아웃/flexbox",
+    "title": "Flexbox",
+    "category": "html-css",
+    "subCategory": "03_레이아웃",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_레이아웃/grid": {
+    "id": "03_레이아웃/grid",
+    "title": "Grid",
+    "category": "html-css",
+    "subCategory": "03_레이아웃",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_grid": {
+    "id": "04_grid",
+    "title": "04 Grid",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_반응형/media-query": {
+    "id": "04_반응형/media-query",
+    "title": "Media Query",
+    "category": "html-css",
+    "subCategory": "04_반응형",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_반응형/responsive-intro": {
+    "id": "04_반응형/responsive-intro",
+    "title": "Responsive Intro",
+    "category": "html-css",
+    "subCategory": "04_반응형",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_반응형/responsive-units": {
+    "id": "04_반응형/responsive-units",
+    "title": "Responsive Units",
+    "category": "html-css",
+    "subCategory": "04_반응형",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_반응형/viewport": {
+    "id": "04_반응형/viewport",
+    "title": "Viewport",
+    "category": "html-css",
+    "subCategory": "04_반응형",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_responsive": {
+    "id": "05_responsive",
+    "title": "05 Responsive",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_실습/css-reset": {
+    "id": "05_실습/css-reset",
+    "title": "Css Reset",
+    "category": "html-css",
+    "subCategory": "05_실습",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "06_면접/interview-html-css": {
+    "id": "06_면접/interview-html-css",
+    "title": "Interview Html Css",
+    "category": "html-css",
+    "subCategory": "06_면접",
+    "language": "Text",
+    "description": "해당 주제의 핵심 원리를 깊이 있게 탐구합니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "index": {
+    "id": "index",
+    "title": "🌐 Day 31-33: HTML/CSS 기초",
+    "category": "html-css",
+    "subCategory": null,
+    "language": "Day 31",
+    "description": "",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🌐 Day 31-33: HTML/CSS 기초",
+        "content": ""
+      },
+      {
+        "type": "code",
+        "language": "Day 31",
+        "code": ""
+      }
+    ]
+  }
+}

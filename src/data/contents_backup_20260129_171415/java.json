@@ -1,0 +1,763 @@
+{
+  "01_입문/java-intro": {
+    "id": "01_입문/java-intro",
+    "title": "Java 소개",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "Java 언어의 특징과 개발 환경 설정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Java란?",
+        "content": "Java는 1995년 Sun Microsystems에서 개발한 객체지향 프로그래밍 언어입니다. 'Write Once, Run Anywhere(WORA)'라는 철학 아래, JVM(Java Virtual Machine) 위에서 실행되어 플랫폼 독립적입니다.\n\nJava의 주요 특징으로는 객체지향, 자동 메모리 관리(Garbage Collection), 강력한 타입 체크, 멀티스레딩 지원 등이 있습니다. 현재 웹 백엔드(Spring), 안드로이드 앱, 빅데이터(Hadoop) 등 다양한 분야에서 사용됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "첫 번째 Java 프로그램",
+        "code": "// HelloWorld.java - 파일명은 클래스명과 동일해야 함\npublic class HelloWorld {\n    // main 메서드: 프로그램의 시작점\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Java!\");\n        \n        // 변수 선언과 출력\n        String name = \"개발자\";\n        int year = 2024;\n        System.out.println(name + \"님, \" + year + \"년에 오신 것을 환영합니다!\");\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. Java 파일명은 public 클래스명과 동일해야 합니다 (.java 확장자)\n2. main 메서드는 프로그램의 진입점입니다\n3. 모든 문장은 세미콜론(;)으로 끝납니다\n4. 대소문자를 구분합니다 (String ≠ string)"
+      }
+    ]
+  },
+  "01_입문/java-basic-syntax": {
+    "id": "01_입문/java-basic-syntax",
+    "title": "Java 기본 문법",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "변수, 자료형, 기본 문법 구조를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "변수와 자료형",
+        "content": "변수는 데이터를 저장하는 메모리 공간입니다. Java는 정적 타입 언어로, 변수 선언 시 자료형을 명시해야 합니다.\n\n기본형(Primitive Type): byte, short, int, long, float, double, char, boolean\n참조형(Reference Type): String, 배열, 클래스, 인터페이스 등"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "자료형 예제",
+        "code": "public class DataTypes {\n    public static void main(String[] args) {\n        // 정수형\n        byte b = 127;           // -128 ~ 127 (1바이트)\n        short s = 32767;        // -32,768 ~ 32,767 (2바이트)\n        int i = 2147483647;     // 약 ±21억 (4바이트) - 가장 많이 사용\n        long l = 9223372036854775807L;  // L 접미사 필수 (8바이트)\n        \n        // 실수형\n        float f = 3.14f;        // f 접미사 필수 (4바이트)\n        double d = 3.141592;    // 기본 실수형 (8바이트)\n        \n        // 문자형\n        char c = 'A';           // 단일 문자 (2바이트, 유니코드)\n        \n        // 논리형\n        boolean flag = true;    // true 또는 false\n        \n        // 참조형\n        String str = \"Hello\";   // 문자열 (클래스)\n        \n        // 타입 추론 (Java 10+)\n        var number = 100;       // int로 추론\n        var text = \"Java\";      // String으로 추론\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. int는 정수의 기본형, double은 실수의 기본형\n2. long은 L, float는 f 접미사 필요\n3. String은 기본형이 아닌 클래스(참조형)\n4. var 키워드로 타입 추론 가능 (Java 10+)"
+      }
+    ]
+  },
+  "01_입문/java-operator": {
+    "id": "01_입문/java-operator",
+    "title": "Java 연산자",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "산술, 비교, 논리, 대입 연산자를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "연산자 종류",
+        "content": "연산자는 변수나 값에 대해 연산을 수행하는 기호입니다.\n\n• 산술 연산자: +, -, *, /, % (나머지)\n• 비교 연산자: ==, !=, <, >, <=, >=\n• 논리 연산자: && (AND), || (OR), ! (NOT)\n• 대입 연산자: =, +=, -=, *=, /=\n• 증감 연산자: ++, --"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "연산자 예제",
+        "code": "public class Operators {\n    public static void main(String[] args) {\n        // 산술 연산자\n        int a = 10, b = 3;\n        System.out.println(\"덧셈: \" + (a + b));    // 13\n        System.out.println(\"나눗셈: \" + (a / b));  // 3 (정수 나눗셈)\n        System.out.println(\"나머지: \" + (a % b));  // 1\n        \n        // 비교 연산자 (결과는 boolean)\n        System.out.println(a > b);   // true\n        System.out.println(a == b);  // false\n        \n        // 논리 연산자\n        boolean x = true, y = false;\n        System.out.println(x && y);  // false (둘 다 true여야 true)\n        System.out.println(x || y);  // true (하나만 true여도 true)\n        System.out.println(!x);      // false (반전)\n        \n        // 증감 연산자\n        int count = 5;\n        System.out.println(count++); // 5 (출력 후 증가)\n        System.out.println(++count); // 7 (증가 후 출력)\n        \n        // 복합 대입 연산자\n        int score = 100;\n        score += 10;  // score = score + 10\n        score -= 5;   // score = score - 5\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 정수/정수 = 정수 (소수점 버림)\n2. i++ vs ++i: 후위/전위 증감의 차이\n3. &&, ||는 단축 평가(Short-circuit) 수행\n4. == vs equals(): 기본형은 ==, 객체는 equals()"
+      }
+    ]
+  },
+  "01_입문/java-condition": {
+    "id": "01_입문/java-condition",
+    "title": "조건문",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "if, else if, else, switch 조건문을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "조건문이란?",
+        "content": "조건문은 특정 조건에 따라 다른 코드를 실행하게 해주는 제어문입니다.\n\n• if-else: 조건이 참/거짓일 때 분기\n• switch: 값에 따라 여러 경우로 분기\n• 삼항 연산자: 간단한 조건을 한 줄로 표현"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "조건문 예제",
+        "code": "public class Conditions {\n    public static void main(String[] args) {\n        int score = 85;\n        \n        // if-else if-else\n        if (score >= 90) {\n            System.out.println(\"A등급\");\n        } else if (score >= 80) {\n            System.out.println(\"B등급\");  // 출력됨\n        } else if (score >= 70) {\n            System.out.println(\"C등급\");\n        } else {\n            System.out.println(\"F등급\");\n        }\n        \n        // 삼항 연산자\n        String result = (score >= 60) ? \"합격\" : \"불합격\";\n        System.out.println(result);  // \"합격\"\n        \n        // switch 문 (Java 14+ 향상된 switch)\n        String grade = \"B\";\n        switch (grade) {\n            case \"A\" -> System.out.println(\"우수\");\n            case \"B\" -> System.out.println(\"양호\");  // 출력됨\n            case \"C\" -> System.out.println(\"보통\");\n            default -> System.out.println(\"노력 필요\");\n        }\n        \n        // switch 표현식 (값 반환)\n        int point = switch (grade) {\n            case \"A\" -> 100;\n            case \"B\" -> 80;\n            case \"C\" -> 60;\n            default -> 0;\n        };\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. if 조건에는 반드시 boolean 타입만 가능\n2. switch는 byte, short, int, char, String, enum 사용 가능\n3. Java 14+의 switch 표현식은 break 불필요\n4. 삼항 연산자는 간단한 조건에만 사용 권장"
+      }
+    ]
+  },
+  "01_입문/java-loop": {
+    "id": "01_입문/java-loop",
+    "title": "반복문",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "for, while, do-while 반복문을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "반복문 종류",
+        "content": "반복문은 특정 코드를 여러 번 실행할 때 사용합니다.\n\n• for: 반복 횟수가 정해져 있을 때\n• while: 조건이 참인 동안 반복\n• do-while: 최소 1번은 실행 후 조건 검사\n• for-each: 컬렉션/배열 순회"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "반복문 예제",
+        "code": "public class Loops {\n    public static void main(String[] args) {\n        // 기본 for문\n        for (int i = 1; i <= 5; i++) {\n            System.out.print(i + \" \");  // 1 2 3 4 5\n        }\n        System.out.println();\n        \n        // while문\n        int count = 0;\n        while (count < 3) {\n            System.out.println(\"count: \" + count);\n            count++;\n        }\n        \n        // do-while문 (최소 1번 실행)\n        int num = 10;\n        do {\n            System.out.println(\"num: \" + num);  // 조건이 false여도 1번 실행\n        } while (num < 5);\n        \n        // for-each문 (향상된 for문)\n        int[] numbers = {10, 20, 30, 40, 50};\n        for (int n : numbers) {\n            System.out.print(n + \" \");  // 10 20 30 40 50\n        }\n        System.out.println();\n        \n        // break와 continue\n        for (int i = 1; i <= 10; i++) {\n            if (i == 3) continue;  // 3은 건너뜀\n            if (i == 7) break;     // 7에서 종료\n            System.out.print(i + \" \");  // 1 2 4 5 6\n        }\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. for문: 초기화; 조건; 증감 형태로 구성\n2. while vs do-while: 조건 검사 시점의 차이\n3. for-each는 인덱스 접근 불가, 읽기 전용 순회에 적합\n4. break는 반복 종료, continue는 다음 반복으로"
+      }
+    ]
+  },
+  "01_입문/java-array": {
+    "id": "01_입문/java-array",
+    "title": "배열",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "1차원, 다차원 배열의 선언과 활용을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "배열이란?",
+        "content": "배열은 같은 타입의 데이터를 연속된 메모리 공간에 저장하는 자료구조입니다. 배열의 크기는 생성 시 고정되며, 인덱스는 0부터 시작합니다.\n\nJava 배열의 특징:\n• 크기 고정 (동적 크기가 필요하면 ArrayList 사용)\n• 같은 타입만 저장 가능\n• 참조형이므로 null 가능"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "배열 예제",
+        "code": "import java.util.Arrays;\n\npublic class ArrayExample {\n    public static void main(String[] args) {\n        // 배열 선언 및 초기화\n        int[] numbers = new int[5];        // 크기 5, 기본값 0\n        int[] scores = {90, 85, 88, 92, 78};  // 리터럴 초기화\n        String[] names = new String[]{\"Alice\", \"Bob\", \"Charlie\"};\n        \n        // 배열 접근\n        System.out.println(scores[0]);     // 90 (첫 번째 요소)\n        System.out.println(scores.length); // 5 (배열 길이)\n        \n        scores[1] = 100;  // 값 변경\n        \n        // 배열 순회\n        for (int i = 0; i < scores.length; i++) {\n            System.out.print(scores[i] + \" \");\n        }\n        System.out.println();\n        \n        // for-each로 순회\n        for (int score : scores) {\n            System.out.print(score + \" \");\n        }\n        System.out.println();\n        \n        // 2차원 배열\n        int[][] matrix = {\n            {1, 2, 3},\n            {4, 5, 6},\n            {7, 8, 9}\n        };\n        System.out.println(matrix[1][2]);  // 6 (2행 3열)\n        \n        // Arrays 유틸리티\n        int[] arr = {3, 1, 4, 1, 5};\n        Arrays.sort(arr);                  // 정렬\n        System.out.println(Arrays.toString(arr)); // [1, 1, 3, 4, 5]\n        System.out.println(Arrays.binarySearch(arr, 4)); // 3 (인덱스)\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 배열 인덱스는 0부터 시작, length-1까지\n2. ArrayIndexOutOfBoundsException 주의\n3. Arrays 클래스로 정렬, 검색, 복사 등 가능\n4. 가변 크기가 필요하면 ArrayList 사용"
+      }
+    ]
+  },
+  "01_입문/java-method": {
+    "id": "01_입문/java-method",
+    "title": "메서드",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "메서드 선언, 매개변수, 반환값, 오버로딩을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "메서드란?",
+        "content": "메서드는 특정 작업을 수행하는 코드 블록입니다. 코드 재사용성을 높이고 프로그램을 모듈화합니다.\n\n메서드 구성요소:\n• 접근제어자: public, private, protected, default\n• 반환타입: void(없음) 또는 데이터 타입\n• 메서드명: 동사로 시작 (camelCase)\n• 매개변수: 입력값을 받는 변수"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "메서드 예제",
+        "code": "public class MethodExample {\n    public static void main(String[] args) {\n        // 메서드 호출\n        greet(\"홍길동\");                    // void 메서드\n        int sum = add(10, 20);             // 반환값 있는 메서드\n        System.out.println(\"합계: \" + sum); // 30\n        \n        // 오버로딩된 메서드 호출\n        System.out.println(add(1, 2));        // int + int\n        System.out.println(add(1.5, 2.5));    // double + double\n        System.out.println(add(1, 2, 3));     // int + int + int\n    }\n    \n    // void 메서드 (반환값 없음)\n    public static void greet(String name) {\n        System.out.println(\"안녕하세요, \" + name + \"님!\");\n    }\n    \n    // 반환값 있는 메서드\n    public static int add(int a, int b) {\n        return a + b;\n    }\n    \n    // 메서드 오버로딩 (같은 이름, 다른 매개변수)\n    public static double add(double a, double b) {\n        return a + b;\n    }\n    \n    public static int add(int a, int b, int c) {\n        return a + b + c;\n    }\n    \n    // 가변 인자 (varargs)\n    public static int sum(int... numbers) {\n        int total = 0;\n        for (int n : numbers) {\n            total += n;\n        }\n        return total;  // sum(1,2,3,4,5) = 15\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 메서드 오버로딩: 이름 같고 매개변수 다름 (반환타입만 다르면 X)\n2. static 메서드: 객체 생성 없이 클래스명.메서드()로 호출\n3. void 메서드는 return 생략 가능\n4. 가변 인자는 내부적으로 배열로 처리"
+      }
+    ]
+  },
+  "01_입문/java-input-output": {
+    "id": "01_입문/java-input-output",
+    "title": "입출력",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "Scanner, BufferedReader를 이용한 입출력을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Java 입출력",
+        "content": "Java에서 콘솔 입출력을 처리하는 방법입니다.\n\n출력:\n• System.out.println(): 줄바꿈 포함 출력\n• System.out.print(): 줄바꿈 없이 출력\n• System.out.printf(): 형식 지정 출력\n\n입력:\n• Scanner: 간편하지만 느림\n• BufferedReader: 빠르지만 복잡함"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "입출력 예제",
+        "code": "import java.util.Scanner;\nimport java.io.*;\n\npublic class IOExample {\n    public static void main(String[] args) throws IOException {\n        // === 출력 ===\n        System.out.println(\"줄바꿈 포함\");\n        System.out.print(\"줄바꿈 없음\");\n        System.out.printf(\"이름: %s, 나이: %d, 점수: %.2f%n\", \"홍길동\", 25, 95.5);\n        \n        // === Scanner 입력 ===\n        Scanner sc = new Scanner(System.in);\n        \n        System.out.print(\"이름 입력: \");\n        String name = sc.nextLine();    // 한 줄 입력\n        \n        System.out.print(\"나이 입력: \");\n        int age = sc.nextInt();         // 정수 입력\n        \n        System.out.print(\"키 입력: \");\n        double height = sc.nextDouble(); // 실수 입력\n        \n        System.out.printf(\"%s님, %d세, %.1fcm%n\", name, age, height);\n        sc.close();\n        \n        // === BufferedReader 입력 (빠른 입력) ===\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));\n        \n        String line = br.readLine();    // 한 줄 입력\n        int num = Integer.parseInt(br.readLine()); // 문자열 -> 정수 변환\n        \n        bw.write(\"결과: \" + num);       // 출력 버퍼에 쓰기\n        bw.newLine();                   // 줄바꿈\n        bw.flush();                     // 버퍼 비우기 (실제 출력)\n        \n        br.close();\n        bw.close();\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. nextInt() 후 nextLine() 사용 시 버퍼에 남은 줄바꿈 주의\n2. BufferedReader는 알고리즘 문제에서 속도 필수\n3. printf 포맷: %d(정수), %f(실수), %s(문자열), %n(줄바꿈)\n4. try-with-resources로 자동 close 권장"
+      }
+    ]
+  },
+  "01_입문/quiz-java-basic": {
+    "id": "01_입문/quiz-java-basic",
+    "title": "Java 기초 퀴즈",
+    "category": "java",
+    "subCategory": "01_입문",
+    "language": "Java",
+    "description": "Java 기초 문법을 점검하는 퀴즈입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "quiz",
+        "title": "Q1. 다음 코드의 출력 결과는?",
+        "code": "int a = 10;\nint b = 3;\nSystem.out.println(a / b);"
+      },
+      {
+        "type": "answer",
+        "content": "정답: 3\n해설: 정수/정수 연산은 정수 결과. 소수점 버림.\n10.0/3 또는 (double)a/b로 하면 3.333..."
+      },
+      {
+        "type": "quiz",
+        "title": "Q2. 배열의 마지막 요소 접근 방법은?",
+        "code": "int[] arr = {1, 2, 3, 4, 5};"
+      },
+      {
+        "type": "answer",
+        "content": "정답: arr[arr.length - 1]\n해설: 배열 인덱스는 0부터 시작하므로 마지막은 length-1"
+      },
+      {
+        "type": "quiz",
+        "title": "Q3. 다음 중 유효한 변수명이 아닌 것은?",
+        "code": "A) _name\nB) $price\nC) 2ndPlace\nD) firstName"
+      },
+      {
+        "type": "answer",
+        "content": "정답: C) 2ndPlace\n해설: 변수명은 숫자로 시작할 수 없음. _, $ 또는 문자로 시작해야 함."
+      }
+    ]
+  },
+  "02_객체지향/oop-concept": {
+    "id": "02_객체지향/oop-concept",
+    "title": "객체지향 프로그래밍 개념",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "OOP의 4대 특성: 캡슐화, 상속, 다형성, 추상화를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "OOP란?",
+        "content": "객체지향 프로그래밍(OOP)은 현실 세계의 사물을 객체(Object)로 모델링하여 프로그래밍하는 패러다임입니다.\n\nOOP의 4대 특성:\n• 캡슐화(Encapsulation): 데이터와 메서드를 하나로 묶고 정보 은닉\n• 상속(Inheritance): 부모 클래스의 속성과 메서드를 자식이 물려받음\n• 다형성(Polymorphism): 같은 인터페이스로 다른 동작 수행\n• 추상화(Abstraction): 핵심만 추출하여 복잡성 감소"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "OOP 4대 특성 예제",
+        "code": "// 추상화 - 핵심만 정의\nabstract class Animal {\n    protected String name;  // 캡슐화 - protected로 보호\n    \n    public abstract void speak();  // 추상 메서드\n}\n\n// 상속 - Animal의 속성과 메서드 물려받음\nclass Dog extends Animal {\n    public Dog(String name) {\n        this.name = name;\n    }\n    \n    @Override\n    public void speak() {  // 다형성 - 오버라이딩\n        System.out.println(name + \"가 멍멍!\");\n    }\n}\n\nclass Cat extends Animal {\n    public Cat(String name) {\n        this.name = name;\n    }\n    \n    @Override\n    public void speak() {  // 다형성 - 같은 메서드, 다른 동작\n        System.out.println(name + \"가 야옹!\");\n    }\n}\n\npublic class OOPExample {\n    public static void main(String[] args) {\n        // 다형성 - 부모 타입으로 자식 객체 참조\n        Animal dog = new Dog(\"멍멍이\");\n        Animal cat = new Cat(\"나비\");\n        \n        dog.speak();  // 멍멍이가 멍멍!\n        cat.speak();  // 나비가 야옹!\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 캡슐화: private 필드 + public getter/setter\n2. 상속: extends 키워드, 단일 상속만 가능\n3. 다형성: 오버라이딩과 업캐스팅으로 구현\n4. 추상화: abstract 클래스 또는 interface 사용"
+      }
+    ]
+  },
+  "02_객체지향/class-object": {
+    "id": "02_객체지향/class-object",
+    "title": "클래스와 객체",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "클래스 정의와 객체 생성 방법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "클래스와 객체",
+        "content": "클래스는 객체를 만들기 위한 설계도(틀)이고, 객체는 클래스를 기반으로 생성된 실체(인스턴스)입니다.\n\n비유:\n• 클래스 = 붕어빵 틀\n• 객체 = 실제 붕어빵\n\n클래스 구성:\n• 필드(Field): 객체의 상태/속성 (변수)\n• 메서드(Method): 객체의 동작/기능 (함수)\n• 생성자(Constructor): 객체 초기화"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "클래스와 객체 예제",
+        "code": "// 클래스 정의\npublic class Car {\n    // 필드 (상태)\n    private String brand;\n    private String color;\n    private int speed;\n    \n    // 생성자\n    public Car(String brand, String color) {\n        this.brand = brand;\n        this.color = color;\n        this.speed = 0;\n    }\n    \n    // 메서드 (동작)\n    public void accelerate(int amount) {\n        this.speed += amount;\n        System.out.println(brand + \" 속도: \" + speed + \"km/h\");\n    }\n    \n    public void brake() {\n        this.speed = 0;\n        System.out.println(brand + \" 정지!\");\n    }\n    \n    // Getter\n    public String getBrand() {\n        return brand;\n    }\n}\n\n// 객체 생성 및 사용\npublic class Main {\n    public static void main(String[] args) {\n        // 객체 생성 (new 키워드)\n        Car myCar = new Car(\"Tesla\", \"Red\");\n        Car yourCar = new Car(\"BMW\", \"Black\");\n        \n        // 메서드 호출\n        myCar.accelerate(60);   // Tesla 속도: 60km/h\n        myCar.accelerate(40);   // Tesla 속도: 100km/h\n        myCar.brake();          // Tesla 정지!\n        \n        System.out.println(myCar.getBrand());  // Tesla\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 클래스명은 대문자로 시작 (PascalCase)\n2. 파일명은 public 클래스명과 동일\n3. this는 현재 객체 자신을 참조\n4. new로 생성된 객체는 힙(Heap) 메모리에 저장"
+      }
+    ]
+  },
+  "02_객체지향/constructor": {
+    "id": "02_객체지향/constructor",
+    "title": "생성자",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "생성자 오버로딩과 this() 호출을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "생성자란?",
+        "content": "생성자(Constructor)는 객체가 생성될 때 호출되어 초기화를 담당하는 특수 메서드입니다.\n\n특징:\n• 클래스명과 동일\n• 반환타입 없음 (void도 X)\n• new 키워드와 함께 호출\n• 기본 생성자: 매개변수 없는 생성자 (미정의 시 컴파일러가 자동 생성)"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "생성자 예제",
+        "code": "public class Person {\n    private String name;\n    private int age;\n    private String email;\n    \n    // 기본 생성자\n    public Person() {\n        this(\"Unknown\", 0);  // 다른 생성자 호출\n    }\n    \n    // 매개변수 2개 생성자\n    public Person(String name, int age) {\n        this(name, age, \"없음\");  // 다른 생성자 호출\n    }\n    \n    // 매개변수 3개 생성자 (핵심 생성자)\n    public Person(String name, int age, String email) {\n        this.name = name;    // this로 필드와 매개변수 구분\n        this.age = age;\n        this.email = email;\n    }\n    \n    // 복사 생성자\n    public Person(Person other) {\n        this(other.name, other.age, other.email);\n    }\n    \n    public void introduce() {\n        System.out.printf(\"이름: %s, 나이: %d, 이메일: %s%n\", name, age, email);\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Person p1 = new Person();                    // 기본 생성자\n        Person p2 = new Person(\"홍길동\", 25);         // 2개 매개변수\n        Person p3 = new Person(\"김철수\", 30, \"a@b.com\"); // 3개 매개변수\n        Person p4 = new Person(p3);                  // 복사 생성자\n        \n        p1.introduce();  // 이름: Unknown, 나이: 0, 이메일: 없음\n        p3.introduce();  // 이름: 김철수, 나이: 30, 이메일: a@b.com\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. this()는 같은 클래스의 다른 생성자 호출 (첫 줄에서만)\n2. 생성자를 하나라도 정의하면 기본 생성자 자동 생성 안 됨\n3. 생성자 오버로딩으로 다양한 초기화 방식 제공\n4. Lombok의 @AllArgsConstructor, @NoArgsConstructor 활용 가능"
+      }
+    ]
+  },
+  "02_객체지향/encapsulation": {
+    "id": "02_객체지향/encapsulation",
+    "title": "캡슐화",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "접근 제어자와 정보 은닉을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "캡슐화란?",
+        "content": "캡슐화(Encapsulation)는 데이터(필드)와 기능(메서드)을 하나로 묶고, 외부로부터 내부 데이터를 보호하는 것입니다.\n\n접근 제어자:\n• public: 어디서든 접근 가능\n• protected: 같은 패키지 + 자식 클래스\n• default(생략): 같은 패키지 내에서만\n• private: 같은 클래스 내에서만"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "캡슐화 예제",
+        "code": "public class BankAccount {\n    // private으로 외부 접근 차단\n    private String accountNumber;\n    private double balance;\n    private String password;\n    \n    public BankAccount(String accountNumber, String password) {\n        this.accountNumber = accountNumber;\n        this.password = password;\n        this.balance = 0;\n    }\n    \n    // Getter - 읽기 허용\n    public String getAccountNumber() {\n        // 일부만 공개 (마스킹)\n        return \"****-\" + accountNumber.substring(4);\n    }\n    \n    public double getBalance() {\n        return balance;\n    }\n    \n    // 비밀번호는 getter 없음 (완전 은닉)\n    \n    // 비즈니스 로직을 통한 안전한 데이터 변경\n    public boolean deposit(double amount) {\n        if (amount <= 0) {\n            System.out.println(\"올바른 금액을 입력하세요.\");\n            return false;\n        }\n        balance += amount;\n        System.out.println(amount + \"원 입금 완료. 잔액: \" + balance);\n        return true;\n    }\n    \n    public boolean withdraw(double amount, String inputPassword) {\n        // 유효성 검증\n        if (!this.password.equals(inputPassword)) {\n            System.out.println(\"비밀번호 오류!\");\n            return false;\n        }\n        if (amount > balance) {\n            System.out.println(\"잔액 부족!\");\n            return false;\n        }\n        balance -= amount;\n        System.out.println(amount + \"원 출금 완료. 잔액: \" + balance);\n        return true;\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 필드는 private, 메서드로 접근 제어\n2. Setter에서 유효성 검증 가능\n3. 불변 객체는 Setter 없이 Getter만 제공\n4. Lombok의 @Getter, @Setter로 자동 생성 가능"
+      }
+    ]
+  },
+  "02_객체지향/inheritance": {
+    "id": "02_객체지향/inheritance",
+    "title": "상속",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "extends, super, 오버라이딩을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "상속이란?",
+        "content": "상속(Inheritance)은 기존 클래스(부모)의 필드와 메서드를 새 클래스(자식)가 물려받는 것입니다.\n\n• extends 키워드로 상속\n• Java는 단일 상속만 허용 (다중 상속 X)\n• 모든 클래스는 Object를 암시적으로 상속\n• super로 부모 멤버 접근"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "상속 예제",
+        "code": "// 부모 클래스\nclass Vehicle {\n    protected String brand;\n    protected int speed;\n    \n    public Vehicle(String brand) {\n        this.brand = brand;\n        this.speed = 0;\n    }\n    \n    public void accelerate() {\n        speed += 10;\n        System.out.println(brand + \" 속도: \" + speed);\n    }\n}\n\n// 자식 클래스\nclass Car extends Vehicle {\n    private int wheels;\n    \n    public Car(String brand) {\n        super(brand);      // 부모 생성자 호출 (필수, 첫 줄에)\n        this.wheels = 4;\n    }\n    \n    // 메서드 오버라이딩\n    @Override\n    public void accelerate() {\n        speed += 20;  // 자동차는 더 빠르게\n        System.out.println(brand + \" 자동차 속도: \" + speed);\n    }\n    \n    // 자식 클래스만의 메서드\n    public void honk() {\n        System.out.println(brand + \" 빵빵!\");\n    }\n}\n\nclass Motorcycle extends Vehicle {\n    public Motorcycle(String brand) {\n        super(brand);\n    }\n    \n    @Override\n    public void accelerate() {\n        super.accelerate();  // 부모 메서드 호출\n        speed += 5;          // 추가 동작\n        System.out.println(\"(오토바이 부스터!) 속도: \" + speed);\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Car car = new Car(\"Tesla\");\n        car.accelerate();  // Tesla 자동차 속도: 20\n        car.honk();        // Tesla 빵빵!\n        \n        Motorcycle bike = new Motorcycle(\"Harley\");\n        bike.accelerate(); // Harley 속도: 10, (오토바이 부스터!) 속도: 15\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. super()는 부모 생성자 호출, 생성자 첫 줄에서만\n2. @Override 어노테이션으로 오버라이딩 명시\n3. private 멤버는 상속되지만 직접 접근 불가\n4. final 클래스는 상속 불가, final 메서드는 오버라이딩 불가"
+      }
+    ]
+  },
+  "02_객체지향/polymorphism": {
+    "id": "02_객체지향/polymorphism",
+    "title": "다형성",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "오버라이딩, 업캐스팅, 다운캐스팅을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "다형성이란?",
+        "content": "다형성(Polymorphism)은 하나의 참조 변수가 여러 타입의 객체를 참조할 수 있는 것입니다. 같은 메서드 호출이 객체에 따라 다르게 동작합니다.\n\n• 업캐스팅: 자식 → 부모 타입 (자동)\n• 다운캐스팅: 부모 → 자식 타입 (명시적)\n• instanceof: 타입 확인 연산자"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "다형성 예제",
+        "code": "abstract class Shape {\n    public abstract double getArea();\n}\n\nclass Circle extends Shape {\n    private double radius;\n    \n    public Circle(double radius) {\n        this.radius = radius;\n    }\n    \n    @Override\n    public double getArea() {\n        return Math.PI * radius * radius;\n    }\n}\n\nclass Rectangle extends Shape {\n    private double width, height;\n    \n    public Rectangle(double width, double height) {\n        this.width = width;\n        this.height = height;\n    }\n    \n    @Override\n    public double getArea() {\n        return width * height;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // 업캐스팅 (자동) - 부모 타입으로 자식 객체 참조\n        Shape s1 = new Circle(5);       // Circle → Shape\n        Shape s2 = new Rectangle(4, 3); // Rectangle → Shape\n        \n        // 다형성 - 같은 메서드, 다른 결과\n        System.out.println(\"원 면적: \" + s1.getArea());      // 78.54...\n        System.out.println(\"사각형 면적: \" + s2.getArea());  // 12.0\n        \n        // 배열/컬렉션에서 활용\n        Shape[] shapes = {new Circle(2), new Rectangle(3, 4), new Circle(3)};\n        double totalArea = 0;\n        for (Shape s : shapes) {\n            totalArea += s.getArea();  // 각 도형에 맞는 getArea() 호출\n        }\n        System.out.println(\"총 면적: \" + totalArea);\n        \n        // 다운캐스팅 (명시적) - instanceof로 확인 필요\n        if (s1 instanceof Circle) {\n            Circle c = (Circle) s1;  // 다운캐스팅\n            // Circle 전용 메서드 호출 가능\n        }\n        \n        // Java 16+ 패턴 매칭\n        if (s1 instanceof Circle c) {\n            // c는 이미 Circle 타입\n            System.out.println(c.getArea());\n        }\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 업캐스팅 시 자식 전용 메서드는 호출 불가\n2. 다운캐스팅 전 instanceof로 확인 필수\n3. 다형성으로 OCP(개방-폐쇄 원칙) 구현 가능\n4. 인터페이스를 통한 다형성이 더 유연함"
+      }
+    ]
+  },
+  "02_객체지향/abstraction": {
+    "id": "02_객체지향/abstraction",
+    "title": "추상화",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "abstract 클래스와 메서드를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "추상화란?",
+        "content": "추상화(Abstraction)는 복잡한 시스템에서 핵심적인 개념만 추출하여 단순화하는 것입니다.\n\nabstract 클래스:\n• 인스턴스 생성 불가 (new 불가)\n• 추상 메서드 포함 가능 (구현부 없음)\n• 일반 메서드도 가질 수 있음\n• 상속을 통해 구현 강제"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "추상 클래스 예제",
+        "code": "// 추상 클래스 - 공통 속성과 미완성 메서드 정의\nabstract class Employee {\n    protected String name;\n    protected double baseSalary;\n    \n    public Employee(String name, double baseSalary) {\n        this.name = name;\n        this.baseSalary = baseSalary;\n    }\n    \n    // 추상 메서드 - 자식 클래스에서 반드시 구현\n    public abstract double calculateSalary();\n    \n    // 일반 메서드 - 공통 기능\n    public void displayInfo() {\n        System.out.printf(\"%s의 급여: %.0f원%n\", name, calculateSalary());\n    }\n}\n\n// 구체 클래스 - 추상 메서드 구현 필수\nclass FullTimeEmployee extends Employee {\n    private double bonus;\n    \n    public FullTimeEmployee(String name, double baseSalary, double bonus) {\n        super(name, baseSalary);\n        this.bonus = bonus;\n    }\n    \n    @Override\n    public double calculateSalary() {\n        return baseSalary + bonus;  // 정규직: 기본급 + 보너스\n    }\n}\n\nclass PartTimeEmployee extends Employee {\n    private int hoursWorked;\n    \n    public PartTimeEmployee(String name, double hourlyRate, int hoursWorked) {\n        super(name, hourlyRate);\n        this.hoursWorked = hoursWorked;\n    }\n    \n    @Override\n    public double calculateSalary() {\n        return baseSalary * hoursWorked;  // 파트타임: 시급 * 시간\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // Employee e = new Employee(\"test\", 1000);  // 컴파일 에러! 추상 클래스는 인스턴스화 불가\n        \n        Employee fullTime = new FullTimeEmployee(\"김정규\", 3000000, 500000);\n        Employee partTime = new PartTimeEmployee(\"이알바\", 10000, 80);\n        \n        fullTime.displayInfo();  // 김정규의 급여: 3500000원\n        partTime.displayInfo();  // 이알바의 급여: 800000원\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. abstract 클래스는 템플릿 역할 (공통 구조 정의)\n2. 추상 메서드는 선언만, 구현은 자식에게 위임\n3. 추상 클래스를 상속받은 자식은 모든 추상 메서드 구현 필수\n4. interface vs abstract: 상태(필드)가 필요하면 abstract 사용"
+      }
+    ]
+  },
+  "02_객체지향/interface": {
+    "id": "02_객체지향/interface",
+    "title": "인터페이스",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "인터페이스 정의와 구현, 다중 구현을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "인터페이스란?",
+        "content": "인터페이스(Interface)는 클래스가 구현해야 할 메서드의 명세(계약)입니다. 다중 구현이 가능합니다.\n\n특징:\n• 모든 메서드는 기본적으로 public abstract\n• 모든 필드는 public static final (상수)\n• Java 8+: default 메서드, static 메서드 가능\n• Java 9+: private 메서드 가능"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "인터페이스 예제",
+        "code": "// 인터페이스 정의\ninterface Flyable {\n    void fly();  // public abstract 생략\n    \n    // default 메서드 (Java 8+)\n    default void land() {\n        System.out.println(\"착륙 중...\");\n    }\n    \n    // static 메서드\n    static void checkWeather() {\n        System.out.println(\"날씨 확인: 맑음\");\n    }\n}\n\ninterface Swimmable {\n    void swim();\n}\n\n// 다중 구현\nclass Duck implements Flyable, Swimmable {\n    @Override\n    public void fly() {\n        System.out.println(\"오리가 날아갑니다!\");\n    }\n    \n    @Override\n    public void swim() {\n        System.out.println(\"오리가 수영합니다!\");\n    }\n}\n\nclass Airplane implements Flyable {\n    @Override\n    public void fly() {\n        System.out.println(\"비행기가 이륙합니다!\");\n    }\n    \n    @Override\n    public void land() {\n        System.out.println(\"비행기 착륙 절차 시작...\");  // default 오버라이딩\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Flyable duck = new Duck();\n        Flyable airplane = new Airplane();\n        \n        duck.fly();       // 오리가 날아갑니다!\n        duck.land();      // 착륙 중... (default 메서드)\n        \n        airplane.fly();   // 비행기가 이륙합니다!\n        airplane.land();  // 비행기 착륙 절차 시작...\n        \n        Flyable.checkWeather();  // static 메서드 호출\n        \n        // 다중 구현 객체\n        Duck d = new Duck();\n        d.fly();\n        d.swim();\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 클래스는 단일 상속, 인터페이스는 다중 구현 가능\n2. 인터페이스 간에도 extends로 상속 가능 (다중 상속 OK)\n3. Comparable, Serializable 등 표준 인터페이스 활용\n4. 함수형 인터페이스: 추상 메서드가 1개인 인터페이스 (@FunctionalInterface)"
+      }
+    ]
+  },
+  "02_객체지향/interface-vs-abstract": {
+    "id": "02_객체지향/interface-vs-abstract",
+    "title": "인터페이스 vs 추상클래스",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "인터페이스와 추상클래스의 차이점과 사용 시점을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "비교",
+        "content": "| 구분 | 추상 클래스 | 인터페이스 |\n|------|-------------|------------|\n| 상속/구현 | extends (단일) | implements (다중) |\n| 필드 | 인스턴스 변수 가능 | 상수(static final)만 |\n| 생성자 | 가질 수 있음 | 가질 수 없음 |\n| 메서드 | 구현된 메서드 포함 가능 | default, static만 구현 가능 |\n| 접근 제어자 | 다양함 | 기본 public |\n\n사용 시점:\n• 추상 클래스: IS-A 관계, 공통 상태(필드) 필요\n• 인터페이스: CAN-DO 관계, 역할 정의"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "적절한 사용 예제",
+        "code": "// 추상 클래스 - 공통 상태와 기본 구현 필요\nabstract class Animal {\n    protected String name;  // 상태 (인스턴스 변수)\n    protected int age;\n    \n    public Animal(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n    \n    // 공통 메서드\n    public void sleep() {\n        System.out.println(name + \"가 잠을 잡니다.\");\n    }\n    \n    public abstract void makeSound();  // 자식마다 다름\n}\n\n// 인터페이스 - 역할(능력) 정의\ninterface Runnable {\n    void run();\n}\n\ninterface Swimmable {\n    void swim();\n}\n\n// 조합 사용\nclass Dog extends Animal implements Runnable {\n    public Dog(String name, int age) {\n        super(name, age);\n    }\n    \n    @Override\n    public void makeSound() {\n        System.out.println(\"멍멍!\");\n    }\n    \n    @Override\n    public void run() {\n        System.out.println(name + \"가 달립니다!\");\n    }\n}\n\nclass Fish extends Animal implements Swimmable {\n    public Fish(String name, int age) {\n        super(name, age);\n    }\n    \n    @Override\n    public void makeSound() {\n        System.out.println(\"...(물고기는 조용)\");\n    }\n    \n    @Override\n    public void swim() {\n        System.out.println(name + \"가 수영합니다!\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Dog dog = new Dog(\"멍멍이\", 3);\n        dog.sleep();      // Animal에서 상속\n        dog.makeSound();  // 구현\n        dog.run();        // Runnable 구현\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "선택 기준",
+        "content": "1. 상태(필드)가 필요하면 → 추상 클래스\n2. 다중 상속이 필요하면 → 인터페이스\n3. 기본 구현을 제공하고 싶으면 → 추상 클래스 또는 default 메서드\n4. 역할/능력만 정의하면 → 인터페이스"
+      }
+    ]
+  },
+  "02_객체지향/static-final": {
+    "id": "02_객체지향/static-final",
+    "title": "static과 final",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "static 멤버와 final 키워드를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "static과 final",
+        "content": "static: 클래스 레벨의 멤버. 객체 생성 없이 사용 가능.\n• static 필드: 모든 인스턴스가 공유\n• static 메서드: 인스턴스 멤버 접근 불가\n• static 블록: 클래스 로딩 시 한 번 실행\n\nfinal: 변경 불가.\n• final 변수: 상수 (대문자_스네이크_케이스)\n• final 메서드: 오버라이딩 불가\n• final 클래스: 상속 불가"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "static과 final 예제",
+        "code": "public class Counter {\n    // static 변수 - 모든 객체가 공유\n    private static int totalCount = 0;\n    \n    // 상수 (static + final)\n    public static final int MAX_COUNT = 100;\n    \n    // 인스턴스 변수\n    private final int id;  // 생성 후 변경 불가\n    \n    // static 블록 - 클래스 로딩 시 실행\n    static {\n        System.out.println(\"Counter 클래스 로딩됨\");\n    }\n    \n    public Counter() {\n        this.id = ++totalCount;  // final 변수 초기화 (생성자에서 가능)\n    }\n    \n    // static 메서드\n    public static int getTotalCount() {\n        // this 사용 불가, 인스턴스 변수 접근 불가\n        return totalCount;\n    }\n    \n    // 인스턴스 메서드\n    public int getId() {\n        return id;\n    }\n}\n\nfinal class ImmutablePoint {  // final 클래스 - 상속 불가\n    private final int x;\n    private final int y;\n    \n    public ImmutablePoint(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n    \n    public int getX() { return x; }\n    public int getY() { return y; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Counter.MAX_COUNT);     // 100 (상수)\n        System.out.println(Counter.getTotalCount()); // 0\n        \n        Counter c1 = new Counter();\n        Counter c2 = new Counter();\n        Counter c3 = new Counter();\n        \n        System.out.println(c1.getId()); // 1\n        System.out.println(c2.getId()); // 2\n        System.out.println(Counter.getTotalCount()); // 3\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. static 메서드에서는 this, 인스턴스 변수 사용 불가\n2. 상수는 public static final + 대문자\n3. final 변수는 선언 시 또는 생성자에서 초기화\n4. String, Integer 등 불변 클래스는 final class"
+      }
+    ]
+  },
+  "02_객체지향/inner-class": {
+    "id": "02_객체지향/inner-class",
+    "title": "내부 클래스",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "멤버 클래스, 정적 클래스, 로컬 클래스, 익명 클래스를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "내부 클래스 종류",
+        "content": "1. 멤버 내부 클래스: 외부 클래스의 인스턴스 멤버\n2. 정적 내부 클래스: static으로 선언, 외부 클래스 인스턴스 불필요\n3. 로컬 클래스: 메서드 내부에 정의\n4. 익명 클래스: 이름 없이 즉석에서 정의"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "내부 클래스 예제",
+        "code": "public class Outer {\n    private String name = \"Outer\";\n    private static int count = 0;\n    \n    // 1. 멤버 내부 클래스\n    class Inner {\n        public void show() {\n            System.out.println(\"외부 클래스 변수: \" + name);  // 외부 멤버 접근 가능\n        }\n    }\n    \n    // 2. 정적 내부 클래스\n    static class StaticInner {\n        public void show() {\n            System.out.println(\"정적 변수: \" + count);  // static만 접근 가능\n        }\n    }\n    \n    public void method() {\n        // 3. 로컬 클래스\n        class LocalInner {\n            public void show() {\n                System.out.println(\"로컬 클래스: \" + name);\n            }\n        }\n        new LocalInner().show();\n    }\n}\n\ninterface Greeting {\n    void greet();\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // 멤버 내부 클래스 생성\n        Outer outer = new Outer();\n        Outer.Inner inner = outer.new Inner();\n        inner.show();\n        \n        // 정적 내부 클래스 생성 (외부 인스턴스 불필요)\n        Outer.StaticInner staticInner = new Outer.StaticInner();\n        staticInner.show();\n        \n        // 4. 익명 클래스 (인터페이스 구현을 즉석에서)\n        Greeting greeting = new Greeting() {\n            @Override\n            public void greet() {\n                System.out.println(\"안녕하세요!\");\n            }\n        };\n        greeting.greet();\n        \n        // Lambda로 대체 (함수형 인터페이스인 경우)\n        Greeting lambdaGreeting = () -> System.out.println(\"람다 인사!\");\n        lambdaGreeting.greet();\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "1. 정적 내부 클래스: Builder 패턴에 자주 사용\n2. 익명 클래스: 이벤트 리스너, 콜백에 활용\n3. Java 8+에서는 익명 클래스 대신 람다 사용 권장\n4. 멤버 내부 클래스는 외부 클래스 참조를 가짐 (메모리 주의)"
+      }
+    ]
+  },
+  "02_객체지향/java-oop-essence": {
+    "id": "02_객체지향/java-oop-essence",
+    "title": "Java OOP 핵심 정리",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "객체지향 프로그래밍의 핵심 개념을 종합 정리합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "OOP 핵심 요약",
+        "content": "객체지향의 핵심은 '책임'과 '협력'입니다.\n\n좋은 객체 설계:\n• 단일 책임: 하나의 클래스는 하나의 책임만\n• 높은 응집도: 관련 기능은 한 곳에\n• 낮은 결합도: 클래스 간 의존성 최소화\n\n설계 원칙 (SOLID):\n• S: 단일 책임 원칙\n• O: 개방-폐쇄 원칙 (확장에 열림, 수정에 닫힘)\n• L: 리스코프 치환 원칙\n• I: 인터페이스 분리 원칙\n• D: 의존관계 역전 원칙"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "좋은 OOP 설계 예제",
+        "code": "// 인터페이스로 추상화\ninterface PaymentProcessor {\n    boolean process(Order order);\n}\n\n// 구현체 분리 - OCP (확장에 열림)\nclass CardPayment implements PaymentProcessor {\n    @Override\n    public boolean process(Order order) {\n        System.out.println(\"카드 결제 처리: \" + order.getAmount());\n        return true;\n    }\n}\n\nclass KakaoPayment implements PaymentProcessor {\n    @Override\n    public boolean process(Order order) {\n        System.out.println(\"카카오페이 결제: \" + order.getAmount());\n        return true;\n    }\n}\n\n// 의존성 주입 - DIP\nclass OrderService {\n    private final PaymentProcessor paymentProcessor;  // 인터페이스에 의존\n    \n    // 생성자 주입\n    public OrderService(PaymentProcessor paymentProcessor) {\n        this.paymentProcessor = paymentProcessor;\n    }\n    \n    public void processOrder(Order order) {\n        if (paymentProcessor.process(order)) {\n            System.out.println(\"주문 완료!\");\n        }\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Order order = new Order(50000);\n        \n        // 결제 방식을 쉽게 교체 가능\n        OrderService cardService = new OrderService(new CardPayment());\n        cardService.processOrder(order);\n        \n        OrderService kakaoService = new OrderService(new KakaoPayment());\n        kakaoService.processOrder(order);\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "면접 빈출 포인트",
+        "content": "1. 캡슐화: private 필드 + public 메서드로 정보 은닉\n2. 상속 vs 구성: \"상속보다 구성을 선호하라\"\n3. 다형성: 인터페이스 타입으로 프로그래밍\n4. 추상화: 변하는 것과 변하지 않는 것 분리"
+      }
+    ]
+  },
+  "02_객체지향/practice-oop": {
+    "id": "02_객체지향/practice-oop",
+    "title": "OOP 실습 문제",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "객체지향 개념을 적용한 실습 문제입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "quiz",
+        "title": "실습: 도서 관리 시스템 설계",
+        "content": "요구사항:\n1. Book 클래스: 제목, 저자, ISBN, 대출 상태\n2. Library 클래스: 도서 목록 관리, 대출/반납 기능\n3. Member 클래스: 회원 정보, 대출 도서 목록\n\n다음 조건을 만족하도록 구현하세요:\n- 캡슐화 적용 (private 필드, getter/setter)\n- 도서 검색 기능 (제목, 저자로 검색)\n- 대출 시 이미 대출 중이면 예외 처리"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "예시 답안",
+        "code": "import java.util.*;\n\nclass Book {\n    private final String isbn;\n    private String title;\n    private String author;\n    private boolean borrowed;\n    \n    public Book(String isbn, String title, String author) {\n        this.isbn = isbn;\n        this.title = title;\n        this.author = author;\n        this.borrowed = false;\n    }\n    \n    public String getIsbn() { return isbn; }\n    public String getTitle() { return title; }\n    public String getAuthor() { return author; }\n    public boolean isBorrowed() { return borrowed; }\n    \n    public void borrow() {\n        if (borrowed) {\n            throw new IllegalStateException(\"이미 대출 중인 도서입니다.\");\n        }\n        borrowed = true;\n    }\n    \n    public void returnBook() {\n        borrowed = false;\n    }\n    \n    @Override\n    public String toString() {\n        return String.format(\"[%s] %s - %s (%s)\", \n            isbn, title, author, borrowed ? \"대출중\" : \"대출가능\");\n    }\n}\n\nclass Library {\n    private List<Book> books = new ArrayList<>();\n    \n    public void addBook(Book book) {\n        books.add(book);\n    }\n    \n    public List<Book> searchByTitle(String keyword) {\n        return books.stream()\n            .filter(b -> b.getTitle().contains(keyword))\n            .toList();\n    }\n    \n    public Optional<Book> findByIsbn(String isbn) {\n        return books.stream()\n            .filter(b -> b.getIsbn().equals(isbn))\n            .findFirst();\n    }\n}"
+      }
+    ]
+  },
+  "02_객체지향/quiz-oop": {
+    "id": "02_객체지향/quiz-oop",
+    "title": "OOP 퀴즈",
+    "category": "java",
+    "subCategory": "02_객체지향",
+    "language": "Java",
+    "description": "객체지향 개념 점검 퀴즈입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "quiz",
+        "title": "Q1. 다음 중 오버로딩과 오버라이딩의 차이는?",
+        "content": "A) 오버로딩은 상속 관계에서만 가능하다\nB) 오버라이딩은 메서드 이름이 달라도 된다\nC) 오버로딩은 매개변수가 다르고, 오버라이딩은 시그니처가 동일하다\nD) 오버라이딩은 반환 타입만 다르면 된다"
+      },
+      {
+        "type": "answer",
+        "content": "정답: C\n\n오버로딩(Overloading): 같은 클래스 내, 같은 이름, 다른 매개변수\n오버라이딩(Overriding): 상속 관계, 같은 시그니처(이름+매개변수), 다른 구현"
+      },
+      {
+        "type": "quiz",
+        "title": "Q2. 추상 클래스와 인터페이스의 공통점은?",
+        "content": "A) 다중 상속이 가능하다\nB) 인스턴스를 생성할 수 없다\nC) 생성자를 가질 수 있다\nD) 인스턴스 변수를 가질 수 있다"
+      },
+      {
+        "type": "answer",
+        "content": "정답: B\n\n둘 다 직접 인스턴스화(new) 불가능.\n추상 클래스: 단일 상속, 생성자/인스턴스 변수 가능\n인터페이스: 다중 구현, 상수만 가능"
+      }
+    ]
+  },
+  "03_핵심문법/exception-basic": {
+    "id": "03_핵심문법/exception-basic",
+    "title": "예외 처리 - 37초 만에 5억 달러 로켓을 폭발시킨 타입 변환",
+    "category": "java",
+    "subCategory": "03_핵심문법",
+    "language": "Java",
+    "description": "1996년 아리안 5호 로켓 폭발 사고로 배우는 예외 처리의 중요성",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "☠️ The Incident - 아리안 5호 로켓 폭발 사고 (1996)",
+        "content": "**Junior**: \"try-catch 쓰기 귀찮은데 그냥 빼도 되죠? 어차피 숫자 변환인데...\"\n\n**Senior**: \"1996년 6월 4일, 유럽우주국의 아리안 5호 로켓이 발사 37초 만에 공중 폭발했어. 5억 달러가 37초 만에 사라졌지.\"\n\n**Junior**: \"미사일 공격이요?\"\n\n**Senior**: \"아니. **64비트 float를 16비트 int로 변환**하다 오버플로우가 발생했는데, **예외 처리가 없어서** 그대로 시스템이 멈춰버렸어.\"\n\n```\n사고 재구성:\n\n1. 아리안 5호의 수평 속도값 = 32,768 이상 (64비트 float)\n2. 이전 버전(아리안 4)에서 복사한 코드 실행\n3. 16비트 정수로 변환 시도 → 16비트 최대값(32,767) 초과\n4. 오버플로우 예외 발생 → 처리 코드 없음\n5. 관성 항법 시스템 완전 정지\n6. 비행 컴퓨터: \"이상 감지\" → 자폭 명령\n7. 발사 37초 만에 폭발\n```"
+      },
+      {
+        "type": "code",
+        "language": "Ada",
+        "title": "💀 실제 아리안 5호 사고 코드 (Ada 언어)",
+        "code": "-- 아리안 4호에서 복사해온 관성 항법 코드\n-- 아리안 4호 최대 속도: ~32,000 → 16비트 범위 내\n-- 아리안 5호 실제 속도: ~32,768 이상 → 오버플로우!\n\n-- 문제의 코드 (의사 코드)\nhorizontal_velocity : FLOAT := 32768.5;  -- 실제 비행 데이터\n\n-- 치명적 변환: 예외 처리 없음\nvelocity_int : INTEGER_16 := INTEGER_16(horizontal_velocity);\n-- ❌ 오버플로우! INTEGER_16 최대값은 32,767\n-- ❌ 예외 발생 → 처리 코드 없음 → 시스템 정지\n\n-- 이게 자바였다면?\nshort velocityInt = (short) 32768.5f;  \n// -32768 (오버플로우로 음수 전환!)\n// 로켓이 갑자기 반대 방향으로 가야 한다고 인식"
+      },
+      {
+        "type": "concept",
+        "title": "🛡️ The Defense - 예외 처리의 3단계 방어",
+        "content": "**1단계: 예방 (Prevention)**\n- 타입 범위 확인\n- 값 검증 후 변환\n\n**2단계: 감지 (Detection)**\n- try-catch로 예외 포착\n- 구체적인 예외 타입 처리\n\n**3단계: 복구 (Recovery)**\n- 대체값 사용\n- 안전한 상태로 복귀\n- 로깅 및 알림"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "✅ 올바른 예외 처리 방법",
+        "code": "public class RocketNavigationSystem {\n    \n    // ❌ 아리안 5호 스타일 - 절대 하지 마세요\n    public short convertVelocityDangerous(double velocity) {\n        return (short) velocity;  // 오버플로우 발생 가능!\n    }\n    \n    // ✅ 안전한 변환 - 로켓에 탑승할 수 있는 코드\n    public short convertVelocitySafe(double velocity) {\n        // 1단계: 예방 - 범위 검증\n        if (velocity > Short.MAX_VALUE || velocity < Short.MIN_VALUE) {\n            throw new ArithmeticException(\n                String.format(\"속도값 %f는 16비트 범위를 초과합니다. 범위: %d ~ %d\",\n                    velocity, Short.MIN_VALUE, Short.MAX_VALUE)\n            );\n        }\n        return (short) velocity;\n    }\n    \n    // ✅ 실제 미션 크리티컬 시스템용 코드\n    public NavigationResult processNavigation(SensorData data) {\n        try {\n            // 2단계: 감지 - 예외 포착 준비\n            double velocity = data.getHorizontalVelocity();\n            short processedVelocity = convertVelocitySafe(velocity);\n            \n            return NavigationResult.success(processedVelocity);\n            \n        } catch (ArithmeticException e) {\n            // 3단계: 복구 - 안전한 폴백\n            logger.error(\"속도 변환 실패: {}\", e.getMessage());\n            \n            // 이전 안전값 사용 (로켓을 폭발시키지 않음!)\n            return NavigationResult.fallback(lastKnownSafeVelocity);\n            \n        } catch (Exception e) {\n            // 예상치 못한 예외도 처리\n            logger.error(\"예상치 못한 오류: {}\", e.getMessage());\n            return NavigationResult.emergencyStop();\n        }\n    }\n}"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "🔥 try-catch-finally 완벽 이해",
+        "code": "public class ExceptionBasics {\n    \n    // 기본 구조\n    public void basicTryCatch() {\n        try {\n            // 예외가 발생할 수 있는 코드\n            int result = 10 / 0;  // ArithmeticException!\n            \n        } catch (ArithmeticException e) {\n            // 예외 처리\n            System.out.println(\"0으로 나눌 수 없습니다: \" + e.getMessage());\n            \n        } finally {\n            // 예외 발생 여부와 관계없이 항상 실행\n            // 리소스 정리에 사용\n            System.out.println(\"finally 블록 실행\");\n        }\n    }\n    \n    // 다중 catch - 구체적인 예외부터 처리\n    public void multiCatch(String input) {\n        try {\n            int number = Integer.parseInt(input);  // NumberFormatException 가능\n            int[] arr = new int[number];\n            arr[100] = 1;  // ArrayIndexOutOfBoundsException 가능\n            \n        } catch (NumberFormatException e) {\n            System.out.println(\"숫자 형식이 아닙니다: \" + input);\n            \n        } catch (ArrayIndexOutOfBoundsException e) {\n            System.out.println(\"배열 인덱스 초과: \" + e.getMessage());\n            \n        } catch (Exception e) {\n            // 모든 예외의 부모 - 마지막에 위치\n            System.out.println(\"알 수 없는 오류: \" + e.getMessage());\n        }\n    }\n    \n    // Java 7+ 멀티 catch\n    public void multiCatchModern(String input) {\n        try {\n            int number = Integer.parseInt(input);\n            int[] arr = new int[number];\n            arr[100] = 1;\n            \n        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {\n            // 같은 방식으로 처리할 예외를 묶음\n            System.out.println(\"입력 처리 오류: \" + e.getMessage());\n        }\n    }\n    \n    // try-with-resources (Java 7+) - 리소스 자동 해제\n    public String readFile(String path) {\n        // AutoCloseable 구현체는 자동으로 close() 호출\n        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {\n            return reader.readLine();\n            \n        } catch (IOException e) {\n            throw new RuntimeException(\"파일 읽기 실패: \" + path, e);\n        }\n        // finally에서 close() 호출 불필요!\n    }\n}"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "🎯 Checked vs Unchecked 예외",
+        "code": "/**\n * 예외 계층 구조\n * \n * Throwable\n * ├── Error (시스템 오류 - 처리 불가)\n * │   ├── OutOfMemoryError\n * │   └── StackOverflowError\n * │\n * └── Exception\n *     ├── RuntimeException (Unchecked - 처리 선택적)\n *     │   ├── NullPointerException\n *     │   ├── ArrayIndexOutOfBoundsException\n *     │   ├── ArithmeticException\n *     │   └── IllegalArgumentException\n *     │\n *     └── 그 외 (Checked - 반드시 처리)\n *         ├── IOException\n *         ├── SQLException\n *         └── ClassNotFoundException\n */\n\npublic class CheckedVsUnchecked {\n    \n    // Checked 예외 - 컴파일러가 처리 강제\n    public void checkedExample() throws IOException {  // throws 선언 필수\n        FileReader file = new FileReader(\"test.txt\");  // IOException 발생 가능\n        // 또는 try-catch로 처리\n    }\n    \n    // Unchecked 예외 - 처리 선택적\n    public void uncheckedExample(String input) {\n        // throws 선언 없어도 됨\n        int number = Integer.parseInt(input);  // NumberFormatException 가능\n        \n        // 하지만 방어적 코딩 권장!\n        if (input == null || input.isEmpty()) {\n            throw new IllegalArgumentException(\"입력값이 비어있습니다\");\n        }\n    }\n    \n    // 실무 패턴: Checked → Unchecked 변환\n    public String readFileContent(String path) {\n        try {\n            return Files.readString(Path.of(path));\n        } catch (IOException e) {\n            // Checked 예외를 RuntimeException으로 감싸서 던짐\n            throw new RuntimeException(\"파일 읽기 실패: \" + path, e);\n        }\n    }\n}"
+      },
+      {
+        "type": "concept",
+        "title": "📊 The Impact - 예외 처리가 구한 것들",
+        "content": "**아리안 5호 이후 변화:**\n\n| 항목 | Before | After |\n|------|--------|-------|\n| 코드 재사용 | 검증 없이 복사 | 환경 변화 분석 필수 |\n| 타입 변환 | 암묵적 신뢰 | 범위 검증 의무화 |\n| 예외 처리 | \"어차피 안 일어나겠지\" | \"반드시 처리하자\" |\n| 테스트 | 일부 경로만 | 경계값 테스트 필수 |\n\n**실제 효과:**\n- 아리안 5호 이후 모든 우주 프로젝트에 정적 분석 도구 도입\n- NASA의 코딩 표준: 모든 정수 변환에 범위 검사 의무화\n- 현대 Java의 Math.toIntExact() 같은 안전 메서드 탄생"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "🚀 미션 크리티컬 시스템의 예외 처리 패턴",
+        "code": "// 아리안 5호 사고 이후 우주 산업 표준이 된 패턴들\n\npublic class MissionCriticalPatterns {\n    \n    // 1. 안전한 타입 변환 (아리안 5호 교훈)\n    public static int safeDoubleToInt(double value) {\n        if (value > Integer.MAX_VALUE || value < Integer.MIN_VALUE) {\n            throw new ArithmeticException(\n                \"변환 불가: \" + value + \"은 int 범위를 초과합니다\");\n        }\n        return (int) value;\n    }\n    \n    // Java 8+ 방식\n    public static int safeConvert(long value) {\n        return Math.toIntExact(value);  // 오버플로우 시 ArithmeticException\n    }\n    \n    // 2. Fail-Fast 원칙 - 문제를 빨리 발견\n    public void processData(InputData data) {\n        // 입력값 검증을 가장 먼저!\n        Objects.requireNonNull(data, \"데이터가 null입니다\");\n        \n        if (data.getValue() < 0) {\n            throw new IllegalArgumentException(\"음수 값은 허용되지 않습니다\");\n        }\n        \n        // 검증 통과 후 로직 실행\n        processValidData(data);\n    }\n    \n    // 3. 예외 체이닝 - 원인 추적 가능\n    public void loadConfiguration(String path) {\n        try {\n            Properties props = new Properties();\n            props.load(new FileInputStream(path));\n        } catch (IOException e) {\n            // 원본 예외를 cause로 포함\n            throw new ConfigurationException(\n                \"설정 파일 로드 실패: \" + path, e);\n        }\n    }\n    \n    // 4. 사용자 정의 예외 - 도메인 의미 전달\n    public void withdraw(Account account, BigDecimal amount) {\n        if (account.getBalance().compareTo(amount) < 0) {\n            throw new InsufficientFundsException(\n                account.getId(), \n                amount, \n                account.getBalance()\n            );\n        }\n        account.debit(amount);\n    }\n}\n\n// 도메인 예외 클래스\nclass InsufficientFundsException extends RuntimeException {\n    private final String accountId;\n    private final BigDecimal requested;\n    private final BigDecimal available;\n    \n    public InsufficientFundsException(String accountId, \n            BigDecimal requested, BigDecimal available) {\n        super(String.format(\n            \"계좌 %s: 요청 %s, 잔액 %s - 잔액 부족\",\n            accountId, requested, available));\n        this.accountId = accountId;\n        this.requested = requested;\n        this.available = available;\n    }\n    \n    // Getter 생략...\n}"
+      },
+      {
+        "type": "tip",
+        "title": "💡 예외 처리 체크리스트",
+        "content": "**코드 작성 시:**\n- [ ] 숫자 변환 전 범위 확인했는가?\n- [ ] null 가능성 있는 값 체크했는가?\n- [ ] try-with-resources로 리소스 관리하는가?\n- [ ] 예외 메시지에 디버깅 정보 포함했는가?\n\n**catch 블록에서:**\n- [ ] 구체적인 예외 타입을 먼저 잡는가?\n- [ ] 예외를 삼키지(무시하지) 않는가?\n- [ ] 복구 가능하면 복구, 불가능하면 상위로 전파하는가?\n\n**면접 핵심:**\n- Checked vs Unchecked 차이\n- try-with-resources 동작 원리\n- 예외 체이닝의 필요성\n- 언제 예외를 던지고 언제 처리할지 판단 기준"
+      }
+    ]
+  },
+  "06_멀티스레딩/thread-sync": {
+    "id": "06_멀티스레딩/thread-sync",
+    "title": "동기화 - 화성에서 로봇이 멈춘 이유",
+    "category": "java",
+    "subCategory": "06_멀티스레딩",
+    "language": "Java",
+    "description": "1997년 NASA 마스 패스파인더 우선순위 역전 사고로 배우는 스레드 동기화",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "☠️ The Incident - 화성에서 멈춘 패스파인더 (1997)",
+        "content": "**Junior**: \"synchronized 쓰면 느려지잖아요. 그냥 빼도 될 것 같은데...\"\n\n**Senior**: \"1997년 7월 4일, NASA의 마스 패스파인더가 화성에 착륙했어. 그런데 착륙 며칠 후, 로봇이 갑자기 멈추고 무한 재부팅을 시작했지.\"\n\n**Junior**: \"외계인 공격이요?\"\n\n**Senior**: \"아니. **Priority Inversion(우선순위 역전)** 때문이었어. 저우선순위 스레드가 락을 잡고 있는데, 고우선순위 스레드가 그 락을 기다리다 타임아웃으로 시스템이 리셋된 거야.\"\n\n```\n마스 패스파인더 사고 상황:\n\n스레드 구성:\n- 고우선순위: ASI/MET (버스 관리 - 가장 중요)\n- 중우선순위: 통신 스레드 (지구와 통신)\n- 저우선순위: 기상 데이터 수집\n\n문제 발생 순서:\n1. 저우선순위 스레드가 공유 버스의 락 획득\n2. 고우선순위 ASI/MET 스레드가 락을 요청 → 대기 시작\n3. 중우선순위 통신 스레드가 CPU 점유 (저우선순위보다 우선)\n4. 저우선순위 스레드는 CPU를 못 받아 락 해제 불가\n5. 고우선순위 스레드는 계속 대기\n6. 워치독 타이머 만료 → 시스템 리셋!\n\n결과: 화성에서 로봇이 무한 재부팅\n```"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "💀 Priority Inversion 재현 코드",
+        "code": "public class MarsPathfinderBug {\n    \n    private final Object sharedBusLock = new Object();\n    private volatile boolean running = true;\n    \n    // 저우선순위: 기상 데이터 수집\n    class WeatherTask implements Runnable {\n        @Override\n        public void run() {\n            Thread.currentThread().setPriority(Thread.MIN_PRIORITY);\n            \n            synchronized (sharedBusLock) {  // 락 획득!\n                System.out.println(\"[LOW] 기상 데이터 수집 시작\");\n                \n                // 오래 걸리는 작업...\n                // 이 동안 고우선순위가 기다림\n                heavyDataProcessing();\n                \n                System.out.println(\"[LOW] 기상 데이터 수집 완료\");\n            }\n        }\n    }\n    \n    // 중우선순위: 통신 (락 불필요하지만 CPU 점유)\n    class CommunicationTask implements Runnable {\n        @Override\n        public void run() {\n            Thread.currentThread().setPriority(Thread.NORM_PRIORITY);\n            \n            while (running) {\n                // CPU 집약적 작업 - 저우선순위를 밀어냄!\n                processDataPackets();\n            }\n        }\n    }\n    \n    // 고우선순위: 버스 관리 (가장 중요!)\n    class BusManagementTask implements Runnable {\n        @Override\n        public void run() {\n            Thread.currentThread().setPriority(Thread.MAX_PRIORITY);\n            \n            synchronized (sharedBusLock) {  // 락 대기...\n                // 저우선순위가 락을 쥐고 있고,\n                // 중우선순위가 CPU를 점유하면\n                // 이 고우선순위 스레드는 영원히 대기!\n                System.out.println(\"[HIGH] 버스 관리 작업 실행\");\n            }\n        }\n    }\n    \n    // 워치독 - 타임아웃 시 시스템 리셋\n    class Watchdog implements Runnable {\n        @Override\n        public void run() {\n            try {\n                Thread.sleep(5000);  // 5초 타임아웃\n            } catch (InterruptedException e) {\n                return;  // 정상 종료\n            }\n            System.out.println(\"💥 워치독 타임아웃! 시스템 리셋!\");\n            System.exit(1);  // 실제 패스파인더는 여기서 재부팅\n        }\n    }\n}"
+      },
+      {
+        "type": "concept",
+        "title": "🛡️ The Defense - 동기화의 3가지 방어 기법",
+        "content": "**1. synchronized 키워드**\n- 메서드 레벨 또는 블록 레벨\n- 모니터 락 사용\n- 간단하지만 유연성 낮음\n\n**2. ReentrantLock**\n- tryLock()으로 타임아웃 설정 가능\n- fairness 옵션으로 기아 상태 방지\n- try-finally 패턴 필수\n\n**3. Priority Inheritance Protocol**\n- NASA가 패스파인더에 적용한 해결책\n- 저우선순위가 락을 잡으면 일시적으로 우선순위 상승\n- VxWorks RTOS의 mutex 옵션으로 활성화"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "✅ synchronized 올바른 사용법",
+        "code": "public class ThreadSafeCounter {\n    \n    private int count = 0;\n    private final Object lock = new Object();\n    \n    // ❌ 잘못된 방법: 동기화 없음\n    public void incrementUnsafe() {\n        count++;  // 읽기-수정-쓰기가 원자적이지 않음!\n    }\n    \n    // ✅ 방법 1: synchronized 메서드\n    public synchronized void incrementSafe() {\n        count++;  // this 객체를 락으로 사용\n    }\n    \n    // ✅ 방법 2: synchronized 블록 (더 세밀한 제어)\n    public void incrementWithBlock() {\n        // 락이 필요 없는 작업...\n        \n        synchronized (lock) {  // 별도 락 객체 사용\n            count++;           // 임계 영역\n        }\n        \n        // 락이 필요 없는 작업...\n    }\n    \n    public synchronized int getCount() {\n        return count;\n    }\n}\n\n// Race Condition 재현 및 해결\npublic class RaceConditionDemo {\n    \n    public static void main(String[] args) throws InterruptedException {\n        ThreadSafeCounter counter = new ThreadSafeCounter();\n        \n        // 1000개의 스레드가 각각 1000번씩 증가\n        Thread[] threads = new Thread[1000];\n        for (int i = 0; i < 1000; i++) {\n            threads[i] = new Thread(() -> {\n                for (int j = 0; j < 1000; j++) {\n                    counter.incrementSafe();  // synchronized 버전\n                }\n            });\n            threads[i].start();\n        }\n        \n        // 모든 스레드 완료 대기\n        for (Thread t : threads) {\n            t.join();\n        }\n        \n        // 동기화 O: 1,000,000\n        // 동기화 X: 987,432 같은 이상한 값\n        System.out.println(\"최종 카운트: \" + counter.getCount());\n    }\n}"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "🔒 ReentrantLock - 타임아웃으로 교착 상태 방지",
+        "code": "import java.util.concurrent.locks.ReentrantLock;\nimport java.util.concurrent.TimeUnit;\n\npublic class NASAStyleLocking {\n    \n    private final ReentrantLock busLock = new ReentrantLock(true);  // fair=true\n    private int sharedData = 0;\n    \n    // 패스파인더 사고 방지: 타임아웃 있는 락\n    public boolean accessBusWithTimeout() {\n        try {\n            // 5초 안에 락을 못 얻으면 포기\n            if (busLock.tryLock(5, TimeUnit.SECONDS)) {\n                try {\n                    // 임계 영역\n                    sharedData++;\n                    processData();\n                    return true;\n                    \n                } finally {\n                    busLock.unlock();  // 반드시 해제!\n                }\n            } else {\n                // 타임아웃 - 대체 로직 실행\n                System.out.println(\"락 획득 타임아웃 - 대체 동작 수행\");\n                performFallbackAction();\n                return false;\n            }\n            \n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n            return false;\n        }\n    }\n    \n    // 데드락 방지 패턴\n    public boolean transferSafe(Account from, Account to, int amount) {\n        // 항상 같은 순서로 락 획득 (계좌 ID 기준 정렬)\n        Account first = from.getId() < to.getId() ? from : to;\n        Account second = from.getId() < to.getId() ? to : from;\n        \n        try {\n            if (first.getLock().tryLock(1, TimeUnit.SECONDS)) {\n                try {\n                    if (second.getLock().tryLock(1, TimeUnit.SECONDS)) {\n                        try {\n                            // 안전하게 이체\n                            from.withdraw(amount);\n                            to.deposit(amount);\n                            return true;\n                        } finally {\n                            second.getLock().unlock();\n                        }\n                    }\n                } finally {\n                    first.getLock().unlock();\n                }\n            }\n        } catch (InterruptedException e) {\n            Thread.currentThread().interrupt();\n        }\n        return false;\n    }\n}"
+      },
+      {
+        "type": "code",
+        "language": "Java",
+        "title": "⚡ 실무 동기화 패턴 모음",
+        "code": "import java.util.concurrent.*;\nimport java.util.concurrent.atomic.AtomicInteger;\n\npublic class ProductionPatterns {\n    \n    // 1. 불변 객체 - 동기화 불필요\n    public final class ImmutableData {\n        private final int value;\n        private final String name;\n        \n        public ImmutableData(int value, String name) {\n            this.value = value;\n            this.name = name;\n        }\n        // getter만, setter 없음\n    }\n    \n    // 2. AtomicInteger - 락 없는 원자적 연산\n    private final AtomicInteger atomicCounter = new AtomicInteger(0);\n    \n    public void atomicIncrement() {\n        atomicCounter.incrementAndGet();  // CAS 연산, 락 없음\n    }\n    \n    public void atomicCompareAndSwap() {\n        int expected = atomicCounter.get();\n        int newValue = expected + 1;\n        \n        // 다른 스레드가 변경하지 않았다면 업데이트\n        boolean success = atomicCounter.compareAndSet(expected, newValue);\n    }\n    \n    // 3. ConcurrentHashMap - 동시성 컬렉션\n    private final ConcurrentMap<String, Integer> cache = \n        new ConcurrentHashMap<>();\n    \n    public void updateCache(String key) {\n        // 원자적 연산\n        cache.compute(key, (k, v) -> v == null ? 1 : v + 1);\n    }\n    \n    // 4. ReadWriteLock - 읽기 많은 상황 최적화\n    private final ReadWriteLock rwLock = new ReentrantReadWriteLock();\n    private Map<String, String> data = new HashMap<>();\n    \n    public String read(String key) {\n        rwLock.readLock().lock();  // 여러 읽기 동시 가능\n        try {\n            return data.get(key);\n        } finally {\n            rwLock.readLock().unlock();\n        }\n    }\n    \n    public void write(String key, String value) {\n        rwLock.writeLock().lock();  // 쓰기는 배타적\n        try {\n            data.put(key, value);\n        } finally {\n            rwLock.writeLock().unlock();\n        }\n    }\n    \n    // 5. CountDownLatch - 여러 작업 완료 대기\n    public void parallelProcess() throws InterruptedException {\n        int taskCount = 5;\n        CountDownLatch latch = new CountDownLatch(taskCount);\n        \n        for (int i = 0; i < taskCount; i++) {\n            final int taskId = i;\n            new Thread(() -> {\n                try {\n                    processTask(taskId);\n                } finally {\n                    latch.countDown();  // 완료 신호\n                }\n            }).start();\n        }\n        \n        latch.await();  // 모든 작업 완료까지 대기\n        System.out.println(\"모든 작업 완료!\");\n    }\n}"
+      },
+      {
+        "type": "concept",
+        "title": "📊 The Impact - NASA의 해결책과 현대 Java",
+        "content": "**NASA가 패스파인더에 적용한 수정:**\n1. Priority Inheritance 활성화 (VxWorks 옵션)\n2. mutex 생성 시 MUTEX_PRIORITY_INHERITANCE 플래그 추가\n3. 원격 업데이트로 화성의 로봇 정상화!\n\n**현대 Java 동기화 발전:**\n\n| 버전 | 추가된 기능 |\n|------|-------------|\n| Java 1.0 | synchronized |\n| Java 5 | java.util.concurrent 패키지 (Lock, Atomic, Executor) |\n| Java 7 | Fork/Join Framework |\n| Java 8 | CompletableFuture, parallel streams |\n| Java 9+ | VarHandle, Flow API (Reactive) |\n| Java 21 | Virtual Threads (Project Loom) |\n\n**결론:**\n\"화성까지 가서 동기화 버그로 죽은 로봇의 교훈 - 락은 귀찮아도 정확히 써야 합니다.\""
+      },
+      {
+        "type": "tip",
+        "title": "💡 스레드 동기화 체크리스트",
+        "content": "**설계 시:**\n- [ ] 공유 자원을 먼저 식별했는가?\n- [ ] 불변 객체로 만들 수 있는가? (동기화 불필요)\n- [ ] java.util.concurrent 클래스로 대체 가능한가?\n\n**구현 시:**\n- [ ] synchronized 블록은 최소화했는가?\n- [ ] Lock 사용 시 finally에서 unlock 하는가?\n- [ ] 데드락 가능성을 검토했는가? (락 순서 고정)\n- [ ] 타임아웃을 설정했는가?\n\n**면접 핵심:**\n- synchronized vs ReentrantLock 차이\n- volatile의 한계 (가시성 O, 원자성 X)\n- ConcurrentHashMap 동작 원리\n- 데드락 발생 조건 4가지와 해결법"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "Java 완전 정복",
+    "category": "java",
+    "subCategory": null,
+    "language": "Java",
+    "description": "Java 전체 학습 가이드입니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Java 학습 로드맵",
+        "content": "1단계 (입문): 변수, 자료형, 연산자, 조건문, 반복문, 배열, 메서드\n2단계 (객체지향): 클래스, 상속, 다형성, 추상화, 인터페이스\n3단계 (핵심 문법): 예외처리, 제네릭, 열거형, 어노테이션\n4단계 (컬렉션): List, Set, Map, Queue\n5단계 (함수형): 람다, 스트림, Optional\n6단계 (멀티스레딩): Thread, 동기화, ExecutorService\n7단계 (JVM): 메모리 구조, GC, 클래스로더\n8단계 (실무): 버전별 특징, 테스트, 디자인 패턴"
+      }
+    ]
+  }
+}

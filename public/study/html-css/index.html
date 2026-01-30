@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML/CSS 학습 | 코드마스터</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #1B1B1F; color: #fff; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #00C471; text-align: center; margin-bottom: 30px; }
+        .card { background: #25252B; padding: 24px; border-radius: 12px; margin: 20px 0; }
+        .card h2 { color: #00C471; margin-bottom: 16px; }
+        .card ul { padding-left: 20px; color: #9CA3AF; line-height: 2; }
+        .card a { color: #00C471; text-decoration: none; }
+        .card a:hover { text-decoration: underline; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .lesson-card { background: #2D2D35; padding: 20px; border-radius: 8px; transition: transform 0.2s; }
+        .lesson-card:hover { transform: translateY(-4px); }
+        .lesson-card h3 { color: #fff; margin-bottom: 8px; }
+        .lesson-card p { color: #9CA3AF; font-size: 0.9rem; }
+        .badge { display: inline-block; padding: 4px 8px; background: #00C471; border-radius: 4px; font-size: 0.75rem; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Day 31-33: HTML/CSS 기초</h1>
+        
+        <div class="card">
+            <h2>📚 학습 목표</h2>
+            <ul>
+                <li>HTML 문서 구조와 시맨틱 태그 이해</li>
+                <li>CSS 선택자, 박스 모델, 스타일링</li>
+                <li>Flexbox와 Grid 레이아웃 마스터</li>
+                <li>반응형 웹 디자인 구현</li>
+            </ul>
+        </div>
+
+        <div class="grid">
+            <a href="01_html_basics.html" class="lesson-card">
+                <span class="badge">Day 31</span>
+                <h3>HTML 기초</h3>
+                <p>문서 구조, 시맨틱 태그, 폼 요소</p>
+            </a>
+            <a href="02_css_basics.html" class="lesson-card">
+                <span class="badge">Day 31</span>
+                <h3>CSS 기초</h3>
+                <p>선택자, 박스 모델, 스타일링</p>
+            </a>
+            <a href="03_flexbox.html" class="lesson-card">
+                <span class="badge">Day 32</span>
+                <h3>Flexbox 레이아웃</h3>
+                <p>유연한 1차원 레이아웃</p>
+            </a>
+            <a href="04_grid.html" class="lesson-card">
+                <span class="badge">Day 32</span>
+                <h3>Grid 레이아웃</h3>
+                <p>강력한 2차원 레이아웃</p>
+            </a>
+            <a href="05_responsive.html" class="lesson-card">
+                <span class="badge">Day 33</span>
+                <h3>반응형 웹</h3>
+                <p>미디어 쿼리, 모바일 퍼스트</p>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🔗 관련 링크</h2>
+            <ul>
+                <li><a href="../javascript/index.html">→ JavaScript 학습</a></li>
+                <li><a href="../react-basics/index.html">→ React 학습</a></li>
+                <li><a href="../index.html">← 학습 홈으로</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

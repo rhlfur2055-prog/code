@@ -1,0 +1,444 @@
+{
+  "01_기초/activation-function": {
+    "id": "01_기초/activation-function",
+    "title": "Activation Function",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/ai-ml-concept": {
+    "id": "01_기초/ai-ml-concept",
+    "title": "Ai Ml Concept",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/batch-normalization": {
+    "id": "01_기초/batch-normalization",
+    "title": "Batch Normalization",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/deep-learning-intro": {
+    "id": "01_기초/deep-learning-intro",
+    "title": "Deep Learning Intro",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/dropout": {
+    "id": "01_기초/dropout",
+    "title": "Dropout",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/gradient-descent": {
+    "id": "01_기초/gradient-descent",
+    "title": "Gradient Descent",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/loss-optimization": {
+    "id": "01_기초/loss-optimization",
+    "title": "Loss Optimization",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "C",
+    "description": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Loss Optimization",
+        "content": "프로세스 메모리 구조와 스레드 간의 컨텍스트 스위칭 원리를 파악합니다."
+      },
+      {
+        "type": "code",
+        "language": "C",
+        "code": "#include <pthread.h>\r\n\r\nvoid* thread_func(void* arg) {\r\n    printf(\"Thread Running\\n\");\r\n    return NULL;\r\n}\r\n\r\nint main() {\r\n    pthread_t thread;\r\n    pthread_create(&thread, NULL, thread_func, NULL);\r\n    pthread_join(thread, NULL);\r\n    return 0;\r\n}"
+      }
+    ]
+  },
+  "01_기초/neural-network": {
+    "id": "01_기초/neural-network",
+    "title": "Neural Network",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Neural Network",
+        "content": "TCP/IP 프로토콜의 계층별 역할과 핸드셰이킹 과정을 학습합니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "code": "import socket\r\n\r\n# TCP 소켓 생성 예제\r\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\nserver_socket.bind(('127.0.0.1', 8080))\r\nserver_socket.listen()"
+      }
+    ]
+  },
+  "01_기초/overfitting-regularization": {
+    "id": "01_기초/overfitting-regularization",
+    "title": "Overfitting Regularization",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "01_기초/supervised-unsupervised": {
+    "id": "01_기초/supervised-unsupervised",
+    "title": "Supervised Unsupervised",
+    "category": "ai",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/cnn-intro": {
+    "id": "02_컴퓨터비전/cnn-intro",
+    "title": "Cnn Intro",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/convolution-operation": {
+    "id": "02_컴퓨터비전/convolution-operation",
+    "title": "Convolution Operation",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/data-augmentation": {
+    "id": "02_컴퓨터비전/data-augmentation",
+    "title": "Data Augmentation",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/image-classification": {
+    "id": "02_컴퓨터비전/image-classification",
+    "title": "Image Classification",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/instance-segmentation": {
+    "id": "02_컴퓨터비전/instance-segmentation",
+    "title": "Instance Segmentation",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/pooling-layer": {
+    "id": "02_컴퓨터비전/pooling-layer",
+    "title": "Pooling Layer",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/rcnn-series": {
+    "id": "02_컴퓨터비전/rcnn-series",
+    "title": "Rcnn Series",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/semantic-segmentation": {
+    "id": "02_컴퓨터비전/semantic-segmentation",
+    "title": "Semantic Segmentation",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/transfer-learning": {
+    "id": "02_컴퓨터비전/transfer-learning",
+    "title": "Transfer Learning",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "02_컴퓨터비전/yolo-object-detection": {
+    "id": "02_컴퓨터비전/yolo-object-detection",
+    "title": "Yolo Object Detection",
+    "category": "ai",
+    "subCategory": "02_컴퓨터비전",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/attention-mechanism": {
+    "id": "03_자연어처리/attention-mechanism",
+    "title": "Attention Mechanism",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/bert": {
+    "id": "03_자연어처리/bert",
+    "title": "Bert",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/gpt-model": {
+    "id": "03_자연어처리/gpt-model",
+    "title": "Gpt Model",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/rnn-lstm": {
+    "id": "03_자연어처리/rnn-lstm",
+    "title": "Rnn Lstm",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/sentiment-analysis": {
+    "id": "03_자연어처리/sentiment-analysis",
+    "title": "Sentiment Analysis",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/text-generation": {
+    "id": "03_자연어처리/text-generation",
+    "title": "Text Generation",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/tokenization": {
+    "id": "03_자연어처리/tokenization",
+    "title": "Tokenization",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/transformer": {
+    "id": "03_자연어처리/transformer",
+    "title": "Transformer",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "03_자연어처리/word-embedding": {
+    "id": "03_자연어처리/word-embedding",
+    "title": "Word Embedding",
+    "category": "ai",
+    "subCategory": "03_자연어처리",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_음성멀티모달/clip-multimodal": {
+    "id": "04_음성멀티모달/clip-multimodal",
+    "title": "Clip Multimodal",
+    "category": "ai",
+    "subCategory": "04_음성멀티모달",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_음성멀티모달/speech-emotion": {
+    "id": "04_음성멀티모달/speech-emotion",
+    "title": "Speech Emotion",
+    "category": "ai",
+    "subCategory": "04_음성멀티모달",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "04_음성멀티모달/whisper-speech": {
+    "id": "04_음성멀티모달/whisper-speech",
+    "title": "Whisper Speech",
+    "category": "ai",
+    "subCategory": "04_음성멀티모달",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_프레임워크/huggingface": {
+    "id": "05_프레임워크/huggingface",
+    "title": "Huggingface",
+    "category": "ai",
+    "subCategory": "05_프레임워크",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_프레임워크/keras-api": {
+    "id": "05_프레임워크/keras-api",
+    "title": "Keras Api",
+    "category": "ai",
+    "subCategory": "05_프레임워크",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_프레임워크/langchain-intro": {
+    "id": "05_프레임워크/langchain-intro",
+    "title": "Langchain Intro",
+    "category": "ai",
+    "subCategory": "05_프레임워크",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_프레임워크/pytorch-intro": {
+    "id": "05_프레임워크/pytorch-intro",
+    "title": "Pytorch Intro",
+    "category": "ai",
+    "subCategory": "05_프레임워크",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "05_프레임워크/tensorflow-intro": {
+    "id": "05_프레임워크/tensorflow-intro",
+    "title": "Tensorflow Intro",
+    "category": "ai",
+    "subCategory": "05_프레임워크",
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "ai_basics": {
+    "id": "ai_basics",
+    "title": "Ai Basics",
+    "category": "ai",
+    "subCategory": null,
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "ai_fullstack": {
+    "id": "ai_fullstack",
+    "title": "Ai Fullstack",
+    "category": "ai",
+    "subCategory": null,
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "sklearn-complete-guide": {
+    "id": "sklearn-complete-guide",
+    "title": "Sklearn Complete Guide",
+    "category": "ai",
+    "subCategory": null,
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "sklearn-guide": {
+    "id": "sklearn-guide",
+    "title": "Sklearn Guide",
+    "category": "ai",
+    "subCategory": null,
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  },
+  "yolo8-realworld": {
+    "id": "yolo8-realworld",
+    "title": "Yolo8 Realworld",
+    "category": "ai",
+    "subCategory": null,
+    "language": "Python",
+    "description": "Python 변수, 제어문 기초입니다.",
+    "isPlaceholder": true,
+    "sections": []
+  }
+}

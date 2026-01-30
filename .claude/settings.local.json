@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(for dir in public/study/*/)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(docker --version:*)",
+      "Bash(docker-compose --version)",
+      "Bash(docker-compose:*)",
+      "Bash(docker compose:*)",
+      "Bash(powershell.exe -Command \"Get-Command docker -ErrorAction SilentlyContinue; if \\($? { docker --version } else { Write-Host ''Docker not found'' }\")",
+      "Bash(powershell.exe -Command \"node --version; npm --version\")",
+      "Bash(powershell.exe -Command \"npm install 2>&1\")",
+      "Bash(powershell.exe -Command \"npx tsc --noEmit 2>&1\")",
+      "Bash(powershell.exe -Command \"npm run dev 2>&1\")",
+      "Bash(powershell.exe -Command \"Invoke-WebRequest -Uri ''http://localhost:3000'' -UseBasicParsing -TimeoutSec 5 | Select-Object StatusCode, StatusDescription\")",
+      "Bash(if [ -f \"mvnw\" ])",
+      "Bash(then ./mvnw compile -q)",
+      "Bash(elif [ -f \"gradlew\" ])",
+      "Bash(then ./gradlew compileJava -q)",
+      "Bash(elif [ -f \"pom.xml\" ])",
+      "Bash(then mvn compile -q)",
+      "Bash(else echo \"No build tool found\")",
+      "Bash(fi)",
+      "Bash(mvn compile:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: Study 가이드 문서 6개 추가\n\n- ULTIMATE-VIBE-CODING-GUIDE.md: 971개 파일 완전 맵핑, 100개 시나리오\n- quick-start-cheatsheet.md: 30초 퀵스타트 가이드\n- study-context-map.md: 학습 경로 맵, 카테고리 연결\n- vscode-ai-command-prompt.md: VS Code AI 명령어 가이드\n- vscode-prompt-examples.md: 복붙 가능한 예제 130개\n- STUDY-DUPLICATE-ANALYSIS.md: 중복 파일 분석 리포트\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(ls:*)",
+      "Bash(xargs:*)",
+      "Bash(git add:*)",
+      "Bash(wc:*)",
+      "Bash(python validate_fix_json.py:*)",
+      "Bash(python fix_json.py:*)",
+      "Bash(npm:*)",
+      "Bash(python count_duplicates.py:*)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(PYTHONUTF8=1 python:*)",
+      "Bash(git init:*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\컴퓨터\\.vscode\\extensions\\redhat.java-*"
+    ]
+  }
+}

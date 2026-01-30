@@ -1,0 +1,159 @@
+// ===== data/contents/java-class-object.json =====
+{
+  "id": "java-class-object",
+  "title": "Java 클래스와 객체",
+  "category": "java",
+  "day": 1,
+  "difficulty": "beginner",
+  "duration": 15,
+  "tags": ["객체지향", "클래스", "인스턴스"],
+  
+  "sections": [
+    {
+      "type": "concept",
+      "title": "핵심 개념",
+      "content": "클래스는 객체를 만들기 위한 설계도입니다. 붕어빵 틀(클래스)로 여러 개의 붕어빵(객체)을 만들 수 있듯이, 하나의 클래스로 여러 개의 객체를 생성할 수 있습니다."
+    },
+    {
+      "type": "theory",
+      "title": "이론 설명",
+      "content": "객체지향 프로그래밍에서 클래스는 데이터(필드)와 동작(메서드)을 하나로 묶은 설계도입니다. new 키워드를 사용하면 클래스로부터 실제 객체(인스턴스)가 메모리에 생성됩니다."
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "filename": "Person.java",
+      "code": "public class Person {\n    // 필드 (데이터)\n    private String name;\n    private int age;\n    \n    // 생성자\n    public Person(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n    \n    // 메서드 (동작)\n    public void introduce() {\n        System.out.println(\"이름: \" + name + \", 나이: \" + age);\n    }\n}\n\n// 객체 생성 및 사용\npublic class Main {\n    public static void main(String[] args) {\n        // 클래스로부터 객체 생성\n        Person person1 = new Person(\"홍길동\", 25);\n        Person person2 = new Person(\"김철수\", 30);\n        \n        // 메서드 호출\n        person1.introduce();  // 이름: 홍길동, 나이: 25\n        person2.introduce();  // 이름: 김철수, 나이: 30\n    }\n}",
+      "highlight": [7, 8, 9, 22, 23]
+    },
+    {
+      "type": "tip",
+      "tipType": "tip",
+      "title": "핵심 포인트",
+      "content": "클래스는 설계도, 객체는 실체입니다. new 키워드로 객체를 생성할 때마다 메모리에 새로운 인스턴스가 만들어집니다. person1과 person2는 같은 클래스를 사용했지만 서로 다른 객체입니다."
+    },
+    {
+      "type": "practice",
+      "title": "실습 과제",
+      "content": "Car 클래스를 만들어보세요. 필드: brand(브랜드), color(색상), year(연식). 메서드: displayInfo() - 차량 정보를 출력하는 메서드를 작성하세요."
+    },
+    {
+      "type": "tip",
+      "tipType": "warning",
+      "title": "주의사항",
+      "content": "생성자를 명시하지 않으면 자동으로 기본 생성자가 제공되지만, 매개변수가 있는 생성자를 정의하면 기본 생성자는 자동 생성되지 않습니다."
+    }
+  ],
+  
+  "quiz": [
+    {
+      "question": "클래스와 객체의 관계는?",
+      "options": [
+        "클래스는 설계도, 객체는 실체",
+        "클래스는 실체, 객체는 설계도",
+        "클래스와 객체는 같은 것",
+        "클래스는 메서드, 객체는 필드"
+      ],
+      "answer": 0
+    }
+  ],
+  
+  "relatedContents": [
+    "java-constructor",
+    "java-method",
+    "java-inheritance"
+  ]
+}
+
+
+// ===== data/contents/spring-di-concept.json =====
+{
+  "id": "spring-di-concept",
+  "title": "Spring DI/IoC 개념",
+  "category": "spring",
+  "day": 21,
+  "difficulty": "intermediate",
+  "duration": 20,
+  "tags": ["DI", "IoC", "의존성주입", "제어의역전"],
+  
+  "sections": [
+    {
+      "type": "concept",
+      "title": "DI (의존성 주입)란?",
+      "content": "의존성 주입(Dependency Injection)은 객체가 필요로 하는 의존성을 외부에서 주입받는 디자인 패턴입니다. 객체가 직접 의존성을 생성하지 않고, 외부(Spring 컨테이너)에서 주입받습니다."
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "filename": "Without DI (나쁜 예)",
+      "code": "// DI 없이 직접 생성 (강한 결합)\npublic class UserService {\n    private UserRepository userRepository = new UserRepository();\n    \n    public User getUser(Long id) {\n        return userRepository.findById(id);\n    }\n}\n\n// 문제점:\n// 1. UserRepository를 변경하려면 UserService 코드 수정 필요\n// 2. 테스트 시 Mock 객체 사용 불가능\n// 3. 강한 결합으로 유연성 떨어짐"
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "filename": "With DI (좋은 예)",
+      "code": "@Service\npublic class UserService {\n    private final UserRepository userRepository;\n    \n    // 생성자 주입 (권장)\n    @Autowired\n    public UserService(UserRepository userRepository) {\n        this.userRepository = userRepository;\n    }\n    \n    public User getUser(Long id) {\n        return userRepository.findById(id);\n    }\n}\n\n// 장점:\n// 1. UserRepository 구현체 변경 가능 (느슨한 결합)\n// 2. 테스트 시 Mock 객체 주입 가능\n// 3. 불변성 보장 (final)",
+      "highlight": [5, 6, 7, 8]
+    },
+    {
+      "type": "tip",
+      "tipType": "important",
+      "title": "생성자 주입을 권장하는 이유",
+      "content": "1. 불변성 보장 (final 사용 가능)\n2. 순환 참조 방지\n3. 테스트 코드 작성 용이\n4. NPE 방지 (필수 의존성 명시)"
+    },
+    {
+      "type": "theory",
+      "title": "IoC (제어의 역전)",
+      "content": "IoC는 객체의 생성과 생명주기 관리를 개발자가 아닌 Spring 컨테이너가 담당하는 것을 의미합니다. 개발자는 @Component, @Service 등의 어노테이션으로 Bean을 등록하기만 하면, Spring이 알아서 객체를 생성하고 주입합니다."
+    },
+    {
+      "type": "practice",
+      "title": "S-MAS 프로젝트 적용",
+      "content": "ParkingService에 ParkingRepository를 생성자 주입 방식으로 연결해보세요. @Service와 @Autowired를 사용하세요."
+    }
+  ]
+}
+
+
+// ===== data/contents/algorithm-dfs.json =====
+{
+  "id": "algorithm-dfs",
+  "title": "DFS (깊이 우선 탐색)",
+  "category": "algorithm",
+  "day": 31,
+  "difficulty": "intermediate",
+  "duration": 25,
+  "tags": ["그래프", "탐색", "재귀", "스택"],
+  
+  "sections": [
+    {
+      "type": "concept",
+      "title": "DFS란?",
+      "content": "깊이 우선 탐색(Depth-First Search)은 그래프를 탐색하는 알고리즘으로, 한 방향으로 깊게 들어가면서 탐색하고, 막히면 다시 돌아와서 다른 경로를 탐색합니다. 미로 찾기에서 한 길을 끝까지 가보고 막히면 되돌아오는 것과 같습니다."
+    },
+    {
+      "type": "code",
+      "language": "Java",
+      "filename": "DFS 구현 (재귀)",
+      "code": "import java.util.*;\n\npublic class DFS {\n    static boolean[] visited;\n    static ArrayList<Integer>[] graph;\n    \n    // DFS 재귀 함수\n    public static void dfs(int node) {\n        visited[node] = true;\n        System.out.print(node + \" \");\n        \n        // 인접한 노드 방문\n        for (int next : graph[node]) {\n            if (!visited[next]) {\n                dfs(next);  // 재귀 호출\n            }\n        }\n    }\n    \n    public static void main(String[] args) {\n        int n = 5;  // 노드 개수\n        graph = new ArrayList[n + 1];\n        visited = new boolean[n + 1];\n        \n        // 그래프 초기화\n        for (int i = 0; i <= n; i++) {\n            graph[i] = new ArrayList<>();\n        }\n        \n        // 간선 추가 (양방향)\n        graph[1].add(2);\n        graph[1].add(3);\n        graph[2].add(1);\n        graph[2].add(4);\n        graph[3].add(1);\n        graph[3].add(5);\n        graph[4].add(2);\n        graph[5].add(3);\n        \n        dfs(1);  // 1번 노드부터 시작\n        // 출력: 1 2 4 3 5\n    }\n}",
+      "highlight": [8, 9, 10, 13, 14, 15, 16]
+    },
+    {
+      "type": "tip",
+      "tipType": "success",
+      "title": "DFS 시간복잡도",
+      "content": "O(V + E) - V는 정점(노드) 개수, E는 간선 개수. 모든 정점과 간선을 한 번씩 방문하므로 효율적입니다."
+    },
+    {
+      "type": "practice",
+      "title": "백준 1260번 문제",
+      "content": "DFS와 BFS를 구현하여 그래프를 탐색하는 문제를 풀어보세요. 입력으로 주어진 그래프를 DFS와 BFS로 탐색한 결과를 출력하세요."
+    },
+    {
+      "type": "tip",
+      "tipType": "goal",
+      "title": "학습 목표",
+      "content": "1. DFS의 동작 원리 이해\n2. 재귀와 스택 방식 구현 가능\n3. 백준 실버 1-2 문제 해결 가능"
+    }
+  ]
+}

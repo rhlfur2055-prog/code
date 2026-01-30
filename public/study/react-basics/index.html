@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React 학습 | 코드마스터</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #1B1B1F; color: #fff; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #61DAFB; text-align: center; margin-bottom: 30px; }
+        .card { background: #25252B; padding: 24px; border-radius: 12px; margin: 20px 0; }
+        .card h2 { color: #61DAFB; margin-bottom: 16px; }
+        .card ul { padding-left: 20px; color: #9CA3AF; line-height: 2; }
+        .card a { color: #61DAFB; text-decoration: none; }
+        .card a:hover { text-decoration: underline; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .lesson-card { background: #2D2D35; padding: 20px; border-radius: 8px; transition: transform 0.2s; text-decoration: none; display: block; }
+        .lesson-card:hover { transform: translateY(-4px); }
+        .lesson-card h3 { color: #fff; margin-bottom: 8px; }
+        .lesson-card p { color: #9CA3AF; font-size: 0.9rem; }
+        .badge { display: inline-block; padding: 4px 8px; background: #61DAFB; color: #000; border-radius: 4px; font-size: 0.75rem; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚛️ Day 37-38: React 기초</h1>
+        
+        <div class="card">
+            <h2>📚 학습 목표</h2>
+            <ul>
+                <li>React 컴포넌트 개념 이해</li>
+                <li>Props와 State 활용</li>
+                <li>React Hooks (useState, useEffect)</li>
+                <li>이벤트 처리와 조건부 렌더링</li>
+            </ul>
+        </div>
+
+        <div class="grid">
+            <a href="01_basics.html" class="lesson-card">
+                <span class="badge">Day 37</span>
+                <h3>React 기초</h3>
+                <p>컴포넌트, JSX, Props</p>
+            </a>
+            <a href="02_state.html" class="lesson-card">
+                <span class="badge">Day 37</span>
+                <h3>State와 이벤트</h3>
+                <p>useState, 이벤트 핸들링</p>
+            </a>
+            <a href="03_hooks.html" class="lesson-card">
+                <span class="badge">Day 38</span>
+                <h3>React Hooks</h3>
+                <p>useEffect, useRef, Custom Hooks</p>
+            </a>
+            <a href="04_practice.html" class="lesson-card">
+                <span class="badge">Day 38</span>
+                <h3>실습: 점수 계산기</h3>
+                <p>React로 점수 계산기 만들기</p>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🔗 관련 링크</h2>
+            <ul>
+                <li><a href="../javascript/index.html">← JavaScript 학습</a></li>
+                <li><a href="../ai-roadmap/index.html">→ AI 활용 학습</a></li>
+                <li><a href="../score-calculator/index.html">→ 점수 계산기 (완성본)</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

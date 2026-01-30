@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Function - 코드마스터</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Pretendard', sans-serif; background: #1a1a2e; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { color: #fff; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; }
+    .badge { background: #3b82f6; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+    pre { background: #0f172a; padding: 15px; border-radius: 8px; overflow-x: auto; color: #a5b4fc; }
+    .desc { background: #1e293b; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">SQL</span>
+    <h1>Date Function</h1>
+    <div class="desc">
+      <h3>학습 목표</h3>
+      <p>CRUD 쿼리 작성법과 다양한 JOIN 기법을 실습합니다.</p>
+    </div>
+    <h3>예제 코드</h3>
+    <pre><code>SELECT u.name, o.order_date
+FROM users u
+JOIN orders o ON u.id = o.user_id
+WHERE u.active = 1;</code></pre>
+  </div>
+</body>
+</html>

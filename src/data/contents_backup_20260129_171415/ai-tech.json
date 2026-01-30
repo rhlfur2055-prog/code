@@ -1,0 +1,299 @@
+{
+  "01_object-detection/yolo-intro": {
+    "id": "01_object-detection/yolo-intro",
+    "title": "YOLO 실전 서비스 아키텍처 - Java + Python + AI 통합",
+    "category": "ai-tech",
+    "subCategory": "01_object-detection",
+    "language": "Python",
+    "description": "YOLO AI 서버를 Spring Boot와 연동하는 MSA 아키텍처를 학습합니다. 왜 Java와 Python을 함께 쓰는지, 실제 프로덕션 코드 리뷰, Docker 배포, 그리고 Spring Boot 연동까지 Big Picture를 그립니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "🎯 Big Picture: 왜 Java와 Python을 함께 쓰는가?",
+        "content": "**호텔 비유로 이해하는 MSA 아키텍처**\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                      🏨 AI 서비스 호텔                        │\n├─────────────────────────────────────────────────────────────┤\n│                                                             │\n│   👔 Java (Spring Boot) = 호텔 매니저                        │\n│   ├── 고객 응대 (API Gateway)                               │\n│   ├── 예약 관리 (트랜잭션, DB)                               │\n│   ├── 회계 처리 (결제, 정산)                                 │\n│   └── 직원 관리 (인증, 권한)                                 │\n│                                                             │\n│   👨‍🍳 Python (FastAPI) = 전문 셰프                           │\n│   ├── AI 요리 전문 (YOLO, Whisper, OCR)                     │\n│   ├── 특수 재료 다루기 (PyTorch, TensorFlow)                │\n│   └── 레시피 실험 (Jupyter, 빠른 프로토타이핑)               │\n│                                                             │\n│   📝 REST API = 주문서                                      │\n│   └── 매니저가 셰프에게 요리 주문하는 표준 양식              │\n│                                                             │\n└─────────────────────────────────────────────────────────────┘\n```\n\n**왜 이렇게 나누는가?**\n\n| 역할 | Java (Spring Boot) | Python (FastAPI) |\n|------|-------------------|------------------|\n| **강점** | 엔터프라이즈, 트랜잭션, 보안 | AI/ML, 데이터 처리 |\n| **생태계** | JPA, Security, Cloud | PyTorch, Ultralytics, HuggingFace |\n| **성능** | 안정적인 동시성 처리 | GPU 연산 최적화 |\n| **유지보수** | 정적 타입, 컴파일 검증 | 빠른 실험/배포 |\n\n**핵심 포인트:**\n- \"모든 걸 하나의 언어로\" 하면 **비효율적**\n- 각 언어가 **가장 잘하는 일**에 집중\n- REST API로 **느슨한 결합** → 독립 배포/확장 가능"
+      },
+      {
+        "type": "concept",
+        "title": "🔄 전체 서비스 흐름 (Spring Boot ↔ FastAPI)",
+        "content": "**K-MaaS 번호판 인식 서비스 흐름**\n\n```\n[사용자 앱]     [Spring Boot]        [Python AI Server]      [응답]\n    │               │                      │                   │\n    │  ① 이미지    │                      │                   │\n    │  업로드      │                      │                   │\n    │─────────────▶│                      │                   │\n    │               │  ② HTTP POST        │                   │\n    │               │  /api/v1/license-   │                   │\n    │               │  plate/detect       │                   │\n    │               │─────────────────────▶│                   │\n    │               │                      │                   │\n    │               │                      │ ③ YOLO 탐지       │\n    │               │                      │    + OCR 인식     │\n    │               │                      │                   │\n    │               │  ④ JSON 응답        │                   │\n    │               │  {plate_number,      │                   │\n    │               │   confidence, bbox}  │                   │\n    │               │◀─────────────────────│                   │\n    │               │                      │                   │\n    │               │ ⑤ DB 저장           │                   │\n    │               │    + 비즈니스 로직   │                   │\n    │               │                      │                   │\n    │  ⑥ 최종 응답 │                      │                   │\n    │◀─────────────│                      │                   │\n```\n\n**왜 Spring Boot가 직접 YOLO를 안 돌리나?**\n1. **라이브러리 호환성**: PyTorch, Ultralytics는 Python 전용\n2. **GPU 관리**: Python이 CUDA 연동에 최적화\n3. **모델 업데이트**: AI 모델만 독립적으로 배포 가능\n4. **장애 격리**: AI 서버 장애가 전체 서비스에 영향 안 줌"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "📝 FastAPI YOLO 서버 코드 리뷰 (main.py)",
+        "code": "\"\"\"\nK-MaaS FastAPI AI Server - 핵심 코드 분석\n\n이 서버가 하는 일:\n1. 번호판 인식 (YOLO + OCR)\n2. 객체 탐지 (YOLO)\n3. 음성 인식 (Whisper)\n4. 감성 분석, 키워드 추출\n\nSpring Boot와 연동되는 AI 처리 전담 서버\n\"\"\"\nfrom fastapi import FastAPI, UploadFile, File, HTTPException, Header\nfrom fastapi.middleware.cors import CORSMiddleware\nfrom pydantic import BaseModel, Field\nfrom typing import List, Optional\nimport io\nimport time\nimport logging\nimport uuid\n\n# ═══════════════════════════════════════════════════════════\n# 1. FastAPI 앱 생성 - 왜 Flask가 아니라 FastAPI?\n# ═══════════════════════════════════════════════════════════\n# - async/await 네이티브 지원 → 동시 요청 처리에 유리\n# - Pydantic 자동 검증 → DTO 타입 안전성\n# - 자동 Swagger 문서 → Spring Boot 개발자와 협업 편리\n# - 성능: Flask 대비 2~3배 빠름\n\napp = FastAPI(\n    title=\"K-MaaS AI Server\",\n    description=\"번호판 인식, 객체 탐지, 음성 인식 API\",\n    version=\"2.0.0\"\n)\n\n# ═══════════════════════════════════════════════════════════\n# 2. CORS 설정 - Spring Boot에서 호출할 수 있게\n# ═══════════════════════════════════════════════════════════\n# 다른 도메인(Spring Boot: 8080)에서 이 서버(8000)를 \n# 호출하려면 CORS 허용 필수\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],        # 프로덕션에서는 특정 도메인만!\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\n\n# ═══════════════════════════════════════════════════════════\n# 3. 모델 싱글톤 패턴 - 왜 이렇게 하는가?\n# ═══════════════════════════════════════════════════════════\n# YOLO 모델 로딩 = 수 초 소요 + 수백 MB 메모리\n# 매 요청마다 로드하면 → 느리고 메모리 터짐\n# 싱글톤: 최초 1번만 로드, 이후 재사용\n\nyolo_model = None\n\ndef get_yolo_model():\n    \"\"\"YOLO 모델 지연 로딩 (Lazy Loading) + 싱글톤\"\"\"\n    global yolo_model\n    if yolo_model is None:  # 아직 안 만들었으면\n        from ultralytics import YOLO\n        yolo_model = YOLO(\"yolov8n.pt\")  # 여기서 다운로드 + 로드\n    return yolo_model\n\n# ═══════════════════════════════════════════════════════════\n# 4. Pydantic 모델 - Spring Boot DTO와 1:1 매핑\n# ═══════════════════════════════════════════════════════════\n# Python의 응답 구조 = Java의 Response DTO와 동일해야\n# JSON 직렬화/역직렬화가 매끄럽게 동작\n\nclass BoundingBox(BaseModel):\n    \"\"\"번호판 영역 좌표 - Spring의 BoundingBox.java와 동일\"\"\"\n    x: int\n    y: int\n    width: int\n    height: int\n\nclass LicensePlateResponse(BaseModel):\n    \"\"\"\n    번호판 인식 응답 모델\n    → Spring Boot의 LicensePlateResponse.java와 1:1 매핑\n    \"\"\"\n    success: bool\n    request_id: Optional[str] = None\n    plate_number: Optional[str] = Field(None, description=\"인식된 번호판\")\n    confidence: Optional[float] = Field(None, ge=0, le=1)\n    bounding_box: Optional[BoundingBox] = None\n    processing_time_ms: Optional[int] = None\n    error_message: Optional[str] = None"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "🚗 번호판 인식 API 핵심 로직",
+        "code": "# ═══════════════════════════════════════════════════════════\n# 번호판 인식 API - YOLO + OCR 파이프라인\n# ═══════════════════════════════════════════════════════════\n\n@app.post(\"/api/v1/license-plate/detect\", response_model=LicensePlateResponse)\nasync def detect_license_plate(\n    file: UploadFile = File(..., description=\"차량 이미지\"),\n    x_request_id: Optional[str] = Header(None, alias=\"X-Request-ID\")\n):\n    \"\"\"\n    🚗 K-MaaS 번호판 인식 API\n    \n    처리 흐름:\n    1. 이미지 수신 (multipart/form-data)\n    2. YOLO로 차량/번호판 영역 탐지\n    3. OCR로 번호판 텍스트 추출\n    4. JSON 응답 반환\n    \n    Spring Boot의 AiService.detectLicensePlate()에서 호출\n    \"\"\"\n    start_time = time.time()\n    request_id = x_request_id or str(uuid.uuid4())\n    \n    try:\n        from PIL import Image\n        import numpy as np\n        import easyocr\n        \n        # 1단계: 이미지 로드 (Spring에서 받은 MultipartFile)\n        contents = await file.read()  # async로 비동기 읽기\n        image = Image.open(io.BytesIO(contents))\n        image_np = np.array(image)\n        \n        # 2단계: YOLO로 객체 탐지 (차량 찾기)\n        model = get_yolo_model()  # 싱글톤에서 가져옴\n        results = model(image)\n        \n        main_plate = None\n        main_confidence = 0\n        \n        # 3단계: 탐지된 차량에서 번호판 영역 추출\n        for r in results:\n            for box in r.boxes:\n                class_name = r.names[int(box.cls)]\n                confidence = float(box.conf)\n                \n                # 차량 클래스인 경우 (car, truck, bus...)\n                if class_name in ['car', 'truck', 'bus', 'motorcycle']:\n                    x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())\n                    \n                    # 차량 하단 30%를 번호판 영역으로 가정\n                    # (실제로는 번호판 전용 YOLO 모델 사용 권장)\n                    plate_y1 = y1 + int((y2 - y1) * 0.7)\n                    plate_region = image_np[plate_y1:y2, x1:x2]\n                    \n                    # 4단계: OCR로 텍스트 추출\n                    if plate_region.size > 0:\n                        reader = easyocr.Reader(['ko', 'en'])\n                        ocr_results = reader.readtext(plate_region)\n                        \n                        if ocr_results:\n                            plate_text = ''.join([t[1] for t in ocr_results])\n                            plate_text = plate_text.replace(' ', '').upper()\n                            \n                            if confidence > main_confidence:\n                                main_confidence = confidence\n                                main_plate = {\n                                    \"number\": plate_text,\n                                    \"confidence\": confidence,\n                                    \"bbox\": BoundingBox(x=x1, y=y1, width=x2-x1, height=y2-y1)\n                                }\n        \n        processing_time = int((time.time() - start_time) * 1000)\n        \n        # 5단계: 결과 반환 (Spring Boot가 받을 JSON)\n        if main_plate:\n            return LicensePlateResponse(\n                success=True,\n                request_id=request_id,\n                plate_number=main_plate[\"number\"],\n                confidence=main_plate[\"confidence\"],\n                bounding_box=main_plate[\"bbox\"],\n                processing_time_ms=processing_time\n            )\n        else:\n            return LicensePlateResponse(\n                success=False,\n                request_id=request_id,\n                processing_time_ms=processing_time,\n                error_message=\"번호판을 찾을 수 없습니다\"\n            )\n            \n    except Exception as e:\n        raise HTTPException(status_code=500, detail=str(e))"
+      },
+      {
+        "type": "code",
+        "language": "dockerfile",
+        "title": "🐳 Docker 배포 설정 (Dockerfile 분석)",
+        "code": "# ═══════════════════════════════════════════════════════════\n# Python AI 서버 Dockerfile - 라인별 상세 설명\n# ═══════════════════════════════════════════════════════════\n\n# 1. 베이스 이미지 선택\n# python:3.11-slim = 데비안 기반 경량 이미지 (약 150MB)\n# 왜 slim? → 전체 이미지는 1GB+, slim은 필수만 포함\nFROM python:3.11-slim\n\n# 2. 작업 디렉토리 설정\n# 컨테이너 내부에서 /app 폴더를 기준으로 작업\nWORKDIR /app\n\n# 3. 시스템 의존성 설치 ⭐ 중요!\n# OpenCV, 이미지 처리에 필요한 라이브러리들\nRUN apt-get update && apt-get install -y \\\n    ffmpeg \\          # 비디오/오디오 처리 (Whisper용)\n    libsm6 \\          # X11 세션 관리 (OpenCV 필수)\n    libxext6 \\        # X11 확장 (OpenCV 필수)\n    libgl1-mesa-glx \\ # OpenGL (이미지 렌더링)\n    && rm -rf /var/lib/apt/lists/*  # 캐시 삭제로 이미지 경량화\n\n# 4. Python 패키지 설치\n# requirements.txt를 먼저 복사 → Docker 캐시 활용\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n# --no-cache-dir: pip 캐시 안 남김 → 이미지 크기 감소\n\n# 5. (선택) 빌드 시 모델 미리 다운로드\n# 주석 해제하면 컨테이너 시작 시 다운로드 안 해도 됨\n# 단점: 이미지 크기 증가 (yolov8n.pt = 약 6MB)\n# RUN python -c \"from ultralytics import YOLO; YOLO('yolov8n.pt')\"\n\n# 6. 소스 코드 복사\n# 의존성 설치 후 복사 → 코드 변경 시 의존성 재설치 안 함\nCOPY . .\n\n# 7. 포트 노출\n# FastAPI 서버가 사용할 포트\nEXPOSE 8000\n\n# 8. 서버 실행 명령\n# uvicorn: ASGI 서버 (비동기 처리에 최적화)\n# --host 0.0.0.0: 외부 접근 허용 (Docker 네트워크용)\nCMD [\"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]"
+      },
+      {
+        "type": "code",
+        "language": "yaml",
+        "title": "🐳 Docker Compose - 전체 서비스 오케스트레이션",
+        "code": "# docker-compose.yml\n# Spring Boot + FastAPI + DB + Redis 통합 실행\n\nversion: '3.8'\n\nservices:\n  # ═══════════════════════════════════════════════════════════\n  # 1. Python AI 서버 (YOLO, Whisper, OCR)\n  # ═══════════════════════════════════════════════════════════\n  ai-server:\n    build: ./backend/python-ai-server\n    ports:\n      - \"8000:8000\"\n    environment:\n      - OPENAI_API_KEY=${OPENAI_API_KEY}  # ChatGPT API용\n    volumes:\n      - ./models:/app/models  # 모델 파일 영속화\n    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia       # GPU 사용 시\n              count: 1\n              capabilities: [gpu]\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:8000/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 3\n\n  # ═══════════════════════════════════════════════════════════\n  # 2. Spring Boot 백엔드 (비즈니스 로직, API Gateway)\n  # ═══════════════════════════════════════════════════════════\n  spring-backend:\n    build: ./backend/spring-boot\n    ports:\n      - \"8080:8080\"\n    environment:\n      - SPRING_PROFILES_ACTIVE=docker\n      - AI_SERVER_URL=http://ai-server:8000  # Docker 네트워크 내부 통신\n      - DATABASE_URL=jdbc:postgresql://db:5432/kmaas\n    depends_on:\n      - ai-server\n      - db\n      - redis\n\n  # ═══════════════════════════════════════════════════════════\n  # 3. PostgreSQL 데이터베이스\n  # ═══════════════════════════════════════════════════════════\n  db:\n    image: postgres:15\n    environment:\n      POSTGRES_DB: kmaas\n      POSTGRES_USER: admin\n      POSTGRES_PASSWORD: ${DB_PASSWORD}\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n\n  # ═══════════════════════════════════════════════════════════\n  # 4. Redis 캐시 (AI 결과 캐싱, 세션 관리)\n  # ═══════════════════════════════════════════════════════════\n  redis:\n    image: redis:7-alpine\n    ports:\n      - \"6379:6379\"\n\nvolumes:\n  postgres_data:"
+      },
+      {
+        "type": "code",
+        "language": "java",
+        "title": "☕ Spring Boot에서 AI 서버 호출하기",
+        "code": "// ═══════════════════════════════════════════════════════════\n// Spring Boot AiService - FastAPI 서버 연동\n// ═══════════════════════════════════════════════════════════\n\n@Service\n@Slf4j\npublic class AiService {\n\n    private final WebClient webClient;  // 비동기 HTTP 클라이언트\n    \n    @Value(\"${ai.server.url}\")\n    private String aiServerUrl;  // http://ai-server:8000 (Docker)\n    \n    public AiService(WebClient.Builder webClientBuilder) {\n        this.webClient = webClientBuilder\n            .baseUrl(aiServerUrl)\n            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.MULTIPART_FORM_DATA_VALUE)\n            .build();\n    }\n    \n    /**\n     * 번호판 인식 API 호출\n     * Python AI 서버의 /api/v1/license-plate/detect 엔드포인트 호출\n     */\n    public Mono<LicensePlateResponse> detectLicensePlate(MultipartFile image) {\n        String requestId = UUID.randomUUID().toString();\n        log.info(\"[{}] 번호판 인식 요청 시작\", requestId);\n        \n        return webClient.post()\n            .uri(\"/api/v1/license-plate/detect\")\n            .header(\"X-Request-ID\", requestId)\n            .body(BodyInserters.fromMultipartData(\n                \"file\", new MultipartInputStreamFileResource(image)\n            ))\n            .retrieve()\n            .onStatus(HttpStatusCode::isError, response -> {\n                log.error(\"[{}] AI 서버 에러: {}\", requestId, response.statusCode());\n                return Mono.error(new AiServiceException(\"AI 처리 실패\"));\n            })\n            .bodyToMono(LicensePlateResponse.class)\n            .doOnSuccess(response -> {\n                if (response.isSuccess()) {\n                    log.info(\"[{}] 번호판 인식 성공: {} ({}ms)\", \n                        requestId, response.getPlateNumber(), response.getProcessingTimeMs());\n                }\n            })\n            .timeout(Duration.ofSeconds(30))  // 타임아웃 설정\n            .retryWhen(Retry.backoff(3, Duration.ofSeconds(1)))  // 재시도\n            .onErrorResume(e -> {\n                log.error(\"[{}] 번호판 인식 실패\", requestId, e);\n                return Mono.just(LicensePlateResponse.failure(e.getMessage()));\n            });\n    }\n}\n\n// ═══════════════════════════════════════════════════════════\n// 응답 DTO - Python의 LicensePlateResponse와 동일 구조\n// ═══════════════════════════════════════════════════════════\n\n@Data\npublic class LicensePlateResponse {\n    private boolean success;\n    private String requestId;\n    private String plateNumber;      // Python: plate_number (자동 매핑)\n    private Double confidence;\n    private BoundingBox boundingBox; // Python: bounding_box\n    private Integer processingTimeMs;\n    private String errorMessage;\n    \n    @Data\n    public static class BoundingBox {\n        private int x, y, width, height;\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "🚀 프로덕션 체크리스트",
+        "content": "**1. 보안**\n```yaml\n# CORS 프로덕션 설정\nallow_origins: [\"https://yourdomain.com\"]  # * 금지!\n\n# API 인증\nX-API-Key 헤더 검증 추가\n```\n\n**2. 성능 최적화**\n```python\n# 모델 워밍업 (서버 시작 시)\n@app.on_event(\"startup\")\nasync def startup():\n    get_yolo_model()  # 미리 로드\n    \n# GPU 사용 확인\nimport torch\nprint(f\"CUDA 사용: {torch.cuda.is_available()}\")\n```\n\n**3. 모니터링**\n```yaml\n# Prometheus 메트릭 추가\npip install prometheus-fastapi-instrumentator\n\n# 로그 구조화\nlogger.info(\"요청\", extra={\"request_id\": id, \"latency_ms\": time})\n```\n\n**4. 확장성**\n```yaml\n# Docker Swarm / K8s로 AI 서버 스케일 아웃\ndeploy:\n  replicas: 3\n  resources:\n    reservations:\n      devices:\n        - driver: nvidia\n          count: 1\n```"
+      },
+      {
+        "type": "tip",
+        "title": "💡 핵심 정리: 언제 이 아키텍처를 쓰는가?",
+        "content": "**이 패턴이 적합한 경우:**\n\n✅ AI 모델이 Python 전용 (PyTorch, TensorFlow)\n✅ GPU 연산이 필요한 무거운 추론\n✅ AI 팀과 백엔드 팀이 분리된 조직\n✅ AI 모델을 자주 업데이트해야 할 때\n✅ 트래픽에 따라 AI 서버만 스케일 아웃 필요\n\n**이 패턴이 과한 경우:**\n\n❌ 간단한 ML (scikit-learn 수준) → Java에서 직접 호출 가능\n❌ 트래픽이 적은 프로토타입 → 단일 서버로 충분\n❌ 팀이 작고 Python만 사용 → Django/FastAPI 단일 스택\n\n**기억할 핵심:**\n```\nSpring Boot = 비즈니스 로직 + 트랜잭션 + 인증\nFastAPI     = AI 추론 + GPU 연산 + 모델 관리\nREST API    = 둘을 연결하는 계약서\n```"
+      }
+    ]
+  },
+  "02_image-generation/stable-diffusion": {
+    "id": "02_image-generation/stable-diffusion",
+    "title": "Stable Diffusion 이미지 생성",
+    "category": "ai-tech",
+    "subCategory": "02_image-generation",
+    "language": "Python",
+    "description": "텍스트로부터 이미지를 생성하는 Stable Diffusion의 원리와 사용법을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Stable Diffusion이란?",
+        "content": "**Text-to-Image 생성 모델**\n\n텍스트 프롬프트를 입력하면 해당 설명에 맞는 이미지를 생성합니다.\n\n**핵심 구성 요소:**\n- **VAE (Variational Autoencoder)**: 이미지 ↔ 잠재 공간 변환\n- **U-Net**: 노이즈 제거 (Denoising)\n- **Text Encoder (CLIP)**: 텍스트를 임베딩으로 변환\n\n**동작 원리:**\n1. 랜덤 노이즈에서 시작\n2. 텍스트 조건에 맞게 점진적으로 노이즈 제거\n3. 최종적으로 깨끗한 이미지 생성"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "Stable Diffusion 사용하기",
+        "code": "# pip install diffusers transformers accelerate torch\n\nfrom diffusers import StableDiffusionPipeline\nimport torch\n\n# 모델 로드 (처음 실행 시 다운로드됨)\npipe = StableDiffusionPipeline.from_pretrained(\n    \"runwayml/stable-diffusion-v1-5\",\n    torch_dtype=torch.float16  # GPU 메모리 절약\n)\npipe = pipe.to(\"cuda\")  # GPU 사용\n\n# 이미지 생성\nprompt = \"a cute cat wearing sunglasses, digital art\"\nimage = pipe(prompt).images[0]\n\n# 저장\nimage.save(\"generated_cat.png\")"
+      },
+      {
+        "type": "tip",
+        "title": "프롬프트 작성 팁",
+        "content": "**좋은 프롬프트 구조:**\n`[주제] + [스타일] + [분위기] + [품질 키워드]`\n\n**예시:**\n`a majestic lion, oil painting style, dramatic lighting, highly detailed, 8k`\n\n**품질 향상 키워드:**\n- highly detailed, masterpiece, best quality\n- 8k, ultra HD, sharp focus\n- studio lighting, professional"
+      }
+    ]
+  },
+  "03_video-generation/video-gen": {
+    "id": "03_video-generation/video-gen",
+    "title": "AI 비디오 생성",
+    "category": "ai-tech",
+    "subCategory": "03_video-generation",
+    "language": "Python",
+    "description": "텍스트나 이미지로부터 비디오를 생성하는 AI 기술을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "AI 비디오 생성 기술",
+        "content": "**주요 모델:**\n- **Runway Gen-2**: 텍스트/이미지 → 비디오\n- **Pika Labs**: 짧은 비디오 생성\n- **Sora (OpenAI)**: 장시간 고품질 비디오\n- **AnimateDiff**: Stable Diffusion 기반 애니메이션\n\n**기술 방식:**\n1. **프레임별 생성**: 이미지 생성 모델 확장\n2. **시간적 일관성**: Temporal attention 활용\n3. **Video Diffusion**: 3D U-Net으로 시공간 모델링"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "AnimateDiff 예제",
+        "code": "# pip install diffusers transformers accelerate\n\nfrom diffusers import AnimateDiffPipeline, MotionAdapter\nimport torch\n\n# Motion adapter 로드\nadapter = MotionAdapter.from_pretrained(\n    \"guoyww/animatediff-motion-adapter-v1-5-2\"\n)\n\n# 파이프라인 생성\npipe = AnimateDiffPipeline.from_pretrained(\n    \"runwayml/stable-diffusion-v1-5\",\n    motion_adapter=adapter,\n    torch_dtype=torch.float16\n).to(\"cuda\")\n\n# 비디오 생성\nprompt = \"a cat walking in the garden\"\nframes = pipe(prompt, num_frames=16).frames[0]\n\n# GIF로 저장\nframes[0].save(\"animation.gif\", \n               save_all=True, \n               append_images=frames[1:], \n               duration=100, \n               loop=0)"
+      }
+    ]
+  },
+  "04_voice-synthesis/tts": {
+    "id": "04_voice-synthesis/tts",
+    "title": "TTS (Text-to-Speech) 음성 합성",
+    "category": "ai-tech",
+    "subCategory": "04_voice-synthesis",
+    "language": "Python",
+    "description": "텍스트를 자연스러운 음성으로 변환하는 TTS 기술을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "TTS 기술 개요",
+        "content": "**Text-to-Speech 파이프라인:**\n\n1. **텍스트 전처리**: 숫자, 약어 변환\n2. **음소 변환**: 텍스트 → 음소(Phoneme)\n3. **음향 모델**: 음소 → 멜 스펙트로그램\n4. **보코더**: 스펙트로그램 → 오디오 파형\n\n**주요 모델:**\n- **Tacotron 2**: Attention 기반 음향 모델\n- **VITS**: End-to-end 고품질 TTS\n- **Coqui TTS**: 오픈소스 다국어 TTS\n- **OpenAI TTS**: API 기반 고품질 음성"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "gTTS로 간단한 음성 생성",
+        "code": "# pip install gtts\n\nfrom gtts import gTTS\nimport os\n\n# 텍스트를 음성으로 변환\ntext = \"안녕하세요, AI 음성 합성 테스트입니다.\"\ntts = gTTS(text=text, lang='ko')  # 한국어\n\n# MP3 파일로 저장\ntts.save(\"output.mp3\")\n\n# 재생 (Windows)\nos.system(\"start output.mp3\")"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "Coqui TTS (고품질)",
+        "code": "# pip install TTS\n\nfrom TTS.api import TTS\n\n# 모델 로드 (자동 다운로드)\ntts = TTS(model_name=\"tts_models/ko/css10/vits\")\n\n# 음성 생성\ntts.tts_to_file(\n    text=\"안녕하세요, 고품질 음성 합성입니다.\",\n    file_path=\"output.wav\"\n)"
+      }
+    ]
+  },
+  "05_speech-recognition/whisper": {
+    "id": "05_speech-recognition/whisper",
+    "title": "Whisper 음성 인식",
+    "category": "ai-tech",
+    "subCategory": "05_speech-recognition",
+    "language": "Python",
+    "description": "OpenAI Whisper를 사용한 음성 인식(STT)을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Whisper란?",
+        "content": "**OpenAI의 범용 음성 인식 모델**\n\n**특징:**\n- 다국어 지원 (한국어 포함 99개 언어)\n- 자동 언어 감지\n- 번역 기능 (→ 영어)\n- 노이즈에 강건함\n\n**모델 크기:**\n- tiny (39M) → base (74M) → small (244M) → medium (769M) → large (1.55B)\n- 크기가 클수록 정확도 높음"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "Whisper 음성 인식",
+        "code": "# pip install openai-whisper\n\nimport whisper\n\n# 모델 로드\nmodel = whisper.load_model(\"base\")  # tiny, base, small, medium, large\n\n# 음성 파일 변환\nresult = model.transcribe(\"audio.mp3\")\n\n# 결과 출력\nprint(result[\"text\"])\n\n# 언어 지정 (한국어)\nresult = model.transcribe(\"korean_audio.mp3\", language=\"ko\")\n\n# 타임스탬프 포함 출력\nfor segment in result[\"segments\"]:\n    start = segment[\"start\"]\n    end = segment[\"end\"]\n    text = segment[\"text\"]\n    print(f\"[{start:.1f}s → {end:.1f}s] {text}\")"
+      },
+      {
+        "type": "tip",
+        "title": "Whisper 활용 팁",
+        "content": "**정확도 향상:**\n- 조용한 환경에서 녹음\n- language 파라미터 명시적 지정\n- medium 이상 모델 사용\n\n**용도:**\n- 회의록 자동 작성\n- 유튜브 자막 생성\n- 팟캐스트 스크립트"
+      }
+    ]
+  },
+  "06_face-recognition/deepface": {
+    "id": "06_face-recognition/deepface",
+    "title": "DeepFace 얼굴 인식",
+    "category": "ai-tech",
+    "subCategory": "06_face-recognition",
+    "language": "Python",
+    "description": "DeepFace 라이브러리를 활용한 얼굴 인식과 분석을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "DeepFace 기능",
+        "content": "**얼굴 분석 라이브러리**\n\n**주요 기능:**\n1. **얼굴 검증 (Verification)**: 두 얼굴이 같은 사람인지\n2. **얼굴 인식 (Recognition)**: DB에서 일치하는 얼굴 찾기\n3. **얼굴 분석 (Analysis)**: 나이, 성별, 감정, 인종 추정\n\n**지원 모델:**\nVGG-Face, Facenet, OpenFace, DeepFace, ArcFace 등"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "DeepFace 사용하기",
+        "code": "# pip install deepface\n\nfrom deepface import DeepFace\n\n# 1. 얼굴 검증 (두 얼굴 비교)\nresult = DeepFace.verify(\n    img1_path=\"face1.jpg\",\n    img2_path=\"face2.jpg\"\n)\nprint(f\"같은 사람: {result['verified']}\")\nprint(f\"거리: {result['distance']}\")\n\n# 2. 얼굴 분석\nanalysis = DeepFace.analyze(\n    img_path=\"face.jpg\",\n    actions=['age', 'gender', 'emotion']\n)\nprint(f\"나이: {analysis[0]['age']}\")\nprint(f\"성별: {analysis[0]['dominant_gender']}\")\nprint(f\"감정: {analysis[0]['dominant_emotion']}\")\n\n# 3. 얼굴 임베딩 추출\nembedding = DeepFace.represent(\n    img_path=\"face.jpg\",\n    model_name=\"Facenet\"\n)"
+      }
+    ]
+  },
+  "07_pose-estimation/mediapipe-pose": {
+    "id": "07_pose-estimation/mediapipe-pose",
+    "title": "MediaPipe 포즈 추정",
+    "category": "ai-tech",
+    "subCategory": "07_pose-estimation",
+    "language": "Python",
+    "description": "Google MediaPipe를 사용한 실시간 인체 포즈 추정을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "MediaPipe Pose란?",
+        "content": "**Google의 실시간 포즈 추정 라이브러리**\n\n**특징:**\n- 33개의 신체 랜드마크 감지\n- 실시간 처리 (30+ FPS)\n- CPU에서도 빠른 추론\n- 웹, 모바일, 데스크톱 지원\n\n**랜드마크 예시:**\n- 0: 코 / 11-12: 어깨 / 23-24: 엉덩이\n- 15-16: 손목 / 27-28: 발목"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "웹캠 실시간 포즈 추정",
+        "code": "# pip install mediapipe opencv-python\n\nimport cv2\nimport mediapipe as mp\n\n# MediaPipe 초기화\nmp_pose = mp.solutions.pose\nmp_draw = mp.solutions.drawing_utils\npose = mp_pose.Pose()\n\n# 웹캠 열기\ncap = cv2.VideoCapture(0)\n\nwhile True:\n    ret, frame = cap.read()\n    if not ret:\n        break\n    \n    # RGB 변환 (MediaPipe는 RGB 입력)\n    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\n    \n    # 포즈 추정\n    results = pose.process(rgb)\n    \n    # 랜드마크 그리기\n    if results.pose_landmarks:\n        mp_draw.draw_landmarks(\n            frame,\n            results.pose_landmarks,\n            mp_pose.POSE_CONNECTIONS\n        )\n        \n        # 특정 랜드마크 좌표 얻기 (예: 왼쪽 손목)\n        left_wrist = results.pose_landmarks.landmark[15]\n        print(f\"왼쪽 손목: x={left_wrist.x:.2f}, y={left_wrist.y:.2f}\")\n    \n    cv2.imshow('Pose Estimation', frame)\n    \n    if cv2.waitKey(1) & 0xFF == ord('q'):\n        break\n\ncap.release()\ncv2.destroyAllWindows()"
+      },
+      {
+        "type": "tip",
+        "title": "활용 사례",
+        "content": "**포즈 추정 활용:**\n- 피트니스 앱 (자세 교정)\n- 게임 컨트롤러 (동작 인식)\n- 스포츠 분석\n- 물리 치료 보조\n- 수화 인식"
+      }
+    ]
+  },
+  "08_ocr/easyocr": {
+    "id": "08_ocr/easyocr",
+    "title": "EasyOCR 문자 인식",
+    "category": "ai-tech",
+    "subCategory": "08_ocr",
+    "language": "Python",
+    "description": "EasyOCR을 사용한 이미지 내 문자 인식(OCR)을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "OCR (Optical Character Recognition)",
+        "content": "**이미지에서 텍스트 추출**\n\n**EasyOCR 특징:**\n- 80+ 언어 지원 (한국어 포함)\n- 딥러닝 기반 고정확도\n- 설치 및 사용 간편\n- GPU 가속 지원\n\n**처리 과정:**\n1. 텍스트 영역 검출 (CRAFT)\n2. 문자 인식 (CRNN)\n3. 결과 후처리"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "EasyOCR 사용하기",
+        "code": "# pip install easyocr\n\nimport easyocr\n\n# 리더 생성 (언어 지정)\nreader = easyocr.Reader(['ko', 'en'])  # 한국어 + 영어\n\n# 이미지에서 텍스트 추출\nresult = reader.readtext('document.jpg')\n\n# 결과 출력\nfor detection in result:\n    bbox = detection[0]      # 바운딩 박스 좌표\n    text = detection[1]      # 인식된 텍스트\n    confidence = detection[2] # 신뢰도\n    \n    print(f\"텍스트: {text}\")\n    print(f\"신뢰도: {confidence:.2f}\")\n    print(f\"위치: {bbox}\")\n    print(\"---\")\n\n# 텍스트만 추출\ntexts = reader.readtext('document.jpg', detail=0)\nprint(\"\\n\".join(texts))"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "OCR 결과 시각화",
+        "code": "import cv2\nimport easyocr\n\nreader = easyocr.Reader(['ko', 'en'])\nimage = cv2.imread('document.jpg')\n\nresult = reader.readtext('document.jpg')\n\nfor detection in result:\n    # 바운딩 박스 그리기\n    pts = detection[0]\n    pts = [(int(p[0]), int(p[1])) for p in pts]\n    \n    cv2.polylines(image, [np.array(pts)], True, (0, 255, 0), 2)\n    cv2.putText(image, detection[1], pts[0], \n                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)\n\ncv2.imwrite('ocr_result.jpg', image)"
+      }
+    ]
+  },
+  "09_chatbot/langchain": {
+    "id": "09_chatbot/langchain",
+    "title": "LangChain 챗봇 개발",
+    "category": "ai-tech",
+    "subCategory": "09_chatbot",
+    "language": "Python",
+    "description": "LangChain을 활용한 LLM 기반 챗봇 개발을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "LangChain이란?",
+        "content": "**LLM 애플리케이션 개발 프레임워크**\n\n**핵심 개념:**\n- **Chain**: 여러 컴포넌트 연결\n- **Agent**: 도구를 사용하는 자율 AI\n- **Memory**: 대화 기록 관리\n- **Retrieval**: 문서 검색 (RAG)\n\n**용도:**\n- 대화형 챗봇\n- 문서 기반 QA\n- 코드 생성/분석\n- 데이터 분석 에이전트"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "LangChain 챗봇 기초",
+        "code": "# pip install langchain langchain-openai\n\nfrom langchain_openai import ChatOpenAI\nfrom langchain.prompts import ChatPromptTemplate\nfrom langchain.memory import ConversationBufferMemory\nfrom langchain.chains import ConversationChain\n\n# LLM 초기화\nllm = ChatOpenAI(\n    model=\"gpt-3.5-turbo\",\n    temperature=0.7,\n    openai_api_key=\"your-api-key\"\n)\n\n# 메모리 설정 (대화 기록 유지)\nmemory = ConversationBufferMemory()\n\n# 대화 체인 생성\nconversation = ConversationChain(\n    llm=llm,\n    memory=memory,\n    verbose=True\n)\n\n# 대화 실행\nresponse1 = conversation.predict(input=\"안녕! 나는 김철수야.\")\nprint(response1)\n\nresponse2 = conversation.predict(input=\"내 이름이 뭐였지?\")\nprint(response2)  # 이전 대화 기억함"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "RAG (문서 기반 QA)",
+        "code": "from langchain.document_loaders import TextLoader\nfrom langchain.text_splitter import CharacterTextSplitter\nfrom langchain.embeddings import OpenAIEmbeddings\nfrom langchain.vectorstores import FAISS\nfrom langchain.chains import RetrievalQA\n\n# 1. 문서 로드\nloader = TextLoader('document.txt')\ndocuments = loader.load()\n\n# 2. 텍스트 분할\nsplitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)\ntexts = splitter.split_documents(documents)\n\n# 3. 임베딩 및 벡터 저장소 생성\nembeddings = OpenAIEmbeddings()\nvectorstore = FAISS.from_documents(texts, embeddings)\n\n# 4. QA 체인 생성\nqa_chain = RetrievalQA.from_chain_type(\n    llm=llm,\n    retriever=vectorstore.as_retriever()\n)\n\n# 5. 질문하기\nanswer = qa_chain.run(\"문서의 주요 내용이 뭐야?\")\nprint(answer)"
+      }
+    ]
+  },
+  "10_code-generation/ai-coding": {
+    "id": "10_code-generation/ai-coding",
+    "title": "AI 코드 생성",
+    "category": "ai-tech",
+    "subCategory": "10_code-generation",
+    "language": "Python",
+    "description": "AI를 활용한 코드 생성과 프로그래밍 보조 도구를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "AI 코딩 도구",
+        "content": "**코드 생성 AI 종류:**\n\n**1. 코드 자동 완성**\n- GitHub Copilot\n- Amazon CodeWhisperer\n- Tabnine\n\n**2. 코드 생성 LLM**\n- GPT-4, Claude\n- Code Llama\n- StarCoder\n\n**3. 특화 도구**\n- Cursor (AI 에디터)\n- Replit AI\n- Claude Code"
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "title": "OpenAI API로 코드 생성",
+        "code": "from openai import OpenAI\n\nclient = OpenAI(api_key=\"your-api-key\")\n\ndef generate_code(prompt):\n    response = client.chat.completions.create(\n        model=\"gpt-4\",\n        messages=[\n            {\n                \"role\": \"system\",\n                \"content\": \"You are a Python expert. Generate clean, well-documented code.\"\n            },\n            {\n                \"role\": \"user\",\n                \"content\": prompt\n            }\n        ],\n        temperature=0.2  # 낮을수록 일관된 출력\n    )\n    return response.choices[0].message.content\n\n# 사용 예시\ncode = generate_code(\n    \"파일에서 JSON을 읽고 특정 키의 값을 추출하는 함수 작성\"\n)\nprint(code)"
+      },
+      {
+        "type": "tip",
+        "title": "AI 코딩 베스트 프랙티스",
+        "content": "**효과적인 프롬프트 작성:**\n1. 명확한 요구사항 명시\n2. 입출력 예시 제공\n3. 사용할 라이브러리 지정\n4. 에러 처리 요청\n\n**주의사항:**\n- 생성된 코드 반드시 검토\n- 보안 취약점 확인\n- 라이선스 문제 고려\n- 단위 테스트 작성"
+      }
+    ]
+  }
+}

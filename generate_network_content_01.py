@@ -1,0 +1,2120 @@
+# -*- coding: utf-8 -*-
+import json
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+with open('src/data/contents/network.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+
+network_contents = {
+    "01_기초/network-intro": {
+        "title": "네트워크 소개",
+        "description": "네트워크의 기본 개념을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 네트워크란?",
+                "content": """## 🔥 한 줄 요약
+> **컴퓨터들이 서로 대화하는 방법** - 카톡처럼 메시지 주고받기!
+
+---
+
+## 💡 왜 배워야 하나?
+
+### 실생활 예시:
+```
+📱 카카오톡 메시지 보내기
+├── 내 폰 → 인터넷 → 카카오 서버 → 친구 폰
+└── 이게 다 네트워크!
+
+🎮 롤 게임하기
+├── 내 PC → 인터넷 → 라이엇 서버 → 다른 플레이어들
+└── 0.01초 안에 데이터 전송!
+
+📺 넷플릭스 보기
+├── 넷플릭스 서버 → 인터넷 → 우리 집 TV
+└── 1초에 수백 MB 전송!
+```
+
+### 개발자에게 필수인 이유:
+```
+🔴 네트워크 모르면 생기는 일
+├── API 에러 원인 못 찾음
+├── "왜 느려요?" 답 못함
+├── 보안 취약점 못 막음
+└── 면접에서 탈락
+
+🟢 네트워크 알면
+├── 버그 원인 빠르게 파악
+├── 성능 최적화 가능
+├── 보안 이슈 대응 가능
+└── 시니어 개발자 필수 역량
+```
+
+---
+
+## 🎯 핵심 개념
+
+### 📬 편지 보내기로 이해하기
+
+```
+인터넷 = 전세계 우체국 네트워크
+
+1. 편지 쓰기 = 데이터 만들기
+2. 봉투에 주소 적기 = IP 주소 붙이기
+3. 우체국에 맡기기 = 공유기로 전송
+4. 여러 우체국 거쳐 전달 = 라우터들 통과
+5. 도착! = 서버가 데이터 받음
+```
+
+### 네트워크 구성요소
+
+```
+🖥️ 클라이언트: 요청하는 쪽 (내 폰, 내 PC)
+🏢 서버: 응답하는 쪽 (네이버, 구글)
+🔀 라우터: 길 안내 (데이터 어디로 보낼지)
+📡 스위치: 같은 네트워크 내 연결
+🌐 인터넷: 전세계 네트워크들의 연결
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 네트워크 확인하기",
+                "content": """### 내 네트워크 정보 확인
+
+```bash
+# Windows
+ipconfig
+
+# Mac/Linux
+ifconfig
+# 또는
+ip addr
+
+# 결과 예시:
+# IPv4 주소: 192.168.0.10  ← 내 컴퓨터 주소
+# 서브넷 마스크: 255.255.255.0
+# 기본 게이트웨이: 192.168.0.1  ← 공유기 주소
+```
+
+### 서버에 연결 테스트
+
+```bash
+# ping: 서버가 살아있나 확인
+ping google.com
+
+# 결과:
+# 64 bytes from 142.250.196.110: time=30ms
+# → 30ms 만에 응답! (빠름)
+
+# traceroute: 어떤 경로로 가는지
+traceroute google.com
+# Mac: traceroute, Windows: tracert
+
+# 결과:
+# 1. 192.168.0.1 (우리 집 공유기)
+# 2. 211.xxx.xxx.1 (통신사)
+# 3. ... (여러 라우터)
+# 10. 142.250.196.110 (구글 서버)
+```
+
+### 웹사이트 정보 확인
+
+```bash
+# nslookup: 도메인 → IP 변환
+nslookup naver.com
+
+# 결과:
+# Name: naver.com
+# Address: 223.130.200.107
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 꿀팁",
+                "content": """### 네트워크 학습 순서
+
+```
+1단계: 기초 용어
+├── IP 주소, 포트, DNS
+└── 인터넷이 어떻게 작동하는지
+
+2단계: 프로토콜
+├── TCP vs UDP
+├── HTTP/HTTPS
+└── 왜 규칙이 필요한지
+
+3단계: 웹 통신
+├── REST API
+├── 인증 (JWT, 세션)
+└── 실제 서비스에서 어떻게 쓰는지
+
+4단계: 심화
+├── WebSocket
+├── 로드밸런싱
+└── 대규모 트래픽 처리
+```
+
+### 실습 추천
+
+```
+1. 브라우저 개발자 도구 → Network 탭
+2. Postman으로 API 테스트
+3. 간단한 서버 만들어보기
+```"""
+            }
+        ]
+    },
+
+    "01_기초/ip-address": {
+        "title": "IP 주소",
+        "description": "IP 주소의 개념과 체계를 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 IP 주소란?",
+                "content": """## 🔥 한 줄 요약
+> **인터넷 세계의 집 주소** - 컴퓨터를 찾아가는 번호!
+
+---
+
+## 💡 왜 배워야 하나?
+
+### 실생활 비유:
+```
+🏠 현실 세계: "서울시 강남구 테헤란로 123"
+🌐 인터넷: "192.168.0.1"
+
+→ 주소가 있어야 택배(데이터)가 도착!
+```
+
+### 개발자가 알아야 하는 이유:
+```
+서버 배포 → IP 주소 설정
+API 호출 → 서버 IP 필요
+보안 설정 → IP 화이트리스트
+디버깅 → IP로 문제 추적
+```
+
+---
+
+## 🎯 핵심 개념
+
+### IPv4 주소 구조
+
+```
+192.168.0.1
+
+각 숫자: 0~255 (8비트)
+총 4개: 32비트
+
+→ 약 43억 개 주소 가능
+→ 근데 전세계 인구 80억... 부족!
+```
+
+### 특별한 IP 주소들
+
+```
+🏠 127.0.0.1 (localhost)
+└── 내 컴퓨터 자기 자신
+└── 개발할 때 "내 PC에서 테스트"
+
+🏢 192.168.x.x, 10.x.x.x, 172.16~31.x.x
+└── 사설 IP (집/회사 내부용)
+└── 인터넷에서 직접 접근 불가
+
+🌍 그 외
+└── 공인 IP (인터넷용)
+└── 전세계에서 유일한 주소
+```
+
+### IPv4 vs IPv6
+
+```
+IPv4: 192.168.0.1
+├── 32비트, 약 43억 개
+├── 거의 고갈됨!
+└── 지금 대부분 사용
+
+IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+├── 128비트, 거의 무한대
+├── 340간 개 (340,000,000,000,000,000,000,000,000,000,000,000,000)
+└── 서서히 전환 중
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 IP 주소 다루기",
+                "content": """### 내 IP 확인
+
+```bash
+# 사설 IP (내부 네트워크)
+# Windows
+ipconfig | findstr "IPv4"
+
+# Mac/Linux
+ifconfig | grep inet
+
+# 공인 IP (외부에서 보이는 주소)
+curl ifconfig.me
+# 또는 네이버에서 "내 IP 주소" 검색
+```
+
+### Python에서 IP 다루기
+
+```python
+import socket
+
+# 내 컴퓨터 IP
+hostname = socket.gethostname()
+my_ip = socket.gethostbyname(hostname)
+print(f"내 IP: {my_ip}")
+
+# 도메인 → IP 변환
+naver_ip = socket.gethostbyname("naver.com")
+print(f"네이버 IP: {naver_ip}")
+
+# IP 유효성 검사
+import ipaddress
+
+try:
+    ip = ipaddress.ip_address("192.168.0.1")
+    print(f"유효한 IPv{ip.version} 주소")
+except ValueError:
+    print("잘못된 IP 주소")
+```
+
+### 서버 설정 예시
+
+```python
+# Flask 서버
+from flask import Flask
+app = Flask(__name__)
+
+# 0.0.0.0 = 모든 IP에서 접근 허용
+app.run(host='0.0.0.0', port=5000)
+
+# 127.0.0.1 = 내 컴퓨터에서만 접근
+app.run(host='127.0.0.1', port=5000)
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 꿀팁",
+                "content": """### 자주 쓰는 IP
+
+```
+127.0.0.1 = 내 컴퓨터 (localhost)
+0.0.0.0 = 모든 IP (서버 바인딩용)
+192.168.0.1 = 보통 공유기 주소
+8.8.8.8 = 구글 DNS 서버
+1.1.1.1 = 클라우드플레어 DNS
+```
+
+### 공인 IP vs 사설 IP
+
+```
+집에서 인터넷 할 때:
+내 PC (192.168.0.10)
+    ↓
+공유기 (192.168.0.1 / 공인IP: 210.xxx.xxx.xxx)
+    ↓
+인터넷
+
+→ 외부에선 공인 IP만 보임
+→ 집 안의 여러 기기가 하나의 공인 IP 공유
+→ 이게 NAT (Network Address Translation)
+```"""
+            }
+        ]
+    },
+
+    "01_기초/port": {
+        "title": "포트 (Port)",
+        "description": "포트의 개념과 역할을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 포트란?",
+                "content": """## 🔥 한 줄 요약
+> **컴퓨터 안의 문 번호** - IP가 아파트라면, 포트는 호수!
+
+---
+
+## 💡 왜 필요한가?
+
+### 비유로 이해하기:
+```
+🏢 아파트 (= 컴퓨터, IP 주소)
+├── 101호: 웹 서버 (포트 80)
+├── 102호: 이메일 서버 (포트 25)
+├── 103호: 게임 서버 (포트 3000)
+└── 104호: 데이터베이스 (포트 3306)
+
+→ 하나의 컴퓨터에서 여러 서비스 동시 운영!
+```
+
+### 실제 예시:
+```
+http://naver.com = http://naver.com:80
+https://google.com = https://google.com:443
+localhost:3000 = React 개발 서버
+localhost:8080 = Spring 서버
+```
+
+---
+
+## 🎯 핵심 개념
+
+### 포트 번호 범위
+
+```
+0 ~ 65535 (총 65,536개)
+
+🔒 Well-Known Ports (0-1023)
+├── 80: HTTP (웹)
+├── 443: HTTPS (보안 웹)
+├── 22: SSH (원격 접속)
+├── 21: FTP (파일 전송)
+├── 25: SMTP (이메일 발송)
+└── 관리자 권한 필요
+
+📋 Registered Ports (1024-49151)
+├── 3000: React 기본 포트
+├── 3306: MySQL
+├── 5432: PostgreSQL
+├── 6379: Redis
+├── 8080: 대체 HTTP
+└── 일반적인 애플리케이션
+
+🎲 Dynamic Ports (49152-65535)
+└── 임시 사용 (브라우저 등)
+```
+
+### 자주 쓰는 포트
+
+```
+웹: 80 (HTTP), 443 (HTTPS)
+DB: 3306 (MySQL), 5432 (Postgres), 27017 (MongoDB)
+개발: 3000 (React), 8080 (Spring), 5000 (Flask)
+기타: 22 (SSH), 6379 (Redis)
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 포트 다루기",
+                "content": """### 사용 중인 포트 확인
+
+```bash
+# Windows
+netstat -ano | findstr :3000
+
+# Mac/Linux
+lsof -i :3000
+# 또는
+netstat -tlnp | grep 3000
+
+# 결과 예시:
+# TCP  127.0.0.1:3000  LISTENING  1234
+# → 프로세스 1234가 3000번 포트 사용 중
+```
+
+### 포트 충돌 해결
+
+```bash
+# "포트가 이미 사용 중입니다" 에러 시
+
+# 1. 누가 쓰는지 확인
+lsof -i :3000
+
+# 2. 해당 프로세스 종료
+kill -9 [PID]
+
+# 또는 다른 포트 사용
+npm start -- --port 3001
+```
+
+### 서버 포트 설정
+
+```python
+# Flask
+app.run(port=5000)
+
+# Express.js
+app.listen(3000, () => {
+    console.log('서버 시작: http://localhost:3000')
+})
+
+# Spring Boot (application.properties)
+server.port=8080
+```
+
+### 방화벽 포트 열기
+
+```bash
+# Linux (UFW)
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 3000
+
+# Windows (관리자 권한)
+netsh advfirewall firewall add rule name="Open 3000" dir=in action=allow protocol=TCP localport=3000
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 꿀팁",
+                "content": """### 포트 선택 가이드
+
+```
+✅ 개발 시
+├── 이미 알려진 포트 피하기
+├── 3000, 8000, 8080 등 사용
+└── 팀 내 규칙 정하기
+
+✅ 배포 시
+├── 웹: 80, 443 사용
+├── 리버스 프록시로 내부 포트 숨기기
+└── 불필요한 포트 방화벽 차단
+```
+
+### URL과 포트
+
+```
+http://example.com:80/page
+https://example.com:443/page
+
+→ 80, 443은 생략 가능 (기본 포트)
+→ http://example.com = http://example.com:80
+```"""
+            }
+        ]
+    },
+
+    "01_기초/dns": {
+        "title": "DNS",
+        "description": "Domain Name System의 원리를 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 DNS란?",
+                "content": """## 🔥 한 줄 요약
+> **인터넷의 전화번호부** - 이름을 IP 주소로 바꿔주는 시스템!
+
+---
+
+## 💡 왜 필요한가?
+
+### 비유로 이해하기:
+```
+📱 핸드폰 연락처
+├── "엄마" → 010-1234-5678
+├── "친구" → 010-8765-4321
+└── 이름만 알면 전화 가능!
+
+🌐 DNS
+├── "naver.com" → 223.130.200.107
+├── "google.com" → 142.250.196.110
+└── 도메인만 알면 접속 가능!
+```
+
+### DNS 없다면?
+```
+❌ "223.130.200.107 접속해서 검색해"
+❌ "142.250.196.110 가서 메일 확인해"
+
+✅ "네이버 가서 검색해"
+✅ "구글 가서 메일 확인해"
+
+→ 사람이 기억하기 쉬운 이름 사용!
+```
+
+---
+
+## 🎯 DNS 동작 과정
+
+### 1단계: naver.com 입력
+
+```
+                    ┌─────────────────┐
+                    │  DNS 서버들     │
+                    │                 │
+  naver.com → ?     │  ① 루트 DNS    │
+      │             │  ② .com DNS    │
+      ▼             │  ③ naver DNS   │
+┌──────────┐        └────────┬────────┘
+│ 브라우저  │◄───────────────┘
+│          │     223.130.200.107
+└──────────┘
+```
+
+### 2단계: 캐싱
+
+```
+다음에 또 naver.com 접속하면?
+
+1. 브라우저 캐시 확인 → 있으면 바로 사용
+2. OS 캐시 확인 → 있으면 바로 사용
+3. 공유기 캐시 확인 → 있으면 바로 사용
+4. ISP DNS 캐시 → 있으면 바로 사용
+5. 없으면 다시 질의
+
+→ 캐싱으로 속도 향상!
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 DNS 명령어",
+                "content": """### DNS 조회
+
+```bash
+# nslookup: DNS 조회
+nslookup naver.com
+
+# 결과:
+# Server: 168.126.63.1 (DNS 서버)
+# Name: naver.com
+# Address: 223.130.200.107
+
+# dig: 더 상세한 정보 (Mac/Linux)
+dig naver.com
+
+# 특정 DNS 서버로 조회
+nslookup naver.com 8.8.8.8
+```
+
+### DNS 캐시 관리
+
+```bash
+# Windows: DNS 캐시 비우기
+ipconfig /flushdns
+
+# Mac
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+
+# Linux
+sudo systemctl restart systemd-resolved
+```
+
+### hosts 파일 수정 (로컬 DNS)
+
+```bash
+# Windows: C:\\Windows\\System32\\drivers\\etc\\hosts
+# Mac/Linux: /etc/hosts
+
+# 파일 내용:
+127.0.0.1   localhost
+127.0.0.1   myapp.local    # 개발용 도메인
+192.168.0.10  dev-server   # 팀 내부 서버
+
+# → myapp.local 입력하면 127.0.0.1로 연결
+# → 개발 시 유용!
+```
+
+### Python DNS 조회
+
+```python
+import socket
+
+# 도메인 → IP
+ip = socket.gethostbyname('naver.com')
+print(ip)  # 223.130.200.107
+
+# IP → 도메인 (역방향)
+domain = socket.gethostbyaddr('8.8.8.8')
+print(domain)  # ('dns.google', ...)
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 꿀팁",
+                "content": """### 추천 DNS 서버
+
+```
+🔵 Google DNS
+├── 8.8.8.8 (주)
+└── 8.8.4.4 (보조)
+
+🟠 Cloudflare DNS
+├── 1.1.1.1 (주)
+└── 1.0.0.1 (보조)
+└── 가장 빠름!
+
+🟢 통신사 기본 DNS
+└── 자동 설정됨
+```
+
+### DNS 문제 해결
+
+```
+"사이트에 연결할 수 없습니다"
+
+1. DNS 캐시 비우기
+2. 다른 DNS로 변경 (8.8.8.8)
+3. nslookup으로 확인
+4. 공유기 재시작
+```
+
+### TTL (Time To Live)
+
+```
+DNS 캐시 유지 시간
+
+TTL 짧음 (300초 = 5분)
+├── 서버 이전 시 빠른 전환
+└── DNS 조회 잦음
+
+TTL 길음 (86400초 = 24시간)
+├── 캐시로 빠른 응답
+└── 변경 반영 느림
+```"""
+            }
+        ]
+    },
+
+    "01_기초/osi-7-layer": {
+        "title": "OSI 7계층",
+        "description": "OSI 모델의 각 계층을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 OSI 7계층이란?",
+                "content": """## 🔥 한 줄 요약
+> **네트워크 통신을 7단계로 나눈 것** - 택배 배송 과정처럼!
+
+---
+
+## 💡 왜 알아야 하나?
+
+### 면접 단골 질문:
+```
+"OSI 7계층 설명해주세요"
+"HTTP는 몇 계층인가요?"
+"TCP와 UDP의 차이는?"
+
+→ 네트워크 기본기 확인용!
+```
+
+### 실무에서:
+```
+"3계층 문제 같아요" = 라우팅/IP 문제
+"4계층 문제 같아요" = TCP/UDP 문제
+"7계층 문제 같아요" = 애플리케이션 문제
+
+→ 문제 범위 좁히기!
+```
+
+---
+
+## 🎯 7계층 한눈에 보기
+
+```
+택배 보내기 비유:
+
+7. 응용 계층    = 주문서 작성 (무엇을 보낼지)
+6. 표현 계층    = 포장하기 (압축, 암호화)
+5. 세션 계층    = 배송 추적번호 (연결 관리)
+4. 전송 계층    = 택배 선택 (빠른배송 vs 일반)
+3. 네트워크 계층 = 배송 경로 (어느 길로?)
+2. 데이터링크   = 차에 싣기 (다음 정류장까지)
+1. 물리 계층    = 도로, 트럭 (실제 이동)
+```
+
+### 계층별 정리
+
+| 계층 | 이름 | 하는 일 | 예시 |
+|-----|------|--------|------|
+| 7 | 응용 | 사용자 서비스 | HTTP, FTP, SMTP |
+| 6 | 표현 | 데이터 변환 | 암호화, 압축 |
+| 5 | 세션 | 연결 관리 | 로그인 유지 |
+| 4 | 전송 | 신뢰성 보장 | TCP, UDP |
+| 3 | 네트워크 | 경로 결정 | IP, 라우터 |
+| 2 | 데이터링크 | 물리주소 | MAC, 스위치 |
+| 1 | 물리 | 전기신호 | 케이블, 허브 |"""
+            },
+            {
+                "type": "code",
+                "title": "💻 계층별 상세",
+                "content": """### 개발자가 주로 다루는 계층
+
+```
+┌─────────────────────────────────────┐
+│ 7계층: HTTP, HTTPS, WebSocket       │ ← 웹 개발
+│ (우리가 만드는 API, 웹사이트)         │
+├─────────────────────────────────────┤
+│ 4계층: TCP, UDP                     │ ← 네트워크 설정
+│ (연결 신뢰성, 속도)                  │
+├─────────────────────────────────────┤
+│ 3계층: IP                           │ ← 서버 배포
+│ (주소, 라우팅)                       │
+├─────────────────────────────────────┤
+│ 1~2계층: 이더넷, WiFi               │ ← 인프라팀
+│ (하드웨어)                          │
+└─────────────────────────────────────┘
+```
+
+### 데이터 전송 과정
+
+```
+보내는 쪽 (캡슐화):
+[데이터] → HTTP 헤더 추가 (7계층)
+[HTTP+데이터] → TCP 헤더 추가 (4계층)
+[TCP+HTTP+데이터] → IP 헤더 추가 (3계층)
+[IP+TCP+HTTP+데이터] → 이더넷 헤더 (2계층)
+[전기 신호로 변환] (1계층)
+
+받는 쪽 (역캡슐화):
+역순으로 헤더 제거하며 데이터 추출
+```
+
+### 실제 HTTP 요청 흐름
+
+```
+1. 브라우저: HTTP 요청 생성 (7계층)
+   GET /index.html HTTP/1.1
+
+2. OS: TCP 연결 (4계층)
+   3-way handshake
+
+3. OS: IP 패킷 생성 (3계층)
+   출발: 192.168.0.10
+   도착: 223.130.200.107
+
+4. 네트워크 카드: 전송 (1~2계층)
+   이더넷 프레임으로 전송
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 꿀팁",
+                "content": """### 암기법
+
+```
+7 - Application  (앱)
+6 - Presentation (프레젠테이션)
+5 - Session      (세션)
+4 - Transport    (전송)
+3 - Network      (네트워크)
+2 - Data Link    (데이터 링크)
+1 - Physical     (물리)
+
+영어: "All People Seem To Need Data Processing"
+한글: "앞 표 세 트 네 대 피"
+```
+
+### OSI vs TCP/IP 모델
+
+```
+OSI 7계층    TCP/IP 4계층
+─────────────────────────
+7 응용      ┐
+6 표현      ├─ 응용 계층 (HTTP)
+5 세션      ┘
+4 전송      ─── 전송 계층 (TCP/UDP)
+3 네트워크   ─── 인터넷 계층 (IP)
+2 데이터링크 ┐
+1 물리      ┴─ 네트워크 접근 계층
+
+→ 실무에서는 TCP/IP 모델 더 많이 사용
+```"""
+            }
+        ]
+    },
+
+    "01_기초/tcp-ip": {
+        "title": "TCP/IP",
+        "description": "TCP/IP 프로토콜 스택을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 TCP/IP란?",
+                "content": """## 🔥 한 줄 요약
+> **인터넷의 공용어** - 전세계 컴퓨터가 대화하는 규칙!
+
+---
+
+## 💡 왜 알아야 하나?
+
+```
+🌍 전세계 인터넷 = TCP/IP 사용
+├── 웹사이트 접속 = HTTP (TCP 기반)
+├── 파일 다운로드 = FTP (TCP 기반)
+├── 이메일 전송 = SMTP (TCP 기반)
+└── 동영상 스트리밍 = UDP 기반
+
+→ TCP/IP 이해 = 인터넷 이해!
+```
+
+---
+
+## 🎯 TCP/IP 4계층
+
+```
+┌───────────────────────────────┐
+│  4. 응용 계층 (Application)    │
+│  HTTP, FTP, SMTP, DNS         │
+│  "무슨 내용을 보낼까?"          │
+├───────────────────────────────┤
+│  3. 전송 계층 (Transport)      │
+│  TCP, UDP                     │
+│  "어떻게 보낼까? (믿을 수 있게/빠르게)" │
+├───────────────────────────────┤
+│  2. 인터넷 계층 (Internet)      │
+│  IP, ICMP                     │
+│  "어디로 보낼까? (주소)"         │
+├───────────────────────────────┤
+│  1. 네트워크 접근 계층          │
+│  Ethernet, WiFi               │
+│  "물리적으로 어떻게? (케이블, 무선)" │
+└───────────────────────────────┘
+```
+
+### TCP vs UDP
+
+```
+📦 TCP (Transmission Control Protocol)
+├── 신뢰성 있는 전송
+├── 순서 보장
+├── 느리지만 확실
+└── 예: 웹, 이메일, 파일 전송
+
+🚀 UDP (User Datagram Protocol)
+├── 빠른 전송
+├── 순서 보장 X
+├── 손실 가능하지만 빠름
+└── 예: 게임, 스트리밍, DNS
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 TCP/IP 실습",
+                "content": """### TCP 통신 (Python)
+
+```python
+# 서버
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # TCP
+server.bind(('0.0.0.0', 8080))
+server.listen(5)
+
+while True:
+    client, addr = server.accept()
+    print(f"연결: {addr}")
+    data = client.recv(1024)
+    client.send(b"Hello!")
+    client.close()
+
+# 클라이언트
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('localhost', 8080))
+client.send(b"Hi!")
+response = client.recv(1024)
+print(response)
+client.close()
+```
+
+### UDP 통신 (Python)
+
+```python
+# 서버
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # UDP
+server.bind(('0.0.0.0', 8080))
+
+while True:
+    data, addr = server.recvfrom(1024)
+    print(f"받음: {data} from {addr}")
+    server.sendto(b"OK", addr)
+
+# 클라이언트
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+client.sendto(b"Hello", ('localhost', 8080))
+response, _ = client.recvfrom(1024)
+print(response)
+```
+
+### 네트워크 상태 확인
+
+```bash
+# 현재 TCP 연결 상태
+netstat -an | grep ESTABLISHED
+
+# 특정 포트 연결 확인
+netstat -an | grep :80
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 정리",
+                "content": """### TCP/IP vs OSI
+
+```
+TCP/IP가 실제 표준!
+OSI는 이론적 모델
+
+실무에서는 TCP/IP 용어 사용:
+├── "IP 주소" (3계층)
+├── "TCP 연결" (4계층)
+├── "HTTP 요청" (7계층)
+```
+
+### 언제 TCP? 언제 UDP?
+
+```
+TCP 사용:
+├── 데이터 정확성 중요
+├── 순서 중요
+├── 웹, 이메일, 파일 전송
+
+UDP 사용:
+├── 속도 중요
+├── 약간의 손실 OK
+├── 게임, 라이브 스트리밍, VoIP
+```"""
+            }
+        ]
+    },
+
+    # 02_TCP_UDP 섹션
+    "02_TCP_UDP/tcp-concept": {
+        "title": "TCP 개념",
+        "description": "TCP의 핵심 개념을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 TCP란?",
+                "content": """## 🔥 한 줄 요약
+> **신뢰할 수 있는 택배 서비스** - 확실하게 도착 보장!
+
+---
+
+## 💡 TCP의 특징
+
+### 택배로 비유:
+```
+📦 TCP = 등기 우편
+├── 배달 확인증 받음 (ACK)
+├── 분실 시 재배송 (재전송)
+├── 순서대로 도착 (순서 보장)
+└── 느리지만 확실!
+
+📨 UDP = 일반 우편
+├── 보내면 끝
+├── 도착 확인 X
+├── 순서 뒤죽박죽 가능
+└── 빠르지만 불확실
+```
+
+---
+
+## 🎯 TCP 핵심 특징
+
+### 1. 연결 지향
+
+```
+통화하기 전에 전화 연결하는 것처럼
+데이터 보내기 전에 연결 먼저!
+
+클라이언트 ──────── 서버
+    │   "연결해도 돼?" (SYN)
+    │─────────────────────▶│
+    │   "응, 나도 연결!" (SYN+ACK)
+    │◀─────────────────────│
+    │   "확인!" (ACK)
+    │─────────────────────▶│
+    └── 이제 데이터 전송 ──┘
+```
+
+### 2. 신뢰성 보장
+
+```
+모든 데이터 도착 확인
+
+보내는 쪽: "데이터 1번 보냄"
+받는 쪽:   "1번 받았어! (ACK)"
+보내는 쪽: "데이터 2번 보냄"
+받는 쪽:   (응답 없음... 손실!)
+보내는 쪽: "2번 다시 보냄" (재전송)
+받는 쪽:   "2번 받았어! (ACK)"
+```
+
+### 3. 순서 보장
+
+```
+데이터가 순서대로 도착
+
+보낸 순서: 1, 2, 3, 4, 5
+도착 순서: 1, 3, 2, 5, 4 (네트워크에서 뒤섞임)
+재조립 후: 1, 2, 3, 4, 5 (TCP가 정리!)
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 TCP 통신",
+                "content": """### TCP 서버 (Python)
+
+```python
+import socket
+
+# TCP 서버
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind(('0.0.0.0', 8080))
+server.listen(5)  # 최대 5개 대기
+
+print("서버 시작: 8080 포트")
+
+while True:
+    client_socket, addr = server.accept()
+    print(f"연결됨: {addr}")
+
+    # 데이터 받기
+    data = client_socket.recv(1024).decode()
+    print(f"받은 데이터: {data}")
+
+    # 응답 보내기
+    client_socket.send(f"받았어요: {data}".encode())
+
+    client_socket.close()
+```
+
+### TCP 클라이언트 (Python)
+
+```python
+import socket
+
+# TCP 클라이언트
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('localhost', 8080))
+
+# 데이터 보내기
+client.send("안녕하세요!".encode())
+
+# 응답 받기
+response = client.recv(1024).decode()
+print(f"서버 응답: {response}")
+
+client.close()
+```
+
+### 연결 상태 확인
+
+```bash
+# TCP 연결 상태 보기
+netstat -an | grep ESTABLISHED
+netstat -an | grep LISTEN
+netstat -an | grep TIME_WAIT
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 TCP 상태",
+                "content": """### TCP 연결 상태
+
+```
+LISTEN: 연결 대기 중 (서버)
+ESTABLISHED: 연결됨 (통신 중)
+TIME_WAIT: 연결 종료 대기
+CLOSE_WAIT: 종료 대기 (상대가 끊음)
+FIN_WAIT: 종료 요청 보냄
+```
+
+### TCP가 쓰이는 곳
+
+```
+✅ TCP 사용
+├── HTTP/HTTPS (웹)
+├── FTP (파일 전송)
+├── SMTP/POP3 (이메일)
+├── SSH (원격 접속)
+└── 데이터 정확성이 중요한 모든 곳
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/tcp-handshake": {
+        "title": "TCP 3-Way Handshake",
+        "description": "TCP 연결 수립 과정을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 3-Way Handshake란?",
+                "content": """## 🔥 한 줄 요약
+> **"연결해도 돼?" → "응, 나도!" → "알겠어!"** - 세 번의 악수!
+
+---
+
+## 💡 왜 세 번인가?
+
+### 전화 거는 것과 비슷:
+```
+📞 전화 연결
+1. 나: "여보세요?" (전화 검)
+2. 상대: "네, 여보세요!" (받음)
+3. 나: "아, 연결됐네!" (확인)
+→ 이제 대화 시작!
+
+🌐 TCP 연결
+1. 클라이언트: "연결할게!" (SYN)
+2. 서버: "응, 나도 연결!" (SYN+ACK)
+3. 클라이언트: "확인!" (ACK)
+→ 이제 데이터 전송!
+```
+
+---
+
+## 🎯 상세 과정
+
+```
+클라이언트                     서버
+    │                           │
+    │──── SYN (seq=100) ───────▶│
+    │     "연결 요청!"            │ LISTEN
+    │                           │   ↓
+    │◀─ SYN+ACK (seq=200,       │ SYN_RECEIVED
+    │         ack=101) ─────────│
+    │     "응, 나도 연결!"        │
+    │                           │
+    │──── ACK (ack=201) ────────▶│
+    │     "확인!"                │ ESTABLISHED
+    │                           │
+ ESTABLISHED                    │
+    │◀═══ 데이터 전송 시작 ══════▶│
+```
+
+### 각 단계 설명
+
+```
+1단계 - SYN (Synchronize)
+├── 클라이언트 → 서버
+├── "나 연결하고 싶어"
+└── seq=100 (내 시작 번호)
+
+2단계 - SYN+ACK
+├── 서버 → 클라이언트
+├── "응 알겠어, 나도 연결하고 싶어"
+├── ack=101 (네 100 받았고, 다음은 101 보내)
+└── seq=200 (내 시작 번호)
+
+3단계 - ACK (Acknowledge)
+├── 클라이언트 → 서버
+├── "확인했어!"
+└── ack=201 (네 200 받았어)
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 Handshake 확인",
+                "content": """### Wireshark로 확인
+
+```
+패킷 1: [SYN] Seq=0
+패킷 2: [SYN, ACK] Seq=0 Ack=1
+패킷 3: [ACK] Seq=1 Ack=1
+패킷 4: [HTTP] GET /index.html  (데이터 전송 시작)
+```
+
+### tcpdump로 캡처
+
+```bash
+# TCP 패킷 캡처
+sudo tcpdump -i any tcp port 80 -nn
+
+# 결과 예시:
+# 192.168.0.10.54321 > 93.184.216.34.80: Flags [S], seq 12345
+# 93.184.216.34.80 > 192.168.0.10.54321: Flags [S.], seq 67890, ack 12346
+# 192.168.0.10.54321 > 93.184.216.34.80: Flags [.], ack 67891
+
+# Flags 의미:
+# [S] = SYN
+# [S.] = SYN+ACK
+# [.] = ACK
+# [P.] = PUSH+ACK (데이터)
+# [F.] = FIN+ACK (종료)
+```
+
+### Python으로 연결 테스트
+
+```python
+import socket
+import time
+
+# 연결 시간 측정
+start = time.time()
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(('google.com', 80))  # 여기서 3-way handshake!
+
+elapsed = time.time() - start
+print(f"연결 시간: {elapsed*1000:.2f}ms")
+
+sock.close()
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 면접 포인트",
+                "content": """### 자주 묻는 질문
+
+```
+Q: 왜 2-way가 아니라 3-way?
+A: 양쪽 모두 송수신 가능 확인 필요
+   2-way면 서버→클라이언트 확인 불가
+
+Q: SYN Flood 공격이란?
+A: SYN만 보내고 ACK 안 보내서
+   서버 리소스 고갈시키는 공격
+   해결: SYN Cookie, 방화벽
+
+Q: seq 번호는 왜 랜덤?
+A: 보안! 예측 가능하면 위조 가능
+```
+
+### 연결 실패 케이스
+
+```
+1. 서버가 꺼져 있음
+   → SYN 보냈는데 응답 없음
+   → 타임아웃 후 연결 실패
+
+2. 방화벽 차단
+   → SYN 보냈는데 RST(거절) 받음
+   → 즉시 연결 실패
+
+3. 포트가 열려있지 않음
+   → RST 응답
+   → "Connection refused"
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/tcp-teardown": {
+        "title": "TCP 연결 종료",
+        "description": "TCP 4-Way Handshake를 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 4-Way Handshake란?",
+                "content": """## 🔥 한 줄 요약
+> **"끊을게" → "응" → "나도 끊을게" → "응"** - 네 번의 악수로 종료!
+
+---
+
+## 💡 왜 네 번인가?
+
+### 전화 끊기와 비슷:
+```
+📞 전화 끊기 (양쪽 다 할 말 마무리)
+
+1. 나: "나 이제 끊을게" (FIN)
+2. 상대: "응, 알겠어" (ACK)
+   상대: (아직 할 말 마무리 중...)
+3. 상대: "나도 끊을게" (FIN)
+4. 나: "응, 잘 가!" (ACK)
+→ 통화 종료!
+```
+
+---
+
+## 🎯 상세 과정
+
+```
+클라이언트                     서버
+    │                           │
+    │──── FIN (seq=100) ───────▶│
+    │     "나 끊을게"            │
+    │                           │
+    │◀──── ACK (ack=101) ───────│
+    │     "응 알겠어"            │
+    │                           │
+    │   (서버가 남은 데이터 전송)  │
+    │                           │
+    │◀──── FIN (seq=200) ───────│
+    │     "나도 끊을게"          │
+    │                           │
+    │──── ACK (ack=201) ────────▶│
+    │     "응 잘가"              │
+    │                           │
+ TIME_WAIT                   CLOSED
+ (잠시 대기)
+    │
+ CLOSED
+```
+
+### 왜 3-way가 아니라 4-way?
+
+```
+연결할 때: 동시에 가능
+├── SYN: "연결하자!"
+├── SYN+ACK: "응, 나도!" (2개 합침)
+└── ACK: "확인!"
+
+종료할 때: 순차적
+├── FIN: "나 끊을게"
+├── ACK: "응" (아직 보낼 데이터 있을 수 있음)
+├── FIN: "나도 끊을게" (데이터 다 보낸 후)
+└── ACK: "응"
+
+→ 양쪽이 독립적으로 종료!
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 연결 종료 확인",
+                "content": """### 상태 변화
+
+```
+클라이언트 상태            서버 상태
+────────────────────────────────────
+ESTABLISHED              ESTABLISHED
+     │ (FIN 전송)              │
+FIN_WAIT_1                     │
+     │                   (FIN 수신)
+     │                   CLOSE_WAIT
+     │ (ACK 수신)              │
+FIN_WAIT_2                     │
+     │                   (FIN 전송)
+     │                   LAST_ACK
+     │ (FIN 수신)              │
+TIME_WAIT                      │
+     │ (ACK 전송)              │
+     │                      CLOSED
+(2MSL 대기)
+CLOSED
+```
+
+### TIME_WAIT 확인
+
+```bash
+# TIME_WAIT 상태 연결 확인
+netstat -an | grep TIME_WAIT
+
+# 많으면 서버에 부하
+# 보통 60초 후 자동 정리
+```
+
+### Python 연결 종료
+
+```python
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(('example.com', 80))
+
+# 데이터 주고받기
+client.send(b"GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n")
+response = client.recv(1024)
+
+# 정상 종료 (4-way handshake)
+client.close()
+
+# 강제 종료 (RST 전송)
+# client.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack('ii', 1, 0))
+# client.close()
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 TIME_WAIT",
+                "content": """### TIME_WAIT가 필요한 이유
+
+```
+1. 지연된 패킷 처리
+   └── 아직 도착 안 한 패킷 대기
+
+2. 새 연결과 혼동 방지
+   └── 같은 포트 재사용 시
+       이전 연결 패킷과 구분
+
+기본값: 2 × MSL (Maximum Segment Lifetime)
+보통: 60초 ~ 4분
+```
+
+### 서버에서 TIME_WAIT 문제
+
+```bash
+# TIME_WAIT 많으면 포트 고갈!
+
+# 해결 1: SO_REUSEADDR 옵션
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+# 해결 2: 커널 파라미터 조정 (Linux)
+net.ipv4.tcp_tw_reuse = 1
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/4way-handshake": {
+        "title": "4-Way Handshake",
+        "description": "TCP 연결 종료의 4단계를 상세히 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 4-Way Handshake 심화",
+                "content": """## 🎯 각 단계 상세
+
+### FIN_WAIT 상태들
+
+```
+클라이언트가 먼저 종료 요청 시:
+
+FIN_WAIT_1: FIN 보내고 ACK 기다림
+     ↓ (ACK 받음)
+FIN_WAIT_2: 상대방 FIN 기다림
+     ↓ (FIN 받음)
+TIME_WAIT: 마지막 ACK 보내고 대기
+     ↓ (2MSL 후)
+CLOSED: 완전 종료
+```
+
+### CLOSE_WAIT 위험
+
+```
+서버에 CLOSE_WAIT 많으면 위험!
+
+원인:
+├── 클라이언트가 FIN 보냈는데
+├── 서버가 close() 안 함
+└── 리소스 누수!
+
+해결:
+├── 코드에서 socket.close() 확실히
+├── try-finally 또는 with문 사용
+└── 타임아웃 설정
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 안전한 종료",
+                "content": """### 올바른 소켓 종료
+
+```python
+# ❌ 나쁜 예
+client = socket.socket()
+client.connect(...)
+client.send(...)
+# close() 깜빡!
+
+# ✅ 좋은 예 (try-finally)
+client = socket.socket()
+try:
+    client.connect(...)
+    client.send(...)
+finally:
+    client.close()
+
+# ✅ 더 좋은 예 (with문)
+with socket.socket() as client:
+    client.connect(...)
+    client.send(...)
+# 자동으로 close()
+```
+
+### 반쪽 종료 (Half-Close)
+
+```python
+# shutdown()으로 송신만 종료
+client.shutdown(socket.SHUT_WR)  # 쓰기 종료
+# 아직 읽기는 가능!
+data = client.recv(1024)
+client.close()  # 완전 종료
+
+# SHUT_RD: 읽기 종료
+# SHUT_WR: 쓰기 종료
+# SHUT_RDWR: 양쪽 종료
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 트러블슈팅",
+                "content": """### 상태별 대응
+
+```
+TIME_WAIT 많음:
+├── 정상 (클라이언트)
+├── 비정상 (서버) → SO_REUSEADDR
+
+CLOSE_WAIT 많음:
+├── 코드 버그!
+└── close() 누락 확인
+
+FIN_WAIT_2 오래 지속:
+├── 상대방이 FIN 안 보냄
+└── 타임아웃 설정 필요
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/udp-concept": {
+        "title": "UDP 개념",
+        "description": "UDP의 특징과 사용 사례를 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 UDP란?",
+                "content": """## 🔥 한 줄 요약
+> **빠르지만 보장 없는 전송** - 일반 우편처럼!
+
+---
+
+## 💡 TCP vs UDP
+
+### 비유로 이해:
+```
+📦 TCP = 등기우편
+├── 배달 확인 받음
+├── 분실 시 재배송
+├── 느리지만 확실
+└── 비쌈
+
+📨 UDP = 일반 엽서
+├── 보내면 끝
+├── 도착 확인 X
+├── 빠름
+└── 저렴
+```
+
+---
+
+## 🎯 UDP 특징
+
+### 연결 없음 (Connectionless)
+
+```
+TCP: "연결할게" → "응" → "확인" → 데이터
+UDP: 바로 데이터 전송!
+
+→ 핸드셰이크 없어서 빠름
+```
+
+### 신뢰성 없음
+
+```
+UDP:
+├── 도착 확인 X
+├── 순서 보장 X
+├── 손실되면 그냥 손실
+└── 대신 빠름!
+
+쓰는 이유:
+├── 약간 손실되도 OK (영상, 게임)
+├── 속도가 중요
+└── 직접 신뢰성 구현
+```
+
+### 사용 사례
+
+```
+🎮 온라인 게임
+└── 1/60초마다 위치 전송
+└── 하나 잃어버려도 다음 거 받으면 됨
+
+📺 라이브 스트리밍
+└── 버퍼링보다 끊김이 나음
+└── 손실된 프레임 스킵
+
+📞 VoIP (인터넷 전화)
+└── 실시간성 중요
+└── 약간 끊겨도 대화 가능
+
+🌐 DNS
+└── 짧은 요청/응답
+└── 빠른 응답 필요
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 UDP 통신",
+                "content": """### UDP 서버
+
+```python
+import socket
+
+# UDP 소켓 (SOCK_DGRAM)
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server.bind(('0.0.0.0', 8080))
+
+print("UDP 서버 시작")
+
+while True:
+    data, addr = server.recvfrom(1024)
+    print(f"받음: {data.decode()} from {addr}")
+    server.sendto(b"OK", addr)
+```
+
+### UDP 클라이언트
+
+```python
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# 연결 없이 바로 전송!
+client.sendto(b"Hello UDP!", ('localhost', 8080))
+
+# 응답 받기
+data, addr = client.recvfrom(1024)
+print(f"응답: {data.decode()}")
+
+client.close()
+```
+
+### 브로드캐스트
+
+```python
+# UDP로 네트워크 전체에 전송
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+client.sendto(b"Hello everyone!", ('255.255.255.255', 8080))
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 TCP vs UDP 선택",
+                "content": """### 언제 뭘 쓸까?
+
+```
+TCP 선택:
+├── 데이터 손실 불가
+├── 순서 중요
+├── 파일 전송, 웹, 이메일
+
+UDP 선택:
+├── 실시간성 중요
+├── 약간 손실 OK
+├── 게임, 스트리밍, VoIP
+```
+
+### UDP + 신뢰성
+
+```
+UDP 위에 신뢰성 구현:
+├── QUIC (HTTP/3)
+├── WebRTC
+└── 게임 자체 프로토콜
+
+→ 필요한 것만 구현해서 효율적
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/tcp-vs-udp": {
+        "title": "TCP vs UDP",
+        "description": "TCP와 UDP의 차이점을 비교합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 TCP vs UDP 비교",
+                "content": """## 🎯 비교표
+
+| 특성 | TCP | UDP |
+|-----|-----|-----|
+| 연결 | 연결 지향 | 비연결 |
+| 신뢰성 | 보장 | 미보장 |
+| 순서 | 보장 | 미보장 |
+| 속도 | 느림 | 빠름 |
+| 오버헤드 | 큼 | 작음 |
+| 흐름제어 | 있음 | 없음 |
+| 혼잡제어 | 있음 | 없음 |
+
+---
+
+## 🎯 헤더 크기 비교
+
+```
+TCP 헤더: 20~60 bytes
+├── 출발지 포트 (2)
+├── 도착지 포트 (2)
+├── 순서 번호 (4)
+├── 확인 번호 (4)
+├── 플래그 등 (4)
+├── 체크섬 (2)
+└── 옵션 (가변)
+
+UDP 헤더: 8 bytes
+├── 출발지 포트 (2)
+├── 도착지 포트 (2)
+├── 길이 (2)
+└── 체크섬 (2)
+
+→ UDP가 훨씬 가벼움!
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 프로토콜별 사용 예시",
+                "content": """### TCP 기반 프로토콜
+
+```
+HTTP/HTTPS (웹): TCP 80/443
+├── 웹페이지 정확히 받아야 함
+
+FTP (파일 전송): TCP 21
+├── 파일 깨지면 안 됨
+
+SMTP (이메일): TCP 25
+├── 이메일 내용 정확해야 함
+
+SSH (원격 접속): TCP 22
+├── 명령어 정확히 전달
+```
+
+### UDP 기반 프로토콜
+
+```
+DNS: UDP 53
+├── 짧은 요청, 빠른 응답
+
+DHCP: UDP 67/68
+├── IP 자동 할당
+
+NTP: UDP 123
+├── 시간 동기화
+
+게임, 스트리밍: 다양한 포트
+├── 실시간성 중요
+```
+
+### 속도 테스트
+
+```python
+import socket
+import time
+
+# TCP 연결 시간
+start = time.time()
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp.connect(('google.com', 80))
+tcp.close()
+print(f"TCP 연결: {(time.time()-start)*1000:.2f}ms")
+
+# UDP는 연결 없음 = 0ms
+udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+udp.sendto(b"test", ('8.8.8.8', 53))  # 바로 전송
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 선택 가이드",
+                "content": """### 결정 흐름
+
+```
+데이터 손실 허용?
+├── NO → TCP
+└── YES ↓
+
+실시간성 중요?
+├── YES → UDP
+└── NO → TCP
+
+작은 패킷 많이?
+├── YES → UDP (오버헤드 적음)
+└── NO → TCP
+```
+
+### 하이브리드 예시
+
+```
+온라인 게임:
+├── 로그인, 결제: TCP (정확성)
+├── 캐릭터 이동: UDP (실시간)
+└── 채팅: TCP (메시지 정확)
+
+스트리밍:
+├── 인증, 메타데이터: TCP
+└── 영상 데이터: UDP
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/tcp-flow-control": {
+        "title": "TCP 흐름 제어",
+        "description": "TCP의 흐름 제어 메커니즘을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 흐름 제어란?",
+                "content": """## 🔥 한 줄 요약
+> **받는 쪽 속도에 맞춰 보내기** - 물 넘치지 않게!
+
+---
+
+## 💡 왜 필요한가?
+
+### 비유:
+```
+🚰 물 따르기
+├── 컵이 작은데 물을 확 부으면?
+├── 넘침!
+└── 컵 크기 보고 천천히 따라야
+
+📨 데이터 전송
+├── 수신 버퍼가 작은데 데이터 확 보내면?
+├── 손실!
+└── 버퍼 크기 보고 조절해야
+```
+
+---
+
+## 🎯 슬라이딩 윈도우
+
+```
+윈도우 = 한 번에 보낼 수 있는 양
+
+송신자: "버퍼 얼마나 남았어?"
+수신자: "1000바이트 남았어" (Window Size)
+송신자: "그럼 1000바이트까지만 보낼게"
+
+수신자가 처리하면:
+수신자: "이제 2000바이트 가능해"
+송신자: "알겠어, 더 보낼게"
+```
+
+### 동작 과정
+
+```
+수신 윈도우: 4KB
+
+1. 송신: 1KB 전송
+   수신 윈도우: 3KB (1KB 받음)
+
+2. 송신: 1KB 전송
+   수신 윈도우: 2KB
+
+3. 애플리케이션이 2KB 읽음
+   수신 윈도우: 4KB (다시 여유)
+
+4. ACK로 윈도우 크기 알림
+   "Window: 4096"
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 윈도우 확인",
+                "content": """### TCP 윈도우 크기 확인
+
+```bash
+# Wireshark에서 TCP 패킷 보면:
+# Window size value: 65535
+# [Calculated window size: 65535]
+
+# tcpdump로 확인
+sudo tcpdump -i any tcp -nn -v
+# ... win 65535 ...
+```
+
+### 소켓 버퍼 설정
+
+```python
+import socket
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 수신 버퍼 크기 설정
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 65536)
+
+# 송신 버퍼 크기 설정
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
+
+# 현재 버퍼 크기 확인
+recv_buf = sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)
+send_buf = sock.getsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF)
+print(f"수신 버퍼: {recv_buf}, 송신 버퍼: {send_buf}")
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 성능 튜닝",
+                "content": """### 윈도우 크기 조절
+
+```
+너무 작으면:
+├── 자주 ACK 기다림
+└── 속도 저하
+
+너무 크면:
+├── 메모리 낭비
+├── 손실 시 재전송 많음
+
+적절한 크기:
+└── 대역폭 × 지연시간
+└── 예: 100Mbps × 50ms = 625KB
+```
+
+### Linux 튜닝
+
+```bash
+# 자동 조절 활성화 (기본값)
+net.ipv4.tcp_window_scaling = 1
+
+# 버퍼 크기 범위
+net.core.rmem_max = 16777216
+net.core.wmem_max = 16777216
+```"""
+            }
+        ]
+    },
+
+    "02_TCP_UDP/tcp-congestion-control": {
+        "title": "TCP 혼잡 제어",
+        "description": "TCP의 혼잡 제어 알고리즘을 이해합니다",
+        "sections": [
+            {
+                "type": "concept",
+                "title": "🔥 혼잡 제어란?",
+                "content": """## 🔥 한 줄 요약
+> **네트워크 상황에 맞춰 속도 조절** - 도로 정체 피하기!
+
+---
+
+## 💡 흐름 제어 vs 혼잡 제어
+
+```
+🚰 흐름 제어
+├── 받는 쪽(컵) 크기에 맞춤
+└── 수신자 보호
+
+🚗 혼잡 제어
+├── 도로(네트워크) 상황에 맞춤
+└── 네트워크 보호
+```
+
+---
+
+## 🎯 혼잡 제어 단계
+
+### 1. Slow Start (천천히 시작)
+
+```
+처음엔 조심스럽게:
+
+윈도우: 1 → 2 → 4 → 8 → 16...
+     (지수적 증가)
+
+임계점(threshold)까지 빠르게 증가
+```
+
+### 2. Congestion Avoidance (혼잡 회피)
+
+```
+임계점 이후:
+
+윈도우: 16 → 17 → 18 → 19...
+     (선형적 증가)
+
+조심스럽게 증가
+```
+
+### 3. 혼잡 감지 시
+
+```
+패킷 손실 발생!
+
+방법 1 (타임아웃):
+├── 윈도우를 1로 확 줄임
+└── Slow Start부터 다시
+
+방법 2 (중복 ACK):
+├── 윈도우를 절반으로
+└── Congestion Avoidance부터
+```"""
+            },
+            {
+                "type": "code",
+                "title": "💻 혼잡 제어 확인",
+                "content": """### 현재 알고리즘 확인
+
+```bash
+# Linux
+cat /proc/sys/net/ipv4/tcp_congestion_control
+# cubic (기본값)
+
+# 사용 가능한 알고리즘
+cat /proc/sys/net/ipv4/tcp_available_congestion_control
+# reno cubic bbr
+
+# 변경
+sudo sysctl -w net.ipv4.tcp_congestion_control=bbr
+```
+
+### TCP BBR (Bottleneck Bandwidth and RTT)
+
+```bash
+# Google이 만든 최신 알고리즘
+# 손실 기반이 아닌 측정 기반
+
+# BBR 활성화 (Linux 4.9+)
+sudo modprobe tcp_bbr
+sudo sysctl -w net.ipv4.tcp_congestion_control=bbr
+
+# 확인
+sysctl net.ipv4.tcp_congestion_control
+```
+
+### 윈도우 크기 변화 관찰
+
+```bash
+# ss 명령으로 실시간 확인
+ss -ti
+
+# 결과에서 cwnd (congestion window) 확인
+# cwnd:10 = 현재 혼잡 윈도우 10 세그먼트
+```"""
+            },
+            {
+                "type": "tip",
+                "title": "💡 알고리즘 비교",
+                "content": """### 주요 알고리즘
+
+```
+Reno (전통적):
+├── 손실 기반
+├── 손실 = 혼잡
+└── 단순하지만 비효율
+
+CUBIC (Linux 기본):
+├── 고속 네트워크 최적화
+├── 큐빅 함수로 증가
+└── 대부분 환경에 적합
+
+BBR (Google):
+├── 대역폭/지연 측정
+├── 손실에 덜 민감
+└── 장거리/고속에 좋음
+```
+
+### 선택 가이드
+
+```
+일반적: CUBIC (기본값)
+장거리 서버: BBR
+저지연 필요: BBR
+고손실 환경: BBR
+```"""
+            }
+        ]
+    }
+}
+
+for key, content in network_contents.items():
+    if key in data:
+        data[key].update({
+            "title": content["title"],
+            "description": content["description"],
+            "sections": content["sections"],
+            "isPlaceholder": False
+        })
+
+with open('src/data/contents/network.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+print(f"✅ 01_기초, 02_TCP_UDP 섹션 업데이트 완료: {len(network_contents)}개 토픽")
