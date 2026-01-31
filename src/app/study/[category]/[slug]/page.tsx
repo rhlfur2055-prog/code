@@ -25,6 +25,7 @@ import collaborationContents from '@/data/contents/collaboration.json';
 import securityContents from '@/data/contents/security.json';
 import osContents from '@/data/contents/os.json';
 import reactContents from '@/data/contents/react.json';
+import pcceContents from '@/data/contents/pcce.json';
 
 interface ContentData {
   id: string;
@@ -74,6 +75,7 @@ const categoryJsonMap: Record<string, Record<string, JsonContent>> = {
   security: securityContents,
   os: osContents,
   react: reactContents,
+  pcce: pcceContents,
 };
 
 // 마크다운을 HTML로 변환하는 간단한 파서

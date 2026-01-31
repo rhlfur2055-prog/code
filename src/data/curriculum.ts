@@ -92,6 +92,7 @@ export const categories = [
   { id: "javascript", name: "JavaScript", icon: "⚡", color: "#F7DF1E", days: "34-36" },
   { id: "react", name: "React", icon: "⚛️", color: "#61DAFB", days: "37-38" },
   { id: "ai", name: "AI 활용", icon: "🤖", color: "#00C471", days: "39-40" },
+  { id: "pcce", name: "PCCE 시험대비", icon: "🎯", color: "#FF4081", days: "특강" },
 ];
 
 export const stats = {

@@ -1,0 +1,392 @@
+{
+  "01_기초/pcce-print": {
+    "id": "01_기초/pcce-print",
+    "title": "print() 완벽 정리",
+    "category": "pcce",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "PCCE 시험 필수! print() 함수의 모든 것",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "print() 기본",
+        "content": "print()는 화면에 출력하는 함수입니다. 괄호 안의 내용을 그대로 출력하고, 자동으로 줄바꿈됩니다. PCCE에서 가장 기본적으로 출제됩니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "기본 사용법",
+        "code": "# 기본 출력\nprint(\"Hello, PCCE!\")\n\n# 여러 값 출력 (기본 공백 구분)\nprint(\"A\", \"B\", \"C\")  # A B C\n\n# sep 옵션: 구분자 변경\nprint(\"A\", \"B\", \"C\", sep=\"-\")  # A-B-C\nprint(1, 2, 3, sep=\"\")  # 123\n\n# end 옵션: 줄바꿈 대신 다른 문자\nprint(\"Hello\", end=\" \")\nprint(\"World\")  # Hello World"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 빈출 함정",
+        "content": "1. print vs Print (대소문자 구분!)\n2. 따옴표 누락 주의\n3. sep와 end 혼동 주의\n4. sep=\"\"이면 붙여서 출력"
+      }
+    ]
+  },
+  "01_기초/pcce-input": {
+    "id": "01_기초/pcce-input",
+    "title": "input() 완벽 정리",
+    "category": "pcce",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "PCCE 필수! input()은 항상 문자열 반환!",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "input() 핵심",
+        "content": "input()은 키보드 입력을 받는 함수입니다. 중요: input()은 항상 문자열(str)을 반환합니다! 숫자를 입력해도 문자열입니다."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "input() 사용법",
+        "code": "# 기본 입력\nname = input(\"이름: \")  # 항상 str 반환!\n\n# 숫자 입력시 형변환 필수!\nx = input()  # \"3\" 입력시\nprint(x + x)  # \"33\" (문자열 연결!)\n\n# 정수로 변환\nage = int(input(\"나이: \"))\nprint(age + 1)  # 정수 연산 가능\n\n# 실수로 변환\nheight = float(input(\"키: \"))"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 최빈출 함정",
+        "content": "1. input()은 무조건 str 반환! (숫자 입력해도!)\n2. \"3\" + \"5\" = \"35\" (문자열 연결)\n3. int(\"3\") + int(\"5\") = 8 (정수 연산)\n4. int(\"3.14\")는 에러! float() 먼저!"
+      }
+    ]
+  },
+  "01_기초/pcce-variable": {
+    "id": "01_기초/pcce-variable",
+    "title": "변수와 자료형",
+    "category": "pcce",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "PCCE 필수! 변수 선언과 4가지 기본 자료형",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "변수와 자료형",
+        "content": "변수는 값을 저장하는 공간입니다. Python 기본 자료형: int(정수), float(실수), str(문자열), bool(불린). = 는 할당, == 는 비교입니다!"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "자료형 예제",
+        "code": "# 정수 (int)\nage = 25\nprint(type(age))  # <class 'int'>\n\n# 실수 (float) - 나눗셈 결과는 항상 float!\nheight = 175.5\nprint(10 / 2)  # 5.0 (float!)\nprint(10 // 2)  # 5 (int)\n\n# 문자열 (str)\nname = \"PCCE\"\n\n# 불린 (bool) - 대문자 시작!\nis_pass = True  # true 아님!\nis_fail = False  # false 아님!"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 함정 포인트",
+        "content": "1. / 나눗셈은 항상 float (10/2=5.0)\n2. // 몫은 int (10//2=5)\n3. True/False 대문자 시작 필수!\n4. = 할당, == 비교 혼동 주의"
+      }
+    ]
+  },
+  "01_기초/pcce-operator": {
+    "id": "01_기초/pcce-operator",
+    "title": "연산자 총정리",
+    "category": "pcce",
+    "subCategory": "01_기초",
+    "language": "Python",
+    "description": "PCCE 필수! 산술/비교/논리 연산자",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "연산자 종류",
+        "content": "산술: +, -, *, /, //(몫), %(나머지), **(거듭제곱). 비교: ==, !=, <, >, <=, >=. 논리: and, or, not."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "연산자 예제",
+        "code": "# 산술 연산자\nprint(10 / 4)   # 2.5 (항상 float!)\nprint(10 // 4)  # 2 (몫)\nprint(10 % 4)   # 2 (나머지)\nprint(2 ** 3)   # 8 (거듭제곱)\n\n# 비교 연산자\nprint(5 == 5)   # True\nprint(5 != 3)   # True\nprint(5 <= 5)   # True\n\n# 논리 연산자\nprint(True and False)  # False\nprint(True or False)   # True\nprint(not True)        # False"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 연산자 함정",
+        "content": "1. / 결과는 무조건 float!\n2. = 와 == 혼동 (if x=5: 는 에러!)\n3. and: 둘 다 True여야 True\n4. or: 하나라도 True면 True"
+      }
+    ]
+  },
+  "02_조건반복/pcce-if": {
+    "id": "02_조건반복/pcce-if",
+    "title": "조건문 if/elif/else",
+    "category": "pcce",
+    "subCategory": "02_조건반복",
+    "language": "Python",
+    "description": "PCCE 필수! 조건문 구조와 콜론",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "조건문 구조",
+        "content": "if 조건: 콜론 필수! 들여쓰기로 블록 구분. elif는 else if, else는 나머지 경우."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "조건문 예제",
+        "code": "score = 85\n\n# 기본 if문 (콜론 필수!)\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nelse:\n    print(\"F\")\n\n# 삼항 연산자\nresult = \"합격\" if score >= 60 else \"불합격\"\n\n# in 연산자\nif \"a\" in \"apple\":\n    print(\"포함\")"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 조건문 함정",
+        "content": "1. 콜론(:) 누락 = SyntaxError\n2. 들여쓰기 = 4칸 또는 탭\n3. elif 순서 중요 (위에서 아래로 검사)\n4. == 비교, = 할당 혼동 주의"
+      }
+    ]
+  },
+  "02_조건반복/pcce-for": {
+    "id": "02_조건반복/pcce-for",
+    "title": "for문과 range()",
+    "category": "pcce",
+    "subCategory": "02_조건반복",
+    "language": "Python",
+    "description": "PCCE 필수! range() 끝값 미포함 주의!",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "for문과 range",
+        "content": "for 변수 in 반복가능객체: 형식. range(n)은 0부터 n-1까지! range(a,b)는 a부터 b-1까지! 끝값 미포함!"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "for문 예제",
+        "code": "# range(n): 0부터 n-1까지\nfor i in range(5):  # 0,1,2,3,4\n    print(i, end=\" \")\n# 출력: 0 1 2 3 4\n\n# range(a, b): a부터 b-1까지\nfor i in range(1, 5):  # 1,2,3,4\n    print(i, end=\" \")\n# 출력: 1 2 3 4\n\n# range(a, b, step): step 간격\nfor i in range(0, 10, 2):  # 0,2,4,6,8\n    print(i, end=\" \")\n\n# 역순\nfor i in range(5, 0, -1):  # 5,4,3,2,1\n    print(i, end=\" \")"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE range() 함정",
+        "content": "1. range(5) = 0,1,2,3,4 (5 미포함!)\n2. range(1,5) = 1,2,3,4 (5 미포함!)\n3. 개수 = 끝 - 시작\n4. for 뒤에도 콜론(:) 필수!"
+      }
+    ]
+  },
+  "02_조건반복/pcce-while": {
+    "id": "02_조건반복/pcce-while",
+    "title": "while문과 break/continue",
+    "category": "pcce",
+    "subCategory": "02_조건반복",
+    "language": "Python",
+    "description": "PCCE! while 조건, break 탈출, continue 건너뛰기",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "while과 제어문",
+        "content": "while 조건: 조건이 True인 동안 반복. break는 반복문 즉시 탈출. continue는 현재 반복 건너뛰고 다음으로."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "while/break/continue",
+        "code": "# while문\nx = 0\nwhile x < 5:\n    print(x, end=\" \")  # 0 1 2 3 4\n    x += 1\n\n# break: 즉시 탈출\nfor i in range(10):\n    if i == 5:\n        break\n    print(i, end=\" \")  # 0 1 2 3 4\n\n# continue: 건너뛰기\nfor i in range(5):\n    if i == 2:\n        continue\n    print(i, end=\" \")  # 0 1 3 4"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 제어문 함정",
+        "content": "1. while 뒤에도 콜론(:) 필수!\n2. break = 가장 가까운 반복문만 탈출\n3. continue ≠ break (건너뛰기 vs 탈출)\n4. pass = 아무것도 안함"
+      }
+    ]
+  },
+  "03_리스트문자열/pcce-list": {
+    "id": "03_리스트문자열/pcce-list",
+    "title": "리스트 완벽 정리",
+    "category": "pcce",
+    "subCategory": "03_리스트문자열",
+    "language": "Python",
+    "description": "PCCE 필수! 인덱스는 0부터! 슬라이싱 끝 미포함!",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "리스트 핵심",
+        "content": "리스트는 [값1, 값2, ...] 형식. 인덱스는 0부터 시작! 1번째 요소 = 인덱스 0. 슬라이싱 [a:b]에서 b는 미포함!"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "리스트 예제",
+        "code": "a = [10, 20, 30, 40, 50]\n\n# 인덱싱 (0부터 시작!)\nprint(a[0])   # 10 (첫번째)\nprint(a[-1])  # 50 (마지막)\n\n# 슬라이싱 (끝 미포함!)\nprint(a[1:4])  # [20, 30, 40] (4번 미포함!)\nprint(a[:3])   # [10, 20, 30]\nprint(a[2:])   # [30, 40, 50]\n\n# 메서드\na.append(60)    # 끝에 추가\na.insert(0, 5)  # 위치에 삽입\na.remove(20)    # 값 삭제\na.pop()         # 마지막 제거 후 반환\n\n# 함수\nprint(len(a))   # 길이\nprint(sum(a))   # 합계"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 리스트 함정",
+        "content": "1. 인덱스 0부터! (1번 학생 = index 0)\n2. a[1:4]에서 4번 미포함!\n3. append()는 None 반환! (a=a.append(x) 하면 a가 None됨)\n4. sort()도 None 반환!"
+      }
+    ]
+  },
+  "03_리스트문자열/pcce-string": {
+    "id": "03_리스트문자열/pcce-string",
+    "title": "문자열 완벽 정리",
+    "category": "pcce",
+    "subCategory": "03_리스트문자열",
+    "language": "Python",
+    "description": "PCCE! 문자열 인덱싱, 슬라이싱, 메서드",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "문자열 핵심",
+        "content": "문자열은 불변(immutable)! 직접 수정 불가. 인덱싱/슬라이싱은 리스트와 동일. +연결, *반복 가능."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문자열 예제",
+        "code": "s = \"Hello\"\n\n# 인덱싱\nprint(s[0])   # H\nprint(s[-1])  # o\n\n# 슬라이싱\nprint(s[1:4])   # ell (4번 미포함!)\nprint(s[::-1])  # olleH (역순)\n\n# 연결과 반복\nprint(\"a\" + \"b\")  # ab\nprint(\"ab\" * 3)   # ababab\n\n# 메서드\nprint(\"a,b,c\".split(\",\"))  # ['a','b','c']\nprint(\"-\".join([\"a\",\"b\"]))  # a-b\nprint(\"hello\".upper())      # HELLO\nprint(\"  hi  \".strip())     # hi"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 문자열 함정",
+        "content": "1. s[0]=\"X\" 불가! (문자열 불변)\n2. \"a\"+1 에러! (str+int 불가)\n3. split()은 리스트 반환\n4. join()은 문자열 리스트만 가능"
+      }
+    ]
+  },
+  "04_함수/pcce-function": {
+    "id": "04_함수/pcce-function",
+    "title": "함수 정의와 호출",
+    "category": "pcce",
+    "subCategory": "04_함수",
+    "language": "Python",
+    "description": "PCCE! def, return, 매개변수",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "함수 핵심",
+        "content": "def 함수명(매개변수): 형식으로 정의. return으로 값 반환. return 없으면 None 반환."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "함수 예제",
+        "code": "# 함수 정의 (콜론 필수!)\ndef add(a, b):\n    return a + b\n\n# 함수 호출\nresult = add(3, 5)\nprint(result)  # 8\n\n# 기본값 매개변수\ndef greet(name=\"손님\"):\n    return f\"{name}님 안녕!\"\n\nprint(greet())        # 손님님 안녕!\nprint(greet(\"홍길동\"))  # 홍길동님 안녕!\n\n# return 없으면 None\ndef no_return():\n    print(\"hi\")\n\nx = no_return()  # hi 출력\nprint(x)  # None"
+      },
+      {
+        "type": "tip",
+        "title": "PCCE 함수 함정",
+        "content": "1. def 뒤에 콜론(:) 필수!\n2. return 없으면 None 반환\n3. print()와 return 다름!\n4. 기본값 매개변수는 뒤에 위치"
+      }
+    ]
+  },
+  "05_시험대비/pcce-trap10": {
+    "id": "05_시험대비/pcce-trap10",
+    "title": "PCCE 10대 함정 총정리",
+    "category": "pcce",
+    "subCategory": "05_시험대비",
+    "language": "Python",
+    "description": "PCCE 합격 필수! 10대 함정 완벽 암기",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "PCCE 10대 함정",
+        "content": "이 10가지만 확실히 알면 700점(합격) 보장! 시험 전 반드시 암기하세요."
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "10대 함정 코드",
+        "code": "# 1. input()은 항상 str!\nx = input()  # \"3\" 입력\nprint(x + x)  # \"33\" (not 6!)\n\n# 2. / 나눗셈은 항상 float!\nprint(10 / 2)  # 5.0 (not 5!)\n\n# 3. 인덱스는 0부터!\na = [10, 20, 30]\nprint(a[1])  # 20 (두번째!)\n\n# 4. range 끝값 미포함!\nfor i in range(3):  # 0, 1, 2 (not 3!)\n    pass\n\n# 5. = 할당, == 비교!\nif x == 5:  # 비교 (if x=5: 는 에러!)\n    pass\n\n# 6. True/False 대문자!\nif True:  # true 아님!\n    pass\n\n# 7. 콜론 필수!\nif x > 0:  # 콜론 필수!\n    pass\n\n# 8. 슬라이싱 끝 미포함!\ns = \"hello\"\nprint(s[1:4])  # \"ell\" (4번 미포함!)\n\n# 9. int() 버림!\nprint(int(3.9))  # 3 (반올림 아님!)\n\n# 10. n번째 = 인덱스 n-1\nstudents = [\"A\", \"B\", \"C\"]\nprint(students[0])  # 1번 학생 = 인덱스 0"
+      },
+      {
+        "type": "tip",
+        "title": "시험 직전 체크리스트",
+        "content": "1. input() = 항상 str\n2. / = 항상 float\n3. index = 0부터\n4. range 끝 = 미포함\n5. == 비교, = 할당\n6. True/False = 대문자\n7. 콜론 = 필수\n8. 슬라이싱 끝 = 미포함\n9. int() = 버림\n10. n번째 = index n-1"
+      }
+    ]
+  },
+  "05_시험대비/pcce-mock1": {
+    "id": "05_시험대비/pcce-mock1",
+    "title": "모의고사 1회",
+    "category": "pcce",
+    "subCategory": "05_시험대비",
+    "language": "Python",
+    "description": "PCCE 실전 모의고사 1회 (10문제)",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "모의고사 1회",
+        "content": "PCCE 실전 형식 10문제. 시간: 50분, 합격: 700점(7문제)"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문제 1-5 (빈칸)",
+        "code": "# Q1. 빈칸: ______(\"Hello\")\n# 정답: print\n\n# Q2. 빈칸: x = int(______(\"숫자:\"))\n# 정답: input\n\n# Q3. 빈칸: ______ i in range(5):\n# 정답: for\n\n# Q4. 빈칸: ______ x > 0:\n# 정답: if\n\n# Q5. 빈칸: a = [1,2,3]; a.______(4)\n# 정답: append"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문제 6-10 (결과/디버깅)",
+        "code": "# Q6. 결과예측: 10 / 4 = ?\n# 정답: 2.5\n\n# Q7. 결과예측: range(1,5) 포함값?\n# 정답: 1, 2, 3, 4\n\n# Q8. 결과예측: \"ab\" * 3 = ?\n# 정답: \"ababab\"\n\n# Q9. 디버깅: if x=5: print(x)\n# 정답: x == 5 (=를 ==로)\n\n# Q10. 디버깅: for i in range(3)\\nprint(i)\n# 정답: 콜론 추가 range(3):"
+      },
+      {
+        "type": "tip",
+        "title": "채점 기준",
+        "content": "각 100점 x 10문제 = 1000점 만점\n700점(7문제) 이상 = 합격\n빈칸 60% + 결과예측 20% + 디버깅 20%"
+      }
+    ]
+  },
+  "05_시험대비/pcce-mock2": {
+    "id": "05_시험대비/pcce-mock2",
+    "title": "모의고사 2회",
+    "category": "pcce",
+    "subCategory": "05_시험대비",
+    "language": "Python",
+    "description": "PCCE 실전 모의고사 2회 (10문제)",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "모의고사 2회",
+        "content": "PCCE 실전 형식 10문제. 더 어려운 난이도!"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문제 1-5",
+        "code": "# Q1. 빈칸: ______ add(a,b): return a+b\n# 정답: def\n\n# Q2. 빈칸: \"a,b,c\".______(\",\")\n# 정답: split\n\n# Q3. 빈칸: \"-\".______([\"a\",\"b\"])\n# 정답: join\n\n# Q4. 빈칸: list(______(int,[\"1\",\"2\"]))\n# 정답: map\n\n# Q5. 빈칸: a=[1,2,3]; a[______] 마지막\n# 정답: -1"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "문제 6-10",
+        "code": "# Q6. 결과: \"hello\"[1:4] = ?\n# 정답: \"ell\"\n\n# Q7. 결과: [1,2] + [3,4] = ?\n# 정답: [1,2,3,4]\n\n# Q8. 결과: int(3.9) = ?\n# 정답: 3\n\n# Q9. 디버깅: if True print(\"ok\")\n# 정답: 콜론 추가\n\n# Q10. 디버깅: a=[1,2,3]; print(a[3])\n# 정답: a[2] (IndexError)"
+      },
+      {
+        "type": "tip",
+        "title": "오답 분석",
+        "content": "틀린 문제 유형 파악:\n- 빈칸: 키워드/함수명 암기\n- 결과예측: 타입 먼저 확인\n- 디버깅: 콜론/들여쓰기/== 체크"
+      }
+    ]
+  },
+  "05_시험대비/pcce-strategy": {
+    "id": "05_시험대비/pcce-strategy",
+    "title": "시험 전략 & 최종 정리",
+    "category": "pcce",
+    "subCategory": "05_시험대비",
+    "language": "Python",
+    "description": "PCCE 합격 전략과 최종 체크리스트",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "PCCE 시험 정보",
+        "content": "시험시간: 50분 / 문제수: 10문제 / 합격기준: 700점(7문제) / 유형: 빈칸 60% + 디버깅 20% + 결과예측 20%"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "최종 암기 사항",
+        "code": "# === 필수 암기 10 ===\n# 1. input() = 항상 str\n# 2. / = 항상 float  \n# 3. index = 0부터\n# 4. range끝 = 미포함\n# 5. == 비교, = 할당\n# 6. True/False = 대문자\n# 7. 콜론 = 필수 (if/for/while/def)\n# 8. 슬라이싱끝 = 미포함\n# 9. int() = 버림 (반올림X)\n# 10. n번째 = index n-1\n\n# === 유형별 접근법 ===\n# 빈칸: 키워드/함수명 떠올리기\n# 디버깅: 콜론/들여쓰기/== 먼저 체크\n# 결과예측: 타입 먼저 확인"
+      },
+      {
+        "type": "tip",
+        "title": "시험 당일 전략",
+        "content": "1. 쉬운 문제 먼저 (5분)\n2. 빈칸채우기 (15분)\n3. 결과예측 (15분)\n4. 디버깅 (15분)\n\n700점 = 7문제 맞추면 합격!\n모르면 과감히 넘기고 아는 것 먼저!"
+      }
+    ]
+  }
+}

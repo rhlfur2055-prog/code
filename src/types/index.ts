@@ -172,6 +172,7 @@ export const CATEGORIES: Category[] = [
   { id: 'javascript', name: 'javascript', nameKo: 'JavaScript', icon: '⚡', color: '#F7DF1E', description: 'ES6+, DOM, 비동기', contentCount: 40, days: [34, 35, 36] },
   { id: 'react', name: 'react', nameKo: 'React', icon: '⚛️', color: '#61DAFB', description: '컴포넌트, Hooks, State', contentCount: 30, days: [37, 38] },
   { id: 'ai', name: 'ai', nameKo: 'AI 활용', icon: '🤖', color: '#00C471', description: 'YOLO, Whisper, 풀스택 AI', contentCount: 40, days: [39, 40] },
+  { id: 'pcce', name: 'pcce', nameKo: 'PCCE 시험대비', icon: '🎯', color: '#FF4081', description: '12시간 완성, 10대 함정, 모의고사', contentCount: 15, days: [] },
 ];
 
 // 40일 로드맵
