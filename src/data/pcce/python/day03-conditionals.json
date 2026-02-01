@@ -1,0 +1,467 @@
+{
+  "id": "python-day03",
+  "language": "python",
+  "day": 3,
+  "title": "조건문",
+  "examScope": "pcce",
+  "difficultyLevel": 1,
+  "estimatedTime": "60분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★★★",
+  "keywords": ["if", "elif", "else", "조건식", "중첩조건문", "삼항연산자", "논리연산자"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "프로그램은 상황에 따라 다르게 동작해야 한다. '로그인 성공이면 메인 페이지, 실패면 에러 메시지' 같은 분기 처리가 필요하다.",
+        "inExam": "PCCE 거의 모든 문제에 조건문 등장. 특히 elif 순서, 중첩 조건문, 범위 조건이 함정으로 출제된다."
+      },
+
+      "coreIdea": {
+        "oneLiner": "조건문 = '만약 ~라면 이것을, 아니면 저것을' 실행하는 분기 구조",
+        "structure": "if 조건: → elif 조건: → else: 순서로 위에서 아래로 검사"
+      },
+
+      "analogy": {
+        "title": "신호등 비유",
+        "explanation": "신호등을 보고 행동을 결정하는 것과 같다. 초록불이면 건너고, 빨간불이면 멈추고, 노란불이면 주의한다. 프로그램도 조건을 보고 어떤 코드를 실행할지 결정한다."
+      },
+
+      "visualization": {
+        "title": "조건문 흐름도",
+        "ascii": [
+          "        ┌─────────────┐",
+          "        │   조건 검사   │",
+          "        └──────┬──────┘",
+          "               │",
+          "         ┌─────▼─────┐",
+          "         │ if 조건1?  │",
+          "         └─────┬─────┘",
+          "          True │ False",
+          "    ┌──────────┼──────────┐",
+          "    ▼                     ▼",
+          "┌───────┐           ┌─────────┐",
+          "│ 실행1 │           │elif 조건2│",
+          "└───────┘           └────┬────┘",
+          "                    True │ False",
+          "               ┌────────┼────────┐",
+          "               ▼                 ▼",
+          "          ┌───────┐         ┌───────┐",
+          "          │ 실행2 │         │ else  │",
+          "          └───────┘         │ 실행3 │",
+          "                            └───────┘"
+        ]
+      },
+
+      "syntax": {
+        "basic": {
+          "title": "기본 구조",
+          "code": "if 조건:\n    실행할 코드\nelif 다른조건:\n    실행할 코드\nelse:\n    실행할 코드"
+        },
+        "rules": [
+          "조건 뒤에 콜론(:) 필수",
+          "실행할 코드는 들여쓰기 (4칸 또는 탭)",
+          "elif, else는 선택사항",
+          "elif는 여러 개 가능"
+        ]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {
+          "belief": "모든 조건을 다 검사한다",
+          "problem": "if가 True면 elif, else는 아예 검사 안 함"
+        },
+        "correct": {
+          "belief": "위에서 아래로 하나씩 검사하다가, True인 것만 실행하고 빠져나감",
+          "tip": "여러 조건이 True일 수 있어도, 먼저 만나는 것만 실행"
+        }
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "조건 순서의 중요성을 아는가?",
+        "secondary": "범위 조건 (이상/이하 vs 초과/미만)을 정확히 쓰는가?",
+        "tertiary": "중첩 조건문을 읽고 이해할 수 있는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "intent": "비교 연산자 정확히 사용",
+          "example": {
+            "code": "score = 85\nif score _____ 90:\n    print('A')\nelse:\n    print('B')  # 'B' 출력되어야 함",
+            "answer": ">=",
+            "explanation": "85 >= 90은 False이므로 else 실행. < 라면 True가 되어 A 출력"
+          },
+          "trapPoints": [
+            ">= vs > 혼동 (이상 vs 초과)",
+            "<= vs < 혼동 (이하 vs 미만)",
+            "경계값에서 어디에 속하는지"
+          ]
+        },
+        {
+          "type": "오류 수정",
+          "frequency": "★★★★★",
+          "intent": "elif 순서 문제 파악",
+          "example": {
+            "bugCode": "score = 95\nif score >= 60:\n    grade = 'D'\nelif score >= 70:\n    grade = 'C'\nelif score >= 80:\n    grade = 'B'\nelif score >= 90:\n    grade = 'A'\nprint(grade)  # 'D' 출력됨 (틀림)",
+            "fixedCode": "if score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\n..."
+          },
+          "trapPoints": [
+            "넓은 범위 조건이 먼저 오면 안 됨",
+            "좁은 범위(엄격한 조건)부터 검사해야 함"
+          ]
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★☆",
+          "intent": "중첩 조건문 실행 흐름 추적",
+          "example": {
+            "code": "x = 5\nif x > 0:\n    if x > 10:\n        print('A')\n    else:\n        print('B')\nelse:\n    print('C')",
+            "answer": "B"
+          }
+        }
+      ],
+
+      "hiddenConditions": {
+        "conditions": [
+          "elif가 여러 개일 때 순서가 결과를 바꿈",
+          "and/or 연산자의 우선순위",
+          "들여쓰기 오류는 SyntaxError"
+        ]
+      }
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 학점 계산 (올바른 순서)",
+          "code": "score = int(input('점수: '))\n\n# 높은 점수부터 검사 (좁은 범위부터)\nif score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelif score >= 70:\n    grade = 'C'\nelif score >= 60:\n    grade = 'D'\nelse:\n    grade = 'F'\n\nprint(f'학점: {grade}')",
+          "lineByLineExplanation": [
+            {"line": 4, "code": "if score >= 90:", "why": "가장 엄격한 조건(90 이상)을 먼저 검사"},
+            {"line": 6, "code": "elif score >= 80:", "why": "90 미만이면서 80 이상인 경우"},
+            {"line": 12, "code": "else:", "why": "위 모든 조건에 해당하지 않으면 F"}
+          ],
+          "keyInsight": "범위 조건은 좁은 것(엄격한 것)부터!"
+        },
+        {
+          "title": "예제 2: 범위 조건 (and 활용)",
+          "code": "age = int(input('나이: '))\n\n# 청소년 요금: 13세 이상 19세 미만\nif age >= 13 and age < 19:\n    print('청소년 요금')\nelif age < 13:\n    print('어린이 요금')\nelse:\n    print('성인 요금')",
+          "lineByLineExplanation": [
+            {"line": 4, "code": "if age >= 13 and age < 19:", "why": "두 조건 모두 만족해야 청소년"},
+            {"line": 6, "code": "elif age < 13:", "why": "13 미만은 어린이"},
+            {"line": 8, "code": "else:", "why": "19 이상은 성인"}
+          ],
+          "alternativeCode": "if 13 <= age < 19:  # Python 연속 비교",
+          "keyInsight": "Python은 13 <= age < 19 같은 연속 비교 가능!"
+        },
+        {
+          "title": "예제 3: 중첩 조건문",
+          "code": "is_member = True\npurchase = 50000\n\nif is_member:\n    if purchase >= 100000:\n        discount = 0.2  # 20% 할인\n    else:\n        discount = 0.1  # 10% 할인\nelse:\n    if purchase >= 100000:\n        discount = 0.05  # 5% 할인\n    else:\n        discount = 0  # 할인 없음\n\nprint(f'할인율: {discount * 100}%')",
+          "keyInsight": "바깥 조건이 True일 때만 안쪽 조건 검사"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: elif 순서 함정",
+          "frequency": "★★★★★",
+          "description": "넓은 조건이 먼저 오면 나머지 조건이 무시됨",
+          "exampleProblem": {
+            "question": "다음 코드에서 score=95일 때 출력은?",
+            "code": "if score >= 60:\n    print('합격')\nelif score >= 90:\n    print('우수')  # 실행 안 됨!",
+            "answer": "합격",
+            "explanation": "95 >= 60이 True라서 '합격' 출력 후 종료. elif는 검사도 안 함"
+          }
+        },
+        {
+          "patternName": "패턴 2: 경계값 테스트",
+          "frequency": "★★★★★",
+          "description": ">= 와 > 의 차이로 경계값 결과 달라짐",
+          "exampleProblem": {
+            "question": "score=80일 때 학점은?",
+            "code": "if score > 80:\n    grade = 'B'\nelse:\n    grade = 'C'",
+            "answer": "C",
+            "explanation": "80 > 80은 False (같으면 안 됨). >= 였으면 B"
+          }
+        },
+        {
+          "patternName": "패턴 3: 논리 연산자 조합",
+          "frequency": "★★★★☆",
+          "description": "and, or 복합 조건",
+          "exampleProblem": {
+            "question": "다음 조건에서 x=5일 때 결과는?",
+            "code": "if x > 0 and x < 10 or x == 15:\n    print('OK')",
+            "answer": "OK",
+            "explanation": "and가 or보다 우선. (5>0 and 5<10) or False → True or False → True"
+          }
+        },
+        {
+          "patternName": "패턴 4: 삼항 연산자",
+          "frequency": "★★★☆☆",
+          "description": "한 줄 조건문",
+          "exampleProblem": {
+            "question": "빈칸을 채워 짝수면 'even', 홀수면 'odd' 출력",
+            "code": "x = 7\nresult = 'even' if _____ else 'odd'",
+            "answer": "x % 2 == 0",
+            "explanation": "삼항 연산자: 값1 if 조건 else 값2"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "세 정수를 입력받아 가장 큰 수를 출력하시오",
+        "input": "5\n12\n8",
+        "output": "12"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:30",
+          "phase": "문제 분석",
+          "thinking": ["세 수 비교 → 조건문 필요", "a, b, c 중 최대값 찾기"]
+        },
+        {
+          "time": "0:30 ~ 1:30",
+          "phase": "알고리즘 설계",
+          "thinking": [
+            "방법 1: a >= b and a >= c 면 a가 최대",
+            "방법 2: max() 함수 사용",
+            "PCCE에서는 직접 비교하는 것도 알아야 함"
+          ]
+        },
+        {
+          "time": "1:30 ~ 3:00",
+          "phase": "코드 작성",
+          "code": "a = int(input())\nb = int(input())\nc = int(input())\n\nif a >= b and a >= c:\n    print(a)\nelif b >= a and b >= c:\n    print(b)\nelse:\n    print(c)"
+        }
+      ],
+
+      "alternativeApproach": {
+        "code": "print(max(a, b, c))  # 내장 함수 활용",
+        "note": "실전에서는 max() 사용, 하지만 조건문 원리 이해 필요"
+      },
+
+      "whenStuck": {
+        "symptom": "조건 순서가 맞는지 모르겠음",
+        "diagnosis": "경계값으로 테스트해보기",
+        "solution": [
+          "1. 경계값 (예: 90점) 대입해서 어디로 가는지 추적",
+          "2. 첫 번째 True가 되는 조건 찾기",
+          "3. 의도와 다르면 순서 바꾸기"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "advantagesInThisLanguage": [
+        "연속 비교: 10 <= x < 20 가능 (다른 언어는 and 필요)",
+        "삼항 연산자: value if 조건 else other",
+        "들여쓰기로 블록 구분 (중괄호 불필요)"
+      ],
+
+      "syntaxReminder": [
+        {"topic": "조건문 끝", "python": "if x > 0:", "note": "콜론(:) 필수!"},
+        {"topic": "else if", "python": "elif", "note": "else if 아님!"},
+        {"topic": "같다 비교", "python": "==", "note": "= 는 대입"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "콜론 누락", "wrong": "if x > 0", "right": "if x > 0:", "frequency": "70%"},
+        {"pitfall": "들여쓰기 불일치", "wrong": "섞인 탭/스페이스", "right": "4칸 스페이스 통일", "frequency": "60%"},
+        {"pitfall": "elif 철자", "wrong": "else if", "right": "elif", "frequency": "50%"}
+      ],
+
+      "usefulPatterns": [
+        {"name": "범위 조건", "code": "if 0 <= x < 10:", "description": "Python 전용 연속 비교"},
+        {"name": "삼항 연산자", "code": "result = 'yes' if flag else 'no'", "description": "한 줄 조건"},
+        {"name": "in 연산자", "code": "if x in [1, 2, 3]:", "description": "여러 값 중 하나인지"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "elif 순서 잘못",
+          "wrongCode": "if score >= 60:\n    print('D')\nelif score >= 90:\n    print('A')",
+          "correctCode": "if score >= 90:\n    print('A')\nelif score >= 60:\n    print('D')",
+          "prevention": "범위 조건은 좁은 것(엄격한 것)부터!",
+          "frequency": "80%"
+        },
+        {
+          "rank": 2,
+          "mistake": ">= 와 > 혼동",
+          "wrongCode": "if age > 18:  # 18세는 포함 안 됨",
+          "correctCode": "if age >= 18:  # 18세 포함",
+          "prevention": "'이상/이하'는 =포함, '초과/미만'은 =없음",
+          "frequency": "75%"
+        },
+        {
+          "rank": 3,
+          "mistake": "= 와 == 혼동",
+          "wrongCode": "if x = 5:  # SyntaxError",
+          "correctCode": "if x == 5:",
+          "prevention": "조건문에서는 항상 ==",
+          "frequency": "65%"
+        },
+        {
+          "rank": 4,
+          "mistake": "콜론 누락",
+          "wrongCode": "if x > 0\n    print(x)",
+          "correctCode": "if x > 0:\n    print(x)",
+          "prevention": "if, elif, else 뒤에 콜론 필수",
+          "frequency": "55%"
+        },
+        {
+          "rank": 5,
+          "mistake": "and/or 우선순위",
+          "wrongCode": "if a or b and c:  # (a) or (b and c)로 해석됨",
+          "correctCode": "if (a or b) and c:  # 의도대로 괄호",
+          "prevention": "and가 or보다 우선순위 높음. 괄호로 명확히",
+          "frequency": "45%"
+        }
+      ],
+
+      "finalChecklist": [
+        "✅ elif 순서 확인 (좁은 범위부터)",
+        "✅ >= vs > 의도대로 사용",
+        "✅ == 와 = 구분",
+        "✅ 콜론(:) 빠뜨리지 않았는지",
+        "✅ 들여쓰기 일관성"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "prerequisiteKnowledge": [
+        "비교 연산자 (>, <, >=, <=, ==, !=)",
+        "논리 연산자 (and, or, not)",
+        "True/False 개념"
+      ],
+
+      "effectivePrompts": [
+        {
+          "situation": "elif 순서 헷갈릴 때",
+          "prompt": "학점 계산 조건문에서 왜 90점 조건을 먼저 써야 하는지 설명해줘"
+        },
+        {
+          "situation": "중첩 조건문 이해 안 될 때",
+          "prompt": "이 중첩 if문이 어떤 순서로 실행되는지 단계별로 설명해줘"
+        }
+      ],
+
+      "selfCheckQuestion": [
+        "if score >= 90과 if score > 90의 차이는?",
+        "elif가 여러 개일 때 몇 개가 실행되나?",
+        "a or b and c 는 어떻게 해석되나?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d3-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "points": 80,
+        "timeLimit": "1분",
+        "question": "다음 코드가 '합격'을 출력하도록 빈칸을 채우시오 (score=75)",
+        "code": "score = 75\nif score _____ 70:\n    print('합격')\nelse:\n    print('불합격')",
+        "options": [">", "<", ">=", "<="],
+        "answer": ">=",
+        "explanation": "75 >= 70은 True. > 라면 75 > 70도 True지만, 70점이면 False가 됨"
+      },
+      {
+        "id": "d3-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "points": 80,
+        "timeLimit": "1분",
+        "question": "x=15일 때 출력 결과는?",
+        "code": "x = 15\nif x > 10:\n    print('A')\nelif x > 5:\n    print('B')\nelse:\n    print('C')",
+        "options": ["A", "B", "C", "A와 B"],
+        "answer": "A",
+        "explanation": "x>10이 True라서 'A' 출력 후 종료. elif는 검사 안 함"
+      },
+      {
+        "id": "d3-p3",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "points": 80,
+        "timeLimit": "1분",
+        "question": "삼항 연산자로 짝수/홀수 판별. 빈칸을 채우시오",
+        "code": "x = 10\nresult = '짝수' _____ x % 2 == 0 _____ '홀수'\nprint(result)",
+        "options": ["if / else", "? / :", "and / or", "when / otherwise"],
+        "answer": "if / else",
+        "explanation": "Python 삼항 연산자: 값1 if 조건 else 값2"
+      },
+      {
+        "id": "d3-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "points": 100,
+        "timeLimit": "3분",
+        "question": "점수에 따른 학점 출력. 95점일 때 'A'가 나와야 하는데 'D'가 나옴",
+        "code": "score = 95\nif score >= 60:\n    grade = 'D'\nelif score >= 70:\n    grade = 'C'\nelif score >= 80:\n    grade = 'B'\nelif score >= 90:\n    grade = 'A'\nprint(grade)",
+        "answer": {
+          "lineToFix": "2-8",
+          "fixedCode": "score = 95\nif score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelif score >= 70:\n    grade = 'C'\nelif score >= 60:\n    grade = 'D'\nprint(grade)"
+        },
+        "explanation": "좁은 범위(높은 점수)부터 검사해야 함. 넓은 범위가 먼저 오면 나머지 조건 무시"
+      },
+      {
+        "id": "d3-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "points": 120,
+        "timeLimit": "4분",
+        "question": "정수를 입력받아 양수/음수/0 판별하여 출력",
+        "input": "-5",
+        "output": "음수",
+        "answer": {
+          "code": "n = int(input())\nif n > 0:\n    print('양수')\nelif n < 0:\n    print('음수')\nelse:\n    print('0')"
+        },
+        "explanation": "0은 양수도 음수도 아니므로 별도 처리"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "elif 순서는 좁은 범위(엄격한 조건)부터! 먼저 True인 것만 실행하고 빠져나감",
+    "examinerMindset": "elif 순서 함정, >= vs > 경계값 함정을 노린다",
+    "mustRemember": [
+      "if-elif-else는 위에서 하나만 실행",
+      ">= (이상) vs > (초과) 구분",
+      "조건 뒤 콜론(:) 필수",
+      "Python: 10 <= x < 20 가능",
+      "and가 or보다 우선순위 높음"
+    ],
+    "tomorrowPreview": {
+      "topic": "Day 4: 반복문",
+      "connection": "조건문이 '한 번 분기'라면, 반복문은 '조건이 참인 동안 계속 실행'"
+    }
+  }
+}

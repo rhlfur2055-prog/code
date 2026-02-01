@@ -1,0 +1,361 @@
+{
+  "id": "python-day10",
+  "language": "python",
+  "day": 10,
+  "title": "정렬",
+  "examScope": "pccp",
+  "difficultyLevel": 3,
+  "estimatedTime": "70분",
+  "difficulty": "초급",
+  "pcceWeight": "★★★★☆",
+  "keywords": ["sort", "sorted", "key", "reverse", "버블정렬", "선택정렬", "람다"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "정렬 = 도서관 책 정리",
+        "explanation": "도서관에서 책을 제자리에 꽂을 때, 제목순/저자순/장르순 등 기준을 정해서 정리합니다. 정렬도 마찬가지로 key(기준)를 정하면 그 기준대로 데이터를 나열합니다. sort()는 책꽂이의 책을 바로 재배치하고, sorted()는 정렬된 목록만 복사해오는 것과 같습니다.",
+        "codeExample": "# 책 제목순(기본) vs 길이순(key)\nbooks = ['Python', 'AI', 'Java']\nbooks.sort()           # 알파벳순: ['AI', 'Java', 'Python']\nbooks.sort(key=len)    # 길이순: ['AI', 'Java', 'Python']"
+      },
+
+      "whyNeeded": {
+        "realWorld": "데이터를 순서대로 정리. 성적순, 가격순, 이름순 등.",
+        "inExam": "PCCE에서 sort vs sorted 차이, key 매개변수 활용이 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "정렬 = 데이터를 특정 기준에 따라 순서대로 배열",
+        "key": "Python은 sort()/sorted()로 간단히 정렬. key로 정렬 기준 지정 가능"
+      },
+
+      "sortVsSorted": {
+        "sort": {
+          "syntax": "list.sort()",
+          "effect": "원본 리스트 변경",
+          "return": "None",
+          "example": "nums.sort()  # nums가 변경됨"
+        },
+        "sorted": {
+          "syntax": "sorted(iterable)",
+          "effect": "원본 유지",
+          "return": "새 리스트",
+          "example": "new_list = sorted(nums)  # nums 유지"
+        }
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "sort()가 정렬된 리스트를 반환한다"},
+        "correct": {"belief": "sort()는 None 반환! 정렬된 새 리스트 원하면 sorted()"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "sort() vs sorted() 차이",
+        "secondary": "key 매개변수로 정렬 기준 지정",
+        "tertiary": "reverse=True로 내림차순"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "nums = [3, 1, 2]\nresult = nums.sort()\nprint(result)",
+            "answer": "None",
+            "explanation": "sort()는 None 반환"
+          }
+        },
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "words = ['banana', 'apple', 'cherry']\nwords.sort(key=_____)\n# 길이순: ['apple', 'banana', 'cherry']",
+            "answer": "len",
+            "explanation": "key=len은 문자열 길이 기준 정렬"
+          }
+        },
+        {
+          "type": "정렬 결과",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "nums = [3, 1, 4, 1, 5]\nprint(sorted(nums, reverse=True))",
+            "answer": "[5, 4, 3, 1, 1]",
+            "explanation": "reverse=True는 내림차순"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: sort vs sorted",
+          "code": "nums = [3, 1, 4, 1, 5]\n\n# sort(): 원본 변경, None 반환\nnums.sort()\nprint(nums)  # [1, 1, 3, 4, 5]\n\nnums2 = [3, 1, 4]\n# sorted(): 원본 유지, 새 리스트 반환\nresult = sorted(nums2)\nprint(nums2)  # [3, 1, 4] (원본 유지)\nprint(result) # [1, 3, 4]",
+          "keyInsight": "원본 유지하려면 sorted()"
+        },
+        {
+          "title": "예제 2: key 매개변수",
+          "code": "# 문자열 길이순 정렬\nwords = ['banana', 'pie', 'apple']\nwords.sort(key=len)\nprint(words)  # ['pie', 'apple', 'banana']\n\n# 절대값 기준 정렬\nnums = [-5, 2, -3, 1]\nnums.sort(key=abs)\nprint(nums)  # [1, 2, -3, -5]",
+          "keyInsight": "key=함수 → 각 요소에 함수 적용한 값으로 정렬"
+        },
+        {
+          "title": "예제 3: 람다로 복잡한 정렬",
+          "code": "# 튜플 리스트: 두 번째 요소 기준\nstudents = [('Kim', 85), ('Lee', 90), ('Park', 80)]\nstudents.sort(key=lambda x: x[1])\nprint(students)  # [('Park', 80), ('Kim', 85), ('Lee', 90)]\n\n# 내림차순\nstudents.sort(key=lambda x: x[1], reverse=True)\nprint(students)  # [('Lee', 90), ('Kim', 85), ('Park', 80)]",
+          "keyInsight": "lambda x: x[1]은 튜플의 두 번째 요소"
+        },
+        {
+          "title": "예제 4: 버블 정렬 (원리 이해용)",
+          "code": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(n-1-i):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([3, 1, 4, 1, 5]))",
+          "keyInsight": "실전에서는 sort() 사용, 하지만 원리 이해 필요"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: sort() 반환값",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "a = [3, 1, 2]\nb = a.sort()\nprint(b)",
+            "answer": "None",
+            "explanation": "sort()는 원본 변경하고 None 반환"
+          }
+        },
+        {
+          "patternName": "패턴 2: sorted() 활용",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "nums = [3, 1, 2]\nresult = sorted(nums)\nprint(nums, result)",
+            "answer": "[3, 1, 2] [1, 2, 3]",
+            "explanation": "sorted()는 원본 유지, 새 리스트 반환"
+          }
+        },
+        {
+          "patternName": "패턴 3: key 함수",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "words = ['bb', 'a', 'ccc']\nprint(sorted(words, key=len))",
+            "answer": "['a', 'bb', 'ccc']",
+            "explanation": "길이 1, 2, 3 순서"
+          }
+        },
+        {
+          "patternName": "패턴 4: reverse",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "print(sorted([1, 3, 2], reverse=True))",
+            "answer": "[3, 2, 1]",
+            "explanation": "내림차순"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "학생 점수 리스트를 점수 내림차순으로 정렬",
+        "input": "[('Kim', 85), ('Lee', 90), ('Park', 80)]",
+        "output": "[('Lee', 90), ('Kim', 85), ('Park', 80)]"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "튜플 리스트, 점수(두 번째 요소) 기준 내림차순"},
+        {"phase": "2️⃣ 정렬 방식 결정", "time": "30초", "thinking": "원본 변경 OK → sort() 사용, key로 두 번째 요소 지정"},
+        {"phase": "3️⃣ key 함수 작성", "time": "1분", "thinking": "lambda x: x[1] → x는 튜플, x[1]은 점수"},
+        {"phase": "4️⃣ 코드 작성", "time": "1분", "code": "students = [('Kim', 85), ('Lee', 90), ('Park', 80)]\nstudents.sort(key=lambda x: x[1], reverse=True)"},
+        {"phase": "5️⃣ 검증", "time": "30초", "thinking": "90 > 85 > 80 순서 → Lee, Kim, Park ✓"}
+      ],
+
+      "whenStuck": {
+        "sort가_None반환": "sort()는 원본 변경하고 None 반환. 새 리스트 필요하면 sorted()",
+        "정렬_기준_오류": "key=lambda x: x[원하는인덱스] 형태로 작성",
+        "정렬_방향_반대": "reverse=True(내림차순)/False(오름차순) 확인",
+        "문자열_숫자_정렬": "'10' < '2' 주의. key=int로 숫자 변환 후 정렬"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "syntaxPatterns": [
+        {"pattern": "list.sort()", "desc": "원본 정렬, None 반환"},
+        {"pattern": "sorted(list)", "desc": "새 리스트 반환"},
+        {"pattern": "sort(reverse=True)", "desc": "내림차순"},
+        {"pattern": "sort(key=len)", "desc": "길이 기준"},
+        {"pattern": "sort(key=lambda x: x[1])", "desc": "두 번째 요소 기준"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "sort() 반환값 저장", "wrong": "result = nums.sort()", "right": "nums.sort() 또는 result = sorted(nums)"},
+        {"pitfall": "문자열 정렬", "note": "'10' < '2' (사전순). 숫자로 정렬하려면 key=int"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "sort() 반환값 사용",
+          "frequency": "85%",
+          "wrongCode": "result = nums.sort()",
+          "correctCode": "result = sorted(nums)  # 또는 nums.sort(); result = nums",
+          "result": "result가 None"
+        },
+        {
+          "rank": 2,
+          "mistake": "원본 유지하려는데 sort() 사용",
+          "frequency": "70%",
+          "wrongCode": "original = [3,1,2]\noriginal.sort()  # 원본 변경됨",
+          "correctCode": "original = [3,1,2]\nsorted_list = sorted(original)  # 원본 유지",
+          "result": "원본 데이터 손실"
+        },
+        {
+          "rank": 3,
+          "mistake": "key 함수 잘못 지정",
+          "frequency": "60%",
+          "wrongCode": "data.sort(key=x[1])",
+          "correctCode": "data.sort(key=lambda x: x[1])",
+          "result": "NameError 또는 잘못된 정렬"
+        },
+        {
+          "rank": 4,
+          "mistake": "문자열 숫자를 사전순 정렬",
+          "frequency": "50%",
+          "wrongCode": "['10', '2', '1'].sort()  # 결과: ['1', '10', '2']",
+          "correctCode": "sorted(['10', '2', '1'], key=int)  # 결과: ['1', '2', '10']",
+          "result": "사전순이라 '10' < '2'"
+        },
+        {
+          "rank": 5,
+          "mistake": "reverse 기본값 혼동",
+          "frequency": "40%",
+          "wrongCode": "nums.sort(reverse=False)  # 불필요한 코드",
+          "correctCode": "nums.sort()  # 기본이 오름차순",
+          "result": "코드 복잡해짐"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "빈 리스트 정렬", "handling": "[].sort() → 에러 없이 그대로 []"},
+        {"case": "요소가 1개", "handling": "정렬할 것 없이 그대로"},
+        {"case": "같은 값 여러 개", "handling": "안정 정렬(stable) - 원래 순서 유지"}
+      ],
+
+      "finalChecklist": [
+        "✅ sort()는 None 반환, 원본 변경",
+        "✅ sorted()는 새 리스트 반환, 원본 유지",
+        "✅ 내림차순은 reverse=True",
+        "✅ 특정 기준은 key=lambda x: ..."
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "sort vs sorted 차이",
+          "badPrompt": "정렬 방법 알려줘",
+          "goodPrompt": "sort()와 sorted()의 차이를 반환값, 원본 변경 여부 관점에서 비교하고 각각 언제 쓰는지 예제로 보여줘",
+          "whyGood": "구체적인 비교 포인트 제시"
+        },
+        {
+          "situation": "복잡한 정렬 기준",
+          "badPrompt": "key 사용법",
+          "goodPrompt": "튜플 리스트를 첫 번째 요소 오름차순, 같으면 두 번째 요소 내림차순으로 정렬하는 방법을 lambda로 보여줘",
+          "whyGood": "복합 조건의 구체적 예시 요청"
+        },
+        {
+          "situation": "문자열 숫자 정렬",
+          "badPrompt": "문자열 정렬 어떻게 해",
+          "goodPrompt": "['10', '2', '1']을 숫자 크기순으로 정렬하려면 key를 어떻게 지정해야 해?",
+          "whyGood": "구체적 상황과 예상 결과 명시"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "lambda 구문은 직접 작성해봐야 시험에서 쓸 수 있습니다",
+        "recommendation": "key=lambda x: x[0], x[1], x[-1] 등 다양한 경우를 10번 이상 직접 타이핑"
+      },
+
+      "selfCheckQuestion": [
+        "nums.sort()의 반환값은? → None",
+        "원본 유지하면서 정렬하려면? → sorted(nums)",
+        "문자열을 길이순으로 정렬하려면? → sort(key=len)",
+        "튜플의 두 번째 요소 기준 정렬? → key=lambda x: x[1]"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d10-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "결과는?",
+        "code": "nums = [3, 1, 2]\nx = nums.sort()\nprint(x)",
+        "answer": "None",
+        "explanation": "sort()는 None 반환"
+      },
+      {
+        "id": "d10-p2",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "길이순 정렬",
+        "code": "words = ['hi', 'hello', 'a']\nwords.sort(key=_____)\nprint(words)",
+        "answer": "len",
+        "explanation": "key=len으로 길이 기준 정렬"
+      },
+      {
+        "id": "d10-p3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "내림차순 정렬",
+        "code": "nums = [1, 3, 2]\nprint(sorted(nums, _____=True))",
+        "answer": "reverse",
+        "explanation": "reverse=True로 내림차순"
+      },
+      {
+        "id": "d10-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "정렬된 리스트를 result에 저장하려는데 None",
+        "code": "nums = [3, 1, 2]\nresult = nums.sort()\nprint(result)  # None",
+        "answer": {"fixedCode": "nums = [3, 1, 2]\nresult = sorted(nums)\nprint(result)"},
+        "explanation": "sorted()로 새 리스트 반환받기"
+      },
+      {
+        "id": "d10-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "튜플 리스트를 두 번째 요소 기준 내림차순 정렬",
+        "input": "[('a', 3), ('b', 1), ('c', 2)]",
+        "output": "[('a', 3), ('c', 2), ('b', 1)]",
+        "answer": {"code": "data = [('a', 3), ('b', 1), ('c', 2)]\ndata.sort(key=lambda x: x[1], reverse=True)\nprint(data)"},
+        "explanation": "key=lambda x: x[1]로 두 번째 요소 기준, reverse=True로 내림차순"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "sort()=None반환+원본변경, sorted()=새리스트반환+원본유지",
+    "examinerMindset": "sort() 반환값 함정, key 매개변수 활용",
+    "mustRemember": ["sort(): None 반환", "sorted(): 새 리스트", "reverse=True: 내림차순", "key=함수: 정렬 기준"],
+    "tomorrowPreview": {"topic": "Day 11: 탐색", "connection": "정렬된 데이터에서 이진 탐색으로 빠르게 찾기"}
+  }
+}

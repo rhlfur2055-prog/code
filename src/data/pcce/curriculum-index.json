@@ -1,0 +1,376 @@
+{
+  "id": "pcce-curriculum-index",
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-31",
+
+  "examTypes": {
+    "pcce": {
+      "name": "PCCE (Programmers Certified Coding Essentials)",
+      "description": "프로그래머스 코딩 필수 역량 인증 - 기초 문법 중심",
+      "level": "입문/초급",
+      "format": {
+        "questions": 10,
+        "timeLimit": "50분",
+        "types": {
+          "fillBlank": 4,
+          "bugFix": 3,
+          "codeWriting": 3
+        }
+      },
+      "passingScore": "1000점 만점 기준 등급제 (Lv1~Lv5)"
+    },
+    "pccp": {
+      "name": "PCCP (Programmers Certified Coding Professional)",
+      "description": "프로그래머스 코딩 전문 역량 인증 - 알고리즘 중심",
+      "level": "중급/고급",
+      "format": {
+        "questions": 4,
+        "timeLimit": "120분",
+        "types": {
+          "algorithm": 4
+        }
+      },
+      "passingScore": "1000점 만점 기준 등급제 (Lv1~Lv5)"
+    }
+  },
+
+  "languages": {
+    "python": {
+      "name": "Python",
+      "totalDays": 21,
+      "metadataFile": "_metadata.json",
+      "basePath": "python/"
+    },
+    "java": {
+      "name": "Java",
+      "totalDays": 21,
+      "metadataFile": "_metadata.json",
+      "basePath": "java/",
+      "status": "planned"
+    },
+    "cpp": {
+      "name": "C++",
+      "totalDays": 21,
+      "metadataFile": "_metadata.json",
+      "basePath": "cpp/",
+      "status": "planned"
+    }
+  },
+
+  "learningPaths": {
+    "pcceQuick": {
+      "name": "PCCE 빠른 합격",
+      "description": "PCCE 합격에 필요한 핵심만 학습 (1주)",
+      "targetExam": "pcce",
+      "estimatedDays": 8,
+      "days": [1, 2, 3, 4, 5, 6, 7, 8],
+      "topics": [
+        {"day": 1, "topic": "변수와 자료형", "essential": true},
+        {"day": 2, "topic": "연산자", "essential": true},
+        {"day": 3, "topic": "조건문", "essential": true},
+        {"day": 4, "topic": "반복문", "essential": true},
+        {"day": 5, "topic": "문자열", "essential": true},
+        {"day": 6, "topic": "리스트", "essential": true},
+        {"day": 7, "topic": "딕셔너리", "essential": true},
+        {"day": 8, "topic": "함수", "essential": true}
+      ],
+      "mockTests": [19],
+      "finalReview": [21]
+    },
+
+    "pcceComplete": {
+      "name": "PCCE 완벽 대비",
+      "description": "PCCE + 심화 학습 (2주)",
+      "targetExam": "pcce",
+      "estimatedDays": 14,
+      "days": [1, 2, 3, 4, 5, 6, 7, 8, 13, 14, 19, 21],
+      "topics": [
+        {"day": 1, "topic": "변수와 자료형", "essential": true},
+        {"day": 2, "topic": "연산자", "essential": true},
+        {"day": 3, "topic": "조건문", "essential": true},
+        {"day": 4, "topic": "반복문", "essential": true},
+        {"day": 5, "topic": "문자열", "essential": true},
+        {"day": 6, "topic": "리스트", "essential": true},
+        {"day": 7, "topic": "딕셔너리", "essential": true},
+        {"day": 8, "topic": "함수", "essential": true},
+        {"day": 13, "topic": "2차원 배열", "essential": false},
+        {"day": 14, "topic": "구현 문제", "essential": false},
+        {"day": 19, "topic": "모의고사 1", "essential": true},
+        {"day": 21, "topic": "최종 정리", "essential": true}
+      ]
+    },
+
+    "pccpFull": {
+      "name": "PCCP 전체 과정",
+      "description": "PCCP 대비 전체 알고리즘 학습 (3주)",
+      "targetExam": "pccp",
+      "estimatedDays": 21,
+      "days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+      "weeks": {
+        "week1": {
+          "title": "기초 문법",
+          "days": [1, 2, 3, 4, 5, 6, 7],
+          "focus": "Python 기본 문법과 자료구조"
+        },
+        "week2": {
+          "title": "함수와 알고리즘 기초",
+          "days": [8, 9, 10, 11, 12, 13, 14],
+          "focus": "함수, 재귀, 정렬, 탐색, 자료구조"
+        },
+        "week3": {
+          "title": "알고리즘과 실전",
+          "days": [15, 16, 17, 18, 19, 20, 21],
+          "focus": "시뮬레이션, 완전탐색, 그리디, DP, 모의고사"
+        }
+      }
+    },
+
+    "algorithmFocus": {
+      "name": "알고리즘 집중",
+      "description": "기본 문법을 아는 분들을 위한 알고리즘 집중 과정",
+      "targetExam": "pccp",
+      "estimatedDays": 10,
+      "days": [9, 10, 11, 12, 15, 16, 17, 18, 20, 21],
+      "prerequisite": "Day 1-8 기본 문법 이해",
+      "topics": [
+        {"day": 9, "topic": "재귀", "category": "기초 알고리즘"},
+        {"day": 10, "topic": "정렬", "category": "기초 알고리즘"},
+        {"day": 11, "topic": "탐색", "category": "기초 알고리즘"},
+        {"day": 12, "topic": "스택/큐", "category": "자료구조"},
+        {"day": 15, "topic": "시뮬레이션", "category": "구현"},
+        {"day": 16, "topic": "브루트포스", "category": "탐색"},
+        {"day": 17, "topic": "그리디", "category": "최적화"},
+        {"day": 18, "topic": "DP", "category": "최적화"},
+        {"day": 20, "topic": "모의고사 2", "category": "실전"},
+        {"day": 21, "topic": "최종 정리", "category": "정리"}
+      ]
+    }
+  },
+
+  "dayIndex": {
+    "python": [
+      {
+        "day": 1,
+        "id": "python-day01",
+        "title": "변수와 자료형",
+        "file": "day01-variables.json",
+        "examScope": "pcce",
+        "difficultyLevel": 1,
+        "estimatedTime": "60분"
+      },
+      {
+        "day": 2,
+        "id": "python-day02",
+        "title": "연산자",
+        "file": "day02-operators.json",
+        "examScope": "pcce",
+        "difficultyLevel": 1,
+        "estimatedTime": "60분"
+      },
+      {
+        "day": 3,
+        "id": "python-day03",
+        "title": "조건문",
+        "file": "day03-conditionals.json",
+        "examScope": "pcce",
+        "difficultyLevel": 1,
+        "estimatedTime": "60분"
+      },
+      {
+        "day": 4,
+        "id": "python-day04",
+        "title": "반복문",
+        "file": "day04-loops.json",
+        "examScope": "pcce",
+        "difficultyLevel": 1,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 5,
+        "id": "python-day05",
+        "title": "문자열",
+        "file": "day05-strings.json",
+        "examScope": "pcce",
+        "difficultyLevel": 2,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 6,
+        "id": "python-day06",
+        "title": "리스트",
+        "file": "day06-lists.json",
+        "examScope": "pcce",
+        "difficultyLevel": 2,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 7,
+        "id": "python-day07",
+        "title": "딕셔너리",
+        "file": "day07-dictionaries.json",
+        "examScope": "pcce",
+        "difficultyLevel": 2,
+        "estimatedTime": "60분"
+      },
+      {
+        "day": 8,
+        "id": "python-day08",
+        "title": "함수",
+        "file": "day08-functions.json",
+        "examScope": "pcce",
+        "difficultyLevel": 2,
+        "estimatedTime": "75분"
+      },
+      {
+        "day": 9,
+        "id": "python-day09",
+        "title": "재귀",
+        "file": "day09-recursion.json",
+        "examScope": "pccp",
+        "difficultyLevel": 3,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 10,
+        "id": "python-day10",
+        "title": "정렬",
+        "file": "day10-sorting.json",
+        "examScope": "pccp",
+        "difficultyLevel": 3,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 11,
+        "id": "python-day11",
+        "title": "탐색",
+        "file": "day11-searching.json",
+        "examScope": "pccp",
+        "difficultyLevel": 3,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 12,
+        "id": "python-day12",
+        "title": "스택과 큐",
+        "file": "day12-stack-queue.json",
+        "examScope": "pccp",
+        "difficultyLevel": 3,
+        "estimatedTime": "70분"
+      },
+      {
+        "day": 13,
+        "id": "python-day13",
+        "title": "2차원 배열",
+        "file": "day13-2d-arrays.json",
+        "examScope": "both",
+        "difficultyLevel": 3,
+        "estimatedTime": "75분"
+      },
+      {
+        "day": 14,
+        "id": "python-day14",
+        "title": "구현 문제",
+        "file": "day14-implementation.json",
+        "examScope": "both",
+        "difficultyLevel": 3,
+        "estimatedTime": "80분"
+      },
+      {
+        "day": 15,
+        "id": "python-day15",
+        "title": "시뮬레이션",
+        "file": "day15-simulation.json",
+        "examScope": "pccp",
+        "difficultyLevel": 4,
+        "estimatedTime": "80분"
+      },
+      {
+        "day": 16,
+        "id": "python-day16",
+        "title": "브루트포스",
+        "file": "day16-bruteforce.json",
+        "examScope": "pccp",
+        "difficultyLevel": 4,
+        "estimatedTime": "80분"
+      },
+      {
+        "day": 17,
+        "id": "python-day17",
+        "title": "그리디",
+        "file": "day17-greedy.json",
+        "examScope": "pccp",
+        "difficultyLevel": 4,
+        "estimatedTime": "75분"
+      },
+      {
+        "day": 18,
+        "id": "python-day18",
+        "title": "DP 기초",
+        "file": "day18-dp-basics.json",
+        "examScope": "pccp",
+        "difficultyLevel": 4,
+        "estimatedTime": "80분"
+      },
+      {
+        "day": 19,
+        "id": "python-day19",
+        "title": "모의고사 1",
+        "file": "day19-mock-test-1.json",
+        "examScope": "pcce",
+        "difficultyLevel": 2,
+        "estimatedTime": "50분"
+      },
+      {
+        "day": 20,
+        "id": "python-day20",
+        "title": "모의고사 2",
+        "file": "day20-mock-test-2.json",
+        "examScope": "pccp",
+        "difficultyLevel": 4,
+        "estimatedTime": "50분"
+      },
+      {
+        "day": 21,
+        "id": "python-day21",
+        "title": "최종 정리",
+        "file": "day21-final-review.json",
+        "examScope": "both",
+        "difficultyLevel": 5,
+        "estimatedTime": "90분"
+      }
+    ]
+  },
+
+  "scopeFilter": {
+    "pcce": {
+      "description": "PCCE 시험 범위 (기초 문법)",
+      "days": [1, 2, 3, 4, 5, 6, 7, 8, 13, 14, 19, 21]
+    },
+    "pccp": {
+      "description": "PCCP 시험 범위 (알고리즘)",
+      "days": [9, 10, 11, 12, 15, 16, 17, 18, 20]
+    },
+    "both": {
+      "description": "양쪽 시험 공통",
+      "days": [13, 14, 21]
+    }
+  },
+
+  "difficultyLevels": {
+    "1": {"name": "입문", "description": "프로그래밍 처음 접하는 분"},
+    "2": {"name": "초급", "description": "기본 문법 학습 중"},
+    "3": {"name": "중급", "description": "기본 문법 완료, 응용 학습"},
+    "4": {"name": "고급", "description": "알고리즘 학습"},
+    "5": {"name": "종합", "description": "전체 내용 정리"}
+  },
+
+  "commonResources": {
+    "basePath": "common/",
+    "files": [
+      {"file": "exam-overview.json", "title": "시험 개요"},
+      {"file": "question-types.json", "title": "문제 유형 분석"},
+      {"file": "strategy.json", "title": "시험 전략"},
+      {"file": "ai-guide.json", "title": "AI 활용 가이드"}
+    ]
+  }
+}

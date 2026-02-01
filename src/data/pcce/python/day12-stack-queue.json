@@ -1,0 +1,351 @@
+{
+  "id": "python-day12",
+  "language": "python",
+  "day": 12,
+  "title": "스택과 큐",
+  "examScope": "pccp",
+  "difficultyLevel": 3,
+  "estimatedTime": "70분",
+  "difficulty": "초급",
+  "pcceWeight": "★★★☆☆",
+  "keywords": ["스택", "큐", "LIFO", "FIFO", "append", "pop", "deque", "괄호검사"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "스택 = 접시 쌓기, 큐 = 줄서기",
+        "explanation": "스택: 접시를 쌓으면 마지막에 올린 접시부터 꺼냅니다(LIFO). 큐: 은행에서 줄 서면 먼저 온 사람이 먼저 서비스 받습니다(FIFO). 두 자료구조의 핵심 차이는 '어떤 것을 먼저 꺼내느냐'입니다.",
+        "codeExample": "# 스택: 마지막에 넣은 것 먼저 (접시)\nstack = [1, 2, 3]  # 3이 맨 위\nstack.pop()  # 3 (맨 위 접시)\n\n# 큐: 먼저 넣은 것 먼저 (줄서기)\nqueue = [1, 2, 3]  # 1이 맨 앞\nqueue.pop(0)  # 1 (맨 앞 사람)"
+      },
+
+      "whyNeeded": {
+        "realWorld": "스택: 웹브라우저 뒤로가기, 실행취소. 큐: 줄서기, 프린터 대기열.",
+        "inExam": "PCCE에서 괄호 검사, 스택/큐 동작 추적 출제."
+      },
+
+      "coreIdea": {
+        "stack": {
+          "name": "스택 (Stack)",
+          "principle": "LIFO - Last In First Out (후입선출)",
+          "analogy": "접시 쌓기: 마지막에 올린 접시를 먼저 꺼냄",
+          "operations": ["push (넣기): append()", "pop (빼기): pop()"]
+        },
+        "queue": {
+          "name": "큐 (Queue)",
+          "principle": "FIFO - First In First Out (선입선출)",
+          "analogy": "줄서기: 먼저 온 사람이 먼저 나감",
+          "operations": ["enqueue (넣기): append()", "dequeue (빼기): pop(0) 또는 popleft()"]
+        }
+      },
+
+      "visualization": {
+        "title": "스택 vs 큐",
+        "ascii": [
+          "스택 (LIFO):",
+          "  push(1), push(2), push(3)",
+          "  [1, 2, 3] ← 입구=출구",
+          "  pop() → 3, pop() → 2",
+          "",
+          "큐 (FIFO):",
+          "  enqueue(1), enqueue(2), enqueue(3)",
+          "  입구 → [1, 2, 3] → 출구",
+          "  dequeue() → 1, dequeue() → 2"
+        ]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "리스트의 pop(0)이 효율적이다"},
+        "correct": {"belief": "pop(0)은 O(n). 큐는 collections.deque의 popleft()가 O(1)로 효율적"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "스택/큐 동작 순서 추적",
+        "secondary": "괄호 검사 문제 (스택 활용)",
+        "tertiary": "LIFO vs FIFO 개념 이해"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "stack = []\nstack.append(1)\nstack.append(2)\nstack.append(3)\nprint(stack.pop())\nprint(stack.pop())",
+            "answer": "3\\n2",
+            "explanation": "LIFO: 마지막 넣은 것 먼저"
+          }
+        },
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "# 큐에서 첫 요소 제거\nqueue = [1, 2, 3]\nfirst = queue._____(0)\nprint(first)  # 1",
+            "answer": "pop",
+            "explanation": "pop(0)은 첫 번째 요소 제거"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 스택 구현 (리스트)",
+          "code": "stack = []\n\n# push\nstack.append(1)\nstack.append(2)\nstack.append(3)\nprint(stack)  # [1, 2, 3]\n\n# pop\nprint(stack.pop())  # 3\nprint(stack.pop())  # 2\nprint(stack)  # [1]\n\n# peek (top 확인)\nif stack:\n    print(stack[-1])  # 1",
+          "keyInsight": "append()로 넣고 pop()으로 빼면 스택"
+        },
+        {
+          "title": "예제 2: 큐 구현 (deque)",
+          "code": "from collections import deque\n\nqueue = deque()\n\n# enqueue\nqueue.append(1)\nqueue.append(2)\nqueue.append(3)\nprint(queue)  # deque([1, 2, 3])\n\n# dequeue\nprint(queue.popleft())  # 1\nprint(queue.popleft())  # 2\nprint(queue)  # deque([3])",
+          "keyInsight": "deque의 popleft()가 O(1)로 효율적"
+        },
+        {
+          "title": "예제 3: 괄호 검사 (스택 활용)",
+          "code": "def is_valid(s):\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in '({[':\n            stack.append(char)\n        elif char in ')}]':\n            if not stack or stack[-1] != pairs[char]:\n                return False\n            stack.pop()\n    \n    return len(stack) == 0\n\nprint(is_valid('({[]})'))  # True\nprint(is_valid('([)]'))    # False",
+          "keyInsight": "여는 괄호 push, 닫는 괄호 만나면 pop해서 짝 확인"
+        },
+        {
+          "title": "예제 4: 스택으로 뒤집기",
+          "code": "def reverse_string(s):\n    stack = list(s)  # 문자열 → 스택\n    result = ''\n    while stack:\n        result += stack.pop()\n    return result\n\nprint(reverse_string('hello'))  # olleh",
+          "keyInsight": "LIFO 특성으로 역순 출력"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 스택 동작 추적",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "s = []\ns.append('A')\ns.append('B')\ns.pop()\ns.append('C')\nprint(s)",
+            "answer": "['A', 'C']",
+            "explanation": "A 넣고, B 넣고, B 빼고, C 넣음"
+          }
+        },
+        {
+          "patternName": "패턴 2: 큐 동작 추적",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "q = [1, 2, 3]\nq.append(4)\nq.pop(0)\nprint(q)",
+            "answer": "[2, 3, 4]",
+            "explanation": "4 넣고, 1(첫번째) 뺌"
+          }
+        },
+        {
+          "patternName": "패턴 3: 괄호 검사",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "올바른 괄호인지 확인",
+            "input": "'(())'",
+            "answer": "True"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "괄호 문자열 '({[]})' 유효성 검사",
+        "input": "'({[]})'",
+        "output": "True"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "짝이 맞는 괄호인지 확인 → 스택 사용"},
+        {"phase": "2️⃣ 로직 설계", "time": "1분", "thinking": "여는 괄호 → push, 닫는 괄호 → pop해서 짝 확인"},
+        {"phase": "3️⃣ 예외 조건", "time": "30초", "thinking": "닫는 괄호인데 스택 비었으면 False, 끝나고 스택 남으면 False"},
+        {"phase": "4️⃣ 코드 작성", "time": "2분", "code": "def is_valid(s):\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    for c in s:\n        if c in '({[':\n            stack.append(c)\n        elif c in ')}]':\n            if not stack or stack.pop() != pairs[c]:\n                return False\n    return len(stack) == 0"},
+        {"phase": "5️⃣ 검증", "time": "1분", "thinking": "'({[]})': (→{ →[→]팝[매칭→}팝{매칭→)팝(매칭 → 스택 빔 → True ✓"}
+      ],
+
+      "whenStuck": {
+        "LIFO_FIFO_헷갈림": "스택=후입선출(마지막것먼저), 큐=선입선출(먼저온것먼저)",
+        "IndexError": "pop 전에 if stack: 또는 if queue: 로 비어있는지 확인",
+        "괄호검사_오류": "짝 매칭 딕셔너리 확인. 닫는 괄호 → 여는 괄호 매핑",
+        "큐_성능문제": "pop(0)은 O(n), deque.popleft()는 O(1)"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "implementations": [
+        {"structure": "스택", "code": "list + append() + pop()"},
+        {"structure": "큐", "code": "collections.deque + append() + popleft()"},
+        {"structure": "비효율 큐", "code": "list + append() + pop(0)  # O(n)"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "리스트 pop(0) 성능", "note": "O(n). deque popleft()는 O(1)"},
+        {"pitfall": "빈 스택에서 pop()", "note": "IndexError 발생. if stack: 확인"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "LIFO/FIFO 혼동",
+          "frequency": "75%",
+          "wrongCode": "stack.pop(0)  # 스택인데 첫 번째 제거",
+          "correctCode": "stack.pop()  # 스택은 마지막 제거",
+          "result": "스택 동작이 큐처럼 됨"
+        },
+        {
+          "rank": 2,
+          "mistake": "빈 스택/큐에서 pop",
+          "frequency": "70%",
+          "wrongCode": "stack = []\nstack.pop()",
+          "correctCode": "stack = []\nif stack:\n    stack.pop()",
+          "result": "IndexError: pop from empty list"
+        },
+        {
+          "rank": 3,
+          "mistake": "pop(0) 성능 문제",
+          "frequency": "60%",
+          "wrongCode": "queue = []\nqueue.pop(0)  # O(n)",
+          "correctCode": "from collections import deque\nqueue = deque()\nqueue.popleft()  # O(1)",
+          "result": "큰 데이터에서 느림"
+        },
+        {
+          "rank": 4,
+          "mistake": "괄호 검사에서 스택 확인 누락",
+          "frequency": "55%",
+          "wrongCode": "if stack.pop() != expected:",
+          "correctCode": "if not stack or stack.pop() != expected:",
+          "result": "빈 스택에서 pop 시도"
+        },
+        {
+          "rank": 5,
+          "mistake": "top 확인할 때 pop 사용",
+          "frequency": "45%",
+          "wrongCode": "top = stack.pop()  # 제거됨",
+          "correctCode": "top = stack[-1]  # 제거 안 됨",
+          "result": "의도치 않게 요소 제거"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "빈 문자열 괄호 검사", "handling": "빈 스택 → True 반환"},
+        {"case": "여는 괄호만 있는 경우", "handling": "스택에 남음 → False"},
+        {"case": "닫는 괄호만 있는 경우", "handling": "스택 비어서 매칭 실패 → False"}
+      ],
+
+      "finalChecklist": [
+        "✅ 스택=LIFO(후입선출), 큐=FIFO(선입선출)",
+        "✅ pop 전 비어있는지 확인 (if stack:)",
+        "✅ 효율적인 큐는 deque + popleft() 사용",
+        "✅ top 확인은 stack[-1] (제거 없이)"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "스택/큐 개념 정리",
+          "badPrompt": "스택 큐 알려줘",
+          "goodPrompt": "스택과 큐의 차이를 '접시 쌓기'와 '은행 줄서기' 비유로 설명하고, Python 코드로 각각 구현해줘",
+          "whyGood": "비유 + 코드로 이해와 실습 동시 요청"
+        },
+        {
+          "situation": "괄호 검사 이해",
+          "badPrompt": "괄호 검사 코드 줘",
+          "goodPrompt": "스택으로 '({[]})' 괄호 검사하는 과정을 각 문자마다 스택 상태와 함께 단계별로 보여줘",
+          "whyGood": "구체적 예시로 동작 과정 추적 요청"
+        },
+        {
+          "situation": "deque 사용법",
+          "badPrompt": "deque 설명",
+          "goodPrompt": "Python에서 리스트로 큐 구현할 때 pop(0)이 왜 비효율적인지, deque의 popleft()와 비교해서 설명해줘",
+          "whyGood": "성능 차이의 이유까지 요청"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "괄호 검사 코드는 외워야 시험에서 쓸 수 있습니다",
+        "recommendation": "스택 append/pop 패턴과 괄호 매칭 로직을 손으로 5번 이상 작성"
+      },
+
+      "selfCheckQuestion": [
+        "스택에서 먼저 나오는 건? → 마지막에 넣은 것 (LIFO)",
+        "큐에서 먼저 나오는 건? → 먼저 넣은 것 (FIFO)",
+        "괄호 검사에 스택을 쓰는 이유는? → 가장 최근 여는 괄호와 짝 맞춰야",
+        "stack[-1]과 stack.pop()의 차이? → 확인만 vs 제거"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d12-p1",
+        "type": "결과예측",
+        "difficulty": "하",
+        "question": "결과는?",
+        "code": "s = []\ns.append(1)\ns.append(2)\nprint(s.pop())",
+        "answer": "2",
+        "explanation": "스택: 마지막 넣은 2가 먼저"
+      },
+      {
+        "id": "d12-p2",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "q = [10, 20, 30]\nq.append(40)\nq.pop(0)\nprint(q)",
+        "answer": "[20, 30, 40]",
+        "explanation": "40 넣고 첫 번째(10) 제거"
+      },
+      {
+        "id": "d12-p3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "스택의 top 확인 (제거 안 함)",
+        "code": "stack = [1, 2, 3]\ntop = stack[_____]\nprint(top)  # 3",
+        "answer": "-1",
+        "explanation": "[-1]로 마지막 요소 확인"
+      },
+      {
+        "id": "d12-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "빈 스택에서 pop 시 에러",
+        "code": "stack = []\nprint(stack.pop())  # IndexError",
+        "answer": {"fixedCode": "stack = []\nif stack:\n    print(stack.pop())\nelse:\n    print('비어있음')"},
+        "explanation": "pop 전 비어있는지 확인"
+      },
+      {
+        "id": "d12-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "괄호 문자열이 올바른지 검사",
+        "input": "'(())'",
+        "output": "True",
+        "answer": {"code": "def is_valid(s):\n    stack = []\n    for c in s:\n        if c == '(':\n            stack.append(c)\n        elif c == ')':\n            if not stack:\n                return False\n            stack.pop()\n    return len(stack) == 0\n\nprint(is_valid('(())'))"},
+        "explanation": "여는 괄호 push, 닫는 괄호면 pop. 끝나고 비어있으면 True"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "스택=LIFO(append+pop), 큐=FIFO(append+popleft)",
+    "examinerMindset": "스택/큐 동작 추적, 괄호 검사, LIFO/FIFO 구분",
+    "mustRemember": ["스택: 마지막 것 먼저 (LIFO)", "큐: 먼저 온 것 먼저 (FIFO)", "효율적 큐: deque", "pop 전 비어있는지 확인"],
+    "tomorrowPreview": {"topic": "Day 13: 2차원 배열", "connection": "2차원 순회에서 스택/큐로 BFS/DFS 탐색"}
+  }
+}

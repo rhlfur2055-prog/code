@@ -1,0 +1,539 @@
+{
+  "id": "pcce-question-types",
+  "title": "PCCE 문제 유형 완벽 분석",
+  "lastUpdated": "2026-01",
+
+  "overview": {
+    "title": "📊 문제 유형 개요",
+    "totalQuestions": 10,
+    "timeLimit": "50분",
+    "distribution": {
+      "fillInBlank": {"count": 4, "points": 320, "percentage": "32%"},
+      "bugFix": {"count": 3, "points": 300, "percentage": "30%"},
+      "codeWriting": {"count": 3, "points": 380, "percentage": "38%"}
+    },
+    "strategicPriority": "빈칸(쉬움) → 오류수정(중간) → 코드작성(어려움) 순으로 풀기 권장"
+  },
+
+  "fillInBlank": {
+    "id": "fill-in-blank",
+    "title": "🔲 빈칸 채우기",
+    "koreanName": "빈칸 채우기",
+    "count": 4,
+    "pointsEach": 80,
+    "totalPoints": 320,
+    "partialScore": false,
+    "recommendedTime": "문제당 2~3분 (총 10분)",
+    "difficulty": "하~중",
+
+    "description": {
+      "what": "주어진 코드에서 ___ 부분을 채워 원하는 출력/동작이 나오도록 하는 문제",
+      "format": "객관식 (4지선다) 또는 단답식",
+      "example": "x = '10'\ny = _____(x) + 5\nprint(y)  # 15 출력"
+    },
+
+    "subTypes": [
+      {
+        "name": "함수/메서드명 채우기",
+        "frequency": "★★★★★",
+        "description": "적절한 내장 함수나 메서드명을 찾는 문제",
+        "exampleCode": "numbers = [3, 1, 4, 1, 5]\nnumbers._____(2)  # 2를 리스트에 추가",
+        "answer": "append",
+        "trapPoints": [
+          "append vs extend 혼동 (단일 요소 vs 여러 요소)",
+          "remove vs pop 혼동 (값 vs 인덱스)",
+          "sort vs sorted 혼동 (원본 변경 vs 새 리스트 반환)"
+        ],
+        "solvingTip": "메서드의 '반환값'과 '원본 변경 여부'를 정확히 알아야 함"
+      },
+      {
+        "name": "타입 변환 함수 채우기",
+        "frequency": "★★★★★",
+        "description": "int(), str(), float() 등 타입 변환 함수 선택",
+        "exampleCode": "age = input()  # '25' 입력\nprint(_____(age) + 1)  # 26 출력",
+        "answer": "int",
+        "trapPoints": [
+          "input()은 항상 str 반환",
+          "int('3.14')는 에러 (float() 먼저 필요)",
+          "str() + 숫자 연산 불가"
+        ],
+        "solvingTip": "input() 뒤에는 무조건 int() 또는 float() 의심"
+      },
+      {
+        "name": "연산자 채우기",
+        "frequency": "★★★★☆",
+        "description": "조건에 맞는 비교/논리/산술 연산자 선택",
+        "exampleCode": "x = 10\nif x _____ 5:  # x가 5 이상일 때\n    print('OK')",
+        "answer": ">=",
+        "trapPoints": [
+          "> vs >= 혼동 (미만 vs 이하)",
+          "== vs = 혼동 (비교 vs 대입)",
+          "and vs or 논리 혼동"
+        ],
+        "solvingTip": "경계값을 대입해서 참/거짓 확인"
+      },
+      {
+        "name": "인덱스/슬라이싱 채우기",
+        "frequency": "★★★★☆",
+        "description": "원하는 결과가 나오는 인덱스나 슬라이싱 범위 선택",
+        "exampleCode": "s = 'PYTHON'\nprint(s[_____])  # 'YTH' 출력",
+        "answer": "1:4",
+        "trapPoints": [
+          "인덱스 0부터 시작",
+          "슬라이싱 끝 인덱스는 미포함 (1:4 = 1,2,3만)",
+          "음수 인덱스 (-1 = 마지막)"
+        ],
+        "solvingTip": "손으로 각 인덱스에 해당하는 문자 적어보기"
+      },
+      {
+        "name": "반복 범위 채우기",
+        "frequency": "★★★★☆",
+        "description": "for문의 range() 매개변수 선택",
+        "exampleCode": "for i in range(_____):\n    print(i)  # 1, 2, 3, 4, 5 출력",
+        "answer": "1, 6",
+        "trapPoints": [
+          "range(n)은 0부터 n-1까지",
+          "range(a, b)는 a부터 b-1까지",
+          "range(a, b, step)의 step 방향"
+        ],
+        "solvingTip": "range(1, 6) = 1,2,3,4,5 (6 미포함)"
+      },
+      {
+        "name": "조건 표현식 채우기",
+        "frequency": "★★★☆☆",
+        "description": "if 조건문의 조건식 완성",
+        "exampleCode": "score = 85\nif _____:\n    print('합격')  # 80점 이상이면 합격",
+        "answer": "score >= 80",
+        "trapPoints": [
+          "조건 순서 (and/or 우선순위)",
+          "복합 조건 괄호 처리",
+          "not 연산자 위치"
+        ],
+        "solvingTip": "조건을 자연어로 읽어보고 코드로 번역"
+      }
+    ],
+
+    "solvingStrategy": {
+      "title": "빈칸 채우기 풀이 전략",
+      "steps": [
+        {
+          "step": 1,
+          "action": "출력/목표 확인",
+          "detail": "주석이나 print 결과로 '원하는 결과'를 먼저 파악"
+        },
+        {
+          "step": 2,
+          "action": "빈칸 주변 문맥 분석",
+          "detail": "빈칸 앞뒤의 코드를 보고 '어떤 종류'가 들어갈지 추론"
+        },
+        {
+          "step": 3,
+          "action": "선택지 필터링",
+          "detail": "문법적으로 말이 되는 것만 남기기 (타입 에러 나는 건 제외)"
+        },
+        {
+          "step": 4,
+          "action": "머릿속 실행",
+          "detail": "남은 선택지로 코드 실행 시뮬레이션"
+        },
+        {
+          "step": 5,
+          "action": "정답 선택",
+          "detail": "원하는 결과가 나오는 것 선택"
+        }
+      ],
+      "timeManagement": "2분 안에 안 풀리면 일단 넘기고 나중에"
+    },
+
+    "practiceExample": {
+      "question": "다음 코드가 [3, 6, 9]를 출력하도록 빈칸을 채우시오",
+      "code": "numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]\nresult = [n for n in numbers if n _____ 3 == 0]\nprint(result)",
+      "options": ["//", "%", "*", "/"],
+      "answer": "%",
+      "explanation": "3의 배수를 찾으려면 n을 3으로 나눈 '나머지'가 0이어야 함. % 연산자가 나머지 연산."
+    }
+  },
+
+  "bugFix": {
+    "id": "bug-fix",
+    "title": "🐛 오류 수정",
+    "koreanName": "오류 수정 (한 줄 수정)",
+    "count": 3,
+    "pointsEach": 100,
+    "totalPoints": 300,
+    "partialScore": false,
+    "recommendedTime": "문제당 3~4분 (총 12분)",
+    "difficulty": "중",
+
+    "description": {
+      "what": "버그가 있는 코드에서 '딱 한 줄만' 수정하여 올바르게 동작하게 하는 문제",
+      "format": "수정할 줄 번호 + 수정된 코드 작성",
+      "criticalRule": "⚠️ 반드시 한 줄만 수정! 여러 줄 고치면 오답 처리"
+    },
+
+    "subTypes": [
+      {
+        "name": "인덱스 범위 오류 (IndexError)",
+        "frequency": "★★★★★",
+        "description": "배열/리스트 인덱스가 범위를 벗어나는 오류",
+        "bugCode": "arr = [1, 2, 3, 4, 5]\nfor i in range(len(arr)):\n    print(arr[i + 1])",
+        "errorType": "IndexError: list index out of range",
+        "fixedCode": "arr = [1, 2, 3, 4, 5]\nfor i in range(len(arr)):\n    print(arr[i])",
+        "explanation": "i가 4일 때 arr[5] 접근 시도 → 범위 초과",
+        "detectionTip": "반복문 + 배열 접근 조합에서 자주 발생"
+      },
+      {
+        "name": "타입 오류 (TypeError)",
+        "frequency": "★★★★★",
+        "description": "호환되지 않는 타입 간 연산 시도",
+        "bugCode": "x = input()  # '10' 입력\nprint(x + 5)",
+        "errorType": "TypeError: can only concatenate str to str",
+        "fixedCode": "x = int(input())  # '10' 입력\nprint(x + 5)",
+        "explanation": "input()은 str 반환 → str + int 연산 불가",
+        "detectionTip": "input() 뒤에 int() 없으면 99% 타입 에러"
+      },
+      {
+        "name": "논리 오류 (Logic Error)",
+        "frequency": "★★★★☆",
+        "description": "에러는 안 나지만 결과가 틀린 경우",
+        "bugCode": "# 1부터 10까지 합 구하기\ntotal = 0\nfor i in range(1, 10):\n    total += i\nprint(total)  # 45가 아닌 다른 값",
+        "errorType": "논리 오류 (Wrong Answer)",
+        "fixedCode": "# 1부터 10까지 합 구하기\ntotal = 0\nfor i in range(1, 11):\n    total += i\nprint(total)  # 55 출력",
+        "explanation": "range(1, 10)은 1~9까지만 (10 미포함)",
+        "detectionTip": "'n까지'라고 하면 range(n+1) 필요"
+      },
+      {
+        "name": "조건문 오류",
+        "frequency": "★★★★☆",
+        "description": "조건식의 논리가 잘못된 경우",
+        "bugCode": "# 10 이상 20 미만의 수 출력\nx = 15\nif x > 10 and x > 20:\n    print('범위 내')",
+        "errorType": "논리 오류",
+        "fixedCode": "# 10 이상 20 미만의 수 출력\nx = 15\nif x >= 10 and x < 20:\n    print('범위 내')",
+        "explanation": "> vs >=, and vs or 혼동",
+        "detectionTip": "조건을 자연어로 다시 읽어보기"
+      },
+      {
+        "name": "반환값 누락",
+        "frequency": "★★★☆☆",
+        "description": "함수에서 return을 빠뜨린 경우",
+        "bugCode": "def add(a, b):\n    result = a + b\n\nprint(add(3, 5))  # None 출력",
+        "errorType": "논리 오류 (None 반환)",
+        "fixedCode": "def add(a, b):\n    result = a + b\n    return result\n\nprint(add(3, 5))  # 8 출력",
+        "explanation": "return이 없으면 함수는 None 반환",
+        "detectionTip": "함수 결과를 출력/사용하는데 None이면 return 확인"
+      },
+      {
+        "name": "변수명/메서드명 오타",
+        "frequency": "★★★☆☆",
+        "description": "변수명이나 메서드명 철자 오류",
+        "bugCode": "numbers = [3, 1, 4]\nnumber.sort()\nprint(numbers)",
+        "errorType": "NameError: name 'number' is not defined",
+        "fixedCode": "numbers = [3, 1, 4]\nnumbers.sort()\nprint(numbers)",
+        "explanation": "numbers vs number 오타",
+        "detectionTip": "NameError 보이면 변수명 오타 의심"
+      },
+      {
+        "name": "연산자 우선순위 오류",
+        "frequency": "★★☆☆☆",
+        "description": "연산 순서가 의도와 다른 경우",
+        "bugCode": "# 평균 계산\na, b, c = 10, 20, 30\navg = a + b + c / 3\nprint(avg)  # 40.0 (틀린 값)",
+        "errorType": "논리 오류",
+        "fixedCode": "# 평균 계산\na, b, c = 10, 20, 30\navg = (a + b + c) / 3\nprint(avg)  # 20.0 (올바른 값)",
+        "explanation": "/ 가 + 보다 우선순위 높음 → 괄호 필요",
+        "detectionTip": "수학 계산에서 결과가 이상하면 괄호 확인"
+      }
+    ],
+
+    "solvingStrategy": {
+      "title": "오류 수정 풀이 전략",
+      "steps": [
+        {
+          "step": 1,
+          "action": "에러 유형 파악",
+          "detail": "문제에 에러 메시지가 있으면 에러 타입 확인, 없으면 '논리 오류'"
+        },
+        {
+          "step": 2,
+          "action": "의심 지점 찾기",
+          "detail": "에러 메시지의 줄 번호 또는 출력이 틀린 부분 추적"
+        },
+        {
+          "step": 3,
+          "action": "원인 분석",
+          "detail": "왜 에러가 나는지 / 왜 결과가 틀린지 파악"
+        },
+        {
+          "step": 4,
+          "action": "한 줄 수정",
+          "detail": "반드시 한 줄만 수정 (여러 줄 X)"
+        },
+        {
+          "step": 5,
+          "action": "검증",
+          "detail": "수정 후 전체 흐름 머릿속 실행"
+        }
+      ],
+      "keyPrinciple": "출제자는 '한 줄만 고치면 되는' 문제를 만든다. 두 줄 이상 고쳐야 할 것 같으면 다시 생각!"
+    },
+
+    "commonErrorPatterns": {
+      "title": "자주 나오는 에러 패턴",
+      "patterns": [
+        {
+          "pattern": "input() + 숫자 연산",
+          "frequency": "90%",
+          "fix": "int(input()) 또는 float(input())"
+        },
+        {
+          "pattern": "range(1, n)에서 n까지 포함해야 할 때",
+          "frequency": "85%",
+          "fix": "range(1, n+1)"
+        },
+        {
+          "pattern": "arr[len(arr)] 접근",
+          "frequency": "80%",
+          "fix": "arr[len(arr)-1] 또는 인덱스 조정"
+        },
+        {
+          "pattern": "= vs == 혼동",
+          "frequency": "75%",
+          "fix": "조건문에서는 ==, 대입에서는 ="
+        },
+        {
+          "pattern": "return 누락",
+          "frequency": "70%",
+          "fix": "함수 끝에 return 추가"
+        }
+      ]
+    },
+
+    "practiceExample": {
+      "question": "다음 코드가 올바르게 1부터 5까지의 합(15)을 출력하도록 수정하시오",
+      "bugCode": "total = 0\nfor i in range(1, 5):\n    total += i\nprint(total)",
+      "currentOutput": "10",
+      "expectedOutput": "15",
+      "lineToFix": 2,
+      "fixedLine": "for i in range(1, 6):",
+      "explanation": "range(1, 5)는 1,2,3,4만 포함 (5 미포함). 5까지 포함하려면 range(1, 6)"
+    }
+  },
+
+  "codeWriting": {
+    "id": "code-writing",
+    "title": "✍️ 코드 작성",
+    "koreanName": "코드 작성",
+    "count": 3,
+    "pointsEach": 120,
+    "totalPoints": 380,
+    "partialScore": true,
+    "recommendedTime": "문제당 7~8분 (총 23분)",
+    "difficulty": "중~상",
+
+    "description": {
+      "what": "요구사항에 맞는 코드를 처음부터 작성하는 문제",
+      "format": "함수 완성 또는 전체 코드 작성",
+      "scoring": "테스트케이스별 부분 점수 (완벽하지 않아도 기본 점수 획득 가능)"
+    },
+
+    "subTypes": [
+      {
+        "name": "문자열 처리",
+        "frequency": "★★★★★",
+        "description": "문자열 순회, 카운팅, 변환 등",
+        "commonProblems": [
+          "특정 문자 개수 세기",
+          "문자열 뒤집기",
+          "대소문자 변환",
+          "특정 패턴 찾기"
+        ],
+        "keySkills": ["for문 순회", "조건문", "문자열 메서드"],
+        "exampleProblem": {
+          "description": "문자열에서 'a'의 개수를 반환하는 함수 작성",
+          "input": "banana",
+          "output": "3",
+          "solution": "def count_a(s):\n    count = 0\n    for char in s:\n        if char == 'a':\n            count += 1\n    return count"
+        }
+      },
+      {
+        "name": "리스트 조작",
+        "frequency": "★★★★★",
+        "description": "리스트 필터링, 변환, 정렬 등",
+        "commonProblems": [
+          "조건에 맞는 요소만 추출",
+          "리스트 요소 합/평균 계산",
+          "중복 제거",
+          "최대/최소값 찾기"
+        ],
+        "keySkills": ["반복문", "조건문", "append", "리스트 메서드"],
+        "exampleProblem": {
+          "description": "리스트에서 짝수만 추출하여 반환하는 함수 작성",
+          "input": "[1, 2, 3, 4, 5, 6]",
+          "output": "[2, 4, 6]",
+          "solution": "def get_evens(numbers):\n    result = []\n    for n in numbers:\n        if n % 2 == 0:\n            result.append(n)\n    return result"
+        }
+      },
+      {
+        "name": "조건 분기 구현",
+        "frequency": "★★★★☆",
+        "description": "복잡한 조건에 따른 처리",
+        "commonProblems": [
+          "학점 계산기",
+          "윤년 판별",
+          "요금 계산기",
+          "등급 판정"
+        ],
+        "keySkills": ["if-elif-else", "다중 조건", "논리 연산"],
+        "exampleProblem": {
+          "description": "점수에 따라 학점을 반환하는 함수 (90이상:A, 80이상:B, 70이상:C, 나머지:F)",
+          "input": "85",
+          "output": "B",
+          "solution": "def get_grade(score):\n    if score >= 90:\n        return 'A'\n    elif score >= 80:\n        return 'B'\n    elif score >= 70:\n        return 'C'\n    else:\n        return 'F'"
+        }
+      },
+      {
+        "name": "누적 계산",
+        "frequency": "★★★★☆",
+        "description": "반복하며 값을 누적",
+        "commonProblems": [
+          "팩토리얼 계산",
+          "거듭제곱 계산",
+          "연속 합/곱",
+          "특정 조건의 합"
+        ],
+        "keySkills": ["반복문", "누적 변수", "조건부 누적"],
+        "exampleProblem": {
+          "description": "1부터 n까지의 합을 반환하는 함수 작성",
+          "input": "5",
+          "output": "15",
+          "solution": "def sum_to_n(n):\n    total = 0\n    for i in range(1, n + 1):\n        total += i\n    return total"
+        }
+      },
+      {
+        "name": "2차원 배열 처리",
+        "frequency": "★★★☆☆",
+        "description": "2차원 리스트 순회 및 처리",
+        "commonProblems": [
+          "행/열 합계",
+          "대각선 요소",
+          "특정 위치 찾기",
+          "2차원 배열 변환"
+        ],
+        "keySkills": ["중첩 반복문", "인덱싱", "범위 처리"],
+        "exampleProblem": {
+          "description": "2차원 배열의 모든 요소 합을 반환하는 함수 작성",
+          "input": "[[1, 2], [3, 4], [5, 6]]",
+          "output": "21",
+          "solution": "def sum_2d(matrix):\n    total = 0\n    for row in matrix:\n        for num in row:\n            total += num\n    return total"
+        }
+      }
+    ],
+
+    "solvingStrategy": {
+      "title": "코드 작성 풀이 전략",
+      "steps": [
+        {
+          "step": 1,
+          "action": "입출력 형식 정확히 파악",
+          "detail": "매개변수 타입, 반환 타입, 예시 입출력 꼼꼼히 읽기",
+          "time": "30초"
+        },
+        {
+          "step": 2,
+          "action": "손으로 예시 풀어보기",
+          "detail": "예시 입력으로 어떻게 결과가 나오는지 손으로 따라가기",
+          "time": "1분"
+        },
+        {
+          "step": 3,
+          "action": "풀이를 코드로 번역",
+          "detail": "손으로 푼 과정을 그대로 코드로 옮기기",
+          "time": "3~4분"
+        },
+        {
+          "step": 4,
+          "action": "예시 테스트",
+          "detail": "예시 입력으로 실행해서 예상 출력 나오는지 확인",
+          "time": "30초"
+        },
+        {
+          "step": 5,
+          "action": "엣지 케이스 고려",
+          "detail": "빈 입력, 최소/최대값 등 예외 상황 테스트",
+          "time": "1분"
+        }
+      ],
+      "partialScoreTip": "완벽하지 않아도 기본 구조라도 작성하면 부분 점수!"
+    },
+
+    "codeTemplate": {
+      "title": "코드 작성 템플릿",
+      "templates": {
+        "countingPattern": {
+          "description": "카운팅 패턴 (특정 조건 개수 세기)",
+          "template": "def count_something(data):\n    count = 0\n    for item in data:\n        if 조건:\n            count += 1\n    return count"
+        },
+        "filteringPattern": {
+          "description": "필터링 패턴 (조건에 맞는 요소 추출)",
+          "template": "def filter_something(data):\n    result = []\n    for item in data:\n        if 조건:\n            result.append(item)\n    return result"
+        },
+        "accumulationPattern": {
+          "description": "누적 패턴 (합계, 곱 등)",
+          "template": "def accumulate(data):\n    total = 0  # 또는 1 (곱셈)\n    for item in data:\n        total += item  # 또는 *= item\n    return total"
+        },
+        "transformPattern": {
+          "description": "변환 패턴 (각 요소를 변환)",
+          "template": "def transform(data):\n    result = []\n    for item in data:\n        transformed = 변환로직(item)\n        result.append(transformed)\n    return result"
+        }
+      }
+    },
+
+    "practiceExample": {
+      "question": "문자열과 문자를 입력받아, 해당 문자가 처음 등장하는 인덱스를 반환하는 함수를 작성하시오. 없으면 -1을 반환합니다.",
+      "functionSignature": "def find_first_index(s, char):",
+      "input": "s = 'hello', char = 'l'",
+      "output": "2",
+      "solution": "def find_first_index(s, char):\n    for i in range(len(s)):\n        if s[i] == char:\n            return i\n    return -1",
+      "explanation": "문자열을 순회하면서 해당 문자를 찾으면 즉시 인덱스 반환, 끝까지 못 찾으면 -1"
+    }
+  },
+
+  "difficultyProgression": {
+    "title": "📈 난이도 분포",
+    "byQuestionNumber": [
+      {"number": "1~2번", "type": "빈칸", "difficulty": "하", "topic": "변수/타입/연산자"},
+      {"number": "3~4번", "type": "빈칸", "difficulty": "중하", "topic": "조건문/반복문"},
+      {"number": "5~6번", "type": "오류수정", "difficulty": "중", "topic": "인덱스/타입 에러"},
+      {"number": "7번", "type": "오류수정", "difficulty": "중상", "topic": "논리 오류"},
+      {"number": "8번", "type": "코드작성", "difficulty": "중", "topic": "기본 구현"},
+      {"number": "9번", "type": "코드작성", "difficulty": "중상", "topic": "조건/반복 복합"},
+      {"number": "10번", "type": "코드작성", "difficulty": "상", "topic": "복합 문제"}
+    ],
+    "strategyByDifficulty": {
+      "easy": "빠르게 풀고 시간 확보 (문제당 2분 이내)",
+      "medium": "꼼꼼히 읽고 함정 피하기 (문제당 4분)",
+      "hard": "부분 점수라도 획득 (문제당 7분, 막히면 넘기기)"
+    }
+  },
+
+  "examinerMindset": {
+    "title": "🎯 출제자가 노리는 것",
+    "byType": {
+      "fillInBlank": [
+        "메서드 이름 혼동 (append vs extend)",
+        "타입 변환 누락 (input() → int())",
+        "인덱스 범위 착각 (0부터 시작, 끝 미포함)"
+      ],
+      "bugFix": [
+        "타입 에러를 못 찾는 것",
+        "경계값 실수 (off-by-one error)",
+        "여러 줄 고치려는 유혹"
+      ],
+      "codeWriting": [
+        "요구사항 꼼꼼히 안 읽는 것",
+        "엣지 케이스 처리 누락",
+        "시간 부족으로 포기하는 것"
+      ]
+    },
+    "goldenRule": "출제자는 '알 것 같은데 실수하기 쉬운' 포인트를 공략한다"
+  }
+}

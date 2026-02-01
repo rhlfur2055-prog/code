@@ -1,0 +1,72 @@
+{
+  "id": "pcce-python-course",
+  "language": "python",
+  "title": "PCCE Python 21일 완성",
+  "description": "Python으로 PCCE 시험을 준비하는 21일 커리큘럼",
+  "totalDays": 21,
+  "estimatedTotalTime": "약 25시간",
+  "targetLevel": "입문 → 중급",
+  "lastUpdated": "2026-01",
+
+  "languageAdvantages": [
+    "문법이 간결하여 코드 작성 시간 단축",
+    "들여쓰기로 블록 구분하여 가독성 좋음",
+    "강력한 내장 함수와 메서드",
+    "PCCE 응시자의 70% 이상이 Python 선택"
+  ],
+
+  "curriculum": [
+    {
+      "week": 1,
+      "theme": "기초 문법",
+      "days": [
+        {"day": 1, "topic": "변수와 자료형", "file": "day01-variables.json", "difficulty": "입문"},
+        {"day": 2, "topic": "연산자", "file": "day02-operators.json", "difficulty": "입문"},
+        {"day": 3, "topic": "조건문", "file": "day03-conditionals.json", "difficulty": "입문"},
+        {"day": 4, "topic": "반복문", "file": "day04-loops.json", "difficulty": "입문"},
+        {"day": 5, "topic": "문자열", "file": "day05-strings.json", "difficulty": "입문"},
+        {"day": 6, "topic": "리스트", "file": "day06-lists.json", "difficulty": "입문"},
+        {"day": 7, "topic": "딕셔너리", "file": "day07-dictionaries.json", "difficulty": "입문"}
+      ]
+    },
+    {
+      "week": 2,
+      "theme": "함수와 중급 개념",
+      "days": [
+        {"day": 8, "topic": "함수", "file": "day08-functions.json", "difficulty": "초급"},
+        {"day": 9, "topic": "재귀", "file": "day09-recursion.json", "difficulty": "초급"},
+        {"day": 10, "topic": "정렬", "file": "day10-sorting.json", "difficulty": "초급"},
+        {"day": 11, "topic": "탐색", "file": "day11-searching.json", "difficulty": "초급"},
+        {"day": 12, "topic": "스택과 큐", "file": "day12-stack-queue.json", "difficulty": "초급"},
+        {"day": 13, "topic": "2차원 배열", "file": "day13-2d-arrays.json", "difficulty": "초급"},
+        {"day": 14, "topic": "구현 문제", "file": "day14-implementation.json", "difficulty": "초급"}
+      ]
+    },
+    {
+      "week": 3,
+      "theme": "알고리즘과 실전",
+      "days": [
+        {"day": 15, "topic": "시뮬레이션", "file": "day15-simulation.json", "difficulty": "중급"},
+        {"day": 16, "topic": "브루트포스", "file": "day16-bruteforce.json", "difficulty": "중급"},
+        {"day": 17, "topic": "그리디", "file": "day17-greedy.json", "difficulty": "중급"},
+        {"day": 18, "topic": "DP 기초", "file": "day18-dp-basics.json", "difficulty": "중급"},
+        {"day": 19, "topic": "모의고사 1", "file": "day19-mock-test-1.json", "difficulty": "실전"},
+        {"day": 20, "topic": "모의고사 2", "file": "day20-mock-test-2.json", "difficulty": "실전"},
+        {"day": 21, "topic": "최종 정리", "file": "day21-final-review.json", "difficulty": "종합"}
+      ]
+    }
+  ],
+
+  "prerequisites": [
+    "Python 설치 (3.8 이상 권장)",
+    "기본적인 컴퓨터 사용 능력",
+    "하루 1시간 학습 시간 확보"
+  ],
+
+  "studyTips": [
+    "코드는 반드시 직접 타이핑하기 (복붙 금지)",
+    "에러가 나면 에러 메시지 읽는 습관 들이기",
+    "모르는 건 넘어가지 말고 그 자리에서 해결",
+    "연습 문제는 답 보기 전에 최소 5분 고민"
+  ]
+}

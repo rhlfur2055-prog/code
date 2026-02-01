@@ -1,0 +1,545 @@
+{
+  "id": "python-day02",
+  "language": "python",
+  "day": 2,
+  "title": "연산자",
+  "examScope": "pcce",
+  "difficultyLevel": 1,
+  "estimatedTime": "60분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★★★",
+  "keywords": ["산술연산자", "비교연산자", "논리연산자", "복합대입연산자", "연산자우선순위", "나머지연산", "정수나눗셈"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "프로그램은 데이터를 '처리'해야 한다. 연산자는 값을 계산하고, 비교하고, 조합하는 도구다.",
+        "inExam": "PCCE 모든 문제에서 연산자가 등장. 특히 %, //, 우선순위 문제가 함정으로 자주 출제된다.",
+        "importance": "연산자를 모르면 코드를 읽을 수도, 쓸 수도 없다."
+      },
+
+      "coreIdea": {
+        "oneLiner": "연산자 = 값들을 가지고 새로운 값을 만드는 기호",
+        "categories": [
+          "산술 연산자: 숫자 계산 (+, -, *, /, //, %, **)",
+          "비교 연산자: 크기 비교 (==, !=, <, >, <=, >=)",
+          "논리 연산자: 조건 조합 (and, or, not)",
+          "복합 대입 연산자: 계산 + 저장 (+=, -=, *=, /=)"
+        ]
+      },
+
+      "analogy": {
+        "title": "계산기 비유",
+        "explanation": "연산자는 계산기의 버튼이다. 숫자만 있으면 아무것도 못하고, +, -, × 버튼을 눌러야 결과가 나온다. 프로그래밍의 연산자도 마찬가지로 값들 사이에서 '무슨 동작을 할지' 정해준다."
+      },
+
+      "visualization": {
+        "title": "연산자 종류 한눈에",
+        "ascii": [
+          "┌─────────────────────────────────────────────────┐",
+          "│            Python 핵심 연산자                    │",
+          "├─────────────────────────────────────────────────┤",
+          "│  산술:  +  -  *  /  //  %  **                   │",
+          "│         덧셈 뺄셈 곱셈 나눗셈 몫 나머지 거듭제곱 │",
+          "├─────────────────────────────────────────────────┤",
+          "│  비교:  ==  !=  <  >  <=  >=                    │",
+          "│         같다 다르다 작다 크다 이하 이상          │",
+          "├─────────────────────────────────────────────────┤",
+          "│  논리:  and  or  not                            │",
+          "│         그리고 또는 아니다                       │",
+          "├─────────────────────────────────────────────────┤",
+          "│  복합대입:  +=  -=  *=  /=  //=  %=             │",
+          "│            x += 1 은 x = x + 1 과 같음          │",
+          "└─────────────────────────────────────────────────┘"
+        ]
+      },
+
+      "operatorDetails": {
+        "arithmetic": {
+          "title": "산술 연산자 상세",
+          "operators": [
+            {"symbol": "+", "name": "덧셈", "example": "5 + 3 = 8", "note": "문자열끼리도 가능 ('a' + 'b' = 'ab')"},
+            {"symbol": "-", "name": "뺄셈", "example": "5 - 3 = 2", "note": "숫자만 가능"},
+            {"symbol": "*", "name": "곱셈", "example": "5 * 3 = 15", "note": "문자열 * 숫자 가능 ('a' * 3 = 'aaa')"},
+            {"symbol": "/", "name": "나눗셈", "example": "5 / 2 = 2.5", "note": "⚠️ 결과 항상 float!"},
+            {"symbol": "//", "name": "정수 나눗셈 (몫)", "example": "5 // 2 = 2", "note": "소수점 버림, 결과 int"},
+            {"symbol": "%", "name": "나머지", "example": "5 % 2 = 1", "note": "⚠️ 단골 출제!"},
+            {"symbol": "**", "name": "거듭제곱", "example": "2 ** 3 = 8", "note": "2의 3승"}
+          ]
+        },
+        "comparison": {
+          "title": "비교 연산자 상세",
+          "operators": [
+            {"symbol": "==", "name": "같다", "example": "5 == 5 → True", "note": "⚠️ = 와 다름!"},
+            {"symbol": "!=", "name": "다르다", "example": "5 != 3 → True", "note": "같지 않으면 True"},
+            {"symbol": "<", "name": "작다", "example": "3 < 5 → True", "note": "미만"},
+            {"symbol": ">", "name": "크다", "example": "5 > 3 → True", "note": "초과"},
+            {"symbol": "<=", "name": "작거나 같다", "example": "3 <= 3 → True", "note": "이하"},
+            {"symbol": ">=", "name": "크거나 같다", "example": "5 >= 5 → True", "note": "이상"}
+          ],
+          "result": "비교 결과는 항상 True 또는 False (bool 타입)"
+        },
+        "logical": {
+          "title": "논리 연산자 상세",
+          "operators": [
+            {"symbol": "and", "name": "그리고", "example": "True and False → False", "note": "둘 다 True여야 True"},
+            {"symbol": "or", "name": "또는", "example": "True or False → True", "note": "하나만 True여도 True"},
+            {"symbol": "not", "name": "부정", "example": "not True → False", "note": "True↔False 반전"}
+          ],
+          "truthTable": [
+            "and: T and T = T, T and F = F, F and T = F, F and F = F",
+            "or:  T or T = T, T or F = T, F or T = T, F or F = F"
+          ]
+        }
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {
+          "belief": "/ 와 // 는 같은 나눗셈이다",
+          "problem": "5 / 2 = 2.5 (float), 5 // 2 = 2 (int). 완전히 다른 결과!"
+        },
+        "correct": {
+          "belief": "/ 는 소수점 포함 나눗셈, // 는 몫만 (소수점 버림)",
+          "tip": "정수 결과가 필요하면 //, 실수 결과가 필요하면 /"
+        }
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "/ 와 // 의 차이를 아는가?",
+        "secondary": "% (나머지) 연산을 활용할 수 있는가?",
+        "tertiary": "연산자 우선순위를 정확히 아는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "intent": "// 와 % 연산자 구분",
+          "example": {
+            "code": "x = 17\nprint(x _____ 5)  # 2 출력 (나머지)",
+            "answer": "%",
+            "explanation": "17을 5로 나눈 나머지는 2. 17 = 5*3 + 2"
+          },
+          "trapPoints": [
+            "// 는 몫, % 는 나머지 - 헷갈리기 쉬움",
+            "음수 나머지는 Python 특유의 규칙 있음 (-17 % 5 = 3)"
+          ]
+        },
+        {
+          "type": "오류 수정",
+          "frequency": "★★★★☆",
+          "intent": "연산자 우선순위 실수 찾기",
+          "example": {
+            "bugCode": "# 평균 계산\na, b, c = 10, 20, 30\navg = a + b + c / 3\nprint(avg)  # 40.0 (틀린 값)",
+            "error": "논리 오류: / 가 + 보다 먼저 계산됨",
+            "fixedCode": "avg = (a + b + c) / 3"
+          },
+          "trapPoints": [
+            "괄호 없으면 c / 3 먼저 계산",
+            "수학처럼 왼쪽→오른쪽 순서 아님!"
+          ]
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "intent": "복합 연산 결과 계산",
+          "example": {
+            "code": "x = 10\nx += 5\nx *= 2\nprint(x)",
+            "answer": "30",
+            "explanation": "x = 10 → x = 15 → x = 30"
+          },
+          "trapPoints": [
+            "+= 는 기존 값에 더함",
+            "순서대로 누적되는 것 주의"
+          ]
+        }
+      ],
+
+      "hiddenConditions": {
+        "title": "시험에서 숨겨진 조건들",
+        "conditions": [
+          "/ 는 정수끼리 나눠도 결과가 float (10 / 2 = 5.0)",
+          "// 는 음수일 때 '내림' (버림 아님). -7 // 2 = -4 (not -3)",
+          "and/or 는 단축 평가 (short-circuit) 함"
+        ]
+      },
+
+      "expectedThinkingFlow": {
+        "title": "출제자가 원하는 사고 흐름",
+        "steps": [
+          "1. 어떤 연산자가 쓰였나 확인",
+          "2. 연산자 우선순위 파악 (괄호 > ** > */ > +-)",
+          "3. 왼쪽에서 오른쪽으로 같은 우선순위 계산",
+          "4. 결과 타입 확인 (/ 는 항상 float)"
+        ]
+      }
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 나머지 연산으로 짝수/홀수 판별",
+          "code": "num = int(input('숫자: '))\n\nif num % 2 == 0:\n    print('짝수')\nelse:\n    print('홀수')",
+          "lineByLineExplanation": [
+            {"line": 1, "code": "num = int(input('숫자: '))", "why": "입력받고 정수 변환"},
+            {"line": 3, "code": "if num % 2 == 0:", "why": "2로 나눈 나머지가 0이면 짝수"},
+            {"line": 4, "code": "print('짝수')", "why": "나머지 0 = 2로 나누어 떨어짐"},
+            {"line": 6, "code": "print('홀수')", "why": "나머지 1 = 홀수"}
+          ],
+          "keyInsight": "% 2 == 0 은 짝수 판별의 정석 패턴"
+        },
+        {
+          "title": "예제 2: 연산자 우선순위와 괄호",
+          "code": "# 세 과목 평균 계산\nkor = 85\neng = 90\nmath = 78\n\n# 잘못된 방법 (수학만 나눔)\nwrong_avg = kor + eng + math / 3  # 85 + 90 + 26 = 201\n\n# 올바른 방법\nright_avg = (kor + eng + math) / 3  # 253 / 3 = 84.33...",
+          "lineByLineExplanation": [
+            {"line": 7, "code": "wrong_avg = kor + eng + math / 3", "why": "/ 가 먼저 계산되어 math/3 = 26"},
+            {"line": 10, "code": "right_avg = (kor + eng + math) / 3", "why": "괄호 안 먼저 → 합계 / 3"}
+          ],
+          "keyInsight": "의도를 명확히 하려면 괄호 사용!"
+        },
+        {
+          "title": "예제 3: 복합 대입 연산자 활용",
+          "code": "# 1부터 10까지 합\ntotal = 0\n\nfor i in range(1, 11):\n    total += i  # total = total + i 와 같음\n\nprint(total)  # 55",
+          "lineByLineExplanation": [
+            {"line": 2, "code": "total = 0", "why": "누적 변수 초기화"},
+            {"line": 4, "code": "for i in range(1, 11):", "why": "1부터 10까지 반복"},
+            {"line": 5, "code": "total += i", "why": "현재 total에 i를 더함. 간결한 표현"}
+          ],
+          "keyInsight": "+= 는 누적 계산의 핵심 패턴"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 몫과 나머지 분리",
+          "frequency": "★★★★★",
+          "description": "// 로 몫, % 로 나머지 구하기",
+          "exampleProblem": {
+            "question": "135분을 시간과 분으로 변환하면?",
+            "code": "minutes = 135\nhours = minutes // 60\nmins = minutes % 60\nprint(f'{hours}시간 {mins}분')",
+            "answer": "2시간 15분",
+            "explanation": "135 // 60 = 2 (몫), 135 % 60 = 15 (나머지)"
+          },
+          "variations": [
+            "초 → 분:초 변환",
+            "n자리 숫자에서 각 자릿수 분리 (123 % 10 = 3)"
+          ]
+        },
+        {
+          "patternName": "패턴 2: 배수 판별",
+          "frequency": "★★★★★",
+          "description": "% 연산으로 배수인지 확인",
+          "exampleProblem": {
+            "question": "다음 중 15의 배수를 모두 고르시오: 30, 45, 50, 75",
+            "code": "for n in [30, 45, 50, 75]:\n    if n % 15 == 0:\n        print(n, '는 15의 배수')",
+            "answer": "30, 45, 75",
+            "explanation": "나머지가 0이면 배수"
+          },
+          "variations": [
+            "3의 배수이면서 5의 배수 (15의 배수)",
+            "짝수이면서 3의 배수 (6의 배수)"
+          ]
+        },
+        {
+          "patternName": "패턴 3: 연산자 우선순위",
+          "frequency": "★★★★☆",
+          "description": "괄호 없을 때 계산 순서",
+          "exampleProblem": {
+            "question": "다음 코드의 출력 결과는?\nprint(2 + 3 * 4 ** 2)",
+            "options": ["400", "50", "80", "200"],
+            "answer": "50",
+            "explanation": "** 먼저 (16) → * (48) → + (50)"
+          },
+          "priorityOrder": "괄호 > ** > * / // % > + -"
+        },
+        {
+          "patternName": "패턴 4: 논리 연산자 조합",
+          "frequency": "★★★★☆",
+          "description": "and, or 로 복합 조건",
+          "exampleProblem": {
+            "question": "x = 15일 때, 다음 조건의 결과는?\nprint(x > 10 and x < 20)",
+            "answer": "True",
+            "explanation": "15 > 10 (True) and 15 < 20 (True) → True"
+          },
+          "variations": [
+            "범위 조건: 10 <= x <= 20 (Python만 가능)",
+            "or 조건: x < 0 or x > 100"
+          ]
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "세 자리 정수를 입력받아 각 자릿수의 합을 출력하시오",
+        "input": "123",
+        "output": "6"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:30",
+          "phase": "문제 분석",
+          "thinking": [
+            "'세 자리 정수' → 100~999 범위",
+            "'각 자릿수' → 백의 자리, 십의 자리, 일의 자리 분리 필요",
+            "어떻게 분리? → // 와 % 사용!"
+          ]
+        },
+        {
+          "time": "0:30 ~ 1:30",
+          "phase": "알고리즘 설계",
+          "thinking": [
+            "123에서 일의 자리: 123 % 10 = 3",
+            "123에서 십의 자리: (123 // 10) % 10 = 2",
+            "123에서 백의 자리: 123 // 100 = 1",
+            "합: 1 + 2 + 3 = 6"
+          ]
+        },
+        {
+          "time": "1:30 ~ 3:00",
+          "phase": "코드 작성",
+          "code": "n = int(input())\n\n# 각 자릿수 분리\nhundreds = n // 100        # 백의 자리\ntens = (n // 10) % 10      # 십의 자리\nones = n % 10              # 일의 자리\n\nprint(hundreds + tens + ones)"
+        },
+        {
+          "time": "3:00 ~ 3:30",
+          "phase": "검증",
+          "thinking": "123 → 1 + 2 + 3 = 6 ✓"
+        }
+      ],
+
+      "alternativeApproach": {
+        "title": "문자열 활용 방법",
+        "code": "n = input()  # 문자열로 받음\ntotal = int(n[0]) + int(n[1]) + int(n[2])\nprint(total)",
+        "note": "문자열 인덱싱으로도 가능하지만, // % 연산 연습이 중요"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "advantagesInThisLanguage": [
+        "연속 비교 가능: 10 <= x <= 20 (다른 언어는 and 필요)",
+        "// 연산자로 정수 나눗셈 명시적",
+        "** 로 거듭제곱 간단히 (다른 언어는 pow() 함수)"
+      ],
+
+      "syntaxReminder": {
+        "items": [
+          {"topic": "나눗셈 종류", "python": "/ (실수), // (정수)", "note": "Java는 / 로 둘 다"},
+          {"topic": "거듭제곱", "python": "2 ** 3", "note": "Java는 Math.pow(2, 3)"},
+          {"topic": "연속 비교", "python": "10 <= x <= 20", "note": "Java는 x >= 10 && x <= 20"}
+        ]
+      },
+
+      "commonPitfalls": [
+        {"pitfall": "/ 결과가 항상 float", "wrong": "10 / 2 가 5라고 생각", "right": "10 / 2 = 5.0", "frequency": "70%"},
+        {"pitfall": "== 와 = 혼동", "wrong": "if x = 5:", "right": "if x == 5:", "frequency": "60%"},
+        {"pitfall": "음수 // 결과", "wrong": "-7 // 2 = -3 이라고 생각", "right": "-7 // 2 = -4 (내림)", "frequency": "40%"}
+      ],
+
+      "usefulBuiltins": [
+        {"function": "abs(x)", "description": "절댓값", "example": "abs(-5) → 5"},
+        {"function": "pow(x, y)", "description": "거듭제곱", "example": "pow(2, 3) → 8"},
+        {"function": "divmod(a, b)", "description": "몫과 나머지 동시 반환", "example": "divmod(17, 5) → (3, 2)"},
+        {"function": "round(x, n)", "description": "반올림", "example": "round(3.14159, 2) → 3.14"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "/ 와 // 혼동",
+          "wrongCode": "avg = (10 + 20 + 30) // 3  # 정수만 나옴",
+          "correctCode": "avg = (10 + 20 + 30) / 3  # 20.0 (실수)",
+          "prevention": "정수 결과 필요하면 //, 실수 필요하면 /",
+          "frequency": "80%"
+        },
+        {
+          "rank": 2,
+          "mistake": "연산자 우선순위 무시",
+          "wrongCode": "result = 10 + 5 * 2  # 30이라고 생각",
+          "correctCode": "result = 10 + 5 * 2  # 실제로 20 (* 먼저)",
+          "prevention": "확실하지 않으면 괄호 사용",
+          "frequency": "70%"
+        },
+        {
+          "rank": 3,
+          "mistake": "== 대신 = 사용",
+          "wrongCode": "if x = 5:  # SyntaxError",
+          "correctCode": "if x == 5:",
+          "prevention": "조건문에서는 이퀄 두 개!",
+          "frequency": "60%"
+        },
+        {
+          "rank": 4,
+          "mistake": "and/or 우선순위",
+          "wrongCode": "True or False and False  # False라고 생각",
+          "correctCode": "True or (False and False)  # True (and 먼저)",
+          "prevention": "and가 or보다 우선순위 높음",
+          "frequency": "50%"
+        },
+        {
+          "rank": 5,
+          "mistake": "복합 대입 초기화 누락",
+          "wrongCode": "total += 10  # total 미정의 에러",
+          "correctCode": "total = 0\ntotal += 10",
+          "prevention": "+= 사용 전 초기값 할당 필수",
+          "frequency": "45%"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "0으로 나누기", "code": "10 / 0", "result": "ZeroDivisionError", "handling": "나누기 전 0인지 확인"},
+        {"case": "음수 나머지", "code": "-17 % 5", "result": "3 (Python)", "note": "다른 언어는 -2일 수 있음"},
+        {"case": "실수 정밀도", "code": "0.1 + 0.2", "result": "0.30000000000000004", "handling": "round() 사용"}
+      ],
+
+      "finalChecklist": [
+        "✅ / 와 // 의도대로 사용했는지 확인",
+        "✅ 연산 순서에 괄호 필요한지 확인",
+        "✅ == 와 = 구분했는지 확인",
+        "✅ 복합 대입 변수 초기화했는지 확인"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "prerequisiteKnowledge": [
+        "사칙연산 기호 (+, -, *, /)",
+        "나눗셈에서 몫과 나머지 개념",
+        "참/거짓 (True/False) 개념"
+      ],
+
+      "effectivePrompts": [
+        {
+          "situation": "연산자 우선순위 헷갈릴 때",
+          "prompt": "Python에서 2 + 3 * 4 ** 2 의 계산 순서를 단계별로 설명해줘"
+        },
+        {
+          "situation": "// 와 / 차이 모를 때",
+          "prompt": "Python에서 10 / 3 과 10 // 3 의 차이를 결과 타입까지 포함해서 설명해줘"
+        },
+        {
+          "situation": "나머지 연산 활용법",
+          "prompt": "% 연산자로 짝수/홀수 판별, 배수 확인하는 예제 보여줘"
+        }
+      ],
+
+      "selfCheckQuestion": [
+        "10 / 3 의 결과와 타입은?",
+        "10 // 3 의 결과와 타입은?",
+        "17 % 5 의 결과는?",
+        "2 + 3 * 4 의 결과는?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d2-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "points": 80,
+        "timeLimit": "1분",
+        "question": "다음 코드가 3을 출력하도록 빈칸을 채우시오",
+        "code": "x = 17\nprint(x _____ 7)",
+        "options": ["/", "//", "%", "**"],
+        "answer": "//",
+        "explanation": "17 // 7 = 2 (몫)... 아 틀렸네. 17 % 7 = 3 (나머지). 정답은 %",
+        "correctAnswer": "%",
+        "correctExplanation": "17 ÷ 7 = 2 ... 3. 나머지가 3이므로 % 연산자"
+      },
+      {
+        "id": "d2-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "points": 80,
+        "timeLimit": "1분",
+        "question": "다음 코드의 출력 결과는?",
+        "code": "x = 10\nx += 5\nx *= 2\nprint(x)",
+        "options": ["25", "30", "35", "20"],
+        "answer": "30",
+        "explanation": "x = 10 → x += 5 (x=15) → x *= 2 (x=30)"
+      },
+      {
+        "id": "d2-p3",
+        "type": "오류수정",
+        "difficulty": "중",
+        "points": 100,
+        "timeLimit": "2분",
+        "question": "세 수의 평균을 구하려고 합니다. 오류를 수정하시오.",
+        "code": "a, b, c = 10, 20, 30\navg = a + b + c / 3\nprint(avg)  # 20이 나와야 하는데 40.0이 나옴",
+        "answer": {
+          "lineToFix": 2,
+          "fixedLine": "avg = (a + b + c) / 3",
+          "fullCode": "a, b, c = 10, 20, 30\navg = (a + b + c) / 3\nprint(avg)"
+        },
+        "explanation": "/ 가 + 보다 우선순위 높아서 c/3 먼저 계산됨. 괄호로 합계 먼저 계산해야 함"
+      },
+      {
+        "id": "d2-p4",
+        "type": "코드작성",
+        "difficulty": "중",
+        "points": 120,
+        "timeLimit": "3분",
+        "question": "초(seconds)를 입력받아 '분:초' 형식으로 출력하시오",
+        "input": "135",
+        "output": "2:15",
+        "answer": {
+          "code": "seconds = int(input())\nminutes = seconds // 60\nsecs = seconds % 60\nprint(f'{minutes}:{secs}')"
+        },
+        "explanation": "135 // 60 = 2 (분), 135 % 60 = 15 (초)"
+      },
+      {
+        "id": "d2-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "points": 120,
+        "timeLimit": "4분",
+        "question": "세 자리 정수를 입력받아 각 자릿수의 합을 출력하시오",
+        "input": "456",
+        "output": "15",
+        "answer": {
+          "code": "n = int(input())\nhundreds = n // 100\ntens = (n // 10) % 10\nones = n % 10\nprint(hundreds + tens + ones)"
+        },
+        "explanation": "456: 4(백) + 5(십) + 6(일) = 15. // 와 % 조합으로 자릿수 분리"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "/ 는 항상 float, // 는 몫(int), % 는 나머지. 우선순위 헷갈리면 괄호!",
+    "examinerMindset": "// 와 % 혼동, 연산자 우선순위 실수를 노린다",
+    "mustRemember": [
+      "10 / 3 = 3.333... (float)",
+      "10 // 3 = 3 (int)",
+      "10 % 3 = 1 (나머지)",
+      "** > * / // % > + -",
+      "and > or (우선순위)"
+    ],
+    "tomorrowPreview": {
+      "topic": "Day 3: 조건문",
+      "connection": "오늘 배운 비교/논리 연산자가 조건문의 핵심! if x > 10 and x < 20: 처럼 사용"
+    }
+  }
+}

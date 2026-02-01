@@ -1,0 +1,348 @@
+{
+  "id": "python-day16",
+  "language": "python",
+  "day": 16,
+  "title": "브루트포스",
+  "examScope": "pccp",
+  "difficultyLevel": 4,
+  "estimatedTime": "80분",
+  "difficulty": "중급",
+  "pcceWeight": "★★★☆☆",
+  "keywords": ["완전탐색", "브루트포스", "모든경우", "중첩반복", "조합", "순열"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "브루트포스 = 자물쇠 비밀번호 찾기",
+        "explanation": "4자리 자물쇠 비밀번호를 모를 때, 0000부터 9999까지 모두 시도하면 반드시 열립니다. 브루트포스도 마찬가지로 가능한 모든 경우를 확인해서 정답을 찾습니다. 비효율적으로 보이지만, 경우의 수가 적으면 가장 확실한 방법입니다.",
+        "codeExample": "# 자물쇠 비밀번호 찾기\nfor pw in range(10000):  # 0000~9999\n    if try_unlock(pw):\n        print('찾았다!')\n        break"
+      },
+
+      "whyNeeded": {
+        "realWorld": "가능한 모든 경우를 확인해서 답을 찾기. 비밀번호 찾기, 최적 조합 등.",
+        "inExam": "PCCE에서 작은 범위의 완전탐색 문제 출제. 모든 경우 확인."
+      },
+
+      "coreIdea": {
+        "oneLiner": "브루트포스 = 가능한 모든 경우를 다 확인해서 정답 찾기",
+        "key": "효율보다 정확성. 범위가 작으면 모두 확인이 확실함"
+      },
+
+      "when": {
+        "title": "언제 사용?",
+        "cases": [
+          "경우의 수가 적을 때 (보통 백만 이하)",
+          "더 효율적인 알고리즘이 안 떠오를 때",
+          "정확한 답이 반드시 필요할 때"
+        ]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "브루트포스는 비효율적이니 피해야 한다"},
+        "correct": {"belief": "범위가 작으면 가장 확실한 방법. PCCE는 대부분 브루트포스로 풀림"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "모든 경우를 빠짐없이 탐색하는가?",
+        "secondary": "중첩 반복문을 활용할 수 있는가?",
+        "tertiary": "조건에 맞는 경우만 필터링하는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "경우의 수",
+          "frequency": "★★★★★",
+          "example": "조건을 만족하는 경우 개수"
+        },
+        {
+          "type": "최적값 찾기",
+          "frequency": "★★★★☆",
+          "example": "조건 만족하는 최대/최소값"
+        },
+        {
+          "type": "모든 조합",
+          "frequency": "★★★☆☆",
+          "example": "가능한 모든 조합 출력"
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 두 수의 합",
+          "problem": "리스트에서 합이 target인 두 수의 인덱스",
+          "code": "nums = [2, 7, 11, 15]\ntarget = 9\n\nfor i in range(len(nums)):\n    for j in range(i+1, len(nums)):\n        if nums[i] + nums[j] == target:\n            print(i, j)  # 0 1\n            break",
+          "keyInsight": "모든 쌍을 확인. j는 i+1부터 (중복 방지)"
+        },
+        {
+          "title": "예제 2: 약수 찾기",
+          "problem": "n의 모든 약수 출력",
+          "code": "n = 12\ndivisors = []\n\nfor i in range(1, n+1):\n    if n % i == 0:\n        divisors.append(i)\n\nprint(divisors)  # [1, 2, 3, 4, 6, 12]",
+          "keyInsight": "1부터 n까지 모두 확인"
+        },
+        {
+          "title": "예제 3: 소수 판별",
+          "problem": "n이 소수인지 확인",
+          "code": "n = 17\nis_prime = True\n\nif n < 2:\n    is_prime = False\nelse:\n    for i in range(2, n):\n        if n % i == 0:\n            is_prime = False\n            break\n\nprint(is_prime)  # True",
+          "keyInsight": "2부터 n-1까지 나누어 떨어지는지 확인"
+        },
+        {
+          "title": "예제 4: 세 수의 합",
+          "problem": "합이 0인 세 수 조합",
+          "code": "nums = [-1, 0, 1, 2, -1, -4]\nresults = []\n\nfor i in range(len(nums)):\n    for j in range(i+1, len(nums)):\n        for k in range(j+1, len(nums)):\n            if nums[i] + nums[j] + nums[k] == 0:\n                results.append([nums[i], nums[j], nums[k]])\n\nprint(results)",
+          "keyInsight": "3중 반복으로 모든 3개 조합"
+        },
+        {
+          "title": "예제 5: 비밀번호 찾기",
+          "problem": "4자리 숫자 비밀번호 브루트포스",
+          "code": "target = '1234'\n\nfor i in range(10000):\n    pw = str(i).zfill(4)  # 0000~9999\n    if pw == target:\n        print(f'Found: {pw}')\n        break",
+          "keyInsight": "0000~9999 모두 확인 (최대 10000번)"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 조건 만족 개수",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "1~100에서 3의 배수이면서 5의 배수인 수의 개수",
+            "answer": "6개 (15,30,45,60,75,90)"
+          }
+        },
+        {
+          "patternName": "패턴 2: 쌍 찾기",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "리스트에서 차이가 k인 쌍의 개수",
+            "answer": "이중 반복문으로 모든 쌍 확인"
+          }
+        },
+        {
+          "patternName": "패턴 3: 최대/최소",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "리스트에서 두 수 곱의 최대값",
+            "answer": "모든 쌍의 곱 중 최대"
+          }
+        },
+        {
+          "patternName": "패턴 4: 자릿수 문제",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "세 자리 수 중 각 자릿수 합이 10인 수의 개수",
+            "answer": "100~999 모두 확인"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "1~100에서 자신을 제외한 약수의 합이 자기 자신인 수 (완전수)",
+        "answer": "6, 28"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "완전수 = 자신 제외 약수 합 = 자신"},
+        {"phase": "2️⃣ 경우의 수 계산", "time": "30초", "thinking": "1~100 각각에 대해 약수 확인 → 최대 100*100=10000번 (OK)"},
+        {"phase": "3️⃣ 탐색 범위 설계", "time": "30초", "thinking": "바깥: 1~100, 안쪽: 1~n-1 (자신 제외)"},
+        {"phase": "4️⃣ 코드 작성", "time": "2분", "code": "for n in range(1, 101):\n    divisor_sum = sum(i for i in range(1, n) if n % i == 0)\n    if divisor_sum == n:\n        print(n)"},
+        {"phase": "5️⃣ 검증", "time": "30초", "thinking": "6: 1+2+3=6 ✓, 28: 1+2+4+7+14=28 ✓"}
+      ],
+
+      "whenStuck": {
+        "경우의_수_과다": "먼저 경우의 수 계산. 백만 이하인지 확인",
+        "중복_탐색": "j=i+1부터 시작하면 중복 방지",
+        "조건_누락": "조건문 안에서 모든 필터링 조건 확인",
+        "범위_실수": "range 시작과 끝 값 정확히 확인"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulPatterns": [
+        {"pattern": "모든 쌍", "code": "for i in range(n): for j in range(i+1, n):"},
+        {"pattern": "모든 조합", "code": "from itertools import combinations"},
+        {"pattern": "모든 순열", "code": "from itertools import permutations"},
+        {"pattern": "조건 필터", "code": "[x for x in range(n) if 조건]"}
+      ],
+
+      "itertools": {
+        "combinations": "combinations([1,2,3], 2) → (1,2), (1,3), (2,3)",
+        "permutations": "permutations([1,2,3], 2) → (1,2), (1,3), (2,1), (2,3), (3,1), (3,2)"
+      },
+
+      "commonPitfalls": [
+        {"pitfall": "범위 실수", "note": "range(i+1, n)으로 중복 쌍 방지"},
+        {"pitfall": "시간 초과", "note": "경우의 수 먼저 계산. 너무 크면 다른 방법 고려"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "범위 설정 실수",
+          "frequency": "80%",
+          "wrongCode": "for i in range(n):  # n 포함 안 됨",
+          "correctCode": "for i in range(n+1):  # n 포함",
+          "result": "마지막 값 탐색 누락"
+        },
+        {
+          "rank": 2,
+          "mistake": "중복 탐색",
+          "frequency": "70%",
+          "wrongCode": "for i in range(n):\n    for j in range(n):  # (1,2)와 (2,1) 중복",
+          "correctCode": "for i in range(n):\n    for j in range(i+1, n):  # 중복 방지",
+          "result": "쌍 중복 카운트"
+        },
+        {
+          "rank": 3,
+          "mistake": "조건 누락",
+          "frequency": "65%",
+          "wrongCode": "if a + b == target:  # 같은 요소 선택 방지 안 함",
+          "correctCode": "if i != j and a + b == target:",
+          "result": "자기 자신과의 쌍 포함"
+        },
+        {
+          "rank": 4,
+          "mistake": "경우의 수 과다",
+          "frequency": "55%",
+          "wrongCode": "for i in range(10**9):  # 10억번 = 시간초과",
+          "correctCode": "# 먼저 경우의 수 계산: 10^6 이하인지 확인",
+          "result": "시간 초과"
+        },
+        {
+          "rank": 5,
+          "mistake": "초기값 설정 실수",
+          "frequency": "50%",
+          "wrongCode": "max_val = 0  # 음수가 최대일 수 있는데",
+          "correctCode": "max_val = float('-inf')",
+          "result": "최대값 오류"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "빈 리스트", "handling": "탐색 전 길이 확인"},
+        {"case": "요소 1개", "handling": "쌍을 못 만드는 경우 처리"},
+        {"case": "모두 같은 값", "handling": "중복 쌍 처리 확인"}
+      ],
+
+      "finalChecklist": [
+        "✅ 경우의 수 먼저 계산 (10^6 이하)",
+        "✅ 모든 경우 빠짐없이 탐색",
+        "✅ 중복 방지 (j=i+1)",
+        "✅ 조건 필터링 정확히"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "경우의 수 확인",
+          "badPrompt": "브루트포스 되나?",
+          "goodPrompt": "이 문제의 경우의 수를 계산해줘. 10^6 이하면 브루트포스 가능한지 알려줘",
+          "whyGood": "구체적 기준으로 판단 요청"
+        },
+        {
+          "situation": "중복 방지",
+          "badPrompt": "이중 for문 어떻게 해",
+          "goodPrompt": "리스트에서 두 요소의 쌍을 중복 없이 탐색하는 이중 for문 구조를 보여줘",
+          "whyGood": "특정 패턴의 구현 요청"
+        },
+        {
+          "situation": "조합/순열 사용",
+          "badPrompt": "itertools 사용법",
+          "goodPrompt": "3개 조합을 이중 for문과 itertools.combinations로 각각 구현하는 코드 비교해줘",
+          "whyGood": "두 방법 비교로 이해도 향상"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "브루트포스 범위 계산은 직접 해봐야 합니다",
+        "recommendation": "문제 보면 먼저 경우의 수 계산하는 습관 기르기"
+      },
+
+      "selfCheckQuestion": [
+        "경우의 수가 10^6 이하인가?",
+        "모든 경우를 빠짐없이 탐색하는가?",
+        "중복 탐색을 방지하는가? (j=i+1)",
+        "조건 필터링이 정확한가?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d16-p1",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "1~100에서 3과 5의 공배수 개수",
+        "answer": {"code": "count = 0\nfor i in range(1, 101):\n    if i % 3 == 0 and i % 5 == 0:\n        count += 1\nprint(count)  # 6"}
+      },
+      {
+        "id": "d16-p2",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "리스트에서 합이 10인 쌍의 개수",
+        "input": "[1, 9, 3, 7, 5, 5]",
+        "output": "3",
+        "answer": {"code": "nums = [1, 9, 3, 7, 5, 5]\ncount = 0\nfor i in range(len(nums)):\n    for j in range(i+1, len(nums)):\n        if nums[i] + nums[j] == 10:\n            count += 1\nprint(count)"}
+      },
+      {
+        "id": "d16-p3",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "n의 약수 개수",
+        "input": "12",
+        "output": "6",
+        "answer": {"code": "n = int(input())\ncount = 0\nfor i in range(1, n+1):\n    if n % i == 0:\n        count += 1\nprint(count)"}
+      },
+      {
+        "id": "d16-p4",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "리스트에서 세 수의 합이 0인 조합 개수",
+        "input": "[-1, 0, 1, 2, -1]",
+        "output": "2",
+        "answer": {"code": "nums = [-1, 0, 1, 2, -1]\ncount = 0\nfor i in range(len(nums)):\n    for j in range(i+1, len(nums)):\n        for k in range(j+1, len(nums)):\n            if nums[i] + nums[j] + nums[k] == 0:\n                count += 1\nprint(count)"}
+      },
+      {
+        "id": "d16-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "세 자리 수 중 각 자릿수 합이 10인 수의 개수",
+        "output": "63",
+        "answer": {"code": "count = 0\nfor n in range(100, 1000):\n    hundreds = n // 100\n    tens = (n // 10) % 10\n    ones = n % 10\n    if hundreds + tens + ones == 10:\n        count += 1\nprint(count)"}
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "브루트포스 = 모든 경우 확인. 범위 작으면 가장 확실한 방법!",
+    "examinerMindset": "경우의 수 계산, 중복 없는 탐색, 조건 필터링",
+    "mustRemember": ["모든 경우 빠짐없이", "중복 방지 (j는 i+1부터)", "경우의 수 먼저 계산", "조건 정확히"],
+    "tomorrowPreview": {"topic": "Day 17: 그리디", "connection": "브루트포스 대신 '현재 최선의 선택'으로 효율화"}
+  }
+}

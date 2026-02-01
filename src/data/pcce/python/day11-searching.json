@@ -1,0 +1,357 @@
+{
+  "id": "python-day11",
+  "language": "python",
+  "day": 11,
+  "title": "탐색",
+  "examScope": "pccp",
+  "difficultyLevel": 3,
+  "estimatedTime": "70분",
+  "difficulty": "초급",
+  "pcceWeight": "★★★★☆",
+  "keywords": ["선형탐색", "이진탐색", "in", "index", "find", "bisect"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "탐색 = 사전에서 단어 찾기",
+        "explanation": "사전에서 'Python' 찾을 때: 선형탐색은 첫 페이지부터 한 장씩 넘기며 찾고, 이진탐색은 중간 펼쳐서 P보다 앞/뒤인지 확인 후 범위를 반으로 줄여가며 찾습니다. 사전이 정렬되어 있으니 이진탐색이 훨씬 빠릅니다.",
+        "codeExample": "# 선형: 처음부터 끝까지\nfor page in dictionary:\n    if page == 'Python': return\n\n# 이진: 중간에서 시작, 범위 절반씩\nmid = len(dictionary) // 2  # 중간부터"
+      },
+
+      "whyNeeded": {
+        "realWorld": "데이터에서 원하는 값 찾기. 회원 검색, 상품 찾기 등.",
+        "inExam": "PCCE에서 탐색 알고리즘 구현, in/index 활용 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "탐색 = 데이터에서 특정 값을 찾는 것",
+        "types": {
+          "선형탐색": "처음부터 끝까지 순서대로 검사. O(n)",
+          "이진탐색": "정렬된 데이터에서 반씩 줄여가며 검색. O(log n)"
+        }
+      },
+
+      "visualization": {
+        "title": "탐색 비교",
+        "ascii": [
+          "선형 탐색: [1, 3, 5, 7, 9]에서 7 찾기",
+          "  1 → 3 → 5 → 7 (찾음!) → 4번 비교",
+          "",
+          "이진 탐색: [1, 3, 5, 7, 9]에서 7 찾기",
+          "  중간=5 → 7>5 → 오른쪽 [7, 9]",
+          "  중간=7 → 찾음! → 2번 비교"
+        ]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "이진 탐색은 항상 빠르다"},
+        "correct": {"belief": "이진 탐색은 정렬된 데이터에서만 가능. 정렬 안 되어 있으면 선형 탐색"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "in, index() 사용법",
+        "secondary": "선형 탐색 구현",
+        "tertiary": "이진 탐색 원리 이해"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "nums = [1, 3, 5, 7]\nif 5 _____ nums:\n    print('있음')",
+            "answer": "in",
+            "explanation": "in으로 포함 여부 확인"
+          }
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "nums = [10, 20, 30, 20]\nprint(nums.index(20))",
+            "answer": "1",
+            "explanation": "index()는 첫 번째 위치 반환"
+          }
+        },
+        {
+          "type": "코드 작성",
+          "frequency": "★★★★☆",
+          "example": {
+            "question": "리스트에서 target의 인덱스 반환 (없으면 -1)",
+            "answer": "선형 탐색 구현"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: in 연산자와 index()",
+          "code": "nums = [10, 20, 30, 40, 50]\n\n# 존재 여부 확인\nif 30 in nums:\n    print('있음')  # 있음\n\n# 위치 찾기\nidx = nums.index(30)\nprint(idx)  # 2\n\n# 없는 값 index() → ValueError\n# nums.index(100)  # 에러!",
+          "keyInsight": "in은 True/False, index()는 위치 (없으면 에러)"
+        },
+        {
+          "title": "예제 2: 선형 탐색 구현",
+          "code": "def linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i  # 찾으면 인덱스 반환\n    return -1  # 못 찾으면 -1\n\nnums = [10, 20, 30, 40]\nprint(linear_search(nums, 30))  # 2\nprint(linear_search(nums, 50))  # -1",
+          "keyInsight": "못 찾으면 -1 반환 (index()는 에러)"
+        },
+        {
+          "title": "예제 3: 이진 탐색 구현",
+          "code": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n\nnums = [1, 3, 5, 7, 9, 11]\nprint(binary_search(nums, 7))  # 3",
+          "keyInsight": "정렬된 데이터에서만! 범위를 반씩 줄임"
+        },
+        {
+          "title": "예제 4: 조건에 맞는 요소 찾기",
+          "code": "# 첫 번째 짝수 찾기\nnums = [1, 3, 4, 7, 8]\nfor n in nums:\n    if n % 2 == 0:\n        print(n)  # 4\n        break",
+          "keyInsight": "조건 탐색은 for + if + break 패턴"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: in 연산자",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "print(3 in [1, 2, 3, 4])",
+            "answer": "True"
+          }
+        },
+        {
+          "patternName": "패턴 2: index() 첫 위치",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "nums = [1, 2, 3, 2, 1]\nprint(nums.index(2))",
+            "answer": "1",
+            "explanation": "첫 번째 2의 위치"
+          }
+        },
+        {
+          "patternName": "패턴 3: 선형 탐색 빈칸",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "def find(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return _____\n    return -1",
+            "answer": "i"
+          }
+        },
+        {
+          "patternName": "패턴 4: 이진 탐색 중간값",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "left=0, right=10일 때 mid는?",
+            "answer": "5",
+            "explanation": "(0+10)//2 = 5"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "리스트에서 target보다 큰 첫 번째 값의 인덱스",
+        "input": "[1, 3, 5, 7, 9], target=4",
+        "output": "2"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "target(4)보다 큰 첫 값의 인덱스 → 조건 탐색"},
+        {"phase": "2️⃣ 탐색 방식 결정", "time": "30초", "thinking": "데이터 정렬 상태 모름 → 선형탐색으로 접근"},
+        {"phase": "3️⃣ 종료 조건 설계", "time": "30초", "thinking": "arr[i] > target이면 바로 return, 끝까지 못 찾으면 -1"},
+        {"phase": "4️⃣ 코드 작성", "time": "1분 30초", "code": "def find_greater(arr, target):\n    for i in range(len(arr)):\n        if arr[i] > target:\n            return i\n    return -1"},
+        {"phase": "5️⃣ 검증", "time": "30초", "thinking": "[1,3,5,7,9], target=4: 5>4 → 인덱스 2 ✓"}
+      ],
+
+      "whenStuck": {
+        "index_에러": "index() 전에 in으로 존재 여부 먼저 확인",
+        "이진탐색_이상한결과": "데이터가 정렬되어 있는지 확인. 안 되어 있으면 선형탐색",
+        "찾았는데_반환안됨": "조건 만족 시 바로 return하는지 확인",
+        "범위_실수": "left <= right (등호 포함) 조건인지 확인"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "builtinMethods": [
+        {"method": "x in list", "desc": "포함 여부 (True/False)"},
+        {"method": "list.index(x)", "desc": "x의 첫 인덱스 (없으면 ValueError)"},
+        {"method": "list.count(x)", "desc": "x의 개수"},
+        {"method": "bisect.bisect_left(list, x)", "desc": "이진탐색 위치 (import bisect)"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "index() 없는 값", "wrong": "[1,2].index(3) → ValueError", "right": "if x in list: list.index(x)"},
+        {"pitfall": "이진탐색 정렬 안 됨", "note": "이진탐색은 정렬된 데이터에서만 사용"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "index() 없는 값 → ValueError",
+          "frequency": "80%",
+          "wrongCode": "idx = nums.index(999)  # 없는 값",
+          "correctCode": "idx = nums.index(999) if 999 in nums else -1",
+          "result": "ValueError 예외"
+        },
+        {
+          "rank": 2,
+          "mistake": "이진탐색을 정렬 안 된 데이터에 적용",
+          "frequency": "70%",
+          "wrongCode": "binary_search([3,1,4,1,5], 4)",
+          "correctCode": "binary_search(sorted([3,1,4,1,5]), 4)",
+          "result": "잘못된 결과 또는 무한루프"
+        },
+        {
+          "rank": 3,
+          "mistake": "선형탐색 return 위치 실수",
+          "frequency": "60%",
+          "wrongCode": "for i in range(len(arr)):\n    if arr[i] == x:\n        found = i\nreturn found  # for 밖에서",
+          "correctCode": "for i in range(len(arr)):\n    if arr[i] == x:\n        return i  # 바로 반환",
+          "result": "마지막 위치만 반환 또는 NameError"
+        },
+        {
+          "rank": 4,
+          "mistake": "이진탐색 범위 업데이트 실수",
+          "frequency": "55%",
+          "wrongCode": "left = mid  # mid 포함하면 무한루프",
+          "correctCode": "left = mid + 1",
+          "result": "무한루프"
+        },
+        {
+          "rank": 5,
+          "mistake": "못 찾았을 때 처리 누락",
+          "frequency": "50%",
+          "wrongCode": "def find(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return i\n    # return 없음",
+          "correctCode": "def find(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return i\n    return -1",
+          "result": "None 반환"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "빈 리스트 탐색", "handling": "바로 -1 또는 False 반환"},
+        {"case": "요소가 1개", "handling": "직접 비교 또는 일반 로직 동작"},
+        {"case": "모두 같은 값", "handling": "첫 번째 위치 반환 (index 동작)"}
+      ],
+
+      "finalChecklist": [
+        "✅ index() 전에 in으로 확인",
+        "✅ 이진탐색은 정렬된 데이터인지",
+        "✅ 못 찾았을 때 -1 반환",
+        "✅ 이진탐색 범위 업데이트 mid+1, mid-1"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "이진탐색 이해 안 될 때",
+          "badPrompt": "이진탐색 알려줘",
+          "goodPrompt": "이진탐색으로 [1,3,5,7,9]에서 7을 찾는 과정을 left, right, mid 값과 함께 단계별로 보여줘",
+          "whyGood": "구체적인 예시와 변수 추적 요청"
+        },
+        {
+          "situation": "선형탐색 구현",
+          "badPrompt": "선형탐색 코드",
+          "goodPrompt": "선형탐색 함수를 작성하고, 못 찾았을 때 -1 반환하는 부분이 왜 필요한지 설명해줘",
+          "whyGood": "예외 처리 로직까지 명확히 요청"
+        },
+        {
+          "situation": "index()와 find() 차이",
+          "badPrompt": "index랑 find 차이",
+          "goodPrompt": "list.index()와 str.find()의 차이점을 '없는 값 처리' 관점에서 비교해줘",
+          "whyGood": "핵심 차이점을 명시하여 질문"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "이진탐색 코드는 외워야 시험에서 쓸 수 있습니다",
+        "recommendation": "left, right, mid 변수와 while left <= right 패턴을 손으로 10번 작성"
+      },
+
+      "selfCheckQuestion": [
+        "in과 index()의 차이는? → True/False vs 위치(에러가능)",
+        "이진탐색 조건은? → 정렬된 데이터에서만",
+        "선형탐색 시간복잡도는? → O(n)",
+        "이진탐색 시간복잡도는? → O(log n)"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d11-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "5가 있으면 '있음' 출력",
+        "code": "nums = [1, 3, 5, 7]\nif 5 _____ nums:\n    print('있음')",
+        "answer": "in",
+        "explanation": "in으로 포함 여부 확인"
+      },
+      {
+        "id": "d11-p2",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "nums = [10, 20, 30, 20]\nprint(nums.index(20))",
+        "answer": "1",
+        "explanation": "첫 번째 20의 인덱스"
+      },
+      {
+        "id": "d11-p3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "선형탐색 완성",
+        "code": "def find(arr, x):\n    for i in range(len(arr)):\n        if arr[i] == x:\n            return _____\n    return -1",
+        "answer": "i",
+        "explanation": "찾으면 인덱스 i 반환"
+      },
+      {
+        "id": "d11-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "없는 값 찾기 시 에러",
+        "code": "nums = [1, 2, 3]\nidx = nums.index(5)  # ValueError",
+        "answer": {"fixedCode": "nums = [1, 2, 3]\nif 5 in nums:\n    idx = nums.index(5)\nelse:\n    idx = -1"},
+        "explanation": "in으로 먼저 확인"
+      },
+      {
+        "id": "d11-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "이진탐색 구현 (정렬된 리스트에서 target 인덱스 반환)",
+        "input": "[1, 3, 5, 7, 9], target=5",
+        "output": "2",
+        "answer": {"code": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n\nprint(binary_search([1,3,5,7,9], 5))"},
+        "explanation": "중간값 비교하며 범위 절반씩 줄임"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "in=존재여부, index()=위치(에러주의), 이진탐색=정렬필수",
+    "examinerMindset": "index() 에러, 이진탐색 조건, 탐색 구현",
+    "mustRemember": ["in: True/False", "index(): 첫 위치 (에러 가능)", "선형: O(n)", "이진: O(log n), 정렬 필수"],
+    "tomorrowPreview": {"topic": "Day 12: 스택과 큐", "connection": "탐색에서 스택/큐를 활용한 BFS/DFS로 확장"}
+  }
+}

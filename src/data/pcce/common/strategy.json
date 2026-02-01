@@ -1,0 +1,449 @@
+{
+  "id": "pcce-exam-strategy",
+  "title": "PCCE 시험 전략 완벽 가이드",
+  "lastUpdated": "2026-01",
+
+  "overallStrategy": {
+    "title": "🎯 시험 전체 전략",
+    "corePhilosophy": "700점(Lv.4) 합격이 목표. 완벽보다 '확실한 점수 확보'가 중요",
+    "keyPrinciples": [
+      "쉬운 문제부터 풀어 시간 확보",
+      "막히면 과감히 넘기기",
+      "코드 작성은 부분 점수라도 노리기",
+      "마지막 5분은 검토 시간"
+    ],
+    "targetScore": {
+      "minimum": 700,
+      "breakdown": {
+        "fillInBlank": "4문제 중 3문제 = 240점",
+        "bugFix": "3문제 중 2문제 = 200점",
+        "codeWriting": "3문제 중 2문제 부분점수 = 260점",
+        "total": "약 700점 (Lv.4 합격)"
+      },
+      "safetyMargin": "모든 문제 맞추려 하지 말고, 확실한 7~8문제 집중"
+    }
+  },
+
+  "timeManagement": {
+    "title": "⏱️ 시간 관리 전략",
+    "totalTime": "50분",
+    "distribution": [
+      {
+        "phase": "Phase 1: 빈칸 채우기",
+        "time": "0~10분 (10분)",
+        "questions": "1~4번 (4문제)",
+        "goal": "전부 맞추기",
+        "perQuestion": "2~3분",
+        "strategy": "가장 쉬운 유형. 빠르게 풀고 시간 확보. 2분 안에 안 풀리면 표시하고 넘기기"
+      },
+      {
+        "phase": "Phase 2: 오류 수정",
+        "time": "10~22분 (12분)",
+        "questions": "5~7번 (3문제)",
+        "goal": "2문제 이상",
+        "perQuestion": "3~4분",
+        "strategy": "에러 유형 빠르게 파악. 한 줄만 고치기. 논리 오류가 가장 어려우니 막히면 넘기기"
+      },
+      {
+        "phase": "Phase 3: 코드 작성",
+        "time": "22~45분 (23분)",
+        "questions": "8~10번 (3문제)",
+        "goal": "부분 점수라도 확보",
+        "perQuestion": "7~8분",
+        "strategy": "완벽하지 않아도 기본 구조 작성. 예시 테스트 통과 확인. 막히면 다음 문제로"
+      },
+      {
+        "phase": "Phase 4: 검토 & 미완성 문제",
+        "time": "45~50분 (5분)",
+        "questions": "넘긴 문제 + 전체 검토",
+        "goal": "실수 발견 및 수정",
+        "strategy": "변수명 오타, 인덱스 범위, 타입 변환 한 번 더 확인"
+      }
+    ],
+    "emergencyProtocol": {
+      "title": "시간 부족 시 대응",
+      "rules": [
+        "남은 시간 10분 이하: 코드 작성 문제는 기본 구조라도 작성 (부분 점수)",
+        "남은 시간 5분 이하: 미완성 문제에 '뭐라도' 제출 (빈칸은 찍어도 25% 확률)",
+        "절대 빈 제출 금지: 부분 점수라도 받을 수 있음"
+      ]
+    }
+  },
+
+  "questionOrderStrategy": {
+    "title": "📋 문제 풀이 순서",
+    "recommended": [
+      {
+        "order": 1,
+        "type": "빈칸 채우기 (쉬운 것)",
+        "reason": "가장 빠르게 풀 수 있음. 자신감 확보",
+        "tip": "1~2번은 보통 기초 문법. 30초~1분 내 풀기"
+      },
+      {
+        "order": 2,
+        "type": "빈칸 채우기 (어려운 것)",
+        "reason": "중간 난이도. 함정만 피하면 됨",
+        "tip": "3~4번은 함정 포인트 있음. 2분 이상 걸리면 표시하고 넘기기"
+      },
+      {
+        "order": 3,
+        "type": "오류 수정 (타입/인덱스 에러)",
+        "reason": "에러 메시지가 명확한 문제 먼저",
+        "tip": "TypeError, IndexError는 원인이 명확. 빠르게 처리"
+      },
+      {
+        "order": 4,
+        "type": "오류 수정 (논리 오류)",
+        "reason": "가장 어려운 오류 수정. 시간 남으면 풀기",
+        "tip": "논리 오류는 시간이 오래 걸릴 수 있음"
+      },
+      {
+        "order": 5,
+        "type": "코드 작성 (기본)",
+        "reason": "간단한 구현 문제",
+        "tip": "기본 for문 + 조건문으로 풀 수 있는 문제"
+      },
+      {
+        "order": 6,
+        "type": "코드 작성 (복합)",
+        "reason": "가장 어려운 문제. 남은 시간에 따라 결정",
+        "tip": "완벽하지 않아도 기본 구조 작성 → 부분 점수"
+      }
+    ],
+    "flexibility": "본인의 강점에 따라 순서 조정 가능. 예: 코드 작성이 자신 있으면 먼저"
+  },
+
+  "byQuestionType": {
+    "title": "📝 유형별 전략",
+
+    "fillInBlank": {
+      "name": "빈칸 채우기 전략",
+      "mindset": "정답은 하나. 논리적으로 제거법 사용",
+      "steps": [
+        {
+          "step": "1. 목표 확인",
+          "detail": "print() 결과나 주석으로 '원하는 결과' 파악"
+        },
+        {
+          "step": "2. 선택지 필터링",
+          "detail": "문법적으로 틀린 것 먼저 제외"
+        },
+        {
+          "step": "3. 실행 시뮬레이션",
+          "detail": "남은 선택지로 머릿속 실행"
+        },
+        {
+          "step": "4. 최종 선택",
+          "detail": "원하는 결과 나오는 것 선택"
+        }
+      ],
+      "commonTraps": [
+        {
+          "trap": "append vs extend",
+          "solution": "append: 단일 요소, extend: 여러 요소"
+        },
+        {
+          "trap": "input() 타입",
+          "solution": "무조건 str 반환. int() 필요한지 확인"
+        },
+        {
+          "trap": "슬라이싱 범위",
+          "solution": "끝 인덱스 미포함. s[1:4] = 인덱스 1,2,3"
+        },
+        {
+          "trap": "range() 범위",
+          "solution": "range(1, 5) = 1,2,3,4. 5 미포함"
+        }
+      ],
+      "ifStuck": "2분 넘으면 직감으로 선택하고 넘기기. 나중에 시간 남으면 다시"
+    },
+
+    "bugFix": {
+      "name": "오류 수정 전략",
+      "mindset": "한 줄만 고쳐야 한다. 출제자가 '한 줄 수정'으로 풀리게 만들었다",
+      "steps": [
+        {
+          "step": "1. 에러 유형 파악",
+          "detail": "TypeError/IndexError/NameError/Logic Error 중 무엇인지"
+        },
+        {
+          "step": "2. 에러 위치 추적",
+          "detail": "에러 메시지의 줄 번호 또는 출력이 틀린 부분"
+        },
+        {
+          "step": "3. 원인 분석",
+          "detail": "왜 에러가 나는지 / 왜 결과가 틀린지"
+        },
+        {
+          "step": "4. 한 줄 수정",
+          "detail": "절대 여러 줄 고치지 않기"
+        },
+        {
+          "step": "5. 검증",
+          "detail": "수정 후 전체 흐름 확인"
+        }
+      ],
+      "errorTypeStrategy": [
+        {
+          "error": "TypeError",
+          "likelyCause": "타입 변환 누락 (input() → int())",
+          "lookFor": "input() 사용하는 줄"
+        },
+        {
+          "error": "IndexError",
+          "likelyCause": "인덱스 범위 초과",
+          "lookFor": "반복문 + 배열 접근 조합"
+        },
+        {
+          "error": "NameError",
+          "likelyCause": "변수명 오타",
+          "lookFor": "변수 선언과 사용 부분 비교"
+        },
+        {
+          "error": "Logic Error",
+          "likelyCause": "조건/범위/연산 실수",
+          "lookFor": "조건문, range(), 연산자"
+        }
+      ],
+      "goldenRule": "여러 줄 고쳐야 할 것 같으면 다시 생각. 출제자는 한 줄로 풀리게 만들었다"
+    },
+
+    "codeWriting": {
+      "name": "코드 작성 전략",
+      "mindset": "완벽하지 않아도 된다. 부분 점수가 있다",
+      "steps": [
+        {
+          "step": "1. 요구사항 정확히 읽기",
+          "detail": "입력 형식, 출력 형식, 예시 입출력",
+          "time": "30초"
+        },
+        {
+          "step": "2. 손으로 예시 풀기",
+          "detail": "예시 입력으로 어떻게 결과가 나오는지",
+          "time": "1분"
+        },
+        {
+          "step": "3. 코드 작성",
+          "detail": "손으로 푼 과정 그대로 코드로",
+          "time": "4분"
+        },
+        {
+          "step": "4. 테스트",
+          "detail": "예시 입력으로 실행. 예상 출력 확인",
+          "time": "1분"
+        },
+        {
+          "step": "5. 엣지 케이스",
+          "detail": "빈 입력, 최대/최소값 테스트",
+          "time": "1분"
+        }
+      ],
+      "codePatterns": {
+        "counting": "count = 0 → for문 → if 조건 → count += 1 → return count",
+        "filtering": "result = [] → for문 → if 조건 → result.append() → return result",
+        "accumulation": "total = 0 → for문 → total += item → return total",
+        "finding": "for문 → if 조건 → return 값 → return -1 (못 찾으면)"
+      },
+      "partialScoreTip": "기본 for문 구조라도 작성하면 부분 점수. 빈 제출은 0점"
+    }
+  },
+
+  "mentalStrategy": {
+    "title": "🧠 멘탈 관리",
+
+    "beforeExam": {
+      "title": "시험 전날",
+      "do": [
+        "일찍 자기 (최소 7시간 수면)",
+        "가벼운 복습만 (새로운 내용 X)",
+        "시험 환경 테스트 (웹캠, 인터넷)",
+        "자주 틀리는 함정 포인트만 훑어보기"
+      ],
+      "dont": [
+        "밤새 벼락치기 (피로가 실수 유발)",
+        "새로운 개념 공부 (혼란만 가중)",
+        "완벽주의 (이미 아는 것도 의심하게 됨)"
+      ]
+    },
+
+    "duringExam": {
+      "title": "시험 중 멘탈",
+      "whenStuck": [
+        "3분 이상 막히면 → 과감히 넘기기",
+        "'이거 어려운 문제구나' 인정하고 다음으로",
+        "남은 시간에 다시 올 거라고 생각"
+      ],
+      "whenPanicking": [
+        "심호흡 3회 (5초 들이마시고, 5초 내쉬기)",
+        "'700점만 넘으면 된다' 상기",
+        "지금까지 푼 문제 점수 계산 → 생각보다 괜찮을 수 있음"
+      ],
+      "whenRunningOutOfTime": [
+        "코드 작성: 기본 구조라도 작성 (부분 점수)",
+        "빈칸: 모르면 일단 찍기 (25% 확률)",
+        "오류 수정: 가장 의심되는 줄 고쳐보기"
+      ]
+    },
+
+    "afterMistake": {
+      "title": "실수했을 때",
+      "mindset": [
+        "한 문제 틀려도 합격 가능 (10문제 중 7~8개만 맞추면 됨)",
+        "이미 지난 문제는 잊기",
+        "다음 문제에 집중"
+      ]
+    }
+  },
+
+  "commonMistakes": {
+    "title": "⚠️ 자주 하는 실수 & 방지법",
+    "mistakes": [
+      {
+        "rank": 1,
+        "mistake": "input() 타입 변환 잊음",
+        "frequency": "90%",
+        "prevention": "input() 보면 자동으로 int() 감싸기",
+        "mnemonic": "input = 무조건 str!"
+      },
+      {
+        "rank": 2,
+        "mistake": "인덱스 범위 초과",
+        "frequency": "85%",
+        "prevention": "range(len(arr)) 사용 시 arr[i+1] 주의",
+        "mnemonic": "마지막 인덱스 = len - 1"
+      },
+      {
+        "rank": 3,
+        "mistake": "슬라이싱 끝 미포함 잊음",
+        "frequency": "80%",
+        "prevention": "s[1:4]는 인덱스 1,2,3만",
+        "mnemonic": "슬라이싱 끝은 미포함!"
+      },
+      {
+        "rank": 4,
+        "mistake": "range() 끝 미포함 잊음",
+        "frequency": "80%",
+        "prevention": "n까지 포함하려면 range(n+1)",
+        "mnemonic": "range 끝도 미포함!"
+      },
+      {
+        "rank": 5,
+        "mistake": "== 와 = 혼동",
+        "frequency": "75%",
+        "prevention": "조건문에서는 무조건 ==",
+        "mnemonic": "비교는 이퀄이퀄(==)"
+      },
+      {
+        "rank": 6,
+        "mistake": "오류 수정에서 여러 줄 고침",
+        "frequency": "70%",
+        "prevention": "한 줄만 고치기. 두 줄 이상 필요하면 재검토",
+        "mnemonic": "오류수정 = 한 줄!"
+      },
+      {
+        "rank": 7,
+        "mistake": "return 누락",
+        "frequency": "65%",
+        "prevention": "함수 작성 후 return 있는지 확인",
+        "mnemonic": "함수 끝 = return 체크"
+      },
+      {
+        "rank": 8,
+        "mistake": "append vs extend 혼동",
+        "frequency": "60%",
+        "prevention": "append: 단일 요소, extend: 리스트 합치기",
+        "mnemonic": "append = 1개, extend = 여러 개"
+      }
+    ]
+  },
+
+  "finalChecklist": {
+    "title": "✅ 제출 전 체크리스트",
+    "fillInBlank": [
+      "선택한 답이 문법적으로 맞는지",
+      "예상 출력이 문제 요구와 일치하는지",
+      "타입 변환 필요한 곳에 int()/str() 있는지"
+    ],
+    "bugFix": [
+      "딱 한 줄만 수정했는지",
+      "수정 후 전체 흐름이 맞는지",
+      "다른 버그를 새로 만들지 않았는지"
+    ],
+    "codeWriting": [
+      "함수 시그니처가 문제 요구와 일치하는지",
+      "return 문이 있는지 (None 반환 아닌지)",
+      "예시 입력으로 예시 출력이 나오는지",
+      "변수명 오타 없는지"
+    ],
+    "general": [
+      "모든 문제에 답이 있는지 (빈 제출 X)",
+      "시간 내에 제출 버튼 눌렀는지"
+    ]
+  },
+
+  "practiceRecommendation": {
+    "title": "📚 연습 추천",
+    "weekly": [
+      {
+        "week": "Week 1",
+        "focus": "기초 문법",
+        "practice": "빈칸 채우기 위주",
+        "goal": "변수, 타입, 조건문, 반복문 100% 이해"
+      },
+      {
+        "week": "Week 2",
+        "focus": "함수 & 자료구조",
+        "practice": "오류 수정 + 빈칸",
+        "goal": "함수, 리스트, 문자열 완벽 숙달"
+      },
+      {
+        "week": "Week 3",
+        "focus": "실전 대비",
+        "practice": "모의고사 + 코드 작성",
+        "goal": "50분 안에 10문제 풀기 연습"
+      }
+    ],
+    "mockTestTips": [
+      "실제 시험처럼 50분 타이머 설정",
+      "중간에 절대 쉬지 않기",
+      "다 풀고 나서 틀린 문제 분석",
+      "같은 유형 반복해서 틀리면 해당 개념 복습"
+    ]
+  },
+
+  "dayOfExam": {
+    "title": "🗓️ 시험 당일 루틴",
+    "timeline": [
+      {
+        "time": "시험 2시간 전",
+        "action": "가벼운 식사, 카페인 적당히",
+        "avoid": "과식, 새로운 공부"
+      },
+      {
+        "time": "시험 1시간 전",
+        "action": "시험 환경 점검 (웹캠, 인터넷, 조용한 장소)",
+        "avoid": "불안한 마음으로 공부 더 하기"
+      },
+      {
+        "time": "시험 30분 전",
+        "action": "화장실, 물 준비, 프로그래머스 로그인",
+        "avoid": "새로운 개념 보기 (혼란만 가중)"
+      },
+      {
+        "time": "시험 10분 전",
+        "action": "함정 포인트 메모 훑어보기 (input=str, 슬라이싱 끝 미포함 등)",
+        "avoid": "긴장하며 아무것도 안 하기"
+      },
+      {
+        "time": "시험 시작",
+        "action": "심호흡 한 번, 첫 문제부터 차분히",
+        "mindset": "700점만 넘으면 된다"
+      }
+    ]
+  },
+
+  "motivationalMessage": {
+    "title": "💪 마지막 한마디",
+    "message": "PCCE는 '기초 역량 인증' 시험입니다. 완벽하지 않아도 됩니다. 10문제 중 7~8개만 맞추면 합격입니다. 이미 공부한 당신은 충분히 준비되어 있습니다. 긴장하지 말고, 아는 것부터 풀어나가세요. 화이팅! 🎯"
+  }
+}

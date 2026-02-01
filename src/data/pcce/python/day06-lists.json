@@ -1,0 +1,341 @@
+{
+  "id": "python-day06",
+  "language": "python",
+  "day": 6,
+  "title": "리스트",
+  "examScope": "pcce",
+  "difficultyLevel": 2,
+  "estimatedTime": "70분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★★★",
+  "keywords": ["리스트", "인덱싱", "슬라이싱", "append", "remove", "pop", "sort", "len", "in"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "여러 데이터를 하나로 묶어 관리. 학생 점수 목록, 상품 가격 등.",
+        "inExam": "PCCE 핵심 자료구조. 메서드 구분, 인덱스 접근이 단골 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "리스트 = 순서 있는 데이터 모음. 수정 가능!",
+        "vs_string": "문자열은 불변, 리스트는 가변 (직접 수정 가능)"
+      },
+
+      "analogy": {
+        "title": "서랍장 비유",
+        "explanation": "리스트는 번호가 붙은 서랍장과 같다. 각 서랍(인덱스)에 물건(값)을 넣고, 빼고, 바꿀 수 있다. append는 새 서랍 추가, pop은 서랍에서 꺼내기, remove는 특정 물건 찾아서 빼기.",
+        "codeExample": "drawer = ['양말', '속옷', '티셔츠']\ndrawer.append('바지')  # 새 서랍 추가\ndrawer[0] = '장갑'     # 첫 서랍 내용 교체"
+      },
+
+      "visualization": {
+        "title": "리스트 구조",
+        "ascii": [
+          "nums = [10, 20, 30, 40, 50]",
+          "",
+          "인덱스:  0    1    2    3    4",
+          "       [10] [20] [30] [40] [50]",
+          "       -5   -4   -3   -2   -1"
+        ]
+      },
+
+      "basicOperations": {
+        "create": ["빈 리스트: []", "값 있는: [1, 2, 3]", "반복: [0] * 5 → [0,0,0,0,0]"],
+        "access": ["인덱스: nums[0]", "슬라이싱: nums[1:3]", "마지막: nums[-1]"],
+        "modify": ["변경: nums[0] = 100", "추가: nums.append(60)", "삭제: nums.remove(30)"]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "append는 여러 요소 추가"},
+        "correct": {"belief": "append는 하나만, extend가 여러 개. [1,2].append([3,4]) → [1,2,[3,4]]"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "append vs extend vs insert 구분",
+        "secondary": "remove vs pop 구분",
+        "tertiary": "sort vs sorted 구분 (원본 변경 여부)"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "nums = [3, 1, 4]\nnums._____(2)\nprint(nums)  # [3, 1, 4, 2]",
+            "answer": "append",
+            "explanation": "끝에 추가는 append"
+          },
+          "trapPoints": [
+            "append vs extend: append([1,2])는 리스트 자체를 추가",
+            "remove vs pop: remove(값), pop(인덱스)",
+            "sort() 반환값은 None"
+          ]
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+            "answer": "[1, 2, 3, 4]",
+            "explanation": "a와 b는 같은 리스트 참조. b 수정하면 a도 변함"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 리스트 메서드 비교",
+          "code": "nums = [1, 2, 3]\n\n# append: 하나 추가\nnums.append(4)       # [1, 2, 3, 4]\n\n# extend: 여러 개 추가\nnums.extend([5, 6])  # [1, 2, 3, 4, 5, 6]\n\n# insert: 특정 위치에 삽입\nnums.insert(0, 0)    # [0, 1, 2, 3, 4, 5, 6]",
+          "keyInsight": "append=1개, extend=여러개, insert=위치지정"
+        },
+        {
+          "title": "예제 2: 삭제 메서드 비교",
+          "code": "nums = [10, 20, 30, 20, 40]\n\n# remove: 값으로 삭제 (첫 번째만)\nnums.remove(20)      # [10, 30, 20, 40]\n\n# pop: 인덱스로 삭제 (반환함)\nx = nums.pop(1)      # x=30, nums=[10, 20, 40]\n\n# pop(): 마지막 삭제\nlast = nums.pop()    # last=40, nums=[10, 20]",
+          "keyInsight": "remove=값, pop=인덱스(기본 마지막)"
+        },
+        {
+          "title": "예제 3: 정렬 비교",
+          "code": "nums = [3, 1, 4, 1, 5]\n\n# sort(): 원본 변경, 반환 None\nnums.sort()          # nums = [1, 1, 3, 4, 5]\n\nnums2 = [3, 1, 4]\n# sorted(): 원본 유지, 새 리스트 반환\nresult = sorted(nums2)  # result=[1,3,4], nums2=[3,1,4]",
+          "keyInsight": "sort()는 원본변경+None반환, sorted()는 원본유지+새리스트반환"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: append vs extend",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "결과는?",
+            "code": "a = [1, 2]\na.append([3, 4])\nprint(a)",
+            "answer": "[1, 2, [3, 4]]",
+            "explanation": "append는 요소 하나로 추가. 리스트 자체가 요소가 됨"
+          }
+        },
+        {
+          "patternName": "패턴 2: sort() 반환값",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "결과는?",
+            "code": "nums = [3, 1, 2]\nresult = nums.sort()\nprint(result)",
+            "answer": "None",
+            "explanation": "sort()는 원본 변경하고 None 반환. sorted()와 다름!"
+          }
+        },
+        {
+          "patternName": "패턴 3: 리스트 복사",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "a와 b가 독립적이려면?",
+            "code": "a = [1, 2, 3]\nb = _____  # a 복사",
+            "answer": "a[:] 또는 a.copy() 또는 list(a)",
+            "explanation": "b = a는 참조 복사. 독립적 복사는 [:] 또는 copy()"
+          }
+        },
+        {
+          "patternName": "패턴 4: in 연산자",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "결과는?",
+            "code": "print(3 in [1, 2, 3, 4])",
+            "answer": "True",
+            "explanation": "in으로 포함 여부 확인"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "리스트에서 최대값 찾기 (max 함수 없이)",
+        "input": "[3, 7, 2, 9, 5]",
+        "output": "9"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:20",
+          "phase": "문제 분석",
+          "thinking": ["리스트에서 가장 큰 값 찾기", "모든 요소 비교 필요"]
+        },
+        {
+          "time": "0:20 ~ 0:40",
+          "phase": "알고리즘 설계",
+          "thinking": ["첫 번째 값을 임시 최대값으로", "순회하며 더 크면 갱신"]
+        },
+        {
+          "time": "0:40 ~ 1:30",
+          "phase": "코드 작성",
+          "code": "nums = [3, 7, 2, 9, 5]\nmax_val = nums[0]\nfor n in nums:\n    if n > max_val:\n        max_val = n\nprint(max_val)"
+        },
+        {
+          "time": "1:30 ~ 2:00",
+          "phase": "검증",
+          "thinking": ["max_val: 3→7→7→9→9", "최종 9 ✓"]
+        },
+        {
+          "time": "2:00 ~ 2:30",
+          "phase": "최종 점검",
+          "thinking": ["빈 리스트면? → nums[0] 에러", "실제 시험에선 빈 리스트 안 줌"]
+        }
+      ],
+
+      "whenStuck": {
+        "symptom": "리스트 수정이 안 됨",
+        "diagnosis": "메서드 반환값 확인",
+        "solution": [
+          "1. sort(), append()는 None 반환",
+          "2. 원본 변경됐는지 리스트 출력해서 확인",
+          "3. 반환값 필요하면 sorted() 사용"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulMethods": [
+        {"method": "append(x)", "desc": "끝에 x 추가"},
+        {"method": "extend([a,b])", "desc": "여러 요소 추가"},
+        {"method": "insert(i, x)", "desc": "i 위치에 x 삽입"},
+        {"method": "remove(x)", "desc": "첫 번째 x 삭제"},
+        {"method": "pop(i)", "desc": "i 위치 삭제 후 반환"},
+        {"method": "pop()", "desc": "마지막 삭제 후 반환"},
+        {"method": "sort()", "desc": "정렬 (원본 변경)"},
+        {"method": "reverse()", "desc": "뒤집기 (원본 변경)"},
+        {"method": "index(x)", "desc": "x의 인덱스"},
+        {"method": "count(x)", "desc": "x 개수"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "sort() 반환값", "wrong": "result = nums.sort()", "right": "nums.sort() 또는 result = sorted(nums)"},
+        {"pitfall": "참조 복사", "wrong": "b = a (같은 리스트)", "right": "b = a[:] (독립 복사)"},
+        {"pitfall": "append 리스트", "wrong": "append([1,2])로 1,2 추가", "right": "extend([1,2])로 추가"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {"rank": 1, "mistake": "sort() 반환값 사용", "wrongCode": "x = nums.sort()", "correctCode": "nums.sort() 또는 x = sorted(nums)", "frequency": "85%"},
+        {"rank": 2, "mistake": "append vs extend 혼동", "wrongCode": "nums.append([1,2])", "correctCode": "nums.extend([1,2])", "frequency": "80%"},
+        {"rank": 3, "mistake": "참조 복사 vs 값 복사", "wrongCode": "b = a (같은 객체)", "correctCode": "b = a[:] (독립 복사)", "frequency": "70%"},
+        {"rank": 4, "mistake": "remove vs pop 혼동", "wrongCode": "remove(인덱스)", "correctCode": "remove(값), pop(인덱스)", "frequency": "65%"},
+        {"rank": 5, "mistake": "인덱스 범위 초과", "wrongCode": "nums[10] (5개짜리)", "correctCode": "인덱스 0~4만 가능", "frequency": "60%"}
+      ],
+
+      "edgeCases": [
+        {"case": "빈 리스트 pop", "code": "[].pop()", "result": "IndexError", "handling": "길이 확인 후 pop"},
+        {"case": "없는 값 remove", "code": "[1,2].remove(3)", "result": "ValueError", "handling": "in으로 존재 확인 후 remove"},
+        {"case": "2차원 리스트 복사", "code": "[[1],[2]][:] (얕은 복사)", "result": "내부 리스트는 공유", "handling": "copy.deepcopy 또는 컴프리헨션"}
+      ],
+
+      "finalChecklist": [
+        "✅ sort()는 None 반환",
+        "✅ append는 하나만",
+        "✅ 복사는 [:]나 copy()",
+        "✅ remove는 값, pop은 인덱스"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {"situation": "메서드 차이 모를 때", "badPrompt": "append 알려줘", "goodPrompt": "append, extend, insert의 차이를 예제로 비교해줘"},
+        {"situation": "복사 이해 안 될 때", "badPrompt": "복사 어떻게", "goodPrompt": "리스트 참조 복사와 값 복사의 차이를 메모리 관점에서 설명해줘"},
+        {"situation": "정렬 결과 이상할 때", "badPrompt": "왜 None", "goodPrompt": "sort()와 sorted()의 반환값 차이를 코드 예제로 보여줘"}
+      ],
+
+      "warningAboutCopyPaste": {
+        "title": "복붙의 위험성",
+        "warning": "메서드 사용법만 외우면 반환값 함정에 빠짐",
+        "rightWay": [
+          "각 메서드 직접 실행하며 원본 변화 확인",
+          "반환값 print로 확인해보기",
+          "표로 정리해서 비교"
+        ]
+      },
+
+      "selfCheckQuestion": [
+        "append([1,2])의 결과는?",
+        "sort()와 sorted()의 차이는?",
+        "b = a 후 b 수정하면 a는?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d6-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "[1,2,3]에 4,5를 추가하여 [1,2,3,4,5]로",
+        "code": "nums = [1, 2, 3]\nnums._____([4, 5])\nprint(nums)",
+        "answer": "extend",
+        "explanation": "extend는 리스트 요소들을 추가. append면 [1,2,3,[4,5]]"
+      },
+      {
+        "id": "d6-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "결과는?",
+        "code": "nums = [3, 1, 4]\nresult = nums.sort()\nprint(result)",
+        "answer": "None",
+        "explanation": "sort()는 원본 변경하고 None 반환"
+      },
+      {
+        "id": "d6-p3",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "[10,20,30]에서 20 삭제",
+        "code": "nums = [10, 20, 30]\nnums._____(20)\nprint(nums)",
+        "answer": "remove",
+        "explanation": "값으로 삭제는 remove"
+      },
+      {
+        "id": "d6-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "정렬된 리스트를 result에 저장하려고 함",
+        "code": "nums = [3, 1, 2]\nresult = nums.sort()\nprint(result)  # None이 출력됨",
+        "answer": {"fixedCode": "nums = [3, 1, 2]\nresult = sorted(nums)\nprint(result)"},
+        "explanation": "sorted()는 새 리스트 반환, sort()는 None 반환"
+      },
+      {
+        "id": "d6-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "리스트의 짝수만 새 리스트로",
+        "input": "[1, 2, 3, 4, 5, 6]",
+        "output": "[2, 4, 6]",
+        "answer": {"code": "nums = [1, 2, 3, 4, 5, 6]\nevens = []\nfor n in nums:\n    if n % 2 == 0:\n        evens.append(n)\nprint(evens)"},
+        "explanation": "조건에 맞는 요소만 append"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "append=1개, extend=여러개, sort()=None반환, 복사는 [:]",
+    "examinerMindset": "메서드 반환값, append vs extend, 참조 복사 함정",
+    "mustRemember": ["append(x): 1개 추가", "extend([...]): 여러개", "sort(): None 반환", "sorted(): 새 리스트", "복사: a[:] 또는 copy()"],
+    "tomorrowPreview": {"topic": "Day 7: 딕셔너리", "connection": "리스트는 인덱스로, 딕셔너리는 키로 접근"}
+  }
+}

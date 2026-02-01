@@ -1,0 +1,300 @@
+{
+  "id": "python-day19",
+  "language": "python",
+  "day": 19,
+  "title": "모의고사 1",
+  "examScope": "pcce",
+  "difficultyLevel": 2,
+  "estimatedTime": "50분",
+  "difficulty": "실전",
+  "pcceWeight": "★★★★★",
+  "keywords": ["모의고사", "실전연습", "빈칸채우기", "오류수정", "코드작성"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 모의고사 안내",
+
+      "analogy": {
+        "title": "모의고사 = 운전면허 시험 전 연습",
+        "explanation": "실제 운전면허 시험 전에 연습장에서 모의 시험을 보듯이, PCCE 시험 전에 같은 형식으로 연습합니다. 시간 제한, 문제 유형, 긴장감을 실제처럼 경험해야 본 시험에서 실력을 발휘할 수 있습니다.",
+        "codeExample": "# 실전처럼!\n# 1. 타이머 50분 설정\n# 2. 힌트/답 안 보고 풀기\n# 3. 끝나면 채점 후 복습"
+      },
+
+      "examInfo": {
+        "totalQuestions": 10,
+        "timeLimit": "50분",
+        "structure": {
+          "fillBlank": {"count": 4, "range": "1~4번"},
+          "bugFix": {"count": 3, "range": "5~7번"},
+          "codeWriting": {"count": 3, "range": "8~10번"}
+        }
+      },
+
+      "scoringGuide": {
+        "fillBlank": "정확히 일치해야 정답",
+        "bugFix": "수정 후 정상 동작해야 정답",
+        "codeWriting": "출력이 정확히 일치해야 정답"
+      },
+
+      "strategy": {
+        "timeAllocation": {
+          "fillBlank": "8분 (문제당 2분)",
+          "bugFix": "15분 (문제당 5분)",
+          "codeWriting": "27분 (문제당 9분)"
+        },
+        "order": "쉬운 것부터. 막히면 넘기고 나중에"
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제 의도 분석",
+
+      "topicsCovered": [
+        "변수와 자료형",
+        "연산자",
+        "조건문",
+        "반복문",
+        "문자열",
+        "리스트",
+        "딕셔너리",
+        "함수"
+      ],
+
+      "difficultyDistribution": {
+        "easy": "1~3번 (기초 문법)",
+        "medium": "4~7번 (응용)",
+        "hard": "8~10번 (종합)"
+      }
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 시험 전 핵심 정리",
+
+      "quickReview": [
+        {
+          "topic": "자료형",
+          "key": "int(), float(), str(), bool(), type()"
+        },
+        {
+          "topic": "연산자",
+          "key": "// 몫, % 나머지, ** 거듭제곱"
+        },
+        {
+          "topic": "조건문",
+          "key": "if-elif-else, and/or/not"
+        },
+        {
+          "topic": "반복문",
+          "key": "for-range, while, break/continue"
+        },
+        {
+          "topic": "문자열",
+          "key": "인덱싱[], 슬라이싱[:], split(), join()"
+        },
+        {
+          "topic": "리스트",
+          "key": "append(), pop(), sort(), len()"
+        },
+        {
+          "topic": "딕셔너리",
+          "key": "d[key], d.get(key), in, items()"
+        },
+        {
+          "topic": "함수",
+          "key": "def, return, 매개변수, 기본값"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 자주 나오는 함정",
+
+      "commonTraps": [
+        {"trap": "range(n)은 0부터 n-1까지", "example": "range(5) → 0,1,2,3,4"},
+        {"trap": "sort()는 None 반환", "example": "x = arr.sort() → x는 None"},
+        {"trap": "문자열은 불변", "example": "s[0] = 'a' → 에러"},
+        {"trap": "return 누락 → None", "example": "def f(): a+b → None 반환"},
+        {"trap": "in은 키만 검사", "example": "1 in {'a':1} → False"}
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 문제 풀이 전략",
+
+      "approach": {
+        "fillBlank": [
+          "1. 전체 코드 흐름 파악",
+          "2. 빈칸 앞뒤 문맥 확인",
+          "3. 예상 출력과 비교"
+        ],
+        "bugFix": [
+          "1. 원하는 동작 파악",
+          "2. 현재 코드 실행 시뮬레이션",
+          "3. 차이점 찾아 수정"
+        ],
+        "codeWriting": [
+          "1. 입력/출력 형식 확인",
+          "2. 알고리즘 구상",
+          "3. 코드 작성 후 테스트"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 핵심 문법",
+
+      "mustKnow": [
+        {"syntax": "input().split()", "use": "공백 구분 입력"},
+        {"syntax": "map(int, input().split())", "use": "정수로 변환"},
+        {"syntax": "' '.join(list)", "use": "리스트를 문자열로"},
+        {"syntax": "for i in range(len(arr))", "use": "인덱스 순회"},
+        {"syntax": "for i, v in enumerate(arr)", "use": "인덱스와 값 동시"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 시험 중 주의사항",
+
+      "tips": [
+        "띄어쓰기, 대소문자 정확히",
+        "콜론(:) 빠뜨리지 않기",
+        "들여쓰기 4칸 통일",
+        "print() vs return 구분",
+        "인덱스 범위 확인"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 실전 시험에서는",
+
+      "note": "실제 PCCE 시험에서는 AI 사용 불가. 이 모의고사는 실력 점검용으로, 먼저 혼자 풀어보고 나서 해설을 확인하세요.",
+
+      "warningAboutCopyPaste": {
+        "message": "모의고사는 반드시 혼자 힘으로 먼저 풀어야 효과가 있습니다",
+        "recommendation": "50분 타이머 맞추고 답/힌트 없이 풀기 → 채점 → 틀린 문제 복습"
+      },
+
+      "selfCheckQuestion": [
+        "시간 내에 모든 문제를 풀었는가?",
+        "8문제 이상 맞았는가?",
+        "틀린 문제의 패턴은 무엇인가?",
+        "부족한 개념은 어느 Day인가?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "mock1-q1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "리스트의 모든 요소 합계를 구하는 코드",
+        "code": "nums = [1, 2, 3, 4, 5]\ntotal = _____(nums)\nprint(total)",
+        "expectedOutput": "15",
+        "answer": "sum",
+        "explanation": "sum()은 리스트의 모든 요소 합계를 반환"
+      },
+      {
+        "id": "mock1-q2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "문자열 길이를 구하는 코드",
+        "code": "s = 'hello'\nprint(_____(s))",
+        "expectedOutput": "5",
+        "answer": "len",
+        "explanation": "len()은 문자열/리스트의 길이 반환"
+      },
+      {
+        "id": "mock1-q3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "딕셔너리에서 안전하게 값 가져오기",
+        "code": "d = {'a': 1, 'b': 2}\nresult = d._____('c', 0)\nprint(result)",
+        "expectedOutput": "0",
+        "answer": "get",
+        "explanation": "get(key, default)는 키가 없으면 default 반환"
+      },
+      {
+        "id": "mock1-q4",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "리스트를 내림차순 정렬",
+        "code": "nums = [3, 1, 4, 1, 5]\nnums.sort(_____=True)\nprint(nums)",
+        "expectedOutput": "[5, 4, 3, 1, 1]",
+        "answer": "reverse",
+        "explanation": "sort(reverse=True)는 내림차순 정렬"
+      },
+      {
+        "id": "mock1-q5",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "두 수의 합을 반환해야 하는데 None 반환",
+        "code": "def add(a, b):\n    a + b\n\nresult = add(3, 5)\nprint(result)",
+        "expectedOutput": "8",
+        "currentOutput": "None",
+        "answer": {"fixedCode": "def add(a, b):\n    return a + b\n\nresult = add(3, 5)\nprint(result)"},
+        "explanation": "return 키워드 누락. return a + b로 수정"
+      },
+      {
+        "id": "mock1-q6",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "1부터 5까지 출력해야 하는데 0부터 4까지 출력",
+        "code": "for i in range(5):\n    print(i)",
+        "expectedOutput": "1\n2\n3\n4\n5",
+        "currentOutput": "0\n1\n2\n3\n4",
+        "answer": {"fixedCode": "for i in range(1, 6):\n    print(i)"},
+        "explanation": "range(5)는 0~4. range(1, 6)으로 수정"
+      },
+      {
+        "id": "mock1-q7",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "정렬된 리스트를 저장해야 하는데 None 저장",
+        "code": "nums = [3, 1, 2]\nsorted_nums = nums.sort()\nprint(sorted_nums)",
+        "expectedOutput": "[1, 2, 3]",
+        "currentOutput": "None",
+        "answer": {"fixedCode": "nums = [3, 1, 2]\nsorted_nums = sorted(nums)\nprint(sorted_nums)"},
+        "explanation": "sort()는 None 반환. sorted()는 새 리스트 반환"
+      },
+      {
+        "id": "mock1-q8",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "리스트에서 짝수만 필터링",
+        "input": "[1, 2, 3, 4, 5, 6]",
+        "expectedOutput": "[2, 4, 6]",
+        "answer": {"code": "nums = [1, 2, 3, 4, 5, 6]\nresult = []\nfor n in nums:\n    if n % 2 == 0:\n        result.append(n)\nprint(result)"},
+        "explanation": "n % 2 == 0이면 짝수"
+      },
+      {
+        "id": "mock1-q9",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "문자열에서 각 문자 개수 세기",
+        "input": "'apple'",
+        "expectedOutput": "{'a': 1, 'p': 2, 'l': 1, 'e': 1}",
+        "answer": {"code": "s = 'apple'\ncount = {}\nfor c in s:\n    count[c] = count.get(c, 0) + 1\nprint(count)"},
+        "explanation": "딕셔너리로 카운팅. get(c, 0)으로 없으면 0"
+      },
+      {
+        "id": "mock1-q10",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "주어진 리스트에서 최대값과 최소값의 차이",
+        "input": "[4, 2, 9, 1, 5]",
+        "expectedOutput": "8",
+        "answer": {"code": "nums = [4, 2, 9, 1, 5]\nresult = max(nums) - min(nums)\nprint(result)"},
+        "explanation": "max()와 min() 활용"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "실전처럼 50분 제한으로 풀어보기",
+    "examinerMindset": "기초 문법 + 자주 나오는 함정",
+    "mustRemember": ["return 확인", "range 범위", "sort vs sorted", "get 활용"],
+    "tomorrowPreview": {"topic": "Day 20: 모의고사 2", "connection": "더 어려운 문제로 실력 향상"}
+  }
+}

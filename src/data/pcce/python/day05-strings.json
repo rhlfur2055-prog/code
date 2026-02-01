@@ -1,0 +1,343 @@
+{
+  "id": "python-day05",
+  "language": "python",
+  "day": 5,
+  "title": "문자열",
+  "examScope": "pcce",
+  "difficultyLevel": 2,
+  "estimatedTime": "70분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★★☆",
+  "keywords": ["인덱싱", "슬라이싱", "문자열메서드", "split", "join", "find", "replace", "포맷팅"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "프로그램에서 텍스트 처리는 필수. 사용자 입력 검증, 데이터 파싱, 출력 형식 등.",
+        "inExam": "PCCE에서 문자열 인덱싱/슬라이싱, 메서드 활용이 자주 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "문자열 = 문자들의 순서 있는 나열. 각 문자는 인덱스로 접근 가능",
+        "key": "인덱스는 0부터 시작, 슬라이싱 끝은 미포함"
+      },
+
+      "analogy": {
+        "title": "아파트 층수 비유",
+        "explanation": "문자열은 아파트 같다. 각 문자는 방이고, 인덱스는 층수다. 0층부터 시작하고(프로그래밍 관례), -1은 맨 꼭대기층. 슬라이싱 [2:5]는 '2층부터 5층 직전까지' 범위를 말한다.",
+        "codeExample": "s = 'PYTHON'\n# 0층=P, 1층=Y, 2층=T...\n# s[2:5]는 2층, 3층, 4층 = 'THO'"
+      },
+
+      "visualization": {
+        "title": "인덱스 이해",
+        "ascii": [
+          "문자열: 'PYTHON'",
+          "",
+          "정방향 인덱스:",
+          "  P   Y   T   H   O   N",
+          "  0   1   2   3   4   5",
+          "",
+          "역방향 인덱스:",
+          "  P   Y   T   H   O   N",
+          " -6  -5  -4  -3  -2  -1"
+        ]
+      },
+
+      "slicingRule": {
+        "title": "슬라이싱 규칙",
+        "syntax": "문자열[시작:끝:간격]",
+        "examples": [
+          {"code": "s[1:4]", "result": "YTH", "note": "인덱스 1,2,3 (4 미포함)"},
+          {"code": "s[:3]", "result": "PYT", "note": "처음부터 2까지"},
+          {"code": "s[3:]", "result": "HON", "note": "3부터 끝까지"},
+          {"code": "s[::-1]", "result": "NOHTYP", "note": "뒤집기"},
+          {"code": "s[::2]", "result": "PTO", "note": "2칸씩 건너뛰기"}
+        ],
+        "criticalRule": "⚠️ 끝 인덱스는 미포함!"
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "s[1:4]는 인덱스 1,2,3,4를 포함"},
+        "correct": {"belief": "s[1:4]는 인덱스 1,2,3만 포함 (4 미포함)"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "슬라이싱 범위를 정확히 아는가?",
+        "secondary": "문자열 메서드를 올바르게 쓸 수 있는가?",
+        "tertiary": "문자열 불변성을 이해하는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "s = 'PYTHON'\nprint(s[_____])  # 'YTH' 출력",
+            "answer": "1:4",
+            "explanation": "인덱스 1,2,3이 Y,T,H"
+          },
+          "trapPoints": ["끝 인덱스 미포함", "음수 인덱스 계산"]
+        },
+        {
+          "type": "메서드 결과",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "s = 'hello world'\nprint(s.split())",
+            "answer": "['hello', 'world']",
+            "explanation": "공백으로 분리"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 슬라이싱 활용",
+          "code": "s = 'PROGRAMMING'\n\n# 다양한 슬라이싱\nprint(s[0:4])    # PROG\nprint(s[-4:])    # MING\nprint(s[::-1])   # GNIMMARGORP (뒤집기)\nprint(s[::2])    # PORMIG (짝수 인덱스만)",
+          "keyInsight": "슬라이싱만 알아도 많은 문제 해결 가능"
+        },
+        {
+          "title": "예제 2: 주요 메서드",
+          "code": "s = 'Hello World'\n\n# 대소문자\nprint(s.upper())       # HELLO WORLD\nprint(s.lower())       # hello world\n\n# 찾기/바꾸기\nprint(s.find('o'))     # 4 (첫 번째 위치)\nprint(s.replace('l', 'L'))  # HeLLo WorLd\n\n# 분리/결합\nwords = s.split()      # ['Hello', 'World']\njoined = '-'.join(words)  # Hello-World",
+          "keyInsight": "메서드는 원본 안 바꾸고 새 문자열 반환"
+        },
+        {
+          "title": "예제 3: 문자 개수 세기",
+          "code": "s = 'banana'\ncount = 0\nfor char in s:\n    if char == 'a':\n        count += 1\nprint(count)  # 3\n\n# 또는 메서드 사용\nprint(s.count('a'))  # 3",
+          "keyInsight": "for문으로 순회하거나 count() 메서드 사용"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 슬라이싱 범위",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "s = 'ABCDEFG'일 때 s[2:5]의 결과는?",
+            "answer": "CDE",
+            "explanation": "인덱스 2,3,4 (5 미포함)"
+          }
+        },
+        {
+          "patternName": "패턴 2: 음수 인덱스",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "s = 'PYTHON'일 때 s[-2]는?",
+            "answer": "O",
+            "explanation": "-1이 N, -2가 O"
+          }
+        },
+        {
+          "patternName": "패턴 3: split과 join",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "'a,b,c'.split(',')의 결과는?",
+            "answer": "['a', 'b', 'c']",
+            "explanation": "쉼표로 분리하여 리스트 생성"
+          }
+        },
+        {
+          "patternName": "패턴 4: 문자열 뒤집기",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "'hello'를 뒤집어 출력하는 코드",
+            "answer": "print('hello'[::-1])",
+            "explanation": "슬라이싱 [::-1]로 역순"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "문자열에서 특정 문자 개수 세기",
+        "input": "banana\na",
+        "output": "3"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:20",
+          "phase": "문제 분석",
+          "thinking": ["문자열과 찾을 문자 입력", "해당 문자 개수 세기"]
+        },
+        {
+          "time": "0:20 ~ 0:40",
+          "phase": "알고리즘 설계",
+          "thinking": ["방법1: count() 메서드", "방법2: for문으로 직접 세기"]
+        },
+        {
+          "time": "0:40 ~ 1:20",
+          "phase": "코드 작성 (방법1)",
+          "code": "s = input()\nch = input()\nprint(s.count(ch))"
+        },
+        {
+          "time": "1:20 ~ 2:00",
+          "phase": "코드 작성 (방법2)",
+          "code": "s = input()\nch = input()\ncount = 0\nfor c in s:\n    if c == ch:\n        count += 1\nprint(count)"
+        },
+        {
+          "time": "2:00 ~ 2:30",
+          "phase": "검증",
+          "thinking": ["'banana'에서 'a' 개수", "a가 2,4,6번째 → 3개 ✓"]
+        }
+      ],
+
+      "whenStuck": {
+        "symptom": "슬라이싱 결과가 예상과 다름",
+        "diagnosis": "인덱스 범위 계산 오류",
+        "solution": [
+          "1. 문자열 각 문자 아래에 인덱스 써보기",
+          "2. 끝 인덱스 미포함 규칙 확인",
+          "3. 음수면 뒤에서부터 세기"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulMethods": [
+        {"method": "s.upper()", "desc": "대문자로"},
+        {"method": "s.lower()", "desc": "소문자로"},
+        {"method": "s.strip()", "desc": "앞뒤 공백 제거"},
+        {"method": "s.split()", "desc": "공백으로 분리 → 리스트"},
+        {"method": "s.split(',')", "desc": "쉼표로 분리"},
+        {"method": "'-'.join(list)", "desc": "리스트를 -로 연결"},
+        {"method": "s.find('x')", "desc": "x 위치 (없으면 -1)"},
+        {"method": "s.replace('a','b')", "desc": "a를 b로 교체"},
+        {"method": "s.count('a')", "desc": "a 개수"},
+        {"method": "s.isdigit()", "desc": "숫자만으로 구성?"},
+        {"method": "s.isalpha()", "desc": "알파벳만으로 구성?"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "슬라이싱 끝 미포함", "wrong": "s[1:3]이 3개", "right": "s[1:3]은 2개"},
+        {"pitfall": "문자열 불변", "wrong": "s[0] = 'A'", "right": "s = 'A' + s[1:]"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {"rank": 1, "mistake": "슬라이싱 끝 인덱스 미포함", "wrongCode": "s[1:4]로 4글자 기대", "correctCode": "s[1:4]는 3글자 (1,2,3)", "frequency": "85%"},
+        {"rank": 2, "mistake": "문자열 직접 수정 시도", "wrongCode": "s[0] = 'A'", "correctCode": "s = 'A' + s[1:]", "frequency": "70%"},
+        {"rank": 3, "mistake": "인덱스 0부터 시작 잊음", "wrongCode": "s[1]이 첫글자", "correctCode": "s[0]이 첫글자", "frequency": "60%"},
+        {"rank": 4, "mistake": "음수 인덱스 계산 실수", "wrongCode": "s[-0]이 마지막", "correctCode": "s[-1]이 마지막", "frequency": "50%"},
+        {"rank": 5, "mistake": "split 결과가 리스트임 모름", "wrongCode": "split()[0] 불가 생각", "correctCode": "'a,b'.split(',')[0] → 'a'", "frequency": "45%"}
+      ],
+
+      "edgeCases": [
+        {"case": "빈 문자열", "code": "s = ''\nprint(len(s))", "result": "0", "handling": "빈 문자열도 유효한 문자열"},
+        {"case": "범위 벗어난 슬라이싱", "code": "s = 'hi'\nprint(s[0:100])", "result": "'hi' (에러 아님)", "handling": "슬라이싱은 범위 초과해도 OK"},
+        {"case": "범위 벗어난 인덱싱", "code": "s = 'hi'\nprint(s[100])", "result": "IndexError", "handling": "인덱싱은 범위 벗어나면 에러"}
+      ],
+
+      "finalChecklist": [
+        "✅ 슬라이싱 끝 인덱스 +1 했는지",
+        "✅ 메서드 결과를 새 변수에 저장했는지",
+        "✅ 인덱스가 0부터 시작하는지 확인"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {"situation": "슬라이싱 헷갈릴 때", "badPrompt": "슬라이싱 알려줘", "goodPrompt": "'PYTHON'에서 s[1:4]가 왜 'YTH'인지 인덱스별로 설명해줘"},
+        {"situation": "메서드 결과 모를 때", "badPrompt": "split 뭐야", "goodPrompt": "split()과 join()의 차이를 예제와 함께 보여줘"},
+        {"situation": "문자열 수정 안 될 때", "badPrompt": "왜 안 돼", "goodPrompt": "Python에서 s[0] = 'A'가 에러인 이유와 대안을 알려줘"}
+      ],
+
+      "warningAboutCopyPaste": {
+        "title": "복붙의 위험성",
+        "warning": "슬라이싱 코드만 복붙하면 인덱스 계산을 이해 못함",
+        "rightWay": [
+          "직접 인덱스 번호 써가며 계산해보기",
+          "여러 슬라이싱 예제 직접 실행해보기",
+          "빈 종이에 인덱스 표 그려보기"
+        ]
+      },
+
+      "selfCheckQuestion": [
+        "s[1:4]는 몇 글자?",
+        "s[-1]은 어떤 문자?",
+        "문자열은 수정 가능한가?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d5-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "s = 'PYTHON'일 때 'THO'를 출력하려면?",
+        "code": "print(s[_____])",
+        "answer": "2:5",
+        "explanation": "인덱스 2,3,4가 T,H,O"
+      },
+      {
+        "id": "d5-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "s = 'hello'를 뒤집어 출력",
+        "code": "print(s[_____])",
+        "answer": "::-1",
+        "explanation": "[::-1]은 전체를 역순으로"
+      },
+      {
+        "id": "d5-p3",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "'a,b,c'를 쉼표로 분리한 결과는?",
+        "code": "print('a,b,c'.split(','))",
+        "answer": "['a', 'b', 'c']",
+        "explanation": "split()은 구분자로 분리하여 리스트 반환"
+      },
+      {
+        "id": "d5-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "첫 글자를 대문자로 바꾸려고 함",
+        "code": "s = 'hello'\ns[0] = 'H'\nprint(s)",
+        "answer": {"fixedCode": "s = 'hello'\ns = 'H' + s[1:]\nprint(s)"},
+        "explanation": "문자열은 불변. 새 문자열 만들어야 함"
+      },
+      {
+        "id": "d5-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "문자열에서 공백 제거 후 길이 출력",
+        "input": "hello world",
+        "output": "10",
+        "answer": {"code": "s = input()\ns_no_space = s.replace(' ', '')\nprint(len(s_no_space))"},
+        "explanation": "replace로 공백 제거 후 len()"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "슬라이싱 s[a:b]는 b 미포함! 인덱스는 0부터, 문자열은 불변",
+    "examinerMindset": "슬라이싱 범위, 음수 인덱스, 메서드 반환값 함정",
+    "mustRemember": ["s[0]이 첫 글자", "s[-1]이 마지막", "s[a:b]는 b미포함", "s[::-1]로 뒤집기", "문자열은 불변"],
+    "tomorrowPreview": {"topic": "Day 6: 리스트", "connection": "리스트도 인덱싱/슬라이싱 동일. 하지만 리스트는 수정 가능!"}
+  }
+}

@@ -38,7 +38,10 @@
       "Bash(python:*)",
       "Bash(curl:*)",
       "Bash(PYTHONUTF8=1 python:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git branch:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: PCCE 시험대비 콘텐츠 추가\n\n- PCCE 카테고리 신규 등록 \\(types/index.ts, curriculum.ts\\)\n- PCCE 콘텐츠 14개 항목 추가 \\(contents.json, pcce.json\\)\n- 21일 고품질 완전정복 학습자료 추가\n- 12시간 완전정복 컴팩트 자료 추가\n- page.tsx에 PCCE JSON 매핑 추가\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\컴퓨터\\.vscode\\extensions\\redhat.java-*"

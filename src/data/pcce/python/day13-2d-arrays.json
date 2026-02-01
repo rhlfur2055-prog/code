@@ -1,0 +1,372 @@
+{
+  "id": "python-day13",
+  "language": "python",
+  "day": 13,
+  "title": "2차원 배열",
+  "examScope": "both",
+  "difficultyLevel": 3,
+  "estimatedTime": "75분",
+  "difficulty": "초급",
+  "pcceWeight": "★★★★☆",
+  "keywords": ["2차원리스트", "행", "열", "순회", "회전", "전치", "중첩반복문"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "2차원 배열 = 아파트 층과 호수",
+        "explanation": "아파트 '301호'는 3층 1호. 2차원 배열도 마찬가지로 matrix[3][1]은 3행 1열입니다. 층(행)을 먼저 정하고, 그 층에서 호수(열)를 찾는 것과 같습니다. 항상 [층][호] = [행][열] 순서입니다.",
+        "codeExample": "# 아파트 = 2차원 배열\napartment = [\n    ['101호', '102호', '103호'],  # 1층 (인덱스 0)\n    ['201호', '202호', '203호'],  # 2층 (인덱스 1)\n    ['301호', '302호', '303호']   # 3층 (인덱스 2)\n]\nprint(apartment[2][0])  # '301호' (3층 1호 = 2행 0열)"
+      },
+
+      "whyNeeded": {
+        "realWorld": "표, 격자, 게임 맵, 이미지 픽셀 등 행렬 구조 데이터.",
+        "inExam": "PCCE에서 2차원 순회, 특정 행/열 접근, 대각선 합 등 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "2차원 배열 = 리스트 안의 리스트. 행(row)과 열(col)로 접근",
+        "access": "matrix[행][열] 형태로 접근"
+      },
+
+      "visualization": {
+        "title": "2차원 배열 구조",
+        "ascii": [
+          "matrix = [[1, 2, 3],",
+          "          [4, 5, 6],",
+          "          [7, 8, 9]]",
+          "",
+          "       열0  열1  열2",
+          "행0 [  1    2    3  ]",
+          "행1 [  4    5    6  ]",
+          "행2 [  7    8    9  ]",
+          "",
+          "matrix[0][1] = 2  (0행 1열)",
+          "matrix[2][0] = 7  (2행 0열)"
+        ]
+      },
+
+      "traversal": {
+        "title": "순회 방법",
+        "rowFirst": "for i in range(행수): for j in range(열수): → 행 우선 순회",
+        "colFirst": "for j in range(열수): for i in range(행수): → 열 우선 순회"
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "matrix[i][j]에서 i가 열, j가 행"},
+        "correct": {"belief": "matrix[행][열]. 첫 인덱스가 행, 두 번째가 열"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "2차원 배열 인덱싱 (행, 열 순서)",
+        "secondary": "중첩 반복문으로 전체 순회",
+        "tertiary": "특정 행/열/대각선 접근"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "matrix = [[1,2,3], [4,5,6], [7,8,9]]\nprint(matrix[_____][_____])  # 6 출력",
+            "answer": "1, 2",
+            "explanation": "1행 2열이 6"
+          }
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "m = [[1,2], [3,4]]\ntotal = 0\nfor row in m:\n    for val in row:\n        total += val\nprint(total)",
+            "answer": "10",
+            "explanation": "1+2+3+4=10"
+          }
+        },
+        {
+          "type": "코드 작성",
+          "frequency": "★★★★☆",
+          "example": {
+            "question": "대각선 합 구하기",
+            "answer": "matrix[i][i] 합계"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 생성과 접근",
+          "code": "# 생성\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\n# 접근\nprint(matrix[0][0])  # 1 (0행 0열)\nprint(matrix[1][2])  # 6 (1행 2열)\n\n# 행 전체\nprint(matrix[1])     # [4, 5, 6]\n\n# 크기\nrows = len(matrix)       # 3\ncols = len(matrix[0])    # 3",
+          "keyInsight": "matrix[행][열] 순서 기억!"
+        },
+        {
+          "title": "예제 2: 전체 순회",
+          "code": "matrix = [[1,2,3], [4,5,6], [7,8,9]]\n\n# 방법 1: 인덱스로\nfor i in range(len(matrix)):\n    for j in range(len(matrix[0])):\n        print(matrix[i][j], end=' ')\n    print()  # 줄바꿈\n\n# 방법 2: 값으로 직접\nfor row in matrix:\n    for val in row:\n        print(val, end=' ')\n    print()",
+          "keyInsight": "중첩 for문으로 모든 요소 순회"
+        },
+        {
+          "title": "예제 3: 행/열 합계",
+          "code": "matrix = [[1,2,3], [4,5,6], [7,8,9]]\n\n# 각 행의 합\nfor i in range(len(matrix)):\n    row_sum = sum(matrix[i])\n    print(f'{i}행 합: {row_sum}')\n\n# 각 열의 합\nfor j in range(len(matrix[0])):\n    col_sum = 0\n    for i in range(len(matrix)):\n        col_sum += matrix[i][j]\n    print(f'{j}열 합: {col_sum}')",
+          "keyInsight": "행 합은 sum(matrix[i]), 열 합은 matrix[i][j] 누적"
+        },
+        {
+          "title": "예제 4: 대각선",
+          "code": "matrix = [[1,2,3], [4,5,6], [7,8,9]]\nn = len(matrix)\n\n# 주대각선 (왼쪽위→오른쪽아래)\nmain_diag = [matrix[i][i] for i in range(n)]\nprint(main_diag)  # [1, 5, 9]\n\n# 부대각선 (오른쪽위→왼쪽아래)\nanti_diag = [matrix[i][n-1-i] for i in range(n)]\nprint(anti_diag)  # [3, 5, 7]",
+          "keyInsight": "주대각선: [i][i], 부대각선: [i][n-1-i]"
+        },
+        {
+          "title": "예제 5: 2차원 배열 생성 주의점",
+          "code": "# 잘못된 방법 (같은 리스트 참조)\nwrong = [[0] * 3] * 3\nwrong[0][0] = 1\nprint(wrong)  # [[1,0,0], [1,0,0], [1,0,0]] ← 모두 변경됨!\n\n# 올바른 방법\nright = [[0] * 3 for _ in range(3)]\nright[0][0] = 1\nprint(right)  # [[1,0,0], [0,0,0], [0,0,0]]",
+          "keyInsight": "[[0]*n]*m은 참조 문제! 리스트 컴프리헨션 사용"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 특정 위치 접근",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "m = [[1,2], [3,4], [5,6]]\nprint(m[2][1])",
+            "answer": "6",
+            "explanation": "2행 1열"
+          }
+        },
+        {
+          "patternName": "패턴 2: 전체 합계",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "m = [[1,2], [3,4]]\ntotal = 0\nfor row in m:\n    total += sum(row)\nprint(total)",
+            "answer": "10"
+          }
+        },
+        {
+          "patternName": "패턴 3: 행/열 개수",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "code": "m = [[1,2,3], [4,5,6]]\nprint(len(m), len(m[0]))",
+            "answer": "2 3",
+            "explanation": "2행 3열"
+          }
+        },
+        {
+          "patternName": "패턴 4: 대각선 합",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "code": "m = [[1,2,3], [4,5,6], [7,8,9]]\ndiag_sum = 0\nfor i in range(3):\n    diag_sum += m[i][i]\nprint(diag_sum)",
+            "answer": "15",
+            "explanation": "1+5+9=15"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "2차원 배열의 가장 큰 값과 위치 찾기",
+        "input": "[[1,5,3], [9,2,4], [6,8,7]]",
+        "output": "9, (1, 0)"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "최대값 + 위치(행,열) 반환. 전체 순회 필요"},
+        {"phase": "2️⃣ 초기값 설정", "time": "30초", "thinking": "max_val = matrix[0][0], max_pos = (0,0)으로 시작"},
+        {"phase": "3️⃣ 순회 방식 결정", "time": "30초", "thinking": "이중 for: i=행(len(matrix)), j=열(len(matrix[0]))"},
+        {"phase": "4️⃣ 코드 작성", "time": "2분", "code": "max_val = matrix[0][0]\nmax_pos = (0, 0)\nfor i in range(len(matrix)):\n    for j in range(len(matrix[0])):\n        if matrix[i][j] > max_val:\n            max_val = matrix[i][j]\n            max_pos = (i, j)"},
+        {"phase": "5️⃣ 검증", "time": "30초", "thinking": "9가 최대, 위치 (1,0) → 1행 0열 ✓"}
+      ],
+
+      "whenStuck": {
+        "인덱스_순서_헷갈림": "matrix[행][열] = matrix[i][j]. i가 세로(행), j가 가로(열)",
+        "범위_오류": "행: range(len(matrix)), 열: range(len(matrix[0]))",
+        "모든_행_같이_변경됨": "[[0]*n]*m 대신 [[0]*n for _ in range(m)] 사용",
+        "열_순회_어려움": "j를 바깥 for, i를 안쪽 for로 → 열 우선 순회"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulPatterns": [
+        {"pattern": "행 개수", "code": "len(matrix)"},
+        {"pattern": "열 개수", "code": "len(matrix[0])"},
+        {"pattern": "전체 합", "code": "sum(sum(row) for row in matrix)"},
+        {"pattern": "평탄화", "code": "[val for row in matrix for val in row]"},
+        {"pattern": "전치 (행↔열)", "code": "list(zip(*matrix))"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "참조 복사", "wrong": "[[0]*3]*3", "right": "[[0]*3 for _ in range(3)]"},
+        {"pitfall": "행열 순서", "wrong": "matrix[열][행]", "right": "matrix[행][열]"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "행/열 인덱스 순서 혼동",
+          "frequency": "80%",
+          "wrongCode": "matrix[열][행]  # x, y 좌표처럼 생각",
+          "correctCode": "matrix[행][열]  # 행이 먼저!",
+          "result": "잘못된 위치 접근"
+        },
+        {
+          "rank": 2,
+          "mistake": "[[0]*n]*m 참조 복사",
+          "frequency": "75%",
+          "wrongCode": "m = [[0]*3]*3  # 같은 리스트 3번 참조",
+          "correctCode": "m = [[0]*3 for _ in range(3)]  # 독립 리스트",
+          "result": "한 행 수정 시 모든 행 변경"
+        },
+        {
+          "rank": 3,
+          "mistake": "인덱스 범위 초과",
+          "frequency": "65%",
+          "wrongCode": "for i in range(3):\n    for j in range(3):  # 2x3 배열인데",
+          "correctCode": "for i in range(len(m)):\n    for j in range(len(m[0])):",
+          "result": "IndexError"
+        },
+        {
+          "rank": 4,
+          "mistake": "행수/열수 구분 실수",
+          "frequency": "55%",
+          "wrongCode": "cols = len(matrix)  # 이건 행 수",
+          "correctCode": "rows = len(matrix)\ncols = len(matrix[0])",
+          "result": "행/열 개수 혼동"
+        },
+        {
+          "rank": 5,
+          "mistake": "대각선 인덱스 실수",
+          "frequency": "50%",
+          "wrongCode": "anti_diag = m[i][i]  # 이건 주대각선",
+          "correctCode": "anti_diag = m[i][n-1-i]  # 부대각선",
+          "result": "잘못된 대각선 접근"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "1x1 행렬", "handling": "matrix[0][0] 하나만 있음"},
+        {"case": "직사각형 (행≠열)", "handling": "len(matrix) ≠ len(matrix[0]) 주의"},
+        {"case": "빈 행렬", "handling": "len(matrix)==0 먼저 확인"}
+      ],
+
+      "finalChecklist": [
+        "✅ matrix[행][열] = matrix[i][j] 순서 확인",
+        "✅ 생성 시 [[0]*cols for _ in range(rows)] 사용",
+        "✅ 행수: len(matrix), 열수: len(matrix[0])",
+        "✅ 대각선: 주=[i][i], 부=[i][n-1-i]"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "인덱싱 시각화",
+          "badPrompt": "2차원 배열 설명해줘",
+          "goodPrompt": "3x3 배열에서 matrix[1][2]가 어떤 위치인지 그림과 함께 설명하고, 행/열 인덱스 순서가 왜 중요한지 알려줘",
+          "whyGood": "시각화 요청 + 핵심 개념 강조"
+        },
+        {
+          "situation": "순회 방법 학습",
+          "badPrompt": "2차원 배열 순회 코드",
+          "goodPrompt": "2차원 배열을 행 우선과 열 우선으로 순회하는 코드를 각각 보여주고, 출력 순서 차이를 비교해줘",
+          "whyGood": "두 방식의 차이점 명확히 요청"
+        },
+        {
+          "situation": "참조 복사 이해",
+          "badPrompt": "[[0]*3]*3 왜 안 돼?",
+          "goodPrompt": "[[0]*3]*3으로 만든 배열에서 m[0][0]=1 했을 때 왜 모든 행이 바뀌는지, 메모리 구조로 설명해줘",
+          "whyGood": "원인의 근본적 이해 요청"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "2차원 배열 인덱싱은 손으로 그려봐야 합니다",
+        "recommendation": "3x3, 2x4 등 다양한 크기 배열에서 matrix[i][j] 접근을 종이에 직접 그려보기 10번"
+      },
+
+      "selfCheckQuestion": [
+        "matrix[2][1]은 몇 행 몇 열? → 2행 1열",
+        "행 개수 구하는 법은? → len(matrix)",
+        "열 개수 구하는 법은? → len(matrix[0])",
+        "[[0]*3]*3의 문제점은? → 같은 리스트 참조 (얕은 복사)"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d13-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "5를 출력하려면?",
+        "code": "m = [[1,2,3], [4,5,6]]\nprint(m[_____][_____])",
+        "answer": "1, 1",
+        "explanation": "1행 1열이 5"
+      },
+      {
+        "id": "d13-p2",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "m = [[1,2], [3,4]]\nprint(len(m), len(m[0]))",
+        "answer": "2 2",
+        "explanation": "2행 2열"
+      },
+      {
+        "id": "d13-p3",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "m = [[1,2,3], [4,5,6], [7,8,9]]\ndiag = [m[i][i] for i in range(3)]\nprint(sum(diag))",
+        "answer": "15",
+        "explanation": "대각선 1+5+9=15"
+      },
+      {
+        "id": "d13-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "한 행 수정했는데 모든 행이 바뀜",
+        "code": "m = [[0]*3]*3\nm[0][0] = 1\nprint(m)  # [[1,0,0],[1,0,0],[1,0,0]]",
+        "answer": {"fixedCode": "m = [[0]*3 for _ in range(3)]\nm[0][0] = 1\nprint(m)  # [[1,0,0],[0,0,0],[0,0,0]]"},
+        "explanation": "리스트 컴프리헨션으로 독립적인 행 생성"
+      },
+      {
+        "id": "d13-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "2차원 배열의 각 열의 합을 리스트로 반환",
+        "input": "[[1,2,3], [4,5,6]]",
+        "output": "[5, 7, 9]",
+        "answer": {"code": "matrix = [[1,2,3], [4,5,6]]\nresult = []\nfor j in range(len(matrix[0])):\n    col_sum = 0\n    for i in range(len(matrix)):\n        col_sum += matrix[i][j]\n    result.append(col_sum)\nprint(result)"},
+        "explanation": "열 인덱스 j 고정, 행 i로 순회"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "matrix[행][열] 순서! 생성 시 [[0]*n]*m 금지, 리스트 컴프리헨션 사용",
+    "examinerMindset": "행/열 순서 혼동, 참조 복사 함정, 대각선/행/열 접근",
+    "mustRemember": ["matrix[i][j] = i행 j열", "행수: len(matrix)", "열수: len(matrix[0])", "생성: [[0]*cols for _ in range(rows)]"],
+    "tomorrowPreview": {"topic": "Day 14: 구현 문제", "connection": "2차원 배열을 활용한 시뮬레이션 문제"}
+  }
+}

@@ -1,0 +1,356 @@
+{
+  "id": "python-day18",
+  "language": "python",
+  "day": 18,
+  "title": "DP 기초",
+  "examScope": "pccp",
+  "difficultyLevel": 4,
+  "estimatedTime": "80분",
+  "difficulty": "중급",
+  "pcceWeight": "★★☆☆☆",
+  "keywords": ["DP", "동적프로그래밍", "메모이제이션", "점화식", "피보나치", "타뷸레이션"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "DP = 계산기에 중간 결과 저장",
+        "explanation": "복잡한 계산을 할 때 중간 결과를 메모해두면 같은 계산을 반복하지 않아도 됩니다. 예를 들어 3+5=8을 계산했으면, 다음에 또 3+5가 나오면 바로 8을 쓰면 됩니다. DP도 부분 문제의 답을 저장해두고 재사용합니다.",
+        "codeExample": "# 메모에 저장하고 재사용\nmemo = {}\ndef calculate(n):\n    if n in memo:\n        return memo[n]  # 저장된 값 재사용\n    result = 복잡한계산(n)\n    memo[n] = result  # 저장\n    return result"
+      },
+
+      "whyNeeded": {
+        "realWorld": "중복 계산을 피해 효율적으로 문제 해결. 최단 경로, 최적 비용 등.",
+        "inExam": "PCCE에서 간단한 DP 문제 출제 가능. 피보나치, 계단 오르기 등."
+      },
+
+      "coreIdea": {
+        "oneLiner": "DP = 큰 문제를 작은 문제로 나누고, 결과를 저장하여 재사용",
+        "key": "그리디와 달리 모든 경우를 고려하되, 메모이제이션으로 중복 계산 방지"
+      },
+
+      "dpVsGreedy": {
+        "DP": "모든 경우 고려 → 항상 최적해",
+        "Greedy": "현재 최선 선택 → 특정 조건에서만 최적해"
+      },
+
+      "twoApproaches": {
+        "topDown": {
+          "name": "탑다운 (메모이제이션)",
+          "desc": "재귀 + 결과 저장",
+          "example": "fib(n) 호출 시 이미 계산된 값이면 바로 반환"
+        },
+        "bottomUp": {
+          "name": "바텀업 (타뷸레이션)",
+          "desc": "반복문으로 작은 것부터 채우기",
+          "example": "dp[0], dp[1]부터 시작해 dp[n]까지 채우기"
+        }
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "DP는 재귀로만 푼다"},
+        "correct": {"belief": "재귀(탑다운)와 반복문(바텀업) 모두 가능. 보통 바텀업이 효율적"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "점화식을 세울 수 있는가?",
+        "secondary": "메모이제이션 개념을 아는가?",
+        "tertiary": "기저 조건을 정확히 설정하는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "피보나치",
+          "frequency": "★★★★★",
+          "example": "fib(n) = fib(n-1) + fib(n-2)"
+        },
+        {
+          "type": "계단 오르기",
+          "frequency": "★★★★☆",
+          "example": "1칸 또는 2칸씩 오를 때 경우의 수"
+        },
+        {
+          "type": "최소 비용",
+          "frequency": "★★★☆☆",
+          "example": "각 칸의 비용이 있을 때 최소 비용으로 도달"
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 피보나치 (재귀 - 비효율)",
+          "problem": "피보나치 수열의 n번째 값",
+          "code": "# 재귀만 사용 - 매우 느림 (중복 계산)\ndef fib_slow(n):\n    if n <= 1:\n        return n\n    return fib_slow(n-1) + fib_slow(n-2)\n\nprint(fib_slow(10))  # 55 (느림)",
+          "keyInsight": "중복 호출이 기하급수적. fib(40)은 몇 초 걸림"
+        },
+        {
+          "title": "예제 2: 피보나치 (탑다운 메모이제이션)",
+          "problem": "피보나치 수열의 n번째 값",
+          "code": "# 메모이제이션 - 계산 결과 저장\nmemo = {}\n\ndef fib(n):\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fib(n-1) + fib(n-2)\n    return memo[n]\n\nprint(fib(50))  # 12586269025 (빠름)",
+          "keyInsight": "이미 계산한 값은 저장 후 재사용"
+        },
+        {
+          "title": "예제 3: 피보나치 (바텀업)",
+          "problem": "피보나치 수열의 n번째 값",
+          "code": "def fib_bottom_up(n):\n    if n <= 1:\n        return n\n    dp = [0] * (n + 1)\n    dp[0] = 0\n    dp[1] = 1\n    for i in range(2, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]\n\nprint(fib_bottom_up(50))  # 12586269025",
+          "keyInsight": "작은 값부터 차례로 계산. 재귀 호출 없음"
+        },
+        {
+          "title": "예제 4: 계단 오르기",
+          "problem": "1칸 또는 2칸씩 n칸 계단을 오르는 경우의 수",
+          "code": "def climb_stairs(n):\n    if n <= 2:\n        return n\n    dp = [0] * (n + 1)\n    dp[1] = 1  # 1칸: 1가지\n    dp[2] = 2  # 2칸: 2가지 (1+1, 2)\n    for i in range(3, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]  # 점화식\n    return dp[n]\n\nprint(climb_stairs(5))  # 8",
+          "keyInsight": "dp[i] = dp[i-1] + dp[i-2] (피보나치와 동일 구조)"
+        },
+        {
+          "title": "예제 5: 최소 비용 계단",
+          "problem": "각 계단에 비용이 있을 때 끝까지 가는 최소 비용",
+          "code": "def min_cost_climbing(cost):\n    n = len(cost)\n    dp = [0] * n\n    dp[0] = cost[0]\n    dp[1] = cost[1]\n    for i in range(2, n):\n        dp[i] = cost[i] + min(dp[i-1], dp[i-2])\n    return min(dp[n-1], dp[n-2])  # 마지막 또는 그 전에서 도착\n\ncost = [10, 15, 20]\nprint(min_cost_climbing(cost))  # 15",
+          "keyInsight": "현재 비용 + 이전까지의 최소 비용"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 피보나치 변형",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "점화식 f(n) = f(n-1) + f(n-2), f(1)=f(2)=1일 때 f(6)",
+            "answer": "8",
+            "explanation": "1,1,2,3,5,8"
+          }
+        },
+        {
+          "patternName": "패턴 2: 경우의 수",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "n칸 타일을 1x1, 1x2로 채우는 경우의 수",
+            "answer": "계단 오르기와 동일 (피보나치)"
+          }
+        },
+        {
+          "patternName": "패턴 3: 최솟값/최댓값",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "배열에서 인접하지 않은 수의 최대 합",
+            "answer": "dp[i] = max(dp[i-1], dp[i-2] + arr[i])"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "1, 2, 3을 더해서 n을 만드는 경우의 수",
+        "input": "n = 4",
+        "output": "7"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 부분 문제 정의", "time": "1분", "thinking": "dp[i] = i를 만드는 경우의 수"},
+        {"phase": "2️⃣ 점화식 도출", "time": "1분", "thinking": "마지막에 1,2,3을 더하는 경우 → dp[i] = dp[i-1] + dp[i-2] + dp[i-3]"},
+        {"phase": "3️⃣ 기저 조건", "time": "30초", "thinking": "dp[1]=1, dp[2]=2, dp[3]=4 (수동 계산)"},
+        {"phase": "4️⃣ 코드 작성", "time": "2분", "code": "dp = [0] * (n + 1)\ndp[1] = 1; dp[2] = 2; dp[3] = 4\nfor i in range(4, n + 1):\n    dp[i] = dp[i-1] + dp[i-2] + dp[i-3]"},
+        {"phase": "5️⃣ 검증", "time": "30초", "thinking": "dp[4] = dp[3]+dp[2]+dp[1] = 4+2+1 = 7 ✓"}
+      ],
+
+      "whenStuck": {
+        "점화식_못세움": "작은 예시(n=1,2,3)를 손으로 풀고 패턴 찾기",
+        "기저조건_헷갈림": "가장 작은 경우(n=0,1)를 직접 계산",
+        "인덱스_오류": "dp 배열 크기 n+1로, 인덱스 0부터 n까지",
+        "메모이제이션_안됨": "딕셔너리 또는 배열에 결과 저장 확인"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulPatterns": [
+        {"pattern": "딕셔너리 메모이제이션", "code": "memo = {}; if n in memo: return memo[n]"},
+        {"pattern": "리스트 DP", "code": "dp = [0] * (n + 1)"},
+        {"pattern": "functools.lru_cache", "code": "from functools import lru_cache; @lru_cache(maxsize=None)"}
+      ],
+
+      "lruCacheExample": {
+        "title": "lru_cache 데코레이터",
+        "code": "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n-1) + fib(n-2)\n\nprint(fib(100))",
+        "benefit": "메모이제이션 자동 처리"
+      },
+
+      "commonPitfalls": [
+        {"pitfall": "기저 조건 누락", "note": "dp[0], dp[1] 초기화 필수"},
+        {"pitfall": "인덱스 범위", "note": "dp 배열 크기 n+1로"},
+        {"pitfall": "점화식 순서", "note": "이전 값이 먼저 계산되어야 함"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "기저 조건 설정 오류",
+          "frequency": "75%",
+          "wrongCode": "dp[0] = 0  # 문제에 따라 1이어야 할 수도",
+          "correctCode": "# 문제 조건 확인: 0칸 = 1가지(아무것도 안 함)",
+          "result": "모든 결과가 틀림"
+        },
+        {
+          "rank": 2,
+          "mistake": "점화식 잘못 세움",
+          "frequency": "70%",
+          "wrongCode": "dp[i] = dp[i-1] + dp[i-2]  # 1,2,3 더하기인데",
+          "correctCode": "dp[i] = dp[i-1] + dp[i-2] + dp[i-3]",
+          "result": "경우의 수 누락"
+        },
+        {
+          "rank": 3,
+          "mistake": "배열 인덱스 범위 오류",
+          "frequency": "65%",
+          "wrongCode": "dp = [0] * n  # n까지 접근하는데",
+          "correctCode": "dp = [0] * (n + 1)  # 0~n 인덱스",
+          "result": "IndexError"
+        },
+        {
+          "rank": 4,
+          "mistake": "메모이제이션 안 함",
+          "frequency": "60%",
+          "wrongCode": "return fib(n-1) + fib(n-2)  # 저장 안 함",
+          "correctCode": "memo[n] = fib(n-1) + fib(n-2)\nreturn memo[n]",
+          "result": "시간 초과"
+        },
+        {
+          "rank": 5,
+          "mistake": "반환값 위치 오류",
+          "frequency": "50%",
+          "wrongCode": "return dp[n-1]  # n번째인데",
+          "correctCode": "return dp[n]",
+          "result": "인덱스 하나 차이로 오답"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "n=0", "handling": "기저 조건에서 처리, 보통 0 또는 1"},
+        {"case": "n=1", "handling": "기저 조건에서 직접 반환"},
+        {"case": "n이 매우 큰 경우", "handling": "메모이제이션 필수, 시간복잡도 확인"}
+      ],
+
+      "finalChecklist": [
+        "✅ 기저 조건 (n=0, n=1) 문제 조건대로 설정",
+        "✅ 점화식을 작은 값(n=3,4)으로 손 검증",
+        "✅ dp 배열 크기 n+1",
+        "✅ 메모이제이션 또는 바텀업 사용"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "점화식 도출",
+          "badPrompt": "이 문제 점화식 뭐야",
+          "goodPrompt": "계단 오르기 문제에서 dp[i]를 어떻게 정의하고, 점화식을 어떻게 도출하는지 과정을 설명해줘",
+          "whyGood": "사고 과정 이해에 집중"
+        },
+        {
+          "situation": "두 방식 비교",
+          "badPrompt": "DP 코드 줘",
+          "goodPrompt": "피보나치를 탑다운(메모이제이션)과 바텀업(타뷸레이션)으로 각각 구현하고 차이점을 비교해줘",
+          "whyGood": "두 접근법 동시 이해"
+        },
+        {
+          "situation": "기저 조건 확인",
+          "badPrompt": "기저 조건 뭐야",
+          "goodPrompt": "이 DP 문제에서 dp[0]과 dp[1]을 어떻게 정해야 하는지, 문제 조건에서 어떻게 유도하는지 설명해줘",
+          "whyGood": "기저 조건 설정 근거 이해"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "DP는 점화식을 직접 세워봐야 합니다",
+        "recommendation": "피보나치, 계단 오르기 점화식을 종이에 직접 유도해보기 5번"
+      },
+
+      "selfCheckQuestion": [
+        "dp[i]는 무엇을 의미하는가?",
+        "점화식은 무엇인가?",
+        "기저 조건 (dp[0], dp[1])은 무엇인가?",
+        "작은 값 (n=3,4)으로 검증했는가?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d18-p1",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "피보나치 n번째 값 (바텀업)",
+        "input": "n = 10",
+        "output": "55",
+        "answer": {"code": "def fib(n):\n    if n <= 1:\n        return n\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    for i in range(2, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]\n\nprint(fib(10))"}
+      },
+      {
+        "id": "d18-p2",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "계단 오르기 경우의 수 (1칸 또는 2칸)",
+        "input": "n = 6",
+        "output": "13",
+        "answer": {"code": "def stairs(n):\n    if n <= 2:\n        return n\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    dp[2] = 2\n    for i in range(3, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]\n\nprint(stairs(6))"}
+      },
+      {
+        "id": "d18-p3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "점화식 완성",
+        "code": "# 1, 2, 3을 더해 n을 만드는 경우의 수\ndp[i] = dp[i-1] + dp[i-2] + _____",
+        "answer": "dp[i-3]",
+        "explanation": "마지막에 3을 더하는 경우"
+      },
+      {
+        "id": "d18-p4",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "최소 비용으로 끝까지 도달",
+        "input": "[1, 100, 1, 1, 1, 100, 1, 1, 100, 1]",
+        "output": "6",
+        "answer": {"code": "def min_cost(cost):\n    n = len(cost)\n    dp = [0] * n\n    dp[0] = cost[0]\n    dp[1] = cost[1]\n    for i in range(2, n):\n        dp[i] = cost[i] + min(dp[i-1], dp[i-2])\n    return min(dp[n-1], dp[n-2])\n\nprint(min_cost([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]))"}
+      },
+      {
+        "id": "d18-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "인접하지 않은 수의 최대 합",
+        "input": "[3, 2, 5, 10, 7]",
+        "output": "15",
+        "answer": {"code": "def max_non_adjacent(nums):\n    n = len(nums)\n    if n == 0:\n        return 0\n    if n == 1:\n        return nums[0]\n    dp = [0] * n\n    dp[0] = nums[0]\n    dp[1] = max(nums[0], nums[1])\n    for i in range(2, n):\n        dp[i] = max(dp[i-1], dp[i-2] + nums[i])\n    return dp[n-1]\n\nprint(max_non_adjacent([3, 2, 5, 10, 7]))"},
+        "explanation": "3 + 5 + 7 = 15 또는 3 + 10 + ? 등 비교"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "DP = 점화식 + 메모이제이션. 큰 문제를 작은 문제로!",
+    "examinerMindset": "점화식 세우기, 기저 조건, 메모이제이션 개념",
+    "mustRemember": ["점화식 정의", "기저 조건 설정", "작은 것부터 계산", "결과 저장 재사용"],
+    "tomorrowPreview": {"topic": "Day 19: 모의고사 1", "connection": "지금까지 배운 내용으로 실전 문제 풀이"}
+  }
+}

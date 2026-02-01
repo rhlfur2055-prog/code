@@ -1,0 +1,356 @@
+{
+  "id": "python-day04",
+  "language": "python",
+  "day": 4,
+  "title": "반복문",
+  "examScope": "pcce",
+  "difficultyLevel": 1,
+  "estimatedTime": "70분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★★★",
+  "keywords": ["for", "while", "range", "break", "continue", "중첩반복문", "enumerate"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "같은 작업을 여러 번 반복해야 할 때. 1부터 100까지 출력, 리스트 모든 요소 처리 등.",
+        "inExam": "PCCE 대부분 문제에서 반복문 필수. range() 범위, 중첩 반복, break/continue가 단골."
+      },
+
+      "coreIdea": {
+        "oneLiner": "반복문 = 조건이 참인 동안 (또는 정해진 횟수만큼) 코드를 반복 실행",
+        "types": [
+          "for: 정해진 횟수/시퀀스만큼 반복",
+          "while: 조건이 참인 동안 반복"
+        ]
+      },
+
+      "analogy": {
+        "title": "운동 비유",
+        "explanation": "for문은 '팔굽혀펴기 10회' 같이 정해진 횟수. while문은 '지칠 때까지' 같이 조건 기반."
+      },
+
+      "visualization": {
+        "title": "반복문 흐름",
+        "ascii": [
+          "for문:",
+          "┌─────────────────┐",
+          "│  range(5) 준비   │",
+          "│  i = 0, 1, 2... │",
+          "└────────┬────────┘",
+          "         ▼",
+          "    ┌────────────┐",
+          "    │ 코드 실행   │◄──┐",
+          "    └─────┬──────┘   │",
+          "          ▼          │",
+          "    ┌────────────┐   │",
+          "    │ 다음 요소? ├───┘",
+          "    └─────┬──────┘",
+          "     없음 │",
+          "          ▼",
+          "        종료"
+        ]
+      },
+
+      "rangeFunction": {
+        "title": "range() 완벽 정리",
+        "patterns": [
+          {"code": "range(5)", "result": "0, 1, 2, 3, 4", "note": "0부터 4까지 (5개)"},
+          {"code": "range(1, 6)", "result": "1, 2, 3, 4, 5", "note": "1부터 5까지 (끝 미포함)"},
+          {"code": "range(0, 10, 2)", "result": "0, 2, 4, 6, 8", "note": "0부터 8까지 2씩 증가"},
+          {"code": "range(5, 0, -1)", "result": "5, 4, 3, 2, 1", "note": "5부터 1까지 감소"}
+        ],
+        "criticalRule": "⚠️ 끝 값은 항상 미포함! range(1, 5)는 5 미포함"
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "range(1, 5)는 1, 2, 3, 4, 5"},
+        "correct": {"belief": "range(1, 5)는 1, 2, 3, 4 (5 미포함)", "tip": "n까지 포함하려면 range(1, n+1)"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "range() 범위를 정확히 아는가?",
+        "secondary": "break/continue를 올바르게 쓸 수 있는가?",
+        "tertiary": "중첩 반복문의 실행 흐름을 추적할 수 있는가?"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★★",
+          "intent": "range() 매개변수 정확히 사용",
+          "example": {
+            "code": "# 1부터 10까지 출력\nfor i in range(_____):\n    print(i)",
+            "answer": "1, 11",
+            "explanation": "10까지 포함하려면 range(1, 11)"
+          },
+          "trapPoints": ["끝 값 미포함 함정", "0부터 시작하는지 1부터인지"]
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "intent": "반복 횟수 계산",
+          "example": {
+            "code": "count = 0\nfor i in range(2, 10, 2):\n    count += 1\nprint(count)",
+            "answer": "4",
+            "explanation": "2, 4, 6, 8 총 4개"
+          }
+        },
+        {
+          "type": "오류 수정",
+          "frequency": "★★★★☆",
+          "intent": "무한 루프 또는 범위 오류",
+          "example": {
+            "bugCode": "i = 0\nwhile i < 5:\n    print(i)  # i 증가 없음 → 무한 루프",
+            "fixedCode": "i = 0\nwhile i < 5:\n    print(i)\n    i += 1"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 기본 for문",
+          "code": "# 1부터 5까지 합계\ntotal = 0\nfor i in range(1, 6):  # 1, 2, 3, 4, 5\n    total += i\nprint(total)  # 15",
+          "lineByLineExplanation": [
+            {"line": 2, "code": "total = 0", "why": "누적 변수 초기화"},
+            {"line": 3, "code": "for i in range(1, 6):", "why": "1부터 5까지. 6은 미포함!"},
+            {"line": 4, "code": "total += i", "why": "각 i를 total에 누적"}
+          ]
+        },
+        {
+          "title": "예제 2: break와 continue",
+          "code": "# 1~10 중 5에서 멈추기\nfor i in range(1, 11):\n    if i == 5:\n        break  # 반복 완전 종료\n    print(i)  # 1, 2, 3, 4 출력\n\n# 1~10 중 5만 건너뛰기\nfor i in range(1, 11):\n    if i == 5:\n        continue  # 이번 반복만 건너뜀\n    print(i)  # 1,2,3,4,6,7,8,9,10 출력",
+          "keyInsight": "break는 완전 종료, continue는 현재 반복만 건너뜀"
+        },
+        {
+          "title": "예제 3: 중첩 반복문",
+          "code": "# 구구단 2~3단\nfor i in range(2, 4):      # 바깥: 단\n    for j in range(1, 10):  # 안쪽: 곱할 수\n        print(f'{i} x {j} = {i*j}')",
+          "keyInsight": "바깥 1번 실행될 때 안쪽은 전체 반복"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: range() 범위 함정",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "다음 코드의 출력 횟수는?",
+            "code": "for i in range(1, 10):\n    print(i)",
+            "answer": "9번 (1~9 출력)",
+            "explanation": "10은 미포함"
+          }
+        },
+        {
+          "patternName": "패턴 2: break 위치",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "출력 결과는?",
+            "code": "for i in range(1, 10):\n    if i % 3 == 0:\n        break\n    print(i)",
+            "answer": "1, 2",
+            "explanation": "i=3일 때 break로 종료. 3은 출력 안 됨"
+          }
+        },
+        {
+          "patternName": "패턴 3: 중첩 반복 횟수",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "총 몇 번 출력되는가?",
+            "code": "for i in range(3):\n    for j in range(4):\n        print('*')",
+            "answer": "12번",
+            "explanation": "바깥 3번 × 안쪽 4번 = 12번"
+          }
+        },
+        {
+          "patternName": "패턴 4: while 조건",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "question": "몇 번 반복되는가?",
+            "code": "n = 100\ncount = 0\nwhile n > 0:\n    n //= 10\n    count += 1",
+            "answer": "3번",
+            "explanation": "100→10→1→0, 각 단계에서 count 증가"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "1부터 n까지의 합을 구하시오",
+        "input": "10",
+        "output": "55"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:20",
+          "phase": "문제 분석",
+          "thinking": ["'1부터 n까지' → 시작 1, 끝 n", "'합' → 누적 덧셈 필요"]
+        },
+        {
+          "time": "0:20 ~ 0:40",
+          "phase": "알고리즘 설계",
+          "thinking": ["반복문으로 1부터 n까지 순회", "누적 변수에 계속 더하기", "range(1, n+1) 필요 (n 포함!)"]
+        },
+        {
+          "time": "0:40 ~ 1:30",
+          "phase": "코드 작성",
+          "code": "n = int(input())\ntotal = 0\nfor i in range(1, n+1):  # 1부터 n까지\n    total += i\nprint(total)"
+        },
+        {
+          "time": "1:30 ~ 2:00",
+          "phase": "검증",
+          "thinking": ["n=10일 때", "i: 1→2→...→10 순회", "total: 0→1→3→6→...→55", "정답 55 ✓"]
+        },
+        {
+          "time": "2:00 ~ 2:30",
+          "phase": "최종 점검",
+          "thinking": ["range(1, n+1)에서 n+1 맞는지", "total 초기값 0 맞는지", "출력 형식 맞는지"]
+        }
+      ],
+
+      "whenStuck": {
+        "symptom": "반복 횟수가 예상과 다름",
+        "diagnosis": "range() 범위가 의도와 맞는지 확인",
+        "solution": [
+          "1. range()에 어떤 값이 들어가는지 print로 확인",
+          "2. list(range(1, 11))로 실제 값 확인",
+          "3. 끝 값 미포함 규칙 다시 체크"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "advantagesInThisLanguage": [
+        "range()로 간단한 숫자 반복",
+        "for item in list: 로 직접 요소 접근",
+        "enumerate()로 인덱스와 값 동시 획득"
+      ],
+
+      "usefulPatterns": [
+        {"name": "리스트 순회", "code": "for item in [1,2,3]: print(item)"},
+        {"name": "인덱스 필요시", "code": "for i, v in enumerate(['a','b']): print(i, v)"},
+        {"name": "역순 반복", "code": "for i in range(5, 0, -1): print(i)"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "range 끝 미포함", "wrong": "range(1, 10)이 10 포함", "right": "range(1, 11)이 10 포함"},
+        {"pitfall": "while 무한루프", "wrong": "i 증가 누락", "right": "반드시 탈출 조건 변화 필요"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {"rank": 1, "mistake": "range 끝 값 미포함 잊음", "wrongCode": "range(1, 10)으로 10까지", "correctCode": "range(1, 11)", "frequency": "85%"},
+        {"rank": 2, "mistake": "while 무한루프", "wrongCode": "i 변경 없이 while", "correctCode": "i += 1 추가", "frequency": "70%"},
+        {"rank": 3, "mistake": "중첩 반복 횟수 계산", "wrongCode": "더하기로 계산", "correctCode": "곱하기로 계산", "frequency": "60%"},
+        {"rank": 4, "mistake": "break vs continue 혼동", "wrongCode": "건너뛰려고 break", "correctCode": "건너뛰기는 continue", "frequency": "55%"},
+        {"rank": 5, "mistake": "range step 방향", "wrongCode": "range(10, 0, 1)", "correctCode": "range(10, 0, -1)", "frequency": "45%"}
+      ],
+
+      "edgeCases": [
+        {"case": "range(0)", "code": "for i in range(0): print(i)", "result": "아무것도 출력 안 됨", "handling": "0번 반복"},
+        {"case": "빈 리스트 순회", "code": "for x in []: print(x)", "result": "아무것도 출력 안 됨", "handling": "반복 0번 실행"},
+        {"case": "음수 step으로 증가 방향", "code": "for i in range(1, 10, -1): print(i)", "result": "아무것도 출력 안 됨", "handling": "시작>끝이면 -step 필요"}
+      ],
+
+      "finalChecklist": [
+        "✅ range() 끝 값 +1 했는지",
+        "✅ while 탈출 조건 변화하는지",
+        "✅ break/continue 의도대로 사용"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {"situation": "range 헷갈릴 때", "prompt": "range(1, 10)과 range(1, 11)의 차이를 출력 결과와 함께 설명해줘"},
+        {"situation": "중첩 반복 이해 안 될 때", "prompt": "이 중첩 for문이 몇 번 실행되는지 각 반복마다 i, j 값을 보여줘"}
+      ],
+
+      "selfCheckQuestion": [
+        "range(5)는 어떤 숫자들?",
+        "1부터 n까지 반복하려면?",
+        "break와 continue 차이는?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d4-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "1부터 5까지 출력되도록 빈칸 채우기",
+        "code": "for i in range(_____):\n    print(i)",
+        "answer": "1, 6",
+        "explanation": "5까지 포함하려면 range(1, 6)"
+      },
+      {
+        "id": "d4-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "출력 결과는?",
+        "code": "for i in range(3):\n    print(i, end=' ')",
+        "answer": "0 1 2",
+        "explanation": "range(3)은 0, 1, 2"
+      },
+      {
+        "id": "d4-p3",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "2, 4, 6, 8이 출력되도록",
+        "code": "for i in range(2, _____, _____):\n    print(i)",
+        "answer": "10, 2",
+        "explanation": "2부터 8까지 2씩 증가: range(2, 10, 2)"
+      },
+      {
+        "id": "d4-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "1~5 합계가 15가 아닌 10이 나옴",
+        "code": "total = 0\nfor i in range(1, 5):\n    total += i\nprint(total)",
+        "answer": {"lineToFix": 2, "fixedLine": "for i in range(1, 6):"},
+        "explanation": "range(1, 5)는 5 미포함. range(1, 6)으로 수정"
+      },
+      {
+        "id": "d4-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "n을 입력받아 n! (팩토리얼) 출력",
+        "input": "5",
+        "output": "120",
+        "answer": {"code": "n = int(input())\nresult = 1\nfor i in range(1, n+1):\n    result *= i\nprint(result)"},
+        "explanation": "5! = 1×2×3×4×5 = 120"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "range(a, b)는 b 미포함! n까지 포함하려면 range(1, n+1)",
+    "examinerMindset": "range 범위 함정, 무한루프, 중첩 반복 횟수 계산",
+    "mustRemember": ["range(n): 0~n-1", "range(a,b): a~b-1", "break: 완전종료", "continue: 건너뛰기"],
+    "tomorrowPreview": {"topic": "Day 5: 문자열", "connection": "for char in string: 으로 문자열 순회 가능"}
+  }
+}

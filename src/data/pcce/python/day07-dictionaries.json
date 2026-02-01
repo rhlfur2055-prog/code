@@ -1,0 +1,326 @@
+{
+  "id": "python-day07",
+  "language": "python",
+  "day": 7,
+  "title": "딕셔너리",
+  "examScope": "pcce",
+  "difficultyLevel": 2,
+  "estimatedTime": "60분",
+  "difficulty": "입문",
+  "pcceWeight": "★★★☆☆",
+  "keywords": ["딕셔너리", "키", "값", "items", "keys", "values", "get", "in"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "whyNeeded": {
+        "realWorld": "이름으로 데이터 찾기. 학생이름→점수, 상품코드→가격 같은 매핑.",
+        "inExam": "PCCE에서 키-값 접근, 존재 확인, 순회가 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "딕셔너리 = 키(key)로 값(value)을 찾는 자료구조",
+        "vs_list": "리스트는 순서(인덱스)로, 딕셔너리는 이름(키)으로 접근"
+      },
+
+      "analogy": {
+        "title": "사전/전화번호부 비유",
+        "explanation": "딕셔너리는 진짜 사전과 같다. 단어(키)로 뜻(값)을 찾는다. 전화번호부도 마찬가지로 이름(키)으로 번호(값)를 찾는다. 순서가 아니라 '이름'으로 검색한다는 점이 핵심!",
+        "codeExample": "phone_book = {'Kim': '010-1234', 'Lee': '010-5678'}\nprint(phone_book['Kim'])  # '010-1234'"
+      },
+
+      "visualization": {
+        "title": "딕셔너리 구조",
+        "ascii": [
+          "scores = {'Kim': 90, 'Lee': 85, 'Park': 95}",
+          "",
+          "   키(key)  →  값(value)",
+          "   'Kim'    →    90",
+          "   'Lee'    →    85",
+          "   'Park'   →    95",
+          "",
+          "scores['Kim'] → 90"
+        ]
+      },
+
+      "basicOperations": {
+        "create": ["빈 딕셔너리: {}", "값 있는: {'a': 1, 'b': 2}"],
+        "access": ["d['key']: 값 반환 (없으면 에러)", "d.get('key'): 값 반환 (없으면 None)", "d.get('key', 0): 없으면 0"],
+        "modify": ["d['key'] = value: 추가/수정", "del d['key']: 삭제"]
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "d['없는키']는 None 반환"},
+        "correct": {"belief": "d['없는키']는 KeyError. 안전하게는 d.get('키') 사용"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "d[key] vs d.get(key) 차이",
+        "secondary": "keys(), values(), items() 순회",
+        "tertiary": "in 연산자로 키 존재 확인"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "d = {'a': 1, 'b': 2}\nprint(d._____('c', 0))  # 0 출력",
+            "answer": "get",
+            "explanation": "get(key, default)는 키 없으면 default 반환"
+          },
+          "trapPoints": ["d['없는키']는 에러", "get은 에러 대신 None/기본값"]
+        },
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "d = {'a': 1, 'b': 2}\nprint('a' in d)",
+            "answer": "True",
+            "explanation": "in은 키 존재 여부 확인"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 기본 연산",
+          "code": "scores = {'Kim': 90, 'Lee': 85}\n\n# 접근\nprint(scores['Kim'])       # 90\nprint(scores.get('Park'))  # None (에러 없음)\nprint(scores.get('Park', 0))  # 0 (기본값)\n\n# 추가/수정\nscores['Park'] = 95        # 추가\nscores['Kim'] = 92         # 수정\n\n# 삭제\ndel scores['Lee']",
+          "keyInsight": "get()으로 안전하게 접근"
+        },
+        {
+          "title": "예제 2: 순회",
+          "code": "d = {'a': 1, 'b': 2, 'c': 3}\n\n# 키만\nfor key in d.keys():\n    print(key)  # a, b, c\n\n# 값만\nfor value in d.values():\n    print(value)  # 1, 2, 3\n\n# 키와 값\nfor key, value in d.items():\n    print(f'{key}: {value}')",
+          "keyInsight": "items()로 키-값 동시 순회"
+        },
+        {
+          "title": "예제 3: 글자 개수 세기",
+          "code": "s = 'banana'\ncount = {}\nfor char in s:\n    if char in count:\n        count[char] += 1\n    else:\n        count[char] = 1\nprint(count)  # {'b': 1, 'a': 3, 'n': 2}",
+          "keyInsight": "딕셔너리로 카운팅 패턴"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: get() 기본값",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "question": "결과는?",
+            "code": "d = {'x': 10}\nprint(d.get('y', 5))",
+            "answer": "5",
+            "explanation": "'y'가 없으므로 기본값 5 반환"
+          }
+        },
+        {
+          "patternName": "패턴 2: in 연산자",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "결과는?",
+            "code": "d = {'a': 1}\nprint(1 in d)",
+            "answer": "False",
+            "explanation": "in은 키를 검사. 1은 값이지 키가 아님"
+          }
+        },
+        {
+          "patternName": "패턴 3: items() 순회",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "출력 결과는?",
+            "code": "d = {'a': 1, 'b': 2}\nfor k, v in d.items():\n    print(k, v)",
+            "answer": "a 1\\nb 2",
+            "explanation": "items()는 (키, 값) 튜플 반환"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "문자열에서 가장 많이 나온 문자 찾기",
+        "input": "abracadabra",
+        "output": "a"
+      },
+
+      "steps": [
+        {
+          "time": "0:00 ~ 0:30",
+          "phase": "문제 분석",
+          "thinking": ["문자열에서 각 문자 개수 세기", "가장 많은 문자 출력"]
+        },
+        {
+          "time": "0:30 ~ 1:00",
+          "phase": "알고리즘 설계",
+          "thinking": ["딕셔너리로 카운팅", "max 찾기 (순회하며 비교)"]
+        },
+        {
+          "time": "1:00 ~ 2:30",
+          "phase": "코드 작성",
+          "code": "s = input()\ncount = {}\nfor c in s:\n    count[c] = count.get(c, 0) + 1\n\nmax_char = ''\nmax_count = 0\nfor char, cnt in count.items():\n    if cnt > max_count:\n        max_count = cnt\n        max_char = char\nprint(max_char)"
+        },
+        {
+          "time": "2:30 ~ 3:00",
+          "phase": "검증",
+          "thinking": ["abracadabra → {'a':5,'b':2,'r':2,'c':1,'d':1}", "최대는 'a' ✓"]
+        },
+        {
+          "time": "3:00 ~ 3:30",
+          "phase": "최종 점검",
+          "thinking": ["get(c, 0)으로 없는 키 안전 처리", "items()로 키-값 동시 순회"]
+        }
+      ],
+
+      "whenStuck": {
+        "symptom": "KeyError 발생",
+        "diagnosis": "없는 키를 d[key]로 접근함",
+        "solution": [
+          "1. d.get(key, 기본값) 사용",
+          "2. 또는 if key in d: 로 확인 후 접근",
+          "3. 디버깅: print(d.keys())로 존재하는 키 확인"
+        ]
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "usefulMethods": [
+        {"method": "d[key]", "desc": "값 반환 (없으면 KeyError)"},
+        {"method": "d.get(key)", "desc": "값 반환 (없으면 None)"},
+        {"method": "d.get(key, default)", "desc": "없으면 default"},
+        {"method": "d.keys()", "desc": "모든 키"},
+        {"method": "d.values()", "desc": "모든 값"},
+        {"method": "d.items()", "desc": "(키, 값) 쌍"},
+        {"method": "key in d", "desc": "키 존재 여부"},
+        {"method": "del d[key]", "desc": "삭제"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "없는 키 접근", "wrong": "d['없는키'] → KeyError", "right": "d.get('없는키') → None"},
+        {"pitfall": "in은 키만 검사", "wrong": "값 in d", "right": "값 in d.values()"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {"rank": 1, "mistake": "없는 키로 d[key] 접근", "wrongCode": "d['없는키']", "correctCode": "d.get('없는키', 기본값)", "frequency": "80%"},
+        {"rank": 2, "mistake": "in이 값도 검사한다고 착각", "wrongCode": "10 in {'a':10}", "correctCode": "10 in d.values()", "frequency": "70%"},
+        {"rank": 3, "mistake": "get() 기본값 생략", "wrongCode": "d.get('키') + 1 (None+1 에러)", "correctCode": "d.get('키', 0) + 1", "frequency": "60%"},
+        {"rank": 4, "mistake": "items() 언패킹 안 함", "wrongCode": "for x in d.items(): x[0]", "correctCode": "for k, v in d.items():", "frequency": "50%"},
+        {"rank": 5, "mistake": "키에 리스트 사용 (불가)", "wrongCode": "d[[1,2]] = 'x'", "correctCode": "d[(1,2)] = 'x' (튜플은 가능)", "frequency": "40%"}
+      ],
+
+      "edgeCases": [
+        {"case": "빈 딕셔너리 순회", "code": "for k in {}: print(k)", "result": "아무것도 출력 안 됨", "handling": "빈 딕셔너리도 에러 없이 순회"},
+        {"case": "키 중복 정의", "code": "d = {'a':1, 'a':2}", "result": "{'a': 2}", "handling": "나중 값이 덮어씀"},
+        {"case": "get 기본값으로 None 연산", "code": "d.get('x') + 1", "result": "TypeError", "handling": "기본값 0 지정 필수"}
+      ],
+
+      "finalChecklist": [
+        "✅ 키 존재 불확실하면 get() 사용",
+        "✅ in은 키만 검사",
+        "✅ items()로 키-값 동시 순회"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {"situation": "get 이해 안 될 때", "badPrompt": "get 뭐야", "goodPrompt": "d['key']와 d.get('key')의 차이를 없는 키일 때 비교해줘"},
+        {"situation": "순회 헷갈릴 때", "badPrompt": "딕셔너리 순회", "goodPrompt": "딕셔너리 keys(), values(), items() 순회를 각각 예제로 보여줘"},
+        {"situation": "카운팅 이해 안 될 때", "badPrompt": "어떻게 세", "goodPrompt": "딕셔너리로 문자열에서 각 문자 개수를 세는 코드를 단계별로 설명해줘"}
+      ],
+
+      "warningAboutCopyPaste": {
+        "title": "복붙의 위험성",
+        "warning": "get 패턴만 복붙하면 기본값 설정 이유를 모름",
+        "rightWay": [
+          "없는 키로 d[key] 접근해서 에러 직접 경험",
+          "get(key)와 get(key, 0)의 차이 확인",
+          "in 연산자로 키/값 확인 실험"
+        ]
+      },
+
+      "selfCheckQuestion": [
+        "d['없는키']의 결과는?",
+        "'a' in {'a': 1}의 결과는?",
+        "1 in {'a': 1}의 결과는?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d7-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "키 'c'가 없을 때 0을 반환",
+        "code": "d = {'a': 1, 'b': 2}\nprint(d._____('c', 0))",
+        "answer": "get",
+        "explanation": "get(key, default)는 없으면 default 반환"
+      },
+      {
+        "id": "d7-p2",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "결과는?",
+        "code": "d = {'x': 10, 'y': 20}\nprint('x' in d)",
+        "answer": "True",
+        "explanation": "'x'는 키로 존재"
+      },
+      {
+        "id": "d7-p3",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "결과는?",
+        "code": "d = {'x': 10}\nprint(10 in d)",
+        "answer": "False",
+        "explanation": "in은 키만 검사. 10은 값"
+      },
+      {
+        "id": "d7-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "없는 키 접근 시 에러 발생",
+        "code": "d = {'a': 1}\nprint(d['b'])  # KeyError",
+        "answer": {"fixedCode": "d = {'a': 1}\nprint(d.get('b', 0))"},
+        "explanation": "get()으로 안전하게 접근"
+      },
+      {
+        "id": "d7-p5",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "리스트에서 각 요소 개수 세기",
+        "input": "[1, 2, 1, 3, 2, 1]",
+        "output": "{1: 3, 2: 2, 3: 1}",
+        "answer": {"code": "nums = [1, 2, 1, 3, 2, 1]\ncount = {}\nfor n in nums:\n    count[n] = count.get(n, 0) + 1\nprint(count)"},
+        "explanation": "get(n, 0)으로 없으면 0부터 시작하여 카운팅"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "d['키']는 에러 위험, d.get('키', 기본값)이 안전. in은 키만 검사!",
+    "examinerMindset": "없는 키 접근 에러, in 연산자 착각, get 기본값 함정",
+    "mustRemember": ["d['키']: 없으면 에러", "d.get('키'): 없으면 None", "key in d: 키 존재 확인", "items(): (키,값) 순회"],
+    "tomorrowPreview": {"topic": "Day 8: 함수", "connection": "딕셔너리를 함수에 전달하거나 반환하는 패턴"}
+  }
+}

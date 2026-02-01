@@ -1,0 +1,345 @@
+{
+  "id": "pcce-exam-overview",
+  "title": "PCCE 시험 완벽 가이드",
+  "lastUpdated": "2026-01",
+
+  "examBasics": {
+    "title": "📋 PCCE 시험 기본 정보",
+    "officialName": "Programmers Certified Coding Essentials",
+    "organizer": "프로그래머스 (그렙)",
+    "purpose": "코딩 기초 역량을 객관적으로 평가하고 인증하는 자격 시험",
+    "targetAudience": [
+      "코딩 입문자 및 초보 개발자",
+      "비전공자로 개발 역량을 증명하고 싶은 분",
+      "취업/이직 준비생",
+      "코딩 교육을 받은 후 실력을 검증하고 싶은 분",
+      "IT 기업 지원 시 기초 코딩 역량 증빙이 필요한 분"
+    ],
+    "recognition": [
+      "IT 기업 채용 시 기초 코딩 역량 증빙 자료로 활용",
+      "코딩 부트캠프/교육 수료 역량 검증",
+      "비전공자 개발 직무 전환 시 기초 역량 증명"
+    ]
+  },
+
+  "examFormat": {
+    "title": "📝 시험 형식",
+    "availableLanguages": [
+      {
+        "language": "Python",
+        "recommendation": "★★★★★ (강력 추천)",
+        "reason": "문법이 간결하고, 코드 작성 시간 단축 가능"
+      },
+      {
+        "language": "Java",
+        "recommendation": "★★★☆☆",
+        "reason": "기업에서 많이 사용하나, 코드량이 많아 시간 관리 필요"
+      },
+      {
+        "language": "C++",
+        "recommendation": "★★☆☆☆",
+        "reason": "포인터, 메모리 관리 등 추가 개념 필요"
+      }
+    ],
+    "questionCount": 10,
+    "timeLimit": "50분",
+    "testEnvironment": "프로그래머스 온라인 IDE",
+    "allowedResources": "없음 (오픈북 아님)",
+    "proctoring": "온라인 감독 시스템 (웹캠 필수)"
+  },
+
+  "questionTypes": {
+    "title": "📊 문제 유형별 구성",
+    "distribution": [
+      {
+        "type": "빈칸 채우기",
+        "count": "4문제",
+        "points": "각 80점",
+        "totalPoints": "320점",
+        "description": "주어진 코드의 빈칸(___)을 채워 원하는 결과가 나오도록 함",
+        "difficulty": "하~중",
+        "avgTime": "문제당 3분"
+      },
+      {
+        "type": "오류 수정",
+        "count": "3문제",
+        "points": "각 100점",
+        "totalPoints": "300점",
+        "description": "버그가 있는 코드에서 딱 한 줄만 수정하여 올바르게 동작하게 함",
+        "difficulty": "중",
+        "avgTime": "문제당 4분"
+      },
+      {
+        "type": "코드 작성",
+        "count": "3문제",
+        "points": "각 120점 (부분 점수 있음)",
+        "totalPoints": "380점",
+        "description": "요구사항에 맞는 코드를 처음부터 작성",
+        "difficulty": "중~상",
+        "avgTime": "문제당 7분"
+      }
+    ],
+    "totalScore": 1000,
+    "scoringNote": "빈칸/오류수정은 정답만 인정, 코드작성은 테스트케이스별 부분점수"
+  },
+
+  "levelSystem": {
+    "title": "🏆 레벨 체계",
+    "levels": [
+      {
+        "level": "Lv.1",
+        "scoreRange": "0 ~ 299점",
+        "description": "코딩 입문 단계",
+        "meaning": "기초 문법 학습 필요"
+      },
+      {
+        "level": "Lv.2",
+        "scoreRange": "300 ~ 499점",
+        "description": "기초 학습 단계",
+        "meaning": "기본 문법은 알지만 응용력 부족"
+      },
+      {
+        "level": "Lv.3",
+        "scoreRange": "500 ~ 699점",
+        "description": "기초 완성 단계",
+        "meaning": "기초 문법 활용 가능, 실전 연습 필요"
+      },
+      {
+        "level": "Lv.4",
+        "scoreRange": "700 ~ 899점",
+        "description": "실전 활용 단계 ⭐ (합격 기준)",
+        "meaning": "코딩 기초 역량 인증, 채용 시 활용 가능"
+      },
+      {
+        "level": "Lv.5",
+        "scoreRange": "900 ~ 1000점",
+        "description": "숙련 단계",
+        "meaning": "기초 역량 완벽, 심화 학습 권장"
+      }
+    ],
+    "passingScore": 700,
+    "passingLevel": "Lv.4 이상",
+    "certificateValidity": "영구 (단, 시험 버전 표기)"
+  },
+
+  "examSchedule": {
+    "title": "📅 시험 일정",
+    "frequency": "상시 응시 가능 (프로그래머스 스쿨에서 예약)",
+    "registrationMethod": "프로그래머스 스쿨 → PCCE 메뉴 → 시험 예약",
+    "cost": "무료 (2026년 기준)",
+    "retakePolicy": {
+      "waitingPeriod": "응시 후 7일 뒤 재응시 가능",
+      "retakeLimit": "횟수 제한 없음"
+    },
+    "resultAnnouncement": "시험 종료 즉시 점수 확인 가능"
+  },
+
+  "examEnvironment": {
+    "title": "💻 시험 환경",
+    "platform": "프로그래머스 온라인 IDE",
+    "requirements": [
+      "안정적인 인터넷 연결",
+      "웹캠 필수 (온라인 감독)",
+      "크롬/엣지 브라우저 권장",
+      "조용한 응시 환경"
+    ],
+    "prohibitedItems": [
+      "다른 탭/창 열기",
+      "외부 IDE 사용",
+      "검색 엔진 사용",
+      "다른 사람과 대화",
+      "휴대폰 사용"
+    ],
+    "availableFeatures": [
+      "기본 코드 자동완성 (IDE 기본 기능)",
+      "구문 하이라이팅",
+      "실행 및 테스트"
+    ]
+  },
+
+  "topicsCovered": {
+    "title": "📚 출제 범위",
+    "coreTopics": [
+      {
+        "topic": "변수와 자료형",
+        "weight": "★★★★★",
+        "details": ["변수 선언", "타입 변환", "input/output"]
+      },
+      {
+        "topic": "연산자",
+        "weight": "★★★★★",
+        "details": ["산술/비교/논리 연산", "연산자 우선순위", "복합 대입"]
+      },
+      {
+        "topic": "조건문",
+        "weight": "★★★★★",
+        "details": ["if-elif-else", "중첩 조건문", "조건 표현식"]
+      },
+      {
+        "topic": "반복문",
+        "weight": "★★★★★",
+        "details": ["for문", "while문", "break/continue", "중첩 반복"]
+      },
+      {
+        "topic": "문자열",
+        "weight": "★★★★☆",
+        "details": ["인덱싱/슬라이싱", "문자열 메서드", "포맷팅"]
+      },
+      {
+        "topic": "리스트/배열",
+        "weight": "★★★★★",
+        "details": ["인덱싱", "추가/삭제/수정", "정렬", "순회"]
+      },
+      {
+        "topic": "딕셔너리/Map",
+        "weight": "★★★☆☆",
+        "details": ["키-값 쌍", "순회", "존재 확인"]
+      },
+      {
+        "topic": "함수",
+        "weight": "★★★★★",
+        "details": ["함수 정의/호출", "매개변수/반환값", "스코프"]
+      }
+    ],
+    "advancedTopics": [
+      {
+        "topic": "재귀",
+        "weight": "★★★☆☆",
+        "details": ["기저 조건", "재귀 호출"]
+      },
+      {
+        "topic": "정렬/탐색",
+        "weight": "★★★★☆",
+        "details": ["내장 정렬 함수", "선형/이진 탐색"]
+      },
+      {
+        "topic": "2차원 배열",
+        "weight": "★★★☆☆",
+        "details": ["2차원 순회", "행/열 접근"]
+      }
+    ],
+    "notCovered": [
+      "클래스/객체지향 (기초 수준만 가끔 출제)",
+      "파일 입출력",
+      "예외 처리 (기초적인 것만)",
+      "외부 라이브러리 (numpy, pandas 등)",
+      "고급 알고리즘 (DFS/BFS, DP 등)"
+    ]
+  },
+
+  "preparationTimeline": {
+    "title": "⏰ 준비 기간 가이드",
+    "byBackground": [
+      {
+        "background": "완전 비전공자 (코딩 처음)",
+        "recommendedTime": "4~6주",
+        "dailyStudy": "1~2시간",
+        "focus": "기초 문법부터 차근차근"
+      },
+      {
+        "background": "코딩 교육 수료자",
+        "recommendedTime": "2~3주",
+        "dailyStudy": "1시간",
+        "focus": "실전 문제 풀이 위주"
+      },
+      {
+        "background": "프로그래밍 경험자",
+        "recommendedTime": "1~2주",
+        "dailyStudy": "30분~1시간",
+        "focus": "문제 유형 익히기 + 시간 관리"
+      }
+    ],
+    "our21DayCurriculum": {
+      "description": "이 학습 플랫폼의 21일 커리큘럼 기준",
+      "week1": "Day 1~7: 기초 문법 (변수~딕셔너리)",
+      "week2": "Day 8~14: 함수~구현 문제",
+      "week3": "Day 15~21: 알고리즘 + 모의고사"
+    }
+  },
+
+  "successTips": {
+    "title": "✅ 합격을 위한 핵심 팁",
+    "beforeExam": [
+      "실제 시험과 같은 환경에서 모의고사 풀어보기",
+      "시간 관리 연습 (50분 안에 10문제)",
+      "자주 틀리는 유형 집중 복습",
+      "input() 타입 변환, 인덱스 범위 등 함정 포인트 암기"
+    ],
+    "duringExam": [
+      "쉬운 문제부터 풀기 (빈칸 → 오류수정 → 코드작성)",
+      "막히면 과감히 넘기고 나중에 다시",
+      "코드 작성 시 부분 점수라도 노리기",
+      "제출 전 변수명 오타, 인덱스 범위 한 번 더 확인"
+    ],
+    "commonMistakes": [
+      "input()은 항상 문자열 반환 → int() 변환 잊지 말기",
+      "인덱스는 0부터 시작, 슬라이싱 끝 인덱스는 미포함",
+      "오류 수정 문제에서 여러 줄 고치면 감점",
+      "코드 작성 후 예제 테스트 반드시 실행"
+    ]
+  },
+
+  "comparisonWithOthers": {
+    "title": "🔄 다른 코딩 시험과 비교",
+    "comparisons": [
+      {
+        "exam": "코딩테스트 (기업 채용)",
+        "difficulty": "PCCE보다 어려움",
+        "focus": "알고리즘 문제 해결력",
+        "relation": "PCCE 합격 후 도전 권장"
+      },
+      {
+        "exam": "정보처리기사",
+        "difficulty": "다른 영역",
+        "focus": "이론 + 실기 (DB, 네트워크 등 포함)",
+        "relation": "PCCE는 순수 코딩 역량만 평가"
+      },
+      {
+        "exam": "TOPCIT",
+        "difficulty": "더 넓은 범위",
+        "focus": "SW 역량 전반 (기획, 설계 포함)",
+        "relation": "PCCE는 코딩에 특화"
+      }
+    ],
+    "pcceAdvantages": [
+      "무료 응시",
+      "상시 응시 가능",
+      "즉시 결과 확인",
+      "코딩에만 집중 (이론 없음)"
+    ]
+  },
+
+  "faq": {
+    "title": "❓ 자주 묻는 질문",
+    "questions": [
+      {
+        "q": "시험 중에 인터넷 검색할 수 있나요?",
+        "a": "아니요. 온라인 감독 시스템이 있어 다른 탭 열면 부정행위로 간주됩니다."
+      },
+      {
+        "q": "Python, Java, C++ 중 어떤 언어로 보는 게 유리한가요?",
+        "a": "Python 강력 추천. 코드가 짧아 시간 절약되고, 실수할 확률도 낮습니다."
+      },
+      {
+        "q": "Lv.4 이하면 불합격인가요?",
+        "a": "공식적으로 '불합격'은 없지만, 채용 시 활용 가능한 최소 레벨은 Lv.4(700점)입니다."
+      },
+      {
+        "q": "시험 시간이 부족하면 어떻게 하나요?",
+        "a": "코드 작성 문제는 부분 점수가 있으므로, 완벽하지 않아도 제출하세요."
+      },
+      {
+        "q": "재시험 볼 수 있나요?",
+        "a": "네. 7일 후 재응시 가능하며, 횟수 제한 없습니다."
+      },
+      {
+        "q": "성적표를 받을 수 있나요?",
+        "a": "네. 프로그래머스에서 성적 인증서를 PDF로 다운로드할 수 있습니다."
+      },
+      {
+        "q": "기업에서 PCCE 성적을 인정하나요?",
+        "a": "점점 많은 기업이 채용 시 참고 자료로 활용하고 있습니다. 특히 주니어/신입 채용에서 유용합니다."
+      }
+    ]
+  }
+}

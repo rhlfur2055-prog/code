@@ -1,0 +1,268 @@
+{
+  "id": "python-day20",
+  "language": "python",
+  "day": 20,
+  "title": "모의고사 2",
+  "examScope": "pccp",
+  "difficultyLevel": 4,
+  "estimatedTime": "50분",
+  "difficulty": "실전",
+  "pcceWeight": "★★★★★",
+  "keywords": ["모의고사", "실전연습", "함수", "알고리즘", "종합문제"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 모의고사 2 안내",
+
+      "analogy": {
+        "title": "모의고사 2 = 실전 직전 마지막 점검",
+        "explanation": "시험 전날 마지막으로 실력을 점검하는 것처럼, 모의고사 2는 실제 시험보다 약간 어렵게 출제됩니다. 여기서 8문제 이상 맞으면 실제 시험은 더 쉽게 느껴질 것입니다.",
+        "codeExample": "# 실전보다 어렵게!\n# 목표: 8문제 이상 정답\n# 틀린 문제 → 해당 Day 복습\n# 자신감 갖고 시험장으로!"
+      },
+
+      "examInfo": {
+        "totalQuestions": 10,
+        "timeLimit": "50분",
+        "structure": {
+          "fillBlank": {"count": 4, "range": "1~4번"},
+          "bugFix": {"count": 3, "range": "5~7번"},
+          "codeWriting": {"count": 3, "range": "8~10번"}
+        },
+        "difficultyNote": "모의고사 1보다 난이도 상승"
+      },
+
+      "scoringGuide": {
+        "fillBlank": "대소문자, 띄어쓰기 정확히",
+        "bugFix": "최소한의 수정으로 해결",
+        "codeWriting": "출력 형식 정확히 맞추기"
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제 의도 분석",
+
+      "topicsCovered": [
+        "함수와 return",
+        "재귀",
+        "정렬과 탐색",
+        "2차원 배열",
+        "구현 문제",
+        "그리디 기초"
+      ],
+
+      "keyFocus": {
+        "functions": "return 누락, 매개변수 활용",
+        "algorithms": "기본 알고리즘 구현",
+        "dataStructures": "리스트, 딕셔너리 복합 활용"
+      }
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 중급 핵심 정리",
+
+      "quickReview": [
+        {
+          "topic": "함수",
+          "key": "return 없으면 None, 기본값 매개변수"
+        },
+        {
+          "topic": "재귀",
+          "key": "기저조건 필수, return 재귀호출"
+        },
+        {
+          "topic": "정렬",
+          "key": "sort() vs sorted(), key=lambda"
+        },
+        {
+          "topic": "2차원 배열",
+          "key": "arr[행][열], 이중 for문"
+        },
+        {
+          "topic": "그리디",
+          "key": "현재 최선 선택, 정렬 후 처리"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 중급 함정",
+
+      "commonTraps": [
+        {"trap": "재귀에서 return 누락", "example": "return fib(n-1) + fib(n-2)"},
+        {"trap": "2차원 배열 복사", "example": "[[0]*n]*m은 얕은 복사"},
+        {"trap": "lambda 문법", "example": "key=lambda x: x[1]"},
+        {"trap": "스코프 문제", "example": "함수 내 지역변수"},
+        {"trap": "enumerate 활용", "example": "for i, v in enumerate(arr)"}
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 문제 접근법",
+
+      "approach": {
+        "step1": "입력/출력 형식 정확히 파악",
+        "step2": "예제로 손으로 풀어보기",
+        "step3": "알고리즘/자료구조 선택",
+        "step4": "코드 작성 후 예제 테스트"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 고급 문법",
+
+      "mustKnow": [
+        {"syntax": "sorted(arr, key=lambda x: x[1])", "use": "특정 기준 정렬"},
+        {"syntax": "[[0]*n for _ in range(m)]", "use": "2차원 배열 생성"},
+        {"syntax": "any(), all()", "use": "조건 검사"},
+        {"syntax": "zip(a, b)", "use": "두 리스트 병렬 순회"},
+        {"syntax": "collections.Counter", "use": "빈도수 계산"}
+      ]
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 시험 중 주의사항",
+
+      "tips": [
+        "함수 정의 시 return 확인",
+        "재귀 기저조건 먼저 작성",
+        "2차원 배열 인덱스 [행][열]",
+        "lambda 함수 문법 정확히",
+        "정렬 기준 확인"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 실전 대비",
+
+      "note": "모의고사 2는 실제 시험보다 약간 어렵게 출제. 8문제 이상 맞추면 합격권",
+
+      "warningAboutCopyPaste": {
+        "message": "모의고사는 반드시 혼자 힘으로 먼저 풀어야 효과가 있습니다",
+        "recommendation": "50분 타이머 맞추고 답/힌트 없이 풀기 → 채점 → 틀린 문제 복습"
+      },
+
+      "selfCheckQuestion": [
+        "모의고사 1보다 점수가 올랐는가?",
+        "재귀, 2차원 배열 문제를 풀 수 있는가?",
+        "lambda 정렬을 직접 작성할 수 있는가?",
+        "global 키워드 사용법을 아는가?"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "mock2-q1",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "리스트를 두 번째 요소 기준으로 정렬",
+        "code": "data = [(1, 3), (2, 1), (3, 2)]\ndata.sort(key=_____ x: x[1])\nprint(data)",
+        "expectedOutput": "[(2, 1), (3, 2), (1, 3)]",
+        "answer": "lambda",
+        "explanation": "key=lambda x: x[1]로 두 번째 요소 기준 정렬"
+      },
+      {
+        "id": "mock2-q2",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "팩토리얼 재귀 함수",
+        "code": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * _____(n - 1)\n\nprint(factorial(5))",
+        "expectedOutput": "120",
+        "answer": "factorial",
+        "explanation": "재귀 호출: 자기 자신을 호출"
+      },
+      {
+        "id": "mock2-q3",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "2차원 배열에서 특정 위치 값",
+        "code": "arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nprint(arr[1]_____)",
+        "expectedOutput": "5",
+        "answer": "[1]",
+        "explanation": "arr[1][1]은 2행 2열 (인덱스는 0부터)"
+      },
+      {
+        "id": "mock2-q4",
+        "type": "빈칸채우기",
+        "difficulty": "중",
+        "question": "기본값 매개변수",
+        "code": "def greet(name, msg='Hello'):\n    return f'{msg}, {name}!'\n\nprint(greet('Kim'))",
+        "expectedOutput": "Hello, Kim!",
+        "inputForBlank": "결과 예측",
+        "answer": "Hello, Kim!",
+        "explanation": "msg 인자 생략 시 기본값 'Hello' 사용"
+      },
+      {
+        "id": "mock2-q5",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "재귀 함수가 None 반환",
+        "code": "def sum_to_n(n):\n    if n == 0:\n        return 0\n    sum_to_n(n - 1) + n\n\nprint(sum_to_n(5))",
+        "expectedOutput": "15",
+        "currentOutput": "None",
+        "answer": {"fixedCode": "def sum_to_n(n):\n    if n == 0:\n        return 0\n    return sum_to_n(n - 1) + n\n\nprint(sum_to_n(5))"},
+        "explanation": "재귀 호출 앞에 return 누락"
+      },
+      {
+        "id": "mock2-q6",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "2차원 배열 생성 오류",
+        "code": "# 3x3 배열을 0으로 초기화\narr = [[0] * 3] * 3\narr[0][0] = 1\nprint(arr)",
+        "expectedOutput": "[[1, 0, 0], [0, 0, 0], [0, 0, 0]]",
+        "currentOutput": "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]",
+        "answer": {"fixedCode": "arr = [[0] * 3 for _ in range(3)]\narr[0][0] = 1\nprint(arr)"},
+        "explanation": "*3은 같은 리스트 참조. for로 생성해야 독립"
+      },
+      {
+        "id": "mock2-q7",
+        "type": "오류수정",
+        "difficulty": "상",
+        "question": "지역변수와 전역변수 혼동",
+        "code": "count = 0\n\ndef increment():\n    count += 1\n\nincrement()\nprint(count)",
+        "expectedOutput": "1",
+        "currentOutput": "UnboundLocalError",
+        "answer": {"fixedCode": "count = 0\n\ndef increment():\n    global count\n    count += 1\n\nincrement()\nprint(count)"},
+        "explanation": "함수 내에서 전역변수 수정하려면 global 선언"
+      },
+      {
+        "id": "mock2-q8",
+        "type": "코드작성",
+        "difficulty": "중",
+        "question": "리스트에서 중복 제거 후 정렬",
+        "input": "[3, 1, 2, 1, 3, 2, 4]",
+        "expectedOutput": "[1, 2, 3, 4]",
+        "answer": {"code": "nums = [3, 1, 2, 1, 3, 2, 4]\nresult = sorted(set(nums))\nprint(result)"},
+        "explanation": "set()으로 중복 제거, sorted()로 정렬"
+      },
+      {
+        "id": "mock2-q9",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "거스름돈 최소 동전 개수",
+        "input": "1260원, 동전: 500, 100, 50, 10",
+        "expectedOutput": "6",
+        "answer": {"code": "money = 1260\ncoins = [500, 100, 50, 10]\ncount = 0\nfor coin in coins:\n    count += money // coin\n    money %= coin\nprint(count)"},
+        "explanation": "큰 동전부터 최대한 사용 (그리디)"
+      },
+      {
+        "id": "mock2-q10",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "2차원 배열 대각선 합",
+        "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+        "expectedOutput": "15",
+        "answer": {"code": "arr = [[1,2,3],[4,5,6],[7,8,9]]\ntotal = 0\nfor i in range(len(arr)):\n    total += arr[i][i]\nprint(total)"},
+        "explanation": "대각선은 arr[0][0], arr[1][1], arr[2][2]"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "중급 문제로 실력 점검. 함수, 재귀, 2차원 배열 집중",
+    "examinerMindset": "return 누락, 얕은 복사, 스코프 함정",
+    "mustRemember": ["재귀에 return", "2차원 배열 for로 생성", "global 키워드", "lambda 정렬"],
+    "tomorrowPreview": {"topic": "Day 21: 최종 정리", "connection": "21일간 학습 총정리 및 시험 전략"}
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "id": "python-day09",
+  "language": "python",
+  "day": 9,
+  "title": "재귀",
+  "examScope": "pccp",
+  "difficultyLevel": 3,
+  "estimatedTime": "70분",
+  "difficulty": "초급",
+  "pcceWeight": "★★★☆☆",
+  "keywords": ["재귀함수", "기저조건", "재귀호출", "팩토리얼", "피보나치", "호출스택"],
+
+  "sections": {
+    "A_principle": {
+      "title": "🎯 원리 이해",
+
+      "analogy": {
+        "title": "재귀 = 러시아 인형(마트료시카)",
+        "explanation": "러시아 인형을 열면 같은 모양의 더 작은 인형이 나오고, 그 인형을 열면 또 더 작은 인형이 나옵니다. 가장 작은 인형(기저조건)에 도달하면 더 이상 열 수 없습니다. 재귀도 같은 구조의 더 작은 문제를 풀다가 기저조건에서 멈춥니다.",
+        "codeExample": "# 인형 열기 = 재귀 호출\ndef open_doll(size):\n    if size == 1:          # 가장 작은 인형 = 기저조건\n        return '가장 작은 인형!'\n    return f'{size}번 인형 열고 → ' + open_doll(size - 1)"
+      },
+
+      "whyNeeded": {
+        "realWorld": "큰 문제를 같은 구조의 작은 문제로 나눠 해결. 트리 탐색, 폴더 구조 등.",
+        "inExam": "PCCE에서 재귀 추적, 기저조건 파악 문제가 출제."
+      },
+
+      "coreIdea": {
+        "oneLiner": "재귀 = 함수가 자기 자신을 호출하는 것",
+        "key": "반드시 기저조건(종료조건)이 있어야 함. 없으면 무한 호출"
+      },
+
+      "visualization": {
+        "title": "재귀 구조",
+        "ascii": [
+          "def factorial(n):",
+          "    if n <= 1:        # 기저조건",
+          "        return 1",
+          "    return n * factorial(n-1)  # 재귀호출",
+          "",
+          "factorial(4) 호출 과정:",
+          "  factorial(4)",
+          "  → 4 * factorial(3)",
+          "  → 4 * 3 * factorial(2)",
+          "  → 4 * 3 * 2 * factorial(1)",
+          "  → 4 * 3 * 2 * 1",
+          "  → 24"
+        ]
+      },
+
+      "twoEssentials": {
+        "기저조건": "재귀를 멈추는 조건. 없으면 무한 재귀 → 에러",
+        "재귀호출": "자기 자신을 더 작은 문제로 호출"
+      },
+
+      "commonMisunderstanding": {
+        "wrong": {"belief": "재귀는 반복문보다 항상 좋다"},
+        "correct": {"belief": "재귀는 직관적이지만 메모리 사용 많음. 단순 반복은 for가 효율적"}
+      }
+    },
+
+    "B_examinerIntent": {
+      "title": "🎯 출제자 의도 분석",
+
+      "whatTheyTest": {
+        "primary": "재귀 호출 순서와 반환값 추적",
+        "secondary": "기저조건 파악",
+        "tertiary": "재귀를 반복문으로 또는 반대로 변환"
+      },
+
+      "questionPatterns": [
+        {
+          "type": "결과 예측",
+          "frequency": "★★★★★",
+          "example": {
+            "code": "def f(n):\n    if n <= 0:\n        return 0\n    return n + f(n-1)\n\nprint(f(3))",
+            "answer": "6",
+            "explanation": "f(3)=3+f(2)=3+2+f(1)=3+2+1+f(0)=3+2+1+0=6"
+          }
+        },
+        {
+          "type": "빈칸 채우기",
+          "frequency": "★★★★☆",
+          "example": {
+            "code": "def factorial(n):\n    if _____:\n        return 1\n    return n * factorial(n-1)",
+            "answer": "n <= 1",
+            "explanation": "기저조건: n이 1 이하면 1 반환"
+          }
+        }
+      ]
+    },
+
+    "C_codePhilosophy": {
+      "title": "💻 코드 철학",
+
+      "examples": [
+        {
+          "title": "예제 1: 팩토리얼",
+          "code": "def factorial(n):\n    # 기저조건\n    if n <= 1:\n        return 1\n    # 재귀호출\n    return n * factorial(n - 1)\n\nprint(factorial(5))  # 120",
+          "trace": "5! = 5 × 4! = 5 × 4 × 3! = ... = 120"
+        },
+        {
+          "title": "예제 2: 피보나치",
+          "code": "def fib(n):\n    if n <= 1:\n        return n\n    return fib(n-1) + fib(n-2)\n\nprint(fib(6))  # 8",
+          "trace": "fib(6)=fib(5)+fib(4)=5+3=8"
+        },
+        {
+          "title": "예제 3: 합계",
+          "code": "def sum_to_n(n):\n    if n <= 0:\n        return 0\n    return n + sum_to_n(n - 1)\n\nprint(sum_to_n(5))  # 15",
+          "trace": "5+4+3+2+1+0=15"
+        }
+      ]
+    },
+
+    "D_realExamPatterns": {
+      "title": "📝 실전 기출 패턴",
+
+      "patterns": [
+        {
+          "patternName": "패턴 1: 재귀 추적",
+          "frequency": "★★★★★",
+          "exampleProblem": {
+            "code": "def f(n):\n    if n == 0:\n        return 1\n    return 2 * f(n-1)\n\nprint(f(3))",
+            "answer": "8",
+            "explanation": "f(3)=2*f(2)=2*2*f(1)=2*2*2*f(0)=2*2*2*1=8"
+          }
+        },
+        {
+          "patternName": "패턴 2: 기저조건 찾기",
+          "frequency": "★★★★☆",
+          "exampleProblem": {
+            "question": "무한 재귀를 막으려면?",
+            "code": "def count(n):\n    print(n)\n    count(n-1)",
+            "answer": "if n <= 0: return 추가"
+          }
+        },
+        {
+          "patternName": "패턴 3: 호출 횟수",
+          "frequency": "★★★☆☆",
+          "exampleProblem": {
+            "code": "def f(n):\n    if n <= 1:\n        return 1\n    return f(n-1) + f(n-2)\n\n# f(4) 호출 시 f 함수 총 몇 번 호출?",
+            "answer": "9번",
+            "explanation": "f(4),f(3),f(2),f(1),f(0),f(2),f(1),f(0),f(1)"
+          }
+        }
+      ]
+    },
+
+    "E_thinkingProcess": {
+      "title": "🧠 사고 과정 시뮬레이션",
+
+      "sampleProblem": {
+        "question": "재귀로 1부터 n까지 합 구하기",
+        "input": "5",
+        "output": "15"
+      },
+
+      "steps": [
+        {"phase": "1️⃣ 문제 파악", "time": "30초", "thinking": "1+2+...+n 합계. 재귀로 풀라고 했으니 점화식 필요"},
+        {"phase": "2️⃣ 점화식 설계", "time": "1분", "thinking": "sum(n) = n + sum(n-1). 기저: sum(0) = 0"},
+        {"phase": "3️⃣ 기저조건 먼저", "time": "30초", "thinking": "n이 0이면 return 0으로 재귀 종료"},
+        {"phase": "4️⃣ 재귀호출 작성", "time": "1분", "code": "def sum_n(n):\n    if n == 0:\n        return 0\n    return n + sum_n(n-1)"},
+        {"phase": "5️⃣ 손으로 추적", "time": "1분", "thinking": "sum_n(3)=3+sum_n(2)=3+2+sum_n(1)=3+2+1+sum_n(0)=6 ✓"}
+      ],
+
+      "whenStuck": {
+        "무한재귀_오류": "기저조건이 있는지, 조건이 도달 가능한지 확인",
+        "결과가_None": "재귀 호출 앞에 return이 있는지 확인. return f(n-1) 형태여야",
+        "결과가_다를때": "손으로 3~4 단계 직접 추적해보기",
+        "RecursionError": "기저조건 범위 확인. n < 0도 처리해야 할 수 있음"
+      }
+    },
+
+    "F_languageSpecific": {
+      "title": "🐍 Python 특화 팁",
+
+      "syntaxPatterns": [
+        {"pattern": "기저조건 → return", "desc": "반드시 종료 조건"},
+        {"pattern": "return func(smaller)", "desc": "더 작은 문제로 호출"}
+      ],
+
+      "commonPitfalls": [
+        {"pitfall": "기저조건 누락", "result": "RecursionError (최대 재귀 깊이 초과)"},
+        {"pitfall": "기저조건 도달 불가", "wrong": "f(n-1) 대신 f(n)", "result": "무한 재귀"},
+        {"pitfall": "return 누락", "wrong": "f(n-1) (return 없음)", "result": "None 반환"}
+      ],
+
+      "pythonLimit": {
+        "default": "기본 재귀 깊이 1000",
+        "change": "import sys; sys.setrecursionlimit(2000)"
+      }
+    },
+
+    "G_mistakePrevention": {
+      "title": "⚠️ 실수 방지 체크리스트",
+
+      "top5Mistakes": [
+        {
+          "rank": 1,
+          "mistake": "기저조건 누락",
+          "frequency": "80%",
+          "wrongCode": "def f(n):\n    return n + f(n-1)",
+          "correctCode": "def f(n):\n    if n <= 0:\n        return 0\n    return n + f(n-1)",
+          "result": "RecursionError: 무한 재귀"
+        },
+        {
+          "rank": 2,
+          "mistake": "재귀 호출에서 return 누락",
+          "frequency": "75%",
+          "wrongCode": "def f(n):\n    if n <= 0: return 0\n    f(n-1) + n",
+          "correctCode": "def f(n):\n    if n <= 0: return 0\n    return f(n-1) + n",
+          "result": "None 반환"
+        },
+        {
+          "rank": 3,
+          "mistake": "기저조건 범위 실수",
+          "frequency": "65%",
+          "wrongCode": "def f(n):\n    if n == 0: return 0  # 음수 미처리",
+          "correctCode": "def f(n):\n    if n <= 0: return 0  # 음수도 처리",
+          "result": "음수 입력 시 무한 재귀"
+        },
+        {
+          "rank": 4,
+          "mistake": "인자가 기저조건으로 수렴 안 함",
+          "frequency": "55%",
+          "wrongCode": "def f(n):\n    if n == 0: return 0\n    return f(n)",
+          "correctCode": "def f(n):\n    if n == 0: return 0\n    return f(n-1)",
+          "result": "무한 재귀 (n이 안 줄어듦)"
+        },
+        {
+          "rank": 5,
+          "mistake": "호출 순서 추적 실수",
+          "frequency": "50%",
+          "wrongCode": "f(3) = f(2) + 3 이라고 생각",
+          "correctCode": "f(3) = 3 + f(2) (코드 순서대로)",
+          "result": "결과 예측 문제 오답"
+        }
+      ],
+
+      "edgeCases": [
+        {"case": "n=0 입력", "handling": "기저조건에서 바로 반환되는지 확인"},
+        {"case": "n=음수 입력", "handling": "n <= 0으로 기저조건 설정"},
+        {"case": "n이 매우 큰 경우", "handling": "Python 재귀 깊이 제한(1000) 고려"}
+      ],
+
+      "finalChecklist": [
+        "✅ 기저조건(종료조건) 있는지",
+        "✅ 재귀 호출에 return 있는지",
+        "✅ 인자가 기저조건 방향으로 변하는지",
+        "✅ 손으로 2~3단계 추적해서 검증"
+      ]
+    },
+
+    "H_aiUsageGuide": {
+      "title": "🤖 AI 활용 가이드",
+
+      "effectivePrompts": [
+        {
+          "situation": "재귀 추적 연습",
+          "badPrompt": "재귀 설명해줘",
+          "goodPrompt": "factorial(4)가 어떻게 계산되는지 호출 스택으로 단계별로 보여줘. 각 단계에서 n 값과 반환값을 표시해줘",
+          "whyGood": "구체적인 값과 시각화 요청"
+        },
+        {
+          "situation": "무한 재귀 디버깅",
+          "badPrompt": "이 코드 왜 안 돼?",
+          "goodPrompt": "이 재귀 함수가 RecursionError가 나는 이유와 기저조건을 어떻게 수정해야 하는지 설명해줘",
+          "whyGood": "오류 유형과 해결 방향을 명시"
+        },
+        {
+          "situation": "반복문을 재귀로",
+          "badPrompt": "for문을 재귀로 바꿔줘",
+          "goodPrompt": "for i in range(n): total += i 를 재귀로 바꾸려면 기저조건과 점화식을 어떻게 설계해야 하는지 설명해줘",
+          "whyGood": "변환 과정의 사고 흐름 요청"
+        }
+      ],
+
+      "warningAboutCopyPaste": {
+        "message": "재귀는 손으로 추적해야 이해됩니다. AI 코드 복사만으론 시험 못 풀어요",
+        "recommendation": "factorial(5), fib(6) 등 손으로 직접 호출 과정 5번 이상 그려보기"
+      },
+
+      "selfCheckQuestion": [
+        "기저조건이 뭐고 왜 필요한가? → 종료 조건, 없으면 무한재귀",
+        "factorial(3)의 계산 과정은? → 3*2*1*1=6",
+        "재귀 vs 반복문의 장단점은? → 직관적 vs 효율적",
+        "return 없이 f(n-1)만 쓰면? → None 반환"
+      ]
+    }
+  },
+
+  "practice": {
+    "problems": [
+      {
+        "id": "d9-p1",
+        "type": "빈칸채우기",
+        "difficulty": "하",
+        "question": "팩토리얼 기저조건",
+        "code": "def factorial(n):\n    if _____:\n        return 1\n    return n * factorial(n-1)",
+        "answer": "n <= 1",
+        "explanation": "1 이하면 1 반환"
+      },
+      {
+        "id": "d9-p2",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "def f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)\n\nprint(f(4))",
+        "answer": "10",
+        "explanation": "4+3+2+1+0=10"
+      },
+      {
+        "id": "d9-p3",
+        "type": "결과예측",
+        "difficulty": "중",
+        "question": "결과는?",
+        "code": "def f(n):\n    if n <= 1:\n        return n\n    return f(n-1) + f(n-2)\n\nprint(f(5))",
+        "answer": "5",
+        "explanation": "피보나치: 0,1,1,2,3,5"
+      },
+      {
+        "id": "d9-p4",
+        "type": "오류수정",
+        "difficulty": "중",
+        "question": "무한 재귀 오류",
+        "code": "def countdown(n):\n    print(n)\n    countdown(n-1)",
+        "answer": {"fixedCode": "def countdown(n):\n    if n <= 0:\n        return\n    print(n)\n    countdown(n-1)"},
+        "explanation": "기저조건 추가"
+      },
+      {
+        "id": "d9-p5",
+        "type": "코드작성",
+        "difficulty": "상",
+        "question": "재귀로 리스트 합계 구하기",
+        "input": "[1, 2, 3, 4, 5]",
+        "output": "15",
+        "answer": {"code": "def sum_list(lst):\n    if len(lst) == 0:\n        return 0\n    return lst[0] + sum_list(lst[1:])\n\nprint(sum_list([1,2,3,4,5]))"},
+        "explanation": "첫 요소 + 나머지 합"
+      }
+    ]
+  },
+
+  "summary": {
+    "todayKey": "재귀 = 기저조건 + 자기호출. 기저조건 없으면 무한 재귀!",
+    "examinerMindset": "재귀 추적, 기저조건 파악, 호출 횟수 계산",
+    "mustRemember": ["기저조건 필수", "재귀호출에 return", "인자가 기저조건 방향으로 변해야"],
+    "tomorrowPreview": {"topic": "Day 10: 정렬", "connection": "재귀는 퀵소트 등 정렬 알고리즘에도 활용"}
+  }
+}
