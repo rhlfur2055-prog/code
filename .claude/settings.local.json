@@ -41,7 +41,10 @@
       "Bash(git init:*)",
       "Bash(git config:*)",
       "Bash(git branch:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: PCCE 시험대비 콘텐츠 추가\n\n- PCCE 카테고리 신규 등록 \\(types/index.ts, curriculum.ts\\)\n- PCCE 콘텐츠 14개 항목 추가 \\(contents.json, pcce.json\\)\n- 21일 고품질 완전정복 학습자료 추가\n- 12시간 완전정복 컴팩트 자료 추가\n- page.tsx에 PCCE JSON 매핑 추가\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: PCCE 시험대비 콘텐츠 추가\n\n- PCCE 카테고리 신규 등록 \\(types/index.ts, curriculum.ts\\)\n- PCCE 콘텐츠 14개 항목 추가 \\(contents.json, pcce.json\\)\n- 21일 고품질 완전정복 학습자료 추가\n- 12시간 완전정복 컴팩트 자료 추가\n- page.tsx에 PCCE JSON 매핑 추가\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: PCCE Python 21일 완전정복 콘텐츠 및 설정 추가\n\n- PCCE 시험 개요, 전략, AI 가이드 등 공통 모듈 추가\n- Python 21일 학습 커리큘럼 콘텐츠 추가 \\(day01-day21\\)\n- Claude 설정 파일 업데이트\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(du:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: 슬래시 명령어 5개 추가 \\(PCCE 모의시험, 취약유형분석 등\\)\n\n- /mock [문제수]: PCCE 모의시험 모드 \\(기본 10문제, 채점+해설\\)\n- /weak: 취약 유형 분석 및 보강 문제 자동 출제\n- /sheet [주제]: 시험 직전용 치트시트 생성\n- /compare A vs B: 헷갈리는 개념 비교표 생성\n- /status: 프로젝트 현황 \\(git, docker, 진도율\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\컴퓨터\\.vscode\\extensions\\redhat.java-*"
