@@ -1,0 +1,185 @@
+{
+  "01_실습/counter-app": {
+    "id": "01_실습/counter-app",
+    "title": "React 카운터 앱",
+    "category": "react",
+    "subCategory": "01_실습",
+    "language": "React",
+    "description": "useState Hook을 사용하여 숫자를 증감하는 카운터 앱을 구현합니다. React 상태 관리의 기초를 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "useState Hook이란?",
+        "content": "useState는 함수형 컴포넌트에서 상태를 관리하기 위한 React Hook입니다.\n\n**기본 문법:**\n```jsx\nconst [state, setState] = useState(initialValue);\n```\n\n- `state`: 현재 상태 값\n- `setState`: 상태를 업데이트하는 함수\n- `initialValue`: 초기 값"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "카운터 컴포넌트",
+        "code": "import React, { useState } from 'react';\n\nfunction Counter() {\n  // useState Hook으로 count 상태 생성\n  const [count, setCount] = useState(0);\n\n  // 증가 함수\n  const increment = () => setCount(count + 1);\n  \n  // 감소 함수\n  const decrement = () => setCount(count - 1);\n  \n  // 리셋 함수\n  const reset = () => setCount(0);\n\n  // 스타일 객체\n  const styles = {\n    container: {\n      textAlign: 'center',\n      padding: '50px',\n      fontFamily: 'Arial, sans-serif'\n    },\n    count: {\n      fontSize: '72px',\n      fontWeight: 'bold',\n      color: count > 0 ? '#28a745' : count < 0 ? '#dc3545' : '#333',\n      margin: '20px 0'\n    },\n    button: {\n      padding: '10px 25px',\n      margin: '5px',\n      fontSize: '18px',\n      border: 'none',\n      borderRadius: '5px',\n      cursor: 'pointer',\n      transition: 'transform 0.1s'\n    },\n    plusBtn: {\n      background: '#28a745',\n      color: 'white'\n    },\n    minusBtn: {\n      background: '#dc3545',\n      color: 'white'\n    },\n    resetBtn: {\n      background: '#6c757d',\n      color: 'white'\n    }\n  };\n\n  return (\n    <div style={styles.container}>\n      <h1>React 카운터</h1>\n      <div style={styles.count}>{count}</div>\n      <div>\n        <button\n          style={{ ...styles.button, ...styles.plusBtn }}\n          onClick={increment}\n        >\n          +1\n        </button>\n        <button\n          style={{ ...styles.button, ...styles.minusBtn }}\n          onClick={decrement}\n        >\n          -1\n        </button>\n        <button\n          style={{ ...styles.button, ...styles.resetBtn }}\n          onClick={reset}\n        >\n          초기화\n        </button>\n      </div>\n    </div>\n  );\n}\n\nexport default Counter;"
+      },
+      {
+        "type": "tip",
+        "title": "실행 방법",
+        "content": "```bash\n# 프로젝트 생성\nnpx create-react-app counter-app\ncd counter-app\n\n# src/App.js를 위 코드로 교체\n# 개발 서버 시작\nnpm start\n```"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** +5, -5 버튼 추가\n**Level 2:** 최소값(0), 최대값(100) 제한 추가\n**Level 3:** 카운트 히스토리 저장 및 되돌리기 기능"
+      }
+    ]
+  },
+  "01_실습/todo-list": {
+    "id": "01_실습/todo-list",
+    "title": "할일 목록 (Todo List)",
+    "category": "react",
+    "subCategory": "01_실습",
+    "language": "React",
+    "description": "배열 상태 관리를 학습하며 할일 추가, 삭제, 완료 체크 기능을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "배열 상태 관리",
+        "content": "React에서 배열을 상태로 관리할 때는 불변성(Immutability)을 지켜야 합니다.\n\n**배열 업데이트 패턴:**\n- 추가: `[...array, newItem]`\n- 삭제: `array.filter(item => item.id !== targetId)`\n- 수정: `array.map(item => item.id === targetId ? {...item, ...changes} : item)`"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "Todo List 컴포넌트",
+        "code": "import React, { useState } from 'react';\n\nfunction TodoList() {\n  const [todos, setTodos] = useState([]);\n  const [input, setInput] = useState('');\n\n  // 할일 추가\n  const addTodo = () => {\n    if (input.trim() === '') return;\n    \n    const newTodo = {\n      id: Date.now(),\n      text: input,\n      done: false\n    };\n    \n    setTodos([...todos, newTodo]);\n    setInput('');\n  };\n\n  // 할일 삭제\n  const deleteTodo = (id) => {\n    setTodos(todos.filter(todo => todo.id !== id));\n  };\n\n  // 완료 토글\n  const toggleDone = (id) => {\n    setTodos(todos.map(todo =>\n      todo.id === id ? { ...todo, done: !todo.done } : todo\n    ));\n  };\n\n  // 엔터 키 처리\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') addTodo();\n  };\n\n  // 스타일\n  const styles = {\n    container: {\n      maxWidth: '500px',\n      margin: '50px auto',\n      padding: '20px',\n      fontFamily: 'Arial, sans-serif'\n    },\n    inputGroup: {\n      display: 'flex',\n      marginBottom: '20px'\n    },\n    input: {\n      flex: 1,\n      padding: '12px',\n      fontSize: '16px',\n      border: '2px solid #ddd',\n      borderRadius: '5px 0 0 5px',\n      outline: 'none'\n    },\n    addBtn: {\n      padding: '12px 20px',\n      fontSize: '16px',\n      background: '#28a745',\n      color: 'white',\n      border: 'none',\n      borderRadius: '0 5px 5px 0',\n      cursor: 'pointer'\n    },\n    todoItem: {\n      display: 'flex',\n      alignItems: 'center',\n      padding: '12px',\n      marginBottom: '10px',\n      background: '#f8f9fa',\n      borderRadius: '5px'\n    },\n    checkbox: {\n      marginRight: '12px',\n      cursor: 'pointer',\n      width: '20px',\n      height: '20px'\n    },\n    deleteBtn: {\n      marginLeft: 'auto',\n      padding: '5px 10px',\n      background: '#dc3545',\n      color: 'white',\n      border: 'none',\n      borderRadius: '3px',\n      cursor: 'pointer'\n    },\n    stats: {\n      textAlign: 'center',\n      color: '#666',\n      marginTop: '20px'\n    }\n  };\n\n  const completedCount = todos.filter(t => t.done).length;\n\n  return (\n    <div style={styles.container}>\n      <h1 style={{ textAlign: 'center' }}>할일 목록</h1>\n      \n      <div style={styles.inputGroup}>\n        <input\n          type=\"text\"\n          value={input}\n          onChange={(e) => setInput(e.target.value)}\n          onKeyPress={handleKeyPress}\n          placeholder=\"할일을 입력하세요\"\n          style={styles.input}\n        />\n        <button onClick={addTodo} style={styles.addBtn}>\n          추가\n        </button>\n      </div>\n\n      <ul style={{ listStyle: 'none', padding: 0 }}>\n        {todos.map(todo => (\n          <li key={todo.id} style={styles.todoItem}>\n            <input\n              type=\"checkbox\"\n              checked={todo.done}\n              onChange={() => toggleDone(todo.id)}\n              style={styles.checkbox}\n            />\n            <span style={{\n              flex: 1,\n              textDecoration: todo.done ? 'line-through' : 'none',\n              color: todo.done ? '#999' : '#333'\n            }}>\n              {todo.text}\n            </span>\n            <button\n              onClick={() => deleteTodo(todo.id)}\n              style={styles.deleteBtn}\n            >\n              삭제\n            </button>\n          </li>\n        ))}\n      </ul>\n\n      {todos.length > 0 && (\n        <p style={styles.stats}>\n          {completedCount} / {todos.length} 완료\n        </p>\n      )}\n    </div>\n  );\n}\n\nexport default TodoList;"
+      },
+      {
+        "type": "tip",
+        "title": "key 속성의 중요성",
+        "content": "**key가 필요한 이유:**\n- React가 어떤 항목이 변경/추가/삭제되었는지 식별\n- 효율적인 DOM 업데이트를 위해 필수\n\n**좋은 key 선택:**\n- `id` (고유 식별자) ✅\n- `index` (배열 인덱스) ⚠️ - 순서 변경 시 문제"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 할일 수정 기능 추가 (더블 클릭)\n**Level 2:** 필터 기능 (전체/완료/미완료)\n**Level 3:** localStorage에 저장하여 새로고침 후에도 유지"
+      }
+    ]
+  },
+  "01_실습/timer": {
+    "id": "01_실습/timer",
+    "title": "스톱워치 타이머",
+    "category": "react",
+    "subCategory": "01_실습",
+    "language": "React",
+    "description": "useEffect Hook을 사용하여 시작/정지/리셋 기능이 있는 타이머를 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "useEffect Hook",
+        "content": "useEffect는 컴포넌트의 사이드 이펙트(부수 효과)를 처리합니다.\n\n**사용 사례:**\n- API 호출\n- 타이머/인터벌 설정\n- DOM 직접 조작\n- 이벤트 리스너 등록/해제\n\n**Cleanup 함수:**\n컴포넌트 언마운트 시 또는 다음 effect 실행 전에 정리 작업 수행"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "타이머 컴포넌트",
+        "code": "import React, { useState, useEffect, useRef } from 'react';\n\nfunction Timer() {\n  const [time, setTime] = useState(0);\n  const [isRunning, setIsRunning] = useState(false);\n  const [laps, setLaps] = useState([]);\n  const intervalRef = useRef(null);\n\n  // useEffect로 타이머 관리\n  useEffect(() => {\n    if (isRunning) {\n      intervalRef.current = setInterval(() => {\n        setTime(prevTime => prevTime + 10);\n      }, 10);\n    } else {\n      clearInterval(intervalRef.current);\n    }\n\n    // Cleanup 함수\n    return () => clearInterval(intervalRef.current);\n  }, [isRunning]);\n\n  // 시간 포맷팅\n  const formatTime = (ms) => {\n    const minutes = Math.floor(ms / 60000);\n    const seconds = Math.floor((ms % 60000) / 1000);\n    const centiseconds = Math.floor((ms % 1000) / 10);\n    \n    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;\n  };\n\n  const start = () => setIsRunning(true);\n  const stop = () => setIsRunning(false);\n  const reset = () => {\n    setIsRunning(false);\n    setTime(0);\n    setLaps([]);\n  };\n  const lap = () => {\n    setLaps([...laps, time]);\n  };\n\n  const styles = {\n    container: {\n      textAlign: 'center',\n      padding: '50px',\n      fontFamily: 'monospace',\n      background: '#1a1a2e',\n      minHeight: '100vh',\n      color: 'white'\n    },\n    time: {\n      fontSize: '72px',\n      fontWeight: 'bold',\n      margin: '30px 0',\n      color: isRunning ? '#4ecdc4' : '#ffffff'\n    },\n    button: {\n      padding: '15px 30px',\n      margin: '10px',\n      fontSize: '18px',\n      border: 'none',\n      borderRadius: '50px',\n      cursor: 'pointer',\n      fontWeight: 'bold',\n      transition: 'all 0.3s'\n    },\n    startBtn: {\n      background: '#28a745',\n      color: 'white'\n    },\n    stopBtn: {\n      background: '#ffc107',\n      color: '#333'\n    },\n    resetBtn: {\n      background: '#dc3545',\n      color: 'white'\n    },\n    lapBtn: {\n      background: '#17a2b8',\n      color: 'white'\n    },\n    lapList: {\n      maxWidth: '300px',\n      margin: '30px auto',\n      textAlign: 'left'\n    },\n    lapItem: {\n      display: 'flex',\n      justifyContent: 'space-between',\n      padding: '10px',\n      borderBottom: '1px solid #333'\n    }\n  };\n\n  return (\n    <div style={styles.container}>\n      <h1>스톱워치</h1>\n      <div style={styles.time}>{formatTime(time)}</div>\n      \n      <div>\n        {!isRunning ? (\n          <button\n            onClick={start}\n            style={{ ...styles.button, ...styles.startBtn }}\n          >\n            시작\n          </button>\n        ) : (\n          <button\n            onClick={stop}\n            style={{ ...styles.button, ...styles.stopBtn }}\n          >\n            정지\n          </button>\n        )}\n        \n        <button\n          onClick={lap}\n          disabled={!isRunning}\n          style={{\n            ...styles.button,\n            ...styles.lapBtn,\n            opacity: isRunning ? 1 : 0.5\n          }}\n        >\n          랩\n        </button>\n        \n        <button\n          onClick={reset}\n          style={{ ...styles.button, ...styles.resetBtn }}\n        >\n          리셋\n        </button>\n      </div>\n\n      {laps.length > 0 && (\n        <div style={styles.lapList}>\n          <h3>랩 기록</h3>\n          {laps.map((lapTime, index) => (\n            <div key={index} style={styles.lapItem}>\n              <span>랩 {index + 1}</span>\n              <span>{formatTime(lapTime)}</span>\n            </div>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport default Timer;"
+      },
+      {
+        "type": "tip",
+        "title": "useRef vs useState",
+        "content": "**useRef 사용 이유:**\n- `intervalRef`는 렌더링에 영향을 주지 않는 값\n- 변경해도 리렌더링이 발생하지 않음\n- DOM 요소 참조나 이전 값 저장에 사용\n\n**useState와 차이:**\n- useState 변경 → 리렌더링 O\n- useRef 변경 → 리렌더링 X"
+      }
+    ]
+  },
+  "01_실습/search-filter": {
+    "id": "01_실습/search-filter",
+    "title": "실시간 검색 필터",
+    "category": "react",
+    "subCategory": "01_실습",
+    "language": "React",
+    "description": "검색어와 카테고리 필터를 조합하여 실시간으로 목록을 필터링하는 기능을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "조건부 렌더링과 필터링",
+        "content": "React에서 조건에 따라 다른 UI를 표시하거나, 데이터를 필터링하는 방법을 학습합니다.\n\n**필터링 패턴:**\n```jsx\nconst filteredData = data.filter(item => \n  item.name.includes(searchTerm) &&\n  (category === 'all' || item.category === category)\n);\n```"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "검색 필터 컴포넌트",
+        "code": "import React, { useState } from 'react';\n\nfunction SearchFilter() {\n  // 샘플 데이터\n  const products = [\n    { id: 1, name: '맥북 프로', category: '전자기기', price: 2500000 },\n    { id: 2, name: '아이패드', category: '전자기기', price: 1200000 },\n    { id: 3, name: '에어팟', category: '전자기기', price: 250000 },\n    { id: 4, name: '나이키 운동화', category: '패션', price: 150000 },\n    { id: 5, name: '리바이스 청바지', category: '패션', price: 120000 },\n    { id: 6, name: '프로틴 파우더', category: '건강', price: 45000 },\n    { id: 7, name: '요가 매트', category: '건강', price: 35000 },\n    { id: 8, name: '캠핑 텐트', category: '아웃도어', price: 280000 },\n  ];\n\n  const [searchTerm, setSearchTerm] = useState('');\n  const [selectedCategory, setSelectedCategory] = useState('전체');\n  const [sortBy, setSortBy] = useState('name');\n\n  // 카테고리 목록 추출\n  const categories = ['전체', ...new Set(products.map(p => p.category))];\n\n  // 필터링 및 정렬\n  const filteredProducts = products\n    .filter(product => {\n      const matchesSearch = product.name\n        .toLowerCase()\n        .includes(searchTerm.toLowerCase());\n      const matchesCategory = \n        selectedCategory === '전체' || \n        product.category === selectedCategory;\n      return matchesSearch && matchesCategory;\n    })\n    .sort((a, b) => {\n      if (sortBy === 'name') return a.name.localeCompare(b.name);\n      if (sortBy === 'price-asc') return a.price - b.price;\n      if (sortBy === 'price-desc') return b.price - a.price;\n      return 0;\n    });\n\n  const styles = {\n    container: {\n      maxWidth: '800px',\n      margin: '50px auto',\n      padding: '20px',\n      fontFamily: 'Arial, sans-serif'\n    },\n    searchBox: {\n      width: '100%',\n      padding: '15px',\n      fontSize: '16px',\n      border: '2px solid #ddd',\n      borderRadius: '10px',\n      marginBottom: '20px',\n      outline: 'none'\n    },\n    filterBar: {\n      display: 'flex',\n      gap: '10px',\n      flexWrap: 'wrap',\n      marginBottom: '20px'\n    },\n    filterBtn: {\n      padding: '10px 20px',\n      border: 'none',\n      borderRadius: '20px',\n      cursor: 'pointer',\n      transition: 'all 0.3s'\n    },\n    select: {\n      padding: '10px 15px',\n      borderRadius: '10px',\n      border: '2px solid #ddd',\n      fontSize: '14px'\n    },\n    productCard: {\n      display: 'flex',\n      justifyContent: 'space-between',\n      alignItems: 'center',\n      padding: '15px 20px',\n      marginBottom: '10px',\n      background: '#f8f9fa',\n      borderRadius: '10px',\n      transition: 'transform 0.2s'\n    },\n    category: {\n      padding: '5px 12px',\n      background: '#e9ecef',\n      borderRadius: '15px',\n      fontSize: '12px'\n    },\n    price: {\n      fontWeight: 'bold',\n      color: '#28a745'\n    },\n    noResult: {\n      textAlign: 'center',\n      color: '#999',\n      padding: '40px'\n    }\n  };\n\n  const formatPrice = (price) => \n    price.toLocaleString('ko-KR') + '원';\n\n  return (\n    <div style={styles.container}>\n      <h1 style={{ textAlign: 'center' }}>상품 검색</h1>\n      \n      <input\n        type=\"text\"\n        placeholder=\"상품명으로 검색...\"\n        value={searchTerm}\n        onChange={(e) => setSearchTerm(e.target.value)}\n        style={styles.searchBox}\n      />\n\n      <div style={styles.filterBar}>\n        {categories.map(cat => (\n          <button\n            key={cat}\n            onClick={() => setSelectedCategory(cat)}\n            style={{\n              ...styles.filterBtn,\n              background: selectedCategory === cat ? '#007bff' : '#e9ecef',\n              color: selectedCategory === cat ? 'white' : '#333'\n            }}\n          >\n            {cat}\n          </button>\n        ))}\n        \n        <select\n          value={sortBy}\n          onChange={(e) => setSortBy(e.target.value)}\n          style={styles.select}\n        >\n          <option value=\"name\">이름순</option>\n          <option value=\"price-asc\">가격 낮은순</option>\n          <option value=\"price-desc\">가격 높은순</option>\n        </select>\n      </div>\n\n      <p style={{ color: '#666', marginBottom: '10px' }}>\n        {filteredProducts.length}개 상품\n      </p>\n\n      {filteredProducts.length > 0 ? (\n        filteredProducts.map(product => (\n          <div\n            key={product.id}\n            style={styles.productCard}\n            onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(5px)'}\n            onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(0)'}\n          >\n            <div>\n              <strong>{product.name}</strong>\n              <span style={{ ...styles.category, marginLeft: '10px' }}>\n                {product.category}\n              </span>\n            </div>\n            <span style={styles.price}>{formatPrice(product.price)}</span>\n          </div>\n        ))\n      ) : (\n        <div style={styles.noResult}>\n          검색 결과가 없습니다.\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport default SearchFilter;"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 가격 범위 필터 추가 (슬라이더)\n**Level 2:** 여러 카테고리 동시 선택 (체크박스)\n**Level 3:** 디바운싱으로 검색 최적화"
+      }
+    ]
+  },
+  "02_심화/dark-mode-toggle": {
+    "id": "02_심화/dark-mode-toggle",
+    "title": "다크모드 토글",
+    "category": "react",
+    "subCategory": "02_심화",
+    "language": "React",
+    "description": "Context API를 사용하여 전역 테마 상태를 관리하고, 라이트/다크 모드를 전환합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Context API란?",
+        "content": "Context는 컴포넌트 트리 전체에 데이터를 전달하는 방법입니다. Props drilling 없이 깊은 컴포넌트에도 데이터를 전달할 수 있습니다.\n\n**구성 요소:**\n- `createContext()`: Context 객체 생성\n- `Provider`: 값을 제공하는 컴포넌트\n- `useContext()`: 값을 소비하는 Hook"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "ThemeContext.js",
+        "code": "import React, { createContext, useContext, useState, useEffect } from 'react';\n\n// Context 생성\nconst ThemeContext = createContext();\n\n// Theme Provider 컴포넌트\nexport function ThemeProvider({ children }) {\n  // localStorage에서 초기값 가져오기\n  const [isDark, setIsDark] = useState(() => {\n    const saved = localStorage.getItem('darkMode');\n    return saved ? JSON.parse(saved) : false;\n  });\n\n  // 테마 변경 시 localStorage에 저장\n  useEffect(() => {\n    localStorage.setItem('darkMode', JSON.stringify(isDark));\n    // body 클래스 토글 (전역 스타일용)\n    document.body.classList.toggle('dark-mode', isDark);\n  }, [isDark]);\n\n  const toggleTheme = () => setIsDark(!isDark);\n\n  // 테마 객체\n  const theme = {\n    isDark,\n    toggleTheme,\n    colors: isDark ? {\n      background: '#1a1a2e',\n      surface: '#16213e',\n      text: '#ffffff',\n      textSecondary: '#a0a0a0',\n      primary: '#4ecdc4',\n      border: '#333'\n    } : {\n      background: '#ffffff',\n      surface: '#f8f9fa',\n      text: '#333333',\n      textSecondary: '#666666',\n      primary: '#007bff',\n      border: '#ddd'\n    }\n  };\n\n  return (\n    <ThemeContext.Provider value={theme}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}\n\n// Custom Hook\nexport function useTheme() {\n  const context = useContext(ThemeContext);\n  if (!context) {\n    throw new Error('useTheme must be used within ThemeProvider');\n  }\n  return context;\n}"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "App.js",
+        "code": "import React from 'react';\nimport { ThemeProvider, useTheme } from './ThemeContext';\n\n// 다크모드 버튼 컴포넌트\nfunction ThemeToggle() {\n  const { isDark, toggleTheme } = useTheme();\n  \n  return (\n    <button\n      onClick={toggleTheme}\n      style={{\n        padding: '10px 20px',\n        fontSize: '16px',\n        background: isDark ? '#ffd700' : '#1a1a2e',\n        color: isDark ? '#333' : '#fff',\n        border: 'none',\n        borderRadius: '25px',\n        cursor: 'pointer',\n        transition: 'all 0.3s'\n      }}\n    >\n      {isDark ? ' 라이트 모드' : ' 다크 모드'}\n    </button>\n  );\n}\n\n// 카드 컴포넌트\nfunction Card({ title, content }) {\n  const { colors } = useTheme();\n  \n  return (\n    <div style={{\n      background: colors.surface,\n      padding: '25px',\n      borderRadius: '15px',\n      marginBottom: '20px',\n      border: `1px solid ${colors.border}`,\n      transition: 'all 0.3s'\n    }}>\n      <h2 style={{ color: colors.text, marginBottom: '10px' }}>{title}</h2>\n      <p style={{ color: colors.textSecondary }}>{content}</p>\n    </div>\n  );\n}\n\n// 메인 앱 컴포넌트\nfunction Main() {\n  const { colors } = useTheme();\n  \n  return (\n    <div style={{\n      minHeight: '100vh',\n      background: colors.background,\n      padding: '50px 20px',\n      transition: 'all 0.3s'\n    }}>\n      <div style={{ maxWidth: '600px', margin: '0 auto' }}>\n        <div style={{\n          display: 'flex',\n          justifyContent: 'space-between',\n          alignItems: 'center',\n          marginBottom: '30px'\n        }}>\n          <h1 style={{ color: colors.text }}>다크 모드</h1>\n          <ThemeToggle />\n        </div>\n        \n        <Card \n          title=\"React Context API\"\n          content=\"Context를 사용하면 props drilling 없이 전역 상태를 관리할 수 있습니다.\"\n        />\n        <Card \n          title=\"다크 모드 구현\"\n          content=\"localStorage와 Context를 조합하여 테마 상태를 유지합니다.\"\n        />\n        <Card \n          title=\"CSS Transition\"\n          content=\"부드러운 전환 효과로 사용자 경험을 향상시킵니다.\"\n        />\n      </div>\n    </div>\n  );\n}\n\n// App 컴포넌트 (Provider 포함)\nexport default function App() {\n  return (\n    <ThemeProvider>\n      <Main />\n    </ThemeProvider>\n  );\n}"
+      },
+      {
+        "type": "tip",
+        "title": "Context 사용 팁",
+        "content": "**언제 Context를 사용?**\n- 테마, 언어, 인증 상태 등 전역 데이터\n- 깊은 컴포넌트 트리에서 props 전달이 번거로울 때\n\n**주의사항:**\n- Context 값이 변경되면 모든 소비자가 리렌더링\n- 자주 변경되는 값은 별도 Context로 분리\n- 복잡한 상태 관리는 Redux/Zustand 고려"
+      }
+    ]
+  },
+  "02_심화/weather-api": {
+    "id": "02_심화/weather-api",
+    "title": "날씨 API 앱",
+    "category": "react",
+    "subCategory": "02_심화",
+    "language": "React",
+    "description": "외부 API를 호출하여 실시간 날씨 정보를 표시하는 앱을 구현합니다. 비동기 처리와 에러 핸들링을 학습합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "API 호출과 비동기 처리",
+        "content": "React에서 API를 호출할 때는 useEffect와 async/await를 함께 사용합니다.\n\n**주의사항:**\n- useEffect 콜백은 직접 async로 만들 수 없음\n- 내부에 async 함수를 정의하고 호출\n- 로딩, 에러 상태 관리 필수"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "날씨 앱 컴포넌트",
+        "code": "import React, { useState } from 'react';\n\nfunction WeatherApp() {\n  const [city, setCity] = useState('');\n  const [weather, setWeather] = useState(null);\n  const [loading, setLoading] = useState(false);\n  const [error, setError] = useState(null);\n\n  // OpenWeatherMap API 키 (https://openweathermap.org/api 에서 무료 발급)\n  const API_KEY = 'YOUR_API_KEY';\n\n  const fetchWeather = async () => {\n    if (!city.trim()) {\n      setError('도시명을 입력해주세요.');\n      return;\n    }\n\n    setLoading(true);\n    setError(null);\n    setWeather(null);\n\n    try {\n      const response = await fetch(\n        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=kr`\n      );\n\n      if (!response.ok) {\n        throw new Error(\n          response.status === 404 \n            ? '도시를 찾을 수 없습니다.' \n            : '날씨 정보를 가져오는데 실패했습니다.'\n        );\n      }\n\n      const data = await response.json();\n      setWeather(data);\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setLoading(false);\n    }\n  };\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') fetchWeather();\n  };\n\n  // 날씨 아이콘 매핑\n  const getWeatherIcon = (main) => {\n    const icons = {\n      'Clear': '',\n      'Clouds': '',\n      'Rain': '',\n      'Drizzle': '',\n      'Thunderstorm': '',\n      'Snow': '',\n      'Mist': '',\n      'Fog': ''\n    };\n    return icons[main] || '';\n  };\n\n  const styles = {\n    container: {\n      maxWidth: '400px',\n      margin: '50px auto',\n      padding: '30px',\n      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',\n      borderRadius: '20px',\n      color: 'white',\n      fontFamily: 'Arial, sans-serif',\n      boxShadow: '0 10px 40px rgba(0,0,0,0.3)'\n    },\n    input: {\n      width: '100%',\n      padding: '15px',\n      fontSize: '16px',\n      border: 'none',\n      borderRadius: '10px',\n      marginBottom: '15px',\n      outline: 'none'\n    },\n    button: {\n      width: '100%',\n      padding: '15px',\n      fontSize: '16px',\n      background: 'rgba(255,255,255,0.2)',\n      color: 'white',\n      border: '2px solid white',\n      borderRadius: '10px',\n      cursor: 'pointer',\n      fontWeight: 'bold',\n      transition: 'all 0.3s'\n    },\n    weatherCard: {\n      marginTop: '30px',\n      background: 'rgba(255,255,255,0.1)',\n      padding: '25px',\n      borderRadius: '15px',\n      textAlign: 'center'\n    },\n    temp: {\n      fontSize: '64px',\n      fontWeight: 'bold',\n      margin: '10px 0'\n    },\n    error: {\n      background: 'rgba(255,0,0,0.2)',\n      padding: '15px',\n      borderRadius: '10px',\n      marginTop: '15px',\n      textAlign: 'center'\n    },\n    loading: {\n      textAlign: 'center',\n      padding: '30px',\n      fontSize: '24px'\n    }\n  };\n\n  return (\n    <div style={styles.container}>\n      <h1 style={{ textAlign: 'center', marginBottom: '25px' }}>\n         날씨 정보\n      </h1>\n      \n      <input\n        type=\"text\"\n        value={city}\n        onChange={(e) => setCity(e.target.value)}\n        onKeyPress={handleKeyPress}\n        placeholder=\"도시 이름 입력 (예: Seoul, Tokyo)\"\n        style={styles.input}\n      />\n      \n      <button\n        onClick={fetchWeather}\n        disabled={loading}\n        style={{\n          ...styles.button,\n          opacity: loading ? 0.7 : 1\n        }}\n      >\n        {loading ? '검색 중...' : ' 날씨 확인'}\n      </button>\n\n      {error && (\n        <div style={styles.error}>\n           {error}\n        </div>\n      )}\n\n      {loading && (\n        <div style={styles.loading}>\n          \n        </div>\n      )}\n\n      {weather && (\n        <div style={styles.weatherCard}>\n          <h2>{weather.name}, {weather.sys.country}</h2>\n          <div style={{ fontSize: '80px', margin: '20px 0' }}>\n            {getWeatherIcon(weather.weather[0].main)}\n          </div>\n          <div style={styles.temp}>\n            {Math.round(weather.main.temp)}C\n          </div>\n          <p style={{ fontSize: '20px', marginBottom: '20px' }}>\n            {weather.weather[0].description}\n          </p>\n          <div style={{ display: 'flex', justifyContent: 'space-around' }}>\n            <div>\n              <p> 습도</p>\n              <p style={{ fontSize: '24px' }}>{weather.main.humidity}%</p>\n            </div>\n            <div>\n              <p> 풍속</p>\n              <p style={{ fontSize: '24px' }}>{weather.wind.speed} m/s</p>\n            </div>\n            <div>\n              <p> 체감</p>\n              <p style={{ fontSize: '24px' }}>\n                {Math.round(weather.main.feels_like)}C\n              </p>\n            </div>\n          </div>\n        </div>\n      )}\n    </div>\n  );\n}\n\nexport default WeatherApp;"
+      },
+      {
+        "type": "tip",
+        "title": "API 키 보안",
+        "content": "**주의:** API 키를 코드에 직접 작성하면 노출 위험!\n\n**해결 방법:**\n1. `.env` 파일에 저장:\n```\nREACT_APP_WEATHER_API_KEY=your_key_here\n```\n\n2. 코드에서 사용:\n```jsx\nconst API_KEY = process.env.REACT_APP_WEATHER_API_KEY;\n```\n\n3. `.gitignore`에 `.env` 추가"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 5일 예보 추가 (forecast API 사용)\n**Level 2:** 현재 위치 기반 자동 날씨 표시\n**Level 3:** 여러 도시 즐겨찾기 기능"
+      }
+    ]
+  }
+}

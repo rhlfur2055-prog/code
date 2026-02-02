@@ -1,0 +1,211 @@
+{
+  "01_실습/responsive-card-layout": {
+    "id": "01_실습/responsive-card-layout",
+    "title": "반응형 카드 레이아웃",
+    "category": "html-css",
+    "subCategory": "01_실습",
+    "language": "HTML/CSS",
+    "description": "CSS Grid를 활용하여 화면 크기에 맞게 자동으로 배치되는 상품 카드 레이아웃을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "반응형 디자인이란?",
+        "content": "반응형 디자인은 다양한 화면 크기(데스크톱, 태블릿, 모바일)에서 최적의 사용자 경험을 제공하는 웹 디자인 접근 방식입니다.\n\n**핵심 기술:**\n- CSS Grid / Flexbox\n- Media Queries\n- 상대적 단위 (%, vw, vh, rem)"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>반응형 카드</title>\n    <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"card\">\n            <img src=\"https://via.placeholder.com/300x200\" alt=\"상품1\">\n            <h3>상품 1</h3>\n            <p>가격: 10,000원</p>\n            <button>구매하기</button>\n        </div>\n        <div class=\"card\">\n            <img src=\"https://via.placeholder.com/300x200\" alt=\"상품2\">\n            <h3>상품 2</h3>\n            <p>가격: 20,000원</p>\n            <button>구매하기</button>\n        </div>\n        <div class=\"card\">\n            <img src=\"https://via.placeholder.com/300x200\" alt=\"상품3\">\n            <h3>상품 3</h3>\n            <p>가격: 30,000원</p>\n            <button>구매하기</button>\n        </div>\n        <div class=\"card\">\n            <img src=\"https://via.placeholder.com/300x200\" alt=\"상품4\">\n            <h3>상품 4</h3>\n            <p>가격: 40,000원</p>\n            <button>구매하기</button>\n        </div>\n    </div>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: 'Malgun Gothic', sans-serif;\n    background-color: #f5f5f5;\n    padding: 20px;\n}\n\n.container {\n    display: grid;\n    /* 최소 250px, 최대 1fr로 자동 배치 */\n    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n    gap: 20px;\n    max-width: 1200px;\n    margin: 0 auto;\n}\n\n.card {\n    background: white;\n    border-radius: 10px;\n    padding: 20px;\n    box-shadow: 0 2px 10px rgba(0,0,0,0.1);\n    transition: transform 0.3s, box-shadow 0.3s;\n}\n\n.card:hover {\n    transform: translateY(-5px);\n    box-shadow: 0 5px 20px rgba(0,0,0,0.2);\n}\n\n.card img {\n    width: 100%;\n    border-radius: 5px;\n}\n\n.card h3 {\n    margin: 15px 0 10px;\n    color: #333;\n}\n\n.card p {\n    color: #666;\n    margin-bottom: 15px;\n}\n\n.card button {\n    width: 100%;\n    padding: 10px;\n    background: #007bff;\n    color: white;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n    font-size: 16px;\n    transition: background 0.3s;\n}\n\n.card button:hover {\n    background: #0056b3;\n}"
+      },
+      {
+        "type": "tip",
+        "title": "핵심 포인트",
+        "content": "**auto-fit vs auto-fill:**\n- `auto-fit`: 컨테이너를 꽉 채우도록 확장\n- `auto-fill`: 빈 공간 유지\n\n**minmax() 함수:**\n- `minmax(250px, 1fr)`: 최소 250px, 최대 1fr\n- 화면이 좁아지면 자동으로 열 수 감소"
+      },
+      {
+        "type": "practice",
+        "title": "실행 방법",
+        "content": "1. `index.html` 파일 생성 후 HTML 코드 복사\n2. `style.css` 파일 생성 후 CSS 코드 복사\n3. 브라우저에서 `index.html` 열기\n4. 창 크기를 조절하며 반응형 동작 확인"
+      }
+    ]
+  },
+  "01_실습/navigation-menu": {
+    "id": "01_실습/navigation-menu",
+    "title": "반응형 햄버거 메뉴",
+    "category": "html-css",
+    "subCategory": "01_실습",
+    "language": "HTML/CSS/JS",
+    "description": "모바일에서는 햄버거 메뉴로, 데스크톱에서는 일반 메뉴로 표시되는 반응형 네비게이션을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "반응형 네비게이션",
+        "content": "반응형 네비게이션은 화면 크기에 따라 메뉴 형태가 변경됩니다.\n\n**데스크톱:** 가로 메뉴 바\n**모바일:** 햄버거 아이콘 + 슬라이드 메뉴"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>네비게이션</title>\n    <link rel=\"stylesheet\" href=\"nav.css\">\n</head>\n<body>\n    <nav class=\"navbar\">\n        <div class=\"logo\">MyLogo</div>\n        <ul class=\"nav-menu\">\n            <li><a href=\"#home\">홈</a></li>\n            <li><a href=\"#about\">소개</a></li>\n            <li><a href=\"#services\">서비스</a></li>\n            <li><a href=\"#contact\">연락처</a></li>\n        </ul>\n        <div class=\"hamburger\">\n            <span></span>\n            <span></span>\n            <span></span>\n        </div>\n    </nav>\n    \n    <main>\n        <h1>반응형 네비게이션</h1>\n        <p>창 크기를 조절하여 햄버거 메뉴를 확인하세요.</p>\n    </main>\n    \n    <script src=\"nav.js\"></script>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.navbar {\n    background: #333;\n    padding: 1rem 2rem;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    position: sticky;\n    top: 0;\n    z-index: 100;\n}\n\n.logo {\n    color: white;\n    font-size: 24px;\n    font-weight: bold;\n}\n\n.nav-menu {\n    display: flex;\n    list-style: none;\n    gap: 2rem;\n}\n\n.nav-menu a {\n    color: white;\n    text-decoration: none;\n    font-size: 18px;\n    transition: color 0.3s;\n    padding: 0.5rem 1rem;\n}\n\n.nav-menu a:hover {\n    color: #007bff;\n}\n\n.hamburger {\n    display: none;\n    flex-direction: column;\n    cursor: pointer;\n    gap: 5px;\n}\n\n.hamburger span {\n    width: 25px;\n    height: 3px;\n    background: white;\n    transition: all 0.3s;\n}\n\n/* 모바일 스타일 */\n@media (max-width: 768px) {\n    .hamburger {\n        display: flex;\n    }\n    \n    .nav-menu {\n        position: fixed;\n        left: -100%;\n        top: 70px;\n        flex-direction: column;\n        background: #333;\n        width: 100%;\n        text-align: center;\n        transition: 0.3s;\n        padding: 2rem 0;\n        gap: 0;\n    }\n    \n    .nav-menu.active {\n        left: 0;\n    }\n    \n    .nav-menu li {\n        padding: 1rem 0;\n    }\n    \n    /* 햄버거 애니메이션 */\n    .hamburger.active span:nth-child(1) {\n        transform: rotate(45deg) translate(5px, 6px);\n    }\n    \n    .hamburger.active span:nth-child(2) {\n        opacity: 0;\n    }\n    \n    .hamburger.active span:nth-child(3) {\n        transform: rotate(-45deg) translate(5px, -6px);\n    }\n}\n\nmain {\n    padding: 2rem;\n    text-align: center;\n}\n\nmain h1 {\n    margin-bottom: 1rem;\n}"
+      },
+      {
+        "type": "code",
+        "language": "JavaScript",
+        "title": "JavaScript 토글",
+        "code": "const hamburger = document.querySelector('.hamburger');\nconst navMenu = document.querySelector('.nav-menu');\n\nhamburger.addEventListener('click', () => {\n    hamburger.classList.toggle('active');\n    navMenu.classList.toggle('active');\n});\n\n// 메뉴 항목 클릭 시 메뉴 닫기\ndocument.querySelectorAll('.nav-menu a').forEach(link => {\n    link.addEventListener('click', () => {\n        hamburger.classList.remove('active');\n        navMenu.classList.remove('active');\n    });\n});"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 드롭다운 서브메뉴 추가\n**Level 2:** 스크롤 시 네비게이션 배경색 변경\n**Level 3:** 부드러운 스크롤 이동 구현"
+      }
+    ]
+  },
+  "01_실습/animation-buttons": {
+    "id": "01_실습/animation-buttons",
+    "title": "CSS 애니메이션 버튼",
+    "category": "html-css",
+    "subCategory": "01_실습",
+    "language": "HTML/CSS",
+    "description": "CSS만으로 다양한 호버 효과와 클릭 애니메이션이 있는 버튼을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "CSS 애니메이션 기초",
+        "content": "CSS 애니메이션은 `transition`과 `@keyframes`를 사용하여 구현합니다.\n\n**transition:** 간단한 상태 변화 (hover, focus 등)\n**@keyframes:** 복잡한 다단계 애니메이션"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>애니메이션 버튼</title>\n    <link rel=\"stylesheet\" href=\"button.css\">\n</head>\n<body>\n    <div class=\"button-container\">\n        <button class=\"btn btn-scale\">Scale Up</button>\n        <button class=\"btn btn-slide\">Slide Effect</button>\n        <button class=\"btn btn-ripple\">Ripple</button>\n        <button class=\"btn btn-glow\">Glow</button>\n        <button class=\"btn btn-3d\">3D Press</button>\n        <button class=\"btn btn-border\">Border Animation</button>\n    </div>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "body {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    min-height: 100vh;\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    margin: 0;\n}\n\n.button-container {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 20px;\n    justify-content: center;\n    max-width: 600px;\n}\n\n.btn {\n    padding: 15px 40px;\n    font-size: 16px;\n    border: none;\n    border-radius: 50px;\n    cursor: pointer;\n    font-weight: bold;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n}\n\n/* 1. Scale Up 효과 */\n.btn-scale {\n    background: white;\n    color: #667eea;\n    transition: transform 0.3s, box-shadow 0.3s;\n}\n\n.btn-scale:hover {\n    transform: scale(1.1);\n    box-shadow: 0 10px 30px rgba(0,0,0,0.3);\n}\n\n/* 2. Slide 효과 */\n.btn-slide {\n    background: #ff6b6b;\n    color: white;\n    position: relative;\n    overflow: hidden;\n    z-index: 1;\n}\n\n.btn-slide::before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: -100%;\n    width: 100%;\n    height: 100%;\n    background: #ee5253;\n    transition: left 0.3s;\n    z-index: -1;\n}\n\n.btn-slide:hover::before {\n    left: 0;\n}\n\n/* 3. Ripple 효과 */\n.btn-ripple {\n    background: #4ecdc4;\n    color: white;\n    position: relative;\n    overflow: hidden;\n}\n\n.btn-ripple::before {\n    content: '';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 0;\n    height: 0;\n    border-radius: 50%;\n    background: rgba(255,255,255,0.3);\n    transform: translate(-50%, -50%);\n    transition: width 0.6s, height 0.6s;\n}\n\n.btn-ripple:hover::before {\n    width: 300px;\n    height: 300px;\n}\n\n/* 4. Glow 효과 */\n.btn-glow {\n    background: #f7b731;\n    color: white;\n    transition: box-shadow 0.3s;\n}\n\n.btn-glow:hover {\n    box-shadow: 0 0 20px #f7b731, 0 0 40px #f7b731, 0 0 60px #f7b731;\n}\n\n/* 5. 3D Press 효과 */\n.btn-3d {\n    background: #26de81;\n    color: white;\n    box-shadow: 0 6px 0 #1abc9c;\n    transition: all 0.1s;\n}\n\n.btn-3d:active {\n    box-shadow: 0 2px 0 #1abc9c;\n    transform: translateY(4px);\n}\n\n/* 6. Border Animation */\n.btn-border {\n    background: transparent;\n    color: white;\n    border: 2px solid white;\n    position: relative;\n}\n\n.btn-border::before,\n.btn-border::after {\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 2px;\n    background: #ff6b6b;\n    transition: width 0.3s;\n}\n\n.btn-border::before {\n    top: -2px;\n    left: 0;\n}\n\n.btn-border::after {\n    bottom: -2px;\n    right: 0;\n}\n\n.btn-border:hover::before,\n.btn-border:hover::after {\n    width: 100%;\n}\n\n.btn-border:hover {\n    color: #ff6b6b;\n    border-color: #ff6b6b;\n}"
+      },
+      {
+        "type": "tip",
+        "title": "애니메이션 성능 팁",
+        "content": "**GPU 가속 속성 (성능 좋음):**\n- `transform`\n- `opacity`\n\n**리플로우 유발 (성능 나쁨):**\n- `width`, `height`\n- `margin`, `padding`\n- `top`, `left`\n\n**권장:** `transform: translate()` 사용"
+      }
+    ]
+  },
+  "01_실습/flexbox-dashboard": {
+    "id": "01_실습/flexbox-dashboard",
+    "title": "Flexbox 대시보드 레이아웃",
+    "category": "html-css",
+    "subCategory": "01_실습",
+    "language": "HTML/CSS",
+    "description": "Flexbox를 사용하여 헤더, 사이드바, 메인 컨텐츠, 푸터로 구성된 대시보드 레이아웃을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Flexbox 레이아웃",
+        "content": "Flexbox는 1차원 레이아웃 모델로, 행 또는 열 방향으로 요소를 배치합니다.\n\n**주요 속성:**\n- `flex-direction`: 방향 (row, column)\n- `justify-content`: 주축 정렬\n- `align-items`: 교차축 정렬\n- `flex`: 크기 비율 (grow, shrink, basis)"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Flexbox 대시보드</title>\n    <link rel=\"stylesheet\" href=\"flex.css\">\n</head>\n<body>\n    <div class=\"dashboard\">\n        <header class=\"header\">\n            <h1>대시보드</h1>\n            <nav>\n                <a href=\"#\">프로필</a>\n                <a href=\"#\">설정</a>\n                <a href=\"#\">로그아웃</a>\n            </nav>\n        </header>\n        \n        <aside class=\"sidebar\">\n            <ul>\n                <li><a href=\"#\">홈</a></li>\n                <li><a href=\"#\">통계</a></li>\n                <li><a href=\"#\">사용자</a></li>\n                <li><a href=\"#\">보고서</a></li>\n                <li><a href=\"#\">설정</a></li>\n            </ul>\n        </aside>\n        \n        <main class=\"main-content\">\n            <div class=\"card\">카드 1</div>\n            <div class=\"card\">카드 2</div>\n            <div class=\"card\">카드 3</div>\n            <div class=\"card\">카드 4</div>\n        </main>\n        \n        <footer class=\"footer\">\n            <p>&copy; 2024 CodeMaster Next. All rights reserved.</p>\n        </footer>\n    </div>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: 'Malgun Gothic', sans-serif;\n}\n\n.dashboard {\n    display: flex;\n    flex-wrap: wrap;\n    min-height: 100vh;\n}\n\n/* 헤더: 전체 너비 */\n.header {\n    flex: 1 1 100%;\n    background: #2c3e50;\n    color: white;\n    padding: 1rem 2rem;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n.header nav a {\n    color: white;\n    text-decoration: none;\n    margin-left: 1.5rem;\n}\n\n.header nav a:hover {\n    text-decoration: underline;\n}\n\n/* 사이드바 */\n.sidebar {\n    flex: 0 0 200px;\n    background: #34495e;\n    color: white;\n    padding: 1rem;\n}\n\n.sidebar ul {\n    list-style: none;\n}\n\n.sidebar li {\n    padding: 0.75rem 1rem;\n    border-radius: 5px;\n    transition: background 0.3s;\n}\n\n.sidebar li:hover {\n    background: #3d566e;\n}\n\n.sidebar a {\n    color: white;\n    text-decoration: none;\n}\n\n/* 메인 컨텐츠 */\n.main-content {\n    flex: 1 1 calc(100% - 200px);\n    display: flex;\n    flex-wrap: wrap;\n    gap: 20px;\n    padding: 20px;\n    background: #ecf0f1;\n    align-content: flex-start;\n}\n\n.card {\n    flex: 1 1 calc(50% - 20px);\n    min-width: 250px;\n    background: white;\n    padding: 30px;\n    border-radius: 10px;\n    box-shadow: 0 2px 5px rgba(0,0,0,0.1);\n    text-align: center;\n    font-size: 1.2rem;\n    color: #333;\n}\n\n/* 푸터 */\n.footer {\n    flex: 1 1 100%;\n    background: #2c3e50;\n    color: white;\n    padding: 1rem;\n    text-align: center;\n}\n\n/* 반응형 */\n@media (max-width: 768px) {\n    .sidebar {\n        flex: 1 1 100%;\n        order: 2;\n    }\n    \n    .main-content {\n        flex: 1 1 100%;\n        order: 3;\n    }\n    \n    .footer {\n        order: 4;\n    }\n    \n    .card {\n        flex: 1 1 100%;\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "flex 단축 속성",
+        "content": "**flex: grow shrink basis**\n\n- `flex: 1` = `flex: 1 1 0%` (동일 비율)\n- `flex: 0 0 200px` = 고정 200px\n- `flex: 1 1 auto` = 내용에 따라 늘어남\n\n**flex-basis vs width:**\n- `flex-basis`: flex 컨테이너 내에서 초기 크기\n- `width`: 일반 크기 (flex-basis가 우선)"
+      }
+    ]
+  },
+  "01_실습/login-form": {
+    "id": "01_실습/login-form",
+    "title": "스타일리시 로그인 폼",
+    "category": "html-css",
+    "subCategory": "01_실습",
+    "language": "HTML/CSS",
+    "description": "플로팅 라벨과 그라데이션 배경을 가진 현대적인 로그인 폼을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "플로팅 라벨 패턴",
+        "content": "플로팅 라벨은 입력 필드에 포커스하면 라벨이 위로 이동하는 UI 패턴입니다. Material Design에서 많이 사용됩니다.\n\n**구현 원리:**\n- `position: absolute`로 라벨 배치\n- `:focus`와 `:valid` 선택자로 상태 감지\n- `transform`으로 위치 이동"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>로그인</title>\n    <link rel=\"stylesheet\" href=\"login.css\">\n</head>\n<body>\n    <div class=\"login-container\">\n        <form class=\"login-form\">\n            <h2>로그인</h2>\n            \n            <div class=\"input-group\">\n                <input type=\"text\" id=\"username\" required>\n                <label for=\"username\">아이디</label>\n                <span class=\"underline\"></span>\n            </div>\n            \n            <div class=\"input-group\">\n                <input type=\"password\" id=\"password\" required>\n                <label for=\"password\">비밀번호</label>\n                <span class=\"underline\"></span>\n            </div>\n            \n            <div class=\"remember-me\">\n                <input type=\"checkbox\" id=\"remember\">\n                <label for=\"remember\">로그인 상태 유지</label>\n            </div>\n            \n            <button type=\"submit\">로그인</button>\n            \n            <p class=\"signup-link\">\n                계정이 없으신가요? <a href=\"#\">회원가입</a>\n            </p>\n        </form>\n    </div>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: 'Malgun Gothic', sans-serif;\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    min-height: 100vh;\n}\n\n.login-container {\n    background: rgba(255, 255, 255, 0.95);\n    padding: 40px;\n    border-radius: 20px;\n    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);\n    width: 350px;\n    backdrop-filter: blur(10px);\n}\n\n.login-form h2 {\n    text-align: center;\n    margin-bottom: 30px;\n    color: #333;\n    font-size: 28px;\n}\n\n.input-group {\n    position: relative;\n    margin-bottom: 30px;\n}\n\n.input-group input {\n    width: 100%;\n    padding: 10px 0;\n    font-size: 16px;\n    border: none;\n    border-bottom: 2px solid #ddd;\n    outline: none;\n    background: transparent;\n    transition: border-color 0.3s;\n}\n\n.input-group label {\n    position: absolute;\n    top: 10px;\n    left: 0;\n    font-size: 16px;\n    color: #999;\n    pointer-events: none;\n    transition: all 0.3s ease;\n}\n\n/* 포커스 또는 값이 있을 때 라벨 이동 */\n.input-group input:focus ~ label,\n.input-group input:valid ~ label {\n    top: -20px;\n    left: 0;\n    color: #667eea;\n    font-size: 12px;\n    font-weight: bold;\n}\n\n.input-group input:focus {\n    border-bottom-color: #667eea;\n}\n\n/* 언더라인 애니메이션 */\n.underline {\n    position: absolute;\n    bottom: 0;\n    left: 50%;\n    width: 0;\n    height: 2px;\n    background: #667eea;\n    transition: all 0.3s ease;\n}\n\n.input-group input:focus ~ .underline {\n    left: 0;\n    width: 100%;\n}\n\n.remember-me {\n    display: flex;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.remember-me input {\n    margin-right: 10px;\n}\n\n.remember-me label {\n    color: #666;\n    font-size: 14px;\n    cursor: pointer;\n}\n\nbutton {\n    width: 100%;\n    padding: 12px;\n    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n    color: white;\n    border: none;\n    border-radius: 25px;\n    font-size: 16px;\n    font-weight: bold;\n    cursor: pointer;\n    transition: all 0.3s;\n}\n\nbutton:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);\n}\n\nbutton:active {\n    transform: translateY(0);\n}\n\n.signup-link {\n    text-align: center;\n    margin-top: 20px;\n    color: #666;\n    font-size: 14px;\n}\n\n.signup-link a {\n    color: #667eea;\n    text-decoration: none;\n    font-weight: bold;\n}\n\n.signup-link a:hover {\n    text-decoration: underline;\n}"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 비밀번호 표시/숨기기 토글 버튼 추가\n**Level 2:** 폼 유효성 검사 및 에러 메시지 표시\n**Level 3:** 소셜 로그인 버튼 (Google, Kakao) 추가"
+      }
+    ]
+  },
+  "02_심화/css-grid-gallery": {
+    "id": "02_심화/css-grid-gallery",
+    "title": "CSS Grid 이미지 갤러리",
+    "category": "html-css",
+    "subCategory": "02_심화",
+    "language": "HTML/CSS",
+    "description": "CSS Grid를 활용하여 Pinterest 스타일의 Masonry 레이아웃 갤러리를 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "CSS Grid 고급 기능",
+        "content": "CSS Grid는 2차원 레이아웃을 위한 강력한 도구입니다.\n\n**고급 기능:**\n- `grid-auto-rows`: 자동 행 높이\n- `grid-row: span N`: 여러 행 차지\n- `grid-column: span N`: 여러 열 차지"
+      },
+      {
+        "type": "code",
+        "language": "HTML",
+        "title": "HTML 구조",
+        "code": "<!DOCTYPE html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>CSS Grid 갤러리</title>\n    <link rel=\"stylesheet\" href=\"gallery.css\">\n</head>\n<body>\n    <h1>이미지 갤러리</h1>\n    \n    <div class=\"gallery\">\n        <div class=\"gallery-item tall\">\n            <img src=\"https://picsum.photos/400/600?random=1\" alt=\"Image 1\">\n            <div class=\"overlay\">\n                <h3>Mountain View</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item\">\n            <img src=\"https://picsum.photos/400/300?random=2\" alt=\"Image 2\">\n            <div class=\"overlay\">\n                <h3>Ocean Sunset</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item wide\">\n            <img src=\"https://picsum.photos/600/300?random=3\" alt=\"Image 3\">\n            <div class=\"overlay\">\n                <h3>City Lights</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item\">\n            <img src=\"https://picsum.photos/400/300?random=4\" alt=\"Image 4\">\n            <div class=\"overlay\">\n                <h3>Forest Path</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item tall\">\n            <img src=\"https://picsum.photos/400/600?random=5\" alt=\"Image 5\">\n            <div class=\"overlay\">\n                <h3>Waterfall</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item\">\n            <img src=\"https://picsum.photos/400/300?random=6\" alt=\"Image 6\">\n            <div class=\"overlay\">\n                <h3>Desert Dunes</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item big\">\n            <img src=\"https://picsum.photos/600/600?random=7\" alt=\"Image 7\">\n            <div class=\"overlay\">\n                <h3>Featured</h3>\n            </div>\n        </div>\n        <div class=\"gallery-item\">\n            <img src=\"https://picsum.photos/400/300?random=8\" alt=\"Image 8\">\n            <div class=\"overlay\">\n                <h3>Snow Peak</h3>\n            </div>\n        </div>\n    </div>\n</body>\n</html>"
+      },
+      {
+        "type": "code",
+        "language": "CSS",
+        "title": "CSS 스타일",
+        "code": "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: 'Malgun Gothic', sans-serif;\n    background: #1a1a2e;\n    padding: 20px;\n    color: white;\n}\n\nh1 {\n    text-align: center;\n    margin-bottom: 30px;\n}\n\n.gallery {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n    grid-auto-rows: 200px;\n    gap: 15px;\n    max-width: 1200px;\n    margin: 0 auto;\n}\n\n.gallery-item {\n    position: relative;\n    overflow: hidden;\n    border-radius: 10px;\n    cursor: pointer;\n}\n\n.gallery-item img {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    transition: transform 0.5s ease;\n}\n\n.gallery-item:hover img {\n    transform: scale(1.1);\n}\n\n/* 오버레이 */\n.overlay {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background: linear-gradient(transparent, rgba(0,0,0,0.8));\n    padding: 20px;\n    transform: translateY(100%);\n    transition: transform 0.3s ease;\n}\n\n.gallery-item:hover .overlay {\n    transform: translateY(0);\n}\n\n.overlay h3 {\n    font-size: 1.2rem;\n}\n\n/* 크기 변형 */\n.gallery-item.tall {\n    grid-row: span 2;\n}\n\n.gallery-item.wide {\n    grid-column: span 2;\n}\n\n.gallery-item.big {\n    grid-column: span 2;\n    grid-row: span 2;\n}\n\n/* 반응형 */\n@media (max-width: 768px) {\n    .gallery-item.wide,\n    .gallery-item.big {\n        grid-column: span 1;\n    }\n    \n    .gallery-item.big {\n        grid-row: span 2;\n    }\n}"
+      },
+      {
+        "type": "tip",
+        "title": "object-fit 속성",
+        "content": "**이미지 크기 조절:**\n- `cover`: 영역을 꽉 채움 (잘림 가능)\n- `contain`: 영역 안에 맞춤 (여백 가능)\n- `fill`: 비율 무시하고 채움\n- `none`: 원본 크기 유지"
+      }
+    ]
+  }
+}

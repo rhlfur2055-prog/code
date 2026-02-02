@@ -1,0 +1,342 @@
+{
+  "01_실습/yolo-object-detection": {
+    "id": "01_실습/yolo-object-detection",
+    "title": "YOLO 객체 인식 실시간 탐지",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "YOLO(You Only Look Once) 모델을 사용하여 웹캠으로 실시간 객체 탐지를 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "YOLO란?",
+        "content": "YOLO(You Only Look Once)는 실시간 객체 탐지를 위한 딥러닝 알고리즘입니다. 이미지를 그리드로 나누고 각 그리드에서 객체를 동시에 예측하여 빠른 속도를 자랑합니다.\n\n**핵심 특징:**\n- 단일 신경망으로 전체 이미지를 한 번에 처리\n- 초당 45프레임 이상의 실시간 처리 가능\n- 80개 이상의 객체 클래스 인식 가능 (사람, 자동차, 동물 등)"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "# 필수 패키지 설치\npip install ultralytics\npip install opencv-python\npip install numpy\n\n# GPU 사용 시 (선택사항)\npip install torch torchvision --index-url https://download.pytorch.org/whl/cu118"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "YOLO 실시간 객체 탐지",
+        "code": "from ultralytics import YOLO\nimport cv2\n\n# YOLO 모델 로드 (처음 실행 시 자동 다운로드)\nmodel = YOLO('yolov8n.pt')  # n=nano (가장 가벼운 모델)\n\n# 웹캠 초기화\ncap = cv2.VideoCapture(0)\n\nprint(\"객체 인식 시작! 종료하려면 'q'를 누르세요.\")\n\nwhile True:\n    # 프레임 읽기\n    ret, frame = cap.read()\n    if not ret:\n        print(\"웹캠을 열 수 없습니다.\")\n        break\n    \n    # YOLO로 객체 탐지\n    results = model(frame, verbose=False)\n    \n    # 결과를 프레임에 그리기\n    annotated_frame = results[0].plot()\n    \n    # 탐지된 객체 정보 출력\n    for box in results[0].boxes:\n        cls = int(box.cls[0])\n        conf = float(box.conf[0])\n        name = model.names[cls]\n        print(f\"탐지: {name} (신뢰도: {conf:.2f})\")\n    \n    # 화면에 표시\n    cv2.imshow('YOLO 객체 인식', annotated_frame)\n    \n    # 'q' 키로 종료\n    if cv2.waitKey(1) & 0xFF == ord('q'):\n        break\n\n# 리소스 해제\ncap.release()\ncv2.destroyAllWindows()\nprint(\"프로그램 종료\")"
+      },
+      {
+        "type": "tip",
+        "title": "실행 방법",
+        "content": "1. 위 코드를 `yolo_detector.py`로 저장\n2. 터미널에서 `python yolo_detector.py` 실행\n3. 웹캠 앞에서 다양한 물체를 비춰보기\n4. `q` 키를 눌러 종료\n\n**예상 결과:** 웹캠 화면에 실시간으로 객체가 박스로 표시되며, 클래스명과 신뢰도가 함께 표시됩니다."
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1 (초급):** 특정 객체(예: 사람)만 탐지하도록 필터링\n- 힌트: `results[0].boxes`에서 `cls` 속성 확인\n\n**Level 2 (중급):** 탐지된 객체 수를 화면에 실시간으로 표시\n- 힌트: `cv2.putText()` 활용\n\n**Level 3 (고급):** 특정 객체가 감지되면 알림음 재생\n- 힌트: `winsound` 또는 `playsound` 라이브러리 사용"
+      }
+    ]
+  },
+  "01_실습/face-recognition": {
+    "id": "01_실습/face-recognition",
+    "title": "실시간 얼굴 인식 시스템",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "웹캠을 사용하여 실시간으로 얼굴을 탐지하고 인식하는 시스템을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "얼굴 인식 기술",
+        "content": "얼굴 인식은 이미지에서 사람의 얼굴을 찾아내는 기술입니다. HOG(Histogram of Oriented Gradients) 알고리즘과 딥러닝 기반 방법을 사용합니다.\n\n**핵심 개념:**\n- 얼굴 탐지(Detection): 이미지에서 얼굴 위치 찾기\n- 얼굴 인식(Recognition): 누구의 얼굴인지 식별\n- 얼굴 특징점(Landmarks): 눈, 코, 입 등 68개 포인트 추출"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "# 필수 패키지\npip install face-recognition\npip install opencv-python\npip install pillow\n\n# Windows에서 dlib 설치 오류 시\npip install cmake\npip install dlib"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "얼굴 탐지 기본 코드",
+        "code": "import face_recognition\nimport cv2\nimport numpy as np\n\n# 웹캠 초기화\nvideo_capture = cv2.VideoCapture(0)\n\nprint(\"얼굴 인식 시작! 종료하려면 'q'를 누르세요.\")\n\nwhile True:\n    # 프레임 읽기\n    ret, frame = video_capture.read()\n    if not ret:\n        break\n    \n    # BGR을 RGB로 변환 (face_recognition은 RGB 사용)\n    rgb_frame = frame[:, :, ::-1]\n    \n    # 얼굴 위치 찾기\n    face_locations = face_recognition.face_locations(rgb_frame)\n    \n    # 찾은 얼굴에 사각형 그리기\n    for top, right, bottom, left in face_locations:\n        # 얼굴 주변에 초록색 박스 그리기\n        cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 3)\n        \n        # 얼굴 위에 텍스트 표시\n        cv2.putText(\n            frame,\n            f'Face Detected',\n            (left, top - 10),\n            cv2.FONT_HERSHEY_SIMPLEX,\n            0.6,\n            (0, 255, 0),\n            2\n        )\n    \n    # 화면 상단에 탐지된 얼굴 수 표시\n    cv2.putText(\n        frame,\n        f'Faces: {len(face_locations)}',\n        (10, 30),\n        cv2.FONT_HERSHEY_SIMPLEX,\n        1,\n        (255, 255, 255),\n        2\n    )\n    \n    # 화면에 표시\n    cv2.imshow('Face Detection', frame)\n    \n    # 'q' 키로 종료\n    if cv2.waitKey(1) & 0xFF == ord('q'):\n        break\n\n# 리소스 해제\nvideo_capture.release()\ncv2.destroyAllWindows()\nprint(\"프로그램 종료\")"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "OpenCV 기반 대안 (더 빠름)",
+        "code": "import cv2\n\n# Haar Cascade 분류기 로드 (OpenCV 기본 제공)\nface_cascade = cv2.CascadeClassifier(\n    cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'\n)\n\ncap = cv2.VideoCapture(0)\n\nwhile True:\n    ret, frame = cap.read()\n    if not ret:\n        break\n    \n    # 그레이스케일 변환 (속도 향상)\n    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)\n    \n    # 얼굴 탐지\n    faces = face_cascade.detectMultiScale(\n        gray,\n        scaleFactor=1.1,\n        minNeighbors=5,\n        minSize=(30, 30)\n    )\n    \n    # 탐지된 얼굴에 박스 그리기\n    for (x, y, w, h) in faces:\n        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)\n    \n    cv2.imshow('Face Detection (OpenCV)', frame)\n    \n    if cv2.waitKey(1) & 0xFF == ord('q'):\n        break\n\ncap.release()\ncv2.destroyAllWindows()"
+      },
+      {
+        "type": "tip",
+        "title": "실행 팁",
+        "content": "**face_recognition vs OpenCV:**\n- face_recognition: 더 정확, 얼굴 인코딩 가능, 느림\n- OpenCV Haar Cascade: 더 빠름, 간단, 정확도 낮음\n\n**성능 최적화:**\n- 프레임 크기 줄이기: `cv2.resize(frame, (640, 480))`\n- 매 프레임이 아닌 5프레임마다 탐지"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 탐지된 얼굴에 모자이크 처리하기\n- 힌트: `cv2.GaussianBlur()` 사용\n\n**Level 2:** 특정 인물의 사진을 등록하고 본인 인식 시 이름 표시\n- 힌트: `face_recognition.face_encodings()` 비교\n\n**Level 3:** 마스크 착용 여부 감지 추가\n- 힌트: 얼굴 하단부 픽셀 분석 또는 추가 ML 모델"
+      }
+    ]
+  },
+  "01_실습/voice-chatbot": {
+    "id": "01_실습/voice-chatbot",
+    "title": "음성 인식 챗봇 만들기",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "음성을 텍스트로 변환(STT)하고, AI 응답을 음성으로 출력(TTS)하는 대화형 챗봇을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "음성 인식과 합성",
+        "content": "**STT (Speech-to-Text):** 음성을 텍스트로 변환\n**TTS (Text-to-Speech):** 텍스트를 음성으로 변환\n\n이 프로젝트에서는 Google Speech API를 활용하여 한국어 음성 인식과 합성을 구현합니다."
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "# 음성 인식\npip install SpeechRecognition\npip install pyaudio\n\n# 음성 합성\npip install gtts\npip install playsound\n\n# Windows에서 pyaudio 설치 오류 시\npip install pipwin\npipwin install pyaudio"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "음성 챗봇 전체 코드",
+        "code": "import speech_recognition as sr\nfrom gtts import gTTS\nimport os\nimport platform\nfrom datetime import datetime\n\ndef speak(text):\n    \"\"\"텍스트를 음성으로 변환하여 재생\"\"\"\n    print(f\"AI: {text}\")\n    tts = gTTS(text=text, lang='ko')\n    filename = 'response.mp3'\n    tts.save(filename)\n    \n    # OS별 재생 명령어\n    if platform.system() == 'Windows':\n        os.system(f'start {filename}')\n    elif platform.system() == 'Darwin':  # macOS\n        os.system(f'afplay {filename}')\n    else:  # Linux\n        os.system(f'mpg321 {filename}')\n\ndef listen():\n    \"\"\"마이크로 음성 입력 받기\"\"\"\n    recognizer = sr.Recognizer()\n    \n    with sr.Microphone() as source:\n        print(\"듣고 있습니다... 말씀하세요!\")\n        recognizer.adjust_for_ambient_noise(source, duration=1)\n        audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)\n    \n    try:\n        text = recognizer.recognize_google(audio, language='ko-KR')\n        print(f\"You: {text}\")\n        return text\n    except sr.UnknownValueError:\n        print(\"음성을 인식할 수 없습니다.\")\n        return None\n    except sr.RequestError as e:\n        print(f\"API 오류: {e}\")\n        return None\n    except sr.WaitTimeoutError:\n        print(\"시간 초과\")\n        return None\n\ndef chatbot_response(user_input):\n    \"\"\"간단한 챗봇 응답 로직\"\"\"\n    user_input = user_input.lower()\n    \n    if '안녕' in user_input or '하이' in user_input:\n        return \"안녕하세요! 무엇을 도와드릴까요?\"\n    elif '이름' in user_input:\n        return \"저는 음성 인식 챗봇입니다.\"\n    elif '날씨' in user_input:\n        return \"오늘 날씨는 맑습니다. 외출하기 좋은 날씨네요!\"\n    elif '시간' in user_input:\n        now = datetime.now()\n        return f\"현재 시각은 {now.hour}시 {now.minute}분입니다.\"\n    elif '계산' in user_input:\n        return \"계산 기능은 아직 구현 중입니다.\"\n    elif '종료' in user_input or '끝' in user_input:\n        return \"안녕히 가세요!\"\n    else:\n        return \"죄송합니다. 다시 말씀해주세요.\"\n\ndef main():\n    speak(\"음성 챗봇을 시작합니다. 말씀해주세요!\")\n    \n    while True:\n        user_input = listen()\n        \n        if user_input is None:\n            continue\n        \n        if '종료' in user_input.lower() or '끝' in user_input.lower():\n            speak(\"안녕히 가세요!\")\n            break\n        \n        response = chatbot_response(user_input)\n        speak(response)\n\nif __name__ == \"__main__\":\n    main()"
+      },
+      {
+        "type": "tip",
+        "title": "지원 명령어",
+        "content": "**기본 명령어:**\n- \"안녕\" - 인사\n- \"시간\" - 현재 시간 확인\n- \"날씨\" - 날씨 정보\n- \"이름\" - 챗봇 소개\n- \"종료\" 또는 \"끝\" - 프로그램 종료\n\n**주의사항:**\n- 인터넷 연결 필요 (Google API 사용)\n- 조용한 환경에서 테스트 권장"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 더 많은 대화 패턴 추가 (취미, 좋아하는 음식 등)\n- 힌트: `chatbot_response()` 함수에 조건 추가\n\n**Level 2:** OpenAI GPT API 연동하여 진짜 AI 대화 구현\n- 힌트: `pip install openai` 후 API 키 설정\n\n**Level 3:** 대화 내용을 저장하고 컨텍스트 유지\n- 힌트: 대화 히스토리를 리스트에 저장"
+      }
+    ]
+  },
+  "01_실습/pose-estimation": {
+    "id": "01_실습/pose-estimation",
+    "title": "MediaPipe 포즈 추정",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "MediaPipe를 사용하여 사람의 자세와 관절 위치를 실시간으로 추정합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "포즈 추정이란?",
+        "content": "포즈 추정(Pose Estimation)은 이미지나 비디오에서 사람의 관절 위치를 감지하는 기술입니다. 운동 분석, 게임, AR/VR, 헬스케어 등에 활용됩니다.\n\n**MediaPipe:**\n- Google에서 개발한 멀티미디어 ML 프레임워크\n- 33개의 신체 랜드마크 추적\n- 실시간 처리 가능"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "pip install mediapipe\npip install opencv-python"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "포즈 추정 실시간 코드",
+        "code": "import cv2\nimport mediapipe as mp\n\n# MediaPipe 초기화\nmp_pose = mp.solutions.pose\nmp_drawing = mp.solutions.drawing_utils\nmp_drawing_styles = mp.solutions.drawing_styles\n\ncap = cv2.VideoCapture(0)\n\nprint(\"포즈 추정 시작! 종료하려면 'q'를 누르세요.\")\n\nwith mp_pose.Pose(\n    min_detection_confidence=0.5,\n    min_tracking_confidence=0.5\n) as pose:\n    \n    while cap.isOpened():\n        ret, frame = cap.read()\n        if not ret:\n            break\n        \n        # BGR을 RGB로 변환\n        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\n        image.flags.writeable = False\n        \n        # 포즈 추정 수행\n        results = pose.process(image)\n        \n        # BGR로 다시 변환\n        image.flags.writeable = True\n        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)\n        \n        # 랜드마크 그리기\n        if results.pose_landmarks:\n            mp_drawing.draw_landmarks(\n                image,\n                results.pose_landmarks,\n                mp_pose.POSE_CONNECTIONS,\n                landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()\n            )\n            \n            # 특정 관절 좌표 출력 (예: 코)\n            nose = results.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE]\n            print(f\"코 위치: ({nose.x:.2f}, {nose.y:.2f})\")\n        \n        cv2.imshow('Pose Estimation', image)\n        \n        if cv2.waitKey(5) & 0xFF == ord('q'):\n            break\n\ncap.release()\ncv2.destroyAllWindows()"
+      },
+      {
+        "type": "tip",
+        "title": "주요 랜드마크",
+        "content": "**33개 신체 랜드마크:**\n- NOSE (0): 코\n- LEFT_SHOULDER (11), RIGHT_SHOULDER (12): 어깨\n- LEFT_ELBOW (13), RIGHT_ELBOW (14): 팔꿈치\n- LEFT_WRIST (15), RIGHT_WRIST (16): 손목\n- LEFT_HIP (23), RIGHT_HIP (24): 엉덩이\n- LEFT_KNEE (25), RIGHT_KNEE (26): 무릎\n- LEFT_ANKLE (27), RIGHT_ANKLE (28): 발목"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 특정 자세 감지 (예: 손 올리기)\n- 힌트: 손목 y좌표 < 어깨 y좌표 확인\n\n**Level 2:** 스쿼트 카운터 만들기\n- 힌트: 엉덩이와 무릎 각도 계산\n\n**Level 3:** 운동 자세 교정 피드백 시스템\n- 힌트: 이상적인 각도와 현재 각도 비교"
+      }
+    ]
+  },
+  "01_실습/hand-gesture": {
+    "id": "01_실습/hand-gesture",
+    "title": "손 제스처 인식",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "MediaPipe Hands를 사용하여 손 모양과 제스처를 실시간으로 인식합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "손 제스처 인식",
+        "content": "손 제스처 인식은 손가락 관절의 위치를 추적하여 다양한 제스처를 인식합니다. 수화 번역, 가상 키보드, 게임 컨트롤 등에 활용됩니다.\n\n**MediaPipe Hands:**\n- 21개의 손 랜드마크 추적\n- 최대 2개 손 동시 인식\n- 실시간 처리 가능"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "손 제스처 인식 코드",
+        "code": "import cv2\nimport mediapipe as mp\n\n# MediaPipe Hands 초기화\nmp_hands = mp.solutions.hands\nmp_drawing = mp.solutions.drawing_utils\n\ncap = cv2.VideoCapture(0)\n\nprint(\"손 제스처 인식 시작! 종료하려면 'q'를 누르세요.\")\n\ndef count_fingers(hand_landmarks):\n    \"\"\"펴진 손가락 개수 세기\"\"\"\n    fingers = []\n    \n    # 엄지: x좌표로 판단\n    if hand_landmarks.landmark[4].x < hand_landmarks.landmark[3].x:\n        fingers.append(1)\n    else:\n        fingers.append(0)\n    \n    # 나머지 손가락: y좌표로 판단 (끝이 두 번째 마디보다 위에 있으면 펴진 것)\n    tips = [8, 12, 16, 20]  # 검지, 중지, 약지, 소지 끝\n    pips = [6, 10, 14, 18]  # 두 번째 마디\n    \n    for tip, pip in zip(tips, pips):\n        if hand_landmarks.landmark[tip].y < hand_landmarks.landmark[pip].y:\n            fingers.append(1)\n        else:\n            fingers.append(0)\n    \n    return sum(fingers)\n\nwith mp_hands.Hands(\n    max_num_hands=2,\n    min_detection_confidence=0.7,\n    min_tracking_confidence=0.5\n) as hands:\n    \n    while cap.isOpened():\n        ret, frame = cap.read()\n        if not ret:\n            break\n        \n        # 좌우 반전 (거울 모드)\n        frame = cv2.flip(frame, 1)\n        \n        # BGR을 RGB로 변환\n        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\n        results = hands.process(image)\n        \n        # BGR로 다시 변환\n        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)\n        \n        if results.multi_hand_landmarks:\n            for idx, hand_landmarks in enumerate(results.multi_hand_landmarks):\n                # 손 랜드마크 그리기\n                mp_drawing.draw_landmarks(\n                    image,\n                    hand_landmarks,\n                    mp_hands.HAND_CONNECTIONS\n                )\n                \n                # 손가락 개수 세기\n                finger_count = count_fingers(hand_landmarks)\n                \n                # 화면에 표시\n                cv2.putText(\n                    image,\n                    f'Fingers: {finger_count}',\n                    (10, 50 + idx * 50),\n                    cv2.FONT_HERSHEY_SIMPLEX,\n                    1.5,\n                    (0, 255, 0),\n                    3\n                )\n        \n        cv2.imshow('Hand Gesture', image)\n        \n        if cv2.waitKey(5) & 0xFF == ord('q'):\n            break\n\ncap.release()\ncv2.destroyAllWindows()"
+      },
+      {
+        "type": "tip",
+        "title": "21개 손 랜드마크",
+        "content": "**손가락별 랜드마크 ID:**\n- 손목: 0\n- 엄지: 1-4 (CMC, MCP, IP, TIP)\n- 검지: 5-8\n- 중지: 9-12\n- 약지: 13-16\n- 소지: 17-20\n\n**TIP (끝):** 4, 8, 12, 16, 20\n**PIP (두 번째 마디):** 3, 6, 10, 14, 18"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 가위/바위/보 제스처 인식\n- 힌트: 펴진 손가락 개수로 판단\n\n**Level 2:** 손가락 그림 그리기\n- 힌트: 검지 끝 좌표 추적하여 선 그리기\n\n**Level 3:** 제스처로 미디어 플레이어 컨트롤\n- 힌트: pyautogui로 키보드 입력 시뮬레이션"
+      }
+    ]
+  },
+  "01_실습/sentiment-analysis": {
+    "id": "01_실습/sentiment-analysis",
+    "title": "감정 분석 (Sentiment Analysis)",
+    "category": "ai",
+    "subCategory": "01_실습",
+    "language": "Python",
+    "description": "Transformers 라이브러리를 사용하여 텍스트의 긍정/부정 감정을 분석합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "감정 분석이란?",
+        "content": "감정 분석은 텍스트에서 감정이나 의견을 추출하는 자연어 처리(NLP) 기술입니다. 리뷰 분석, 소셜 미디어 모니터링, 고객 피드백 분석 등에 활용됩니다.\n\n**Hugging Face Transformers:**\n- 사전 학습된 NLP 모델 제공\n- BERT, GPT 등 최신 모델 사용 가능\n- 간단한 파이프라인 API"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "pip install transformers\npip install torch\n\n# 한국어 모델 사용 시\npip install sentencepiece"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "감정 분석 코드",
+        "code": "from transformers import pipeline\n\n# 영어 감정 분석 파이프라인\nsentiment_en = pipeline('sentiment-analysis')\n\n# 영어 텍스트 분석\nen_texts = [\n    \"I love this product! It's amazing!\",\n    \"This is the worst experience ever.\",\n    \"The weather is okay today.\"\n]\n\nprint(\"=== 영어 감정 분석 ===\")\nfor text in en_texts:\n    result = sentiment_en(text)[0]\n    emoji = \"\" if result['label'] == 'POSITIVE' else \"\"\n    print(f\"{emoji} {text}\")\n    print(f\"   -> {result['label']} ({result['score']:.2%})\\n\")\n\n# 한국어 감정 분석 (한국어 모델 사용)\nprint(\"\\n=== 한국어 감정 분석 ===\")\ntry:\n    sentiment_ko = pipeline(\n        'sentiment-analysis',\n        model='matthewburke/korean_sentiment'\n    )\n    \n    ko_texts = [\n        \"오늘 정말 기분이 좋아요!\",\n        \"이 영화는 너무 재미없었어요.\",\n        \"그냥 그래요.\"\n    ]\n    \n    for text in ko_texts:\n        result = sentiment_ko(text)[0]\n        emoji = \"\" if 'positive' in result['label'].lower() else \"\"\n        print(f\"{emoji} {text}\")\n        print(f\"   -> {result['label']} ({result['score']:.2%})\\n\")\nexcept Exception as e:\n    print(f\"한국어 모델 로드 실패: {e}\")\n    print(\"영어 모델만 사용 가능합니다.\")"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "실시간 감정 분석 챗봇",
+        "code": "from transformers import pipeline\n\nprint(\"실시간 감정 분석기\")\nprint(\"텍스트를 입력하면 감정을 분석합니다. 종료하려면 'quit' 입력\")\nprint(\"=\" * 50)\n\nsentiment = pipeline('sentiment-analysis')\n\nwhile True:\n    text = input(\"\\n입력: \")\n    \n    if text.lower() == 'quit':\n        print(\"프로그램을 종료합니다.\")\n        break\n    \n    if not text.strip():\n        continue\n    \n    result = sentiment(text)[0]\n    label = result['label']\n    score = result['score']\n    \n    if label == 'POSITIVE':\n        emoji = \"\"\n        bar = \"\" * int(score * 10)\n    else:\n        emoji = \"\"\n        bar = \"\" * int(score * 10)\n    \n    print(f\"\\n결과: {emoji} {label}\")\n    print(f\"신뢰도: {bar} {score:.1%}\")"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** 상품 리뷰 CSV 파일을 읽어 일괄 분석\n- 힌트: pandas로 CSV 읽고 루프로 분석\n\n**Level 2:** 감정별 통계 및 시각화\n- 힌트: matplotlib으로 파이 차트 생성\n\n**Level 3:** 실시간 트위터/뉴스 감정 분석\n- 힌트: tweepy 또는 뉴스 API 연동"
+      }
+    ]
+  },
+  "02_심화/chatgpt-api": {
+    "id": "02_심화/chatgpt-api",
+    "title": "ChatGPT API 활용하기",
+    "category": "ai",
+    "subCategory": "02_심화",
+    "language": "Python",
+    "description": "OpenAI API를 사용하여 GPT 기반 챗봇과 다양한 AI 애플리케이션을 구현합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "OpenAI API 소개",
+        "content": "OpenAI API는 GPT-4, GPT-3.5-turbo 등 강력한 언어 모델에 접근할 수 있게 해줍니다. 챗봇, 텍스트 생성, 코드 생성, 번역 등 다양한 용도로 활용 가능합니다.\n\n**주요 모델:**\n- gpt-4: 가장 강력, 복잡한 추론 가능\n- gpt-3.5-turbo: 빠르고 경제적\n- gpt-4-vision: 이미지 인식 가능"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "설치 및 API 키 설정",
+        "code": "# OpenAI 패키지 설치\npip install openai\n\n# 환경 변수로 API 키 설정 (권장)\n# Windows\nset OPENAI_API_KEY=your-api-key-here\n\n# Mac/Linux\nexport OPENAI_API_KEY=your-api-key-here"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "기본 챗봇 구현",
+        "code": "from openai import OpenAI\nimport os\n\n# API 클라이언트 초기화\nclient = OpenAI(\n    api_key=os.getenv('OPENAI_API_KEY')  # 환경 변수에서 가져오기\n    # 또는 직접 입력: api_key='sk-...'\n)\n\ndef chat(user_message, conversation_history=None):\n    \"\"\"GPT와 대화하기\"\"\"\n    if conversation_history is None:\n        conversation_history = []\n    \n    # 시스템 메시지 (챗봇 성격 설정)\n    messages = [\n        {\n            \"role\": \"system\",\n            \"content\": \"당신은 친절하고 도움이 되는 AI 어시스턴트입니다. 한국어로 답변해주세요.\"\n        }\n    ]\n    \n    # 대화 히스토리 추가\n    messages.extend(conversation_history)\n    \n    # 사용자 메시지 추가\n    messages.append({\"role\": \"user\", \"content\": user_message})\n    \n    # API 호출\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo\",\n        messages=messages,\n        max_tokens=1000,\n        temperature=0.7\n    )\n    \n    assistant_message = response.choices[0].message.content\n    \n    # 히스토리 업데이트\n    conversation_history.append({\"role\": \"user\", \"content\": user_message})\n    conversation_history.append({\"role\": \"assistant\", \"content\": assistant_message})\n    \n    return assistant_message, conversation_history\n\n# 대화 시작\nprint(\"ChatGPT 챗봇입니다. 종료하려면 'quit' 입력\")\nprint(\"=\" * 50)\n\nhistory = []\n\nwhile True:\n    user_input = input(\"\\nYou: \")\n    \n    if user_input.lower() == 'quit':\n        print(\"대화를 종료합니다.\")\n        break\n    \n    response, history = chat(user_input, history)\n    print(f\"\\nAI: {response}\")"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "특수 기능 활용",
+        "code": "from openai import OpenAI\n\nclient = OpenAI()\n\n# 1. 코드 생성\ndef generate_code(description):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo\",\n        messages=[\n            {\"role\": \"system\", \"content\": \"당신은 Python 전문가입니다. 코드만 출력하세요.\"},\n            {\"role\": \"user\", \"content\": description}\n        ]\n    )\n    return response.choices[0].message.content\n\n# 2. 번역\ndef translate(text, target_lang=\"영어\"):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo\",\n        messages=[\n            {\"role\": \"system\", \"content\": f\"{target_lang}로 번역해주세요. 번역 결과만 출력하세요.\"},\n            {\"role\": \"user\", \"content\": text}\n        ]\n    )\n    return response.choices[0].message.content\n\n# 3. 요약\ndef summarize(text, max_sentences=3):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo\",\n        messages=[\n            {\"role\": \"system\", \"content\": f\"{max_sentences}문장 이내로 핵심만 요약해주세요.\"},\n            {\"role\": \"user\", \"content\": text}\n        ]\n    )\n    return response.choices[0].message.content\n\n# 사용 예시\nprint(\"=== 코드 생성 ===\")\ncode = generate_code(\"피보나치 수열을 계산하는 함수\")\nprint(code)\n\nprint(\"\\n=== 번역 ===\")\ntranslated = translate(\"인공지능이 세상을 바꾸고 있습니다.\", \"영어\")\nprint(translated)"
+      },
+      {
+        "type": "tip",
+        "title": "API 사용 팁",
+        "content": "**비용 절약:**\n- gpt-3.5-turbo가 gpt-4보다 훨씬 저렴\n- max_tokens 제한으로 응답 길이 조절\n- 불필요한 대화 히스토리 정리\n\n**성능 향상:**\n- temperature: 0.0 (일관성) ~ 1.0 (창의성)\n- system 프롬프트로 역할 명확히 설정\n- 구체적인 지시로 정확한 응답 유도"
+      }
+    ]
+  },
+  "02_심화/image-generation": {
+    "id": "02_심화/image-generation",
+    "title": "AI 이미지 생성 (Stable Diffusion)",
+    "category": "ai",
+    "subCategory": "02_심화",
+    "language": "Python",
+    "description": "텍스트 설명으로 이미지를 생성하는 Stable Diffusion 모델을 사용합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "Text-to-Image 생성",
+        "content": "Stable Diffusion은 텍스트 프롬프트를 입력받아 이미지를 생성하는 딥러닝 모델입니다. Diffusion 모델은 노이즈를 점진적으로 제거하여 이미지를 생성합니다.\n\n**요구사항:**\n- GPU 권장 (NVIDIA, CUDA 지원)\n- 최소 8GB VRAM (16GB 권장)\n- CPU에서도 가능하나 매우 느림"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "# diffusers 라이브러리 설치\npip install diffusers transformers accelerate\n\n# GPU 사용 시 (CUDA)\npip install torch torchvision --index-url https://download.pytorch.org/whl/cu118"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "이미지 생성 코드",
+        "code": "from diffusers import StableDiffusionPipeline\nimport torch\n\n# GPU 확인\ndevice = \"cuda\" if torch.cuda.is_available() else \"cpu\"\nprint(f\"사용 장치: {device}\")\n\n# 모델 로드 (처음 실행 시 다운로드 - 약 4GB)\nprint(\"모델 로딩 중... (처음에는 시간이 걸립니다)\")\n\nif device == \"cuda\":\n    pipe = StableDiffusionPipeline.from_pretrained(\n        \"runwayml/stable-diffusion-v1-5\",\n        torch_dtype=torch.float16  # GPU 메모리 절약\n    )\n    pipe = pipe.to(\"cuda\")\nelse:\n    # CPU 사용 (느림)\n    pipe = StableDiffusionPipeline.from_pretrained(\n        \"runwayml/stable-diffusion-v1-5\"\n    )\n\n# 이미지 생성\nprompt = \"a beautiful sunset over mountains, digital art, highly detailed\"\n\nprint(f\"프롬프트: {prompt}\")\nprint(\"이미지 생성 중...\")\n\nimage = pipe(\n    prompt,\n    num_inference_steps=30,  # 더 높으면 품질 향상, 시간 증가\n    guidance_scale=7.5       # 프롬프트 따르는 정도 (7-8 권장)\n).images[0]\n\n# 이미지 저장\nimage.save(\"generated_image.png\")\nprint(\"이미지 저장 완료: generated_image.png\")\n\n# 이미지 표시 (Jupyter 환경)\n# display(image)"
+      },
+      {
+        "type": "tip",
+        "title": "프롬프트 작성 팁",
+        "content": "**좋은 프롬프트 구조:**\n`[주제], [스타일], [품질 키워드], [추가 설명]`\n\n**예시:**\n- \"a cute cat wearing sunglasses, digital art, highly detailed, 4k\"\n- \"futuristic city at night, cyberpunk style, neon lights, cinematic\"\n- \"portrait of a wizard, fantasy art, dramatic lighting, oil painting\"\n\n**품질 키워드:**\nhighly detailed, 4k, 8k, masterpiece, best quality, sharp focus"
+      }
+    ]
+  },
+  "02_심화/qr-code": {
+    "id": "02_심화/qr-code",
+    "title": "QR 코드 생성 및 인식",
+    "category": "ai",
+    "subCategory": "02_심화",
+    "language": "Python",
+    "description": "Python으로 QR 코드를 생성하고, 카메라로 QR 코드를 인식합니다.",
+    "isPlaceholder": false,
+    "sections": [
+      {
+        "type": "concept",
+        "title": "QR 코드란?",
+        "content": "QR 코드(Quick Response Code)는 2차원 바코드로, URL, 텍스트, 연락처 등 다양한 정보를 저장할 수 있습니다.\n\n**활용 분야:**\n- URL 공유 및 웹사이트 연결\n- 결제 시스템 (카카오페이, 네이버페이)\n- 출입 관리 및 티켓\n- 명함, 연락처 공유"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "title": "패키지 설치",
+        "code": "# QR 코드 생성\npip install qrcode[pil]\n\n# QR 코드 인식\npip install opencv-python\npip install pyzbar"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "QR 코드 생성",
+        "code": "import qrcode\nfrom PIL import Image\n\n# 기본 QR 코드 생성\nqr = qrcode.QRCode(\n    version=1,              # 크기 (1-40, 자동이면 None)\n    error_correction=qrcode.constants.ERROR_CORRECT_H,  # 오류 정정 수준\n    box_size=10,            # 각 박스 픽셀 크기\n    border=4                # 테두리 두께\n)\n\n# 데이터 추가\nqr.add_data('https://github.com')\nqr.make(fit=True)\n\n# 이미지 생성\nimg = qr.make_image(fill_color='black', back_color='white')\nimg.save('basic_qr.png')\nprint(\"기본 QR 코드 생성 완료: basic_qr.png\")\n\n# 컬러 QR 코드\nimg_color = qr.make_image(fill_color='#0066cc', back_color='#ffffff')\nimg_color.save('color_qr.png')\nprint(\"컬러 QR 코드 생성 완료: color_qr.png\")\n\n# 로고가 들어간 QR 코드\ndef create_qr_with_logo(data, logo_path, output_path):\n    qr = qrcode.QRCode(\n        error_correction=qrcode.constants.ERROR_CORRECT_H  # 높은 오류 정정\n    )\n    qr.add_data(data)\n    qr.make(fit=True)\n    \n    qr_img = qr.make_image(fill_color='black', back_color='white').convert('RGB')\n    \n    # 로고 삽입\n    logo = Image.open(logo_path)\n    qr_width, qr_height = qr_img.size\n    logo_size = qr_width // 4\n    logo = logo.resize((logo_size, logo_size))\n    \n    pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)\n    qr_img.paste(logo, pos)\n    qr_img.save(output_path)\n    \n    return output_path"
+      },
+      {
+        "type": "code",
+        "language": "Python",
+        "title": "실시간 QR 코드 인식",
+        "code": "import cv2\nfrom pyzbar.pyzbar import decode\n\ncap = cv2.VideoCapture(0)\n\nprint(\"QR 코드 스캐너 시작! 종료하려면 'q'를 누르세요.\")\n\nwhile True:\n    ret, frame = cap.read()\n    if not ret:\n        break\n    \n    # QR 코드 감지\n    decoded_objects = decode(frame)\n    \n    for obj in decoded_objects:\n        # QR 코드 데이터\n        data = obj.data.decode('utf-8')\n        obj_type = obj.type\n        \n        # 테두리 그리기\n        points = obj.polygon\n        if len(points) == 4:\n            pts = [(p.x, p.y) for p in points]\n            for i in range(4):\n                cv2.line(frame, pts[i], pts[(i+1)%4], (0, 255, 0), 3)\n        \n        # 데이터 표시\n        x, y, w, h = obj.rect\n        cv2.putText(\n            frame,\n            data,\n            (x, y - 10),\n            cv2.FONT_HERSHEY_SIMPLEX,\n            0.7,\n            (0, 255, 0),\n            2\n        )\n        \n        print(f\"인식됨: [{obj_type}] {data}\")\n    \n    cv2.imshow('QR Scanner', frame)\n    \n    if cv2.waitKey(1) & 0xFF == ord('q'):\n        break\n\ncap.release()\ncv2.destroyAllWindows()"
+      },
+      {
+        "type": "practice",
+        "title": "도전 과제",
+        "content": "**Level 1:** WiFi 연결용 QR 코드 생성\n- 힌트: `WIFI:T:WPA;S:네트워크명;P:비밀번호;;`\n\n**Level 2:** 명함 정보 QR 코드 (vCard 형식)\n- 힌트: vCard 3.0 형식 사용\n\n**Level 3:** QR 코드 스캔 시 자동 웹브라우저 열기\n- 힌트: `webbrowser.open(url)` 사용"
+      }
+    ]
+  }
+}
